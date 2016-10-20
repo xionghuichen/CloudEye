@@ -1,0 +1,1 @@
+templates 文件夹用于存储模板文件，包括js，css，html等文件
