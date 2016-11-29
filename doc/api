@@ -1,0 +1,633 @@
+ 
+1. Register 
+request:
+	user_name:String
+	user_nickname:String
+	userTel:String
+	userIdentiNum:String(用户身份证号码,与userId不是一个数据)
+	password:String
+	//[mark]:user_icon
+	verifyNum:String(验证码)
+		telephone:电话号码
+		real_name:真实姓名
+		nick_name:昵称
+		password:密码
+		id_num:身份证号码
+		has_update:[acid]
+response:
+	code:[success or failed]
+	message[reason]
+
+	++
+		[UserBuizModel]
+			[UserCoreModel]
+				[opt] register to user table.
+					[input] 
+							telephone:
+							real_name:
+							nick_name:
+							password:
+							id_num:
+							has_update:
+							check input and insert 
+							set: user_id: index
+							set: has_update = false.
+							
+							Insert to : user_table
+					[ouput] user_id
+			[PersonCoreModel]
+				[opt] import missing person table.
+					[input] telephone:
+						Find parent_telephone = telephone 
+						From missing_person_collection
+						in MongoDB
+						append to missing_person_list.
+					[output] missing_person_list.
+			[UserCoreModel]
+				[opt] import missing person list.
+					[input] missing_person_list,user_id.
+					[output] success or fail
+
+	++
+2. Login---
+request:
+	telephone:String
+	password:String
+response:
+	code:[success or failed]
+	message[reason]	
+	[if success]
+		user_id:
+		missing_person_list:
+		[other informations?]
+[inner logic in server]
+	++
+		[UserBuizModel]
+			[UserCoreModel]
+				[opt] check telephone and password
+					[input] telephone, password.
+						in Mysql
+					[output]  success(boolean),user_id.
+			if success:
+				[UserCoreModel]
+					[opt] get missing_person_list through user_id
+						[input] user_id
+							Find missing_person_list
+							From user_collection
+							In MongoDb
+						[output] missing_person_list
+	++
+
+4. SetLocation---
+[this api should and only be called only if user login successfully.]
+request:
+	user_id:
+	channel_id:[get from baiduyuntui]
+	location:[x,y] (x belong to [-180,180], y belong to [-90,90])	
+response:
+	code,
+	message.
+	
+[inner logic in server]
+++
+		[UserBuizModel]:
+			[UserCoreModel]
+				[opt] add to online_collection.
+					[input]	user_id, channel_id, location[x,y]
+						Insert to online_user,
+						Data: user_id, channel_id, location[x,y]
+						Index: user_id
+						In MongoDb.
+					[output] success(boolean)	
+++
+
+3. UpdateLocation---
+request:
+	user_id:
+	location:[x,y] (x belong to [-180,180], y belong to [-90,90])
+response:
+	code:[success or failed]
+	message[reason]	
+
+[inner logic in server]
+	++
+		[UserBuizModel]:
+			[UserCoreModel]
+				[opt] update online_user_collection.
+					[input]user_id, location[x,y]
+						Update: location,
+						Index: user_id.
+						From:online_user
+						In MongoDB
+					[output] success(boolean)
+	++
+
+4. Logout---
+request:
+	user_id:
+response:
+	code:[success or failed]
+	message[reason]	
+
+[inner logic in server]
+++
+	[UserBuizModel]:
+		[UserCoreModel]
+			[opt] delete online_user_collection.
+				[input]user_id.
+					Delete document
+					Index: user_id
+					From:online_user_collection
+					In MongoDB
+				[output] success(boolean)
+
+++
+
+5. CheckUpdateStatus----[check if missing person has new situation]
+request:
+	user_id:
+response:
+	has_update.
+
+[inner logic in server]
+++
+	[PersonBuizModel]
+		[UserCoreModel]
+			[opt] get hasUpdate status and through user_id
+				[input] user_id
+				select: has_update
+				from: user_table
+				in Mysql.
+				[output] has_update
+++
+
+6. Get [post list]
+requset:
+	user_id:
+	missing_person_list.[this data should be stored after user login.]
+
+response:
+		[must]:
+		lastTrackDate[Date]	
+		missing_person_id 
+		stand_photo: key list
+		[[mark]:follow fields is optional, depend on client]
+		
+
+7.  get [missing person detail and track_list ] 
+request:
+	missing_person_id
+response:
+		standdardphotoKey: key list
+		faceplusplus_person_id:[this id is just used to recognized missing person]  
+		name:String
+		losenTime:String
+		losenSpot:String  
+		sex:boolean  
+		age:int
+		parent_id -->
+			name.
+			telephone.
+		description:String
+		hasRecord:boolean
+		track_list:[array of track_objectId]
+			-->
+			12. get track list for a special missing person.
+				[other missing person information should be stored in client in advance.]
+				request:
+					track_list.
+				response:
+					[sort by snapTime in descrease order]
+					track_list[{
+							type:[camera or person]
+							snapTime
+							location[x,y] ---> 地址
+							confidence. 
+							[if person] 
+								person_id.
+									--> nick name.
+								snapImageKey. 
+								description.
+					}
+					]
+					[change: camera list and person list]
+
+				[inner logic in server]
+					++
+					[PersonBuizModel]
+						[PersonCoreModel]	
+							[opt] get a missing person's track_detail_list.
+								[input] track_list:
+									Find: all information 
+									Index: track_list
+									From: track_collection
+									In MongoDb.
+								[output] all information.
+					++
+
+	[inner logic in server]
+	++
+
+	[PersonBuizModel]
+		[PersonCoreModel]
+			[opt] get missing_person_detail info list through missing_person_list.
+				[input] missing_person_list.	
+				-->[mongodb] missing_person_collection
+				-->[get informations and sort by lastTrackDate]:
+						[must]:
+						track_list:[array of track_objectId]
+						lastTrackDate[Date]	
+						[[mark]:follow fields is optional, depend on client]
+						[needn't] faceplusplus_person_id:[this id is just used to recognized missing person]
+						name:String
+						sex:boolean
+						age:int
+						familyTel:String
+						losenTime:String
+						losenSpot:String
+						standdardphotoKey:key list
+						description:String
+						hasRecord:boolean
+						track_list:[array of track_objectId]
+					[output] all above
+
+	++
+
+
+7. upload opencv:
+	resquest:
+		image base64.
+		location[x,y]
+	response:
+		need not response.
+	++[inner logic in server:]
+		
+		[UploadPictureBuizModel]
+			[SSDCoreModel]
+				upload image to aliyun--> get url get key.
+		--> [FaceSetCoreModel]
+			-->	/detection/detect -->face_id
+			--> /recognition/identify -->person_id
+				"""
+				eg:
+			        "candidate": [
+				        {
+				            "confidence": 94.299985,
+				            "person_id": "c1e580c0665f6ed11d510fe4d194b37a",
+				            "person_name": "1",
+				            "tag": ""
+				        },
+				"""
+			--->get confidence and person_id.
+		if (confidence >= thresh){
+			[RedisCoreModel]
+				if(not redis){
+					[PersonCoreModel] //get information and update track.
+						[opt]get person info:
+						-->[input]person_id-->missing_person_collection
+						-->[get informations]
+							person_id:[person,index for 5,7]
+							faceplusplus_person_id:[this id is used to recognized missing person]
+							name:String
+							sex:boolean
+							age:int
+							parent_id:
+							familyTel:String
+							losenTime:String
+							losenSpot:String
+							standdardphotoKey:key list
+							description:String
+							hasRecord:boolean
+							track_list:[array of track_objectId]
+							lastTrackDate:[Date]	
+						
+						[opt] update track:
+							[input]
+								type = camera;
+								snapTime:
+								location:[x,y]
+								snapImageKey
+								confidence.
+
+							-->track_object_id.
+						[opt] update last track date and track_list:
+							-->[input]data and track_list-->missing_person_collection 
+								-->update lastTrackDate
+								-->update track_list
+
+					[UserCoreModel] //push info to parent.
+						[opt] update hasUpdate.
+							[input]	parent_id.
+								hasUpdate = false.
+							[output] null.
+
+						[opt] check if user online.
+							-->[input] parent_id
+							--> exist? online_user_collection.
+							-->[output]:isOnline, channel_id.
+						
+						if(isOnline){
+							[api:8]
+							[PushCoreModel]
+								[opt] push to somebody:
+									[input] [mark what information do we need?]
+										channel_id.
+										name
+										standdardphotoKey[ssd]
+										losenTime
+										losenSpot
+						}else{
+							do nothing.
+						}
+					[PushCoreModel]//push message to police.
+						[mark what information do we need?]
+					
+					[LocationCoreModel]//find channel_id list from location x,y.
+						[opt] get channel_id_list.
+							[input] location:[x,y]
+								--> online_user
+							--> [output]channel_id map user_id list.
+						[opt] delete parent's chanel_id.
+					[PushCoreModel]//push message to channel_id list.
+						[opt] push to chanel_id list 
+							[api:10]
+							--> [input]channel_id_list.
+								--->get server date.
+								--->send message.
+
+				}
+		}
+	++
+
+
+8. tuisong msg to missing person's parents.
+request:
+need not requset:
+response:
+	name
+	standdardphoto
+	losenTime
+	losenSpot
+
+9. has receive push msg, set hasUpdate to false.
+request:
+	user_id
+response:
+	code,message.
+
+
+10. push msg to user list.
+request:
+need not requset:
+response:
+	pushTime:String;
+	losenTime:String;
+	losenSpot:String;
+	photo:?type
+	person_id
+	lastTrackDate:[Date]
+
+11. push message to police.
+[mark? the same to api:10?]
+
+
+13. user upload image:
+	resquest:
+		image base64.
+		location[x,y]
+		user_id
+		description
+		[mark: upload based on receive message?]:person_id
+	response:
+		confidence.
+		thresh[thresh to judge it is a missing person]
+	++[inner logic in server]
+		[UploadPictureBuizModel]
+			[SSDCoreModel]
+				upload image to aliyun--> get url get key.
+		--> [FaceSetCoreModel]
+			-->	/detection/detect -->face_id
+			--> /recognition/verify 
+				"""
+				eg:
+					{
+					    "confidence": 55.039787, 
+					    "is_same_person": true, 
+					    "session_id": "a58bbfc672abce074111166dd9961163"
+					}
+				"""
+			--->get confidence and person_id.
+
+		return to client: confidence,thresh
+
+		if (confidence >= thresh){
+
+			[RedisCoreModel]
+				if(not redis){
+					[PersonCoreModel] //get information and update track.
+						[opt]get person info:
+						-->[input]person_id-->missing_person_collection
+						-->[get informations]
+							person_id:[person,index for 5,7]
+							faceplusplus_person_id:[this id is used to recognized missing person]
+							name:String
+							sex:boolean
+							age:int
+							parent_id:
+							familyTel:String
+							losenTime:String
+							losenSpot:String
+							standdardphoto:key
+							description:String
+							hasRecord:boolean
+							track_list:[array of track_objectId]
+							lastTrackDate:[Date]	
+						
+						[opt] update person track :
+							[input]
+								type = person;
+								snapTime:
+								location:[x,y]
+								snapImageKey
+								confidence.
+								person_id = user_id;
+								description
+
+							-->track_object_id.
+						[opt] update lastTrackDate and track_list:
+							-->[input]data and track_list-->missing_person_collection 
+								-->update lastTrackDate
+								-->update track_list
+
+					[UserCoreModel] //push info to parent.
+						[opt] update hasUpdate.
+							[input]	parent_id.
+								hasUpdate = false.
+							[output] null.
+
+						[opt] check if user online.
+							-->[input] parent_id
+							--> exist? online_user_collection.
+							-->[output]:isOnline, channel_id.
+						
+						if(isOnline){
+							[api:8]
+							[PushCoreModel]
+								[opt] push to somebody:
+									[input] [mark what information do we need?]
+										channel_id.
+										name
+										standdardphoto
+										losenTime
+										losenSpot
+						}else{
+							do nothing.
+						}
+					[PushCoreModel]//push message to police.
+						[mark what information do we need?]
+					
+					[LocationCoreModel]//find channel_id list from location x,y.
+						[opt] get channel_id_list.
+							[input] location:[x,y]
+								--> online_user
+							--> [output]channel_id map user_id list.
+						[opt] delete parent's chanel_id.
+						[opt] delete user's [upload user] channel_id.
+
+					[PushCoreModel]//push message to channel_id list.
+						[opt] push to chanel_id list 
+							[api:10]
+							--> [input]channel_id_list.
+								--->get server date.
+								--->send message.
+
+				}
+		}
+	++
+
+	name:String
+	age:int
+	sex:String
+	familyTel:String
+	losenSpot:String
+	photoList:List<?type>
+
+14. call for help.
+	request:
+		image_list.
+		name:String
+		sex:boolean
+		age:int
+		familyTel:String [change : not mapping from user_id]
+		losenTime:String
+		//losenSpot:String
+		location:’[x,y]' ---> server should mapping it to location
+		description:String
+		user_id:
+
+	response:
+		code,message.
+	++
+		[UploadPictureBuizModel]
+			[SSDCoreModel]
+				[opt] upload image to aliyun--> get url get key.
+				[mark: not only a single picture is need]
+				[output]get key list.
+		--> [FaceSetCoreModel]
+			[opt]
+			-->	/detection/detect -->face_id
+			face_id_list.
+			[opt]
+			-->/person/create [face_id,face_id]
+			-->[output]person_id
+			[opt]
+			-->/group/add_person
+		[PersonCoreModel]
+			[opt] add missing person.
+				[input]
+					faceplusplus_person_id = pserson objectId
+					name:String
+					sex:boolean
+					age:int
+					familyTel:String
+					losenTime:String
+					losenSpot:String
+					standdardphotokey: key list
+					description:String
+					parent_id = user_id.
+					hasRecord:boolean = false.
+					track_list:[array of track_objectId] =[]
+					lastTrackDate:[Date] = now
+				-->insert to missing_person_collection
+				[output] missing person objectId
+		[UserCoreModel]
+			[opt] add missing person list.
+				[input]
+					missing person objectId
+					--->user_collection-->add to missing_person_list
+
+
+		[PushCoreModel]//push message to police.
+			[mark what information do we need?]
+
+		[LocationCoreModel]//find channel_id list from location x,y.
+			[opt] get channel_id_list.
+				[input] location:[x,y]
+					--> online_user
+				--> [output]channel_id map user_id list.
+			[opt] delete user's [upload user] channel_id.
+		
+		[PushCoreModel]//push message to channel_id list.
+			[opt] push to chanel_id list 
+				[api:10]
+				--> [input]channel_id_list.
+					--->get server date.
+					--->send message.
+						[input]person_id
+						pushTime: get server date
+						losenTime:String;
+						losenSpot:String;
+						faceplusplus_person_id:[this id is used to recognized missing person]
+						name:String
+						sex:boolean
+						age:int
+						parent_id[mark: need what information of parents?]
+						familyTel:String
+						standdardphotoKey:[SSDCoreModel] to image
+						description:String
+						hasRecord:boolean
+						track_list:[array of track_objectId]
+		[return to client]:upload result.
+
+		[FaceSetCoreModel]
+			-->/train/identify
+	++
+
+15.Has find my child:
+resquest:
+	user_id:
+	person_id:
+response:
+	code,message.
+
+	++[inner logic in server]
+		[UserBuizModel]
+			[opt] can Finish or not?
+			-->user_id -->user_collection
+			-->missing_person_list
+		if person_id in missing_person list:
+			[UserBuizModel]
+				[opt] missing_person_list remove person_id.
+			[FaceSetCoreModel]
+				[opt] delete person from group.
+			[PersonCoreModel]
+				[opt] get track list.
+				[opt] delete person_id in missing_person_collection 
+				[opt] delete track list in track_collection;
+	++
+
+16. getStaticPages
+request:
+	null.
+response:
+	url_list.

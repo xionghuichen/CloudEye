@@ -98,4 +98,4 @@ api.person.delete(person_name = FACES.iterkeys())
 # 恭喜！您已经完成了本教程，可以继续阅读我们的API文档并利用Face++ API开始写您自
 # 己的App了！
 # 旅途愉快 :)
-"""
+

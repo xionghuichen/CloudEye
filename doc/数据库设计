@@ -1,0 +1,45 @@
+mysql:
+	user_table:
+		user_id:
+		telephone:
+		real_name:
+		nick_name:
+		password:
+		id_num:
+		has_update:[acid]
+
+mongodb:
+	online_user_collection:
+		user_id:[index]
+		location:[x,y][index]
+		channel_id:
+	user_collection:
+		user_id:[index]
+		missing_person_list:[array of missing_person_objectId]
+	
+	missing_person_collection:
+		person_id:[person,index for 5,7]
+		faceplusplus_person_id:[this id is used to recognized missing person]
+		name:String
+		sex:boolean
+		age:int
+		parent_telephone:[index]
+		parent_id:[can be empty if upload this data offline.]
+		familyTel:String
+		losenTime:String
+		losenSpot:String
+		standard_photo_key:key list
+		description:String
+		hasRecord:boolean
+		track_list:[array of track_objectId]
+		lastTrackDate:[Date]
+		[new add] isFinished：
+	track_collection:
+		type:[camera or person]
+		snapTime:
+		location:[x,y]
+		snapImageKey.
+		confidence.
+		[if person] person_id.
+		date.
+redis:
