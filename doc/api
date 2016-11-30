@@ -228,7 +228,7 @@ response:
 	[inner logic in server]
 	++
 
-	[PersonBuizModel]
+	[PersonBuizModel]		
 		[PersonCoreModel]
 			[opt] get missing_person_detail info list through missing_person_list.
 				[input] missing_person_list.	
@@ -360,14 +360,14 @@ response:
 	++
 
 
-8. tuisong msg to missing person's parents.
+8. push msg to missing person's parents.
 request:
 need not requset:
 response:
 	name
-	standdardphoto
-	losenTime
-	losenSpot
+	standdard_photo
+	snap_spot
+	lastTrack_date
 
 9. has receive push msg, set hasUpdate to false.
 request:
@@ -380,12 +380,12 @@ response:
 request:
 need not requset:
 response:
-	pushTime:String;
-	losenTime:String;
-	losenSpot:String;
-	photo:?type
+	push_time:String;
+	losenTime:String;?
+	losenSpot:String;?
+	standdard_photo:?type
 	person_id
-	lastTrackDate:[Date]
+	lastTrack_date:[Date]
 
 11. push message to police.
 [mark? the same to api:10?]
@@ -518,8 +518,9 @@ response:
 		name:String
 		sex:boolean
 		age:int
-		familyTel:String [change : not mapping from user_id]
-		losenTime:String
+		family_tel:String [change : not mapping from user_id]
+		【个人认为这些选项因为涉及到用户隐私和安全不被勒索，所以应该不被放出来】
+		// 不需要从客户端哪，服务器给他时间，losenTime:String
 		//losenSpot:String
 		location:’[x,y]' ---> server should mapping it to location
 		description:String

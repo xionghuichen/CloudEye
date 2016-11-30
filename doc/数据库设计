@@ -25,7 +25,7 @@ mongodb:
 		age:int
 		parent_telephone:[index]
 		parent_id:[can be empty if upload this data offline.]
-		familyTel:String
+		family_tel:String
 		losenTime:String
 		losenSpot:String
 		standard_photo_key:key list
