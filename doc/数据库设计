@@ -1,4 +1,4 @@
-mysql:
+ mysql:
 	user_table:
 		user_id:
 		telephone:
@@ -6,8 +6,8 @@ mysql:
 		nick_name:
 		password:
 		id_num:
-		has_update:[acid]
-
+		has_update:[acid]: 
+		
 mongodb:
 	online_user_collection:
 		user_id:[index]
@@ -16,7 +16,6 @@ mongodb:
 	user_collection:
 		user_id:[index]
 		missing_person_list:[array of missing_person_objectId]
-	
 	missing_person_collection:
 		person_id:[person,index for 5,7]
 		faceplusplus_person_id:[this id is used to recognized missing person]

@@ -1,0 +1,37 @@
+ User.py
+
+    1. Register 
+    2. Login--- 
+    4. Logout---
+
+Location.py
+
+    4. SetLocation.
+    3. UpdateLocation
+
+
+Update.py
+
+    5. CheckUpdateStatus----[check if missing person has new situation]
+    9. has receive push msg, set hasUpdate to false.
+    
+    15.Has find my child:
+
+
+GetInfo.py
+6.  Get [post list]
+7.  get [missing person detail and track_list  
+
+
+PushToClient.py
+10. push msg to user list.
+11. push message to police.
+8. push msg to missing person's parents.
+
+Upload.py
+13. user upload image:
+14. call for help.
+7. upload opencv:
+
+Index.py
+16. getStaticPages
