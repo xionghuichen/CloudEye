@@ -9,14 +9,14 @@
 		has_update:[acid]: 
 		
 mongodb:
-	online_user_collection:
+	online_user_collection[user.online]:
 		user_id:[index]
 		location:[x,y][index]
 		channel_id:
-	user_collection:
+	user_collection[user.personlist]:
 		user_id:[index]
 		missing_person_list:[array of missing_person_objectId]
-	missing_person_collection:
+	missing_person_collection[pserson.missing]:
 		person_id:[person,index for 5,7]
 		faceplusplus_person_id:[this id is used to recognized missing person]
 		name:String
@@ -33,7 +33,7 @@ mongodb:
 		track_list:[array of track_objectId]
 		lastTrackDate:[Date]
 		[new add] isFinished：
-	track_collection:
+	track_collection:[person.track]
 		type:[camera or person]
 		snapTime:
 		location:[x,y]

@@ -31,9 +31,9 @@ Index.py
         - Register
             - unique_check
             - import_missing_person_list
+            - register
         - Login
-            - identify_check
-            - get_user_info
+            - identify_check && get_user_info 
         - SetLocation
             - update_to_online
         - UpdateLocation

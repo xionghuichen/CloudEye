@@ -23,7 +23,7 @@ import pymongo
 
 from config.globalVal import AP
 from Handlers.Index import IndexHandler
-from Handlers.User import RegisterHandler
+from Handlers.User import RegisterHandler, LoginHandler
 
 define("port", default=9000, help="run on the given port", type=int)
 define("host", default="139.196.207.155", help="community database host")
@@ -57,7 +57,8 @@ class Application(tornado.web.Application):
         handlers = [
             # test
             (r'/', IndexHandler),
-            (r'/user/register',RegisterHandler)
+            (r'/user/register',RegisterHandler),
+            (r'/user/login',LoginHandler)
         ]
 
         tornado.web.Application.__init__(self, handlers, **settings)
