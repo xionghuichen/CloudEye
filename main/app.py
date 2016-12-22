@@ -10,23 +10,24 @@ sys.path.append(location)
 
 import ConfigParser
 import logging
+
+import tornado.web
 import tornado.httpserver
 import tornado.ioloop
 from tornado.options import define, options
-import tornado.web
-from config.globalVal import AP
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
-
 import pymongo
 
+from config.globalVal import AP
 from Handlers.Index import IndexHandler
+from Handlers.User import RegisterHandler
 
 define("port", default=9000, help="run on the given port", type=int)
 define("host", default="139.196.207.155", help="community database host")
-define("mysql_database", default="alumnuscircle",
+define("mysql_database", default="cloudeye",
        help="community database name")
 define("mysql_user", default="root", help="community mysql user")
 define("mysql_password", default="zp19950310",
@@ -56,6 +57,7 @@ class Application(tornado.web.Application):
         handlers = [
             # test
             (r'/', IndexHandler),
+            (r'/user/register',RegisterHandler)
         ]
 
         tornado.web.Application.__init__(self, handlers, **settings)
@@ -67,10 +69,13 @@ class Application(tornado.web.Application):
                 autocommit=False, 
                 autoflush=True,
                 expire_on_commit=False)
+        BaseModel = declarative_base()
+        # create all of model inherit from BaseModel 
+        BaseModel.metadata.create_all(engine) 
         # use pymongo to connectino to mongodb
         client = pymongo.MongoClient(options.host,27017)
-        self.mongodb = client.cloudeye.authenticate(options.mongo_user,options.mongo_password)
-
+        client.cloudeye.authenticate(options.mongo_user,options.mongo_password)
+        self.mongodb = client.cloudeye
 
 def main():
     tornado.options.parse_command_line()
