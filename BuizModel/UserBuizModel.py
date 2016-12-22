@@ -110,11 +110,11 @@ class UserBuizModel(BaseBuizModel):
         Returns:
             result: UserInfo object or None
         """
-        message_mapping = {
+        message_mapping = [
             'login success',# 0
             "no such user",# 1
             "telephone format error", # 2
-        }
+        ]
         result = ReturnStruct()
         if re.match(regex_dict['telephone'], telephone):
             user_info = self.user_model.identify_check(telephone,password)

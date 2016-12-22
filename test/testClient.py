@@ -6,8 +6,8 @@ import cookielib
 import json
 import random
 import hashlib
-# prefix ="http://139.196.207.155:8000"
-prefix = "http://127.0.0.1:9000"
+prefix ="http://139.196.207.155:9000"
+# prefix = "http://127.0.0.1:9000"
 cj = cookielib.CookieJar()
 opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cj))
 urllib2.install_opener(opener)
@@ -38,7 +38,7 @@ def set_resquest(api,data,method):
 
 def register():
     data = {
-        "telephone":"15195861108",
+        "telephone":"15195861109",
         "password":"zp19950310",
         "real_name":"chenxionghui",
         "nick_name":"burningbear",
@@ -58,8 +58,8 @@ def login():
     response = urllib2.urlopen(req)
     the_page = response.read()
     print the_page
-register()
-# login()
+# register()
+login()
 # def setMessage(message,num,content):
 #    message[num] = "No.%s "%num + content + "\r\n"
 
