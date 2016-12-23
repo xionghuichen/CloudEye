@@ -20,11 +20,12 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 import pymongo
+from facepp_sdk.facepp import API, File
 
 from config.globalVal import AP
 from Handlers.Index import IndexHandler
 from Handlers.User import RegisterHandler, LoginHandler
-
+from Handlers.FindPerson import SearchPersonHandler
 define("port", default=9000, help="run on the given port", type=int)
 define("host", default="139.196.207.155", help="community database host")
 define("mysql_database", default="cloudeye",
@@ -43,12 +44,14 @@ class Application(tornado.web.Application):
     def __init__(self, *argc, **argkw):
         config = ConfigParser.ConfigParser()
         config.readfp(open(AP + "config/config.ini"))
-        cookie_secret = config.get("app", "cookie_secret")
+        COOKIE_SECRET = config.get("app", "COOKIE_SECRET")
+        FACE_API_KEY = config.get("app", "FACE_API_KEY")
+        FACE_API_SECRET = config.get("app","FACE_API_SECRET")
         template_path = os.path.join(AP + "template")
         static_path = os.path.join(AP + "static")
         logging.info("start server.")
         settings = dict(
-            cookie_secret=cookie_secret,
+            cookie_secret=COOKIE_SECRET,
             xsrf_cookies=True,
             template_path=template_path,
             static_path=static_path
@@ -58,7 +61,8 @@ class Application(tornado.web.Application):
             # test
             (r'/', IndexHandler),
             (r'/user/register',RegisterHandler),
-            (r'/user/login',LoginHandler)
+            (r'/user/login',LoginHandler),
+            (r'/find/searchperson',SearchPersonHandler)
         ]
 
         tornado.web.Application.__init__(self, handlers, **settings)
@@ -77,6 +81,7 @@ class Application(tornado.web.Application):
         client = pymongo.MongoClient(options.host,27017)
         client.cloudeye.authenticate(options.mongo_user,options.mongo_password)
         self.mongodb = client.cloudeye
+        self.facepp = API(FACE_API_KEY, FACE_API_SECRET)
 
 def main():
     tornado.options.parse_command_line()

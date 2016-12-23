@@ -6,3 +6,4 @@ class BaseCoreModel(object):
     def __init__(self, *argc, **argkw):
         self.mongodb = argkw['mongodb']
         self.session = argkw['sqlsession']
+        self.facepp = argkw['facepp']

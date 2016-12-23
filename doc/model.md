@@ -70,12 +70,14 @@ Index.py
                 - delete person_id in missing_person_collection 
                 - delete track list in track_collection
                 - delete_person_from_group[has_find_person]
-    - UploadPictureBuizModel;
+
+<!--     - UploadPictureBuizModel;
         - upload_opencv
             - 
         - user_upload_image
         - call_for_help
-        - has_find_person
+        - has_find_person -->
+
     - FaceSetBuizModel
         - upload_opencv, user_upload_image
             - [1] search_person

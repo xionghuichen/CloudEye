@@ -3,8 +3,8 @@
 # BaseBuizModel.py
 
 from CoreModels.UserCoreModel import UserCoreModel
+from CoreModels.FaceSetCoreModel import FaceSetCoreModel
 class BaseBuizModel(object):
     def __init__(self, *argc, **argkw):
-        # argkw['mongodb']
-        # argkw['sqldb']
         self.user_model = UserCoreModel(*argc, **argkw)
+        self.face_model = FaceSetCoreModel(*argc, **argkw)

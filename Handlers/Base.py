@@ -13,7 +13,7 @@ import tornado.gen
 import tornado.httpclient
 import json
 from BuizModel.UserBuizModel import UserBuizModel 
-
+from BuizModel.FaceSetBuizModel import FaceSetBuizModel
 class BaseHandler(tornado.web.RequestHandler):
     def __init__(self, *argc, **argkw):
         super(BaseHandler, self).__init__(*argc, **argkw)
@@ -21,11 +21,17 @@ class BaseHandler(tornado.web.RequestHandler):
         para['mongodb'] = self.application.mongodb 
         self.session = self.application.sqldb() 
         para['sqlsession'] = self.session
+        para['facepp'] = self.application.facepp
         self._user_model = UserBuizModel(**para) 
+        self._face_model = FaceSetBuizModel(**para)
 
     @property
     def user_model(self):
         return self._user_model
+
+    @property
+    def face_model(self):
+        return self._face_model
 
     def __del__(self):
         self.session.close()
@@ -34,4 +40,5 @@ class BaseHandler(tornado.web.RequestHandler):
         temp_json = json.dumps({'code':return_struct.code,
             'message':return_struct.message,
             'data':return_struct.data})
-        temp_json.replace("null", "\"empty\"")
+        temp_json.replace("null", "\'empty\'")
+        self.write(temp_json)

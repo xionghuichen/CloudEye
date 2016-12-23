@@ -6,8 +6,8 @@ import cookielib
 import json
 import random
 import hashlib
-prefix ="http://139.196.207.155:9000"
-# prefix = "http://127.0.0.1:9000"
+# prefix ="http://139.196.207.155:9000"
+prefix = "http://127.0.0.1:9000"
 cj = cookielib.CookieJar()
 opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cj))
 urllib2.install_opener(opener)
@@ -58,8 +58,18 @@ def login():
     response = urllib2.urlopen(req)
     the_page = response.read()
     print the_page
+
+def upload():
+    data = {
+        "url":'http://bj-mc-prod-asset.oss-cn-beijing.aliyuncs.com/mc-official/images/face/demo-pic11.jpg',
+    }
+    req = set_resquest("/find/searchperson",data,"POST")
+    response = urllib2.urlopen(req)
+    the_page = response.read()
+    print the_page
 # register()
-login()
+# login()
+upload()
 # def setMessage(message,num,content):
 #    message[num] = "No.%s "%num + content + "\r\n"
 

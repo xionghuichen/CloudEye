@@ -4,7 +4,14 @@
     2. Login--- 
     4. Logout---
 
-Location.py
+Upload.py
+
+    13. user upload image:
+    14. call for help.
+    7. upload opencv:
+
+
+Location.py 
 
     4. SetLocation.
     3. UpdateLocation
@@ -28,10 +35,7 @@ PushToClient.py
 11. push message to police.
 8. push msg to missing person's parents.
 
-Upload.py
-13. user upload image:
-14. call for help.
-7. upload opencv:
+
 
 Index.py
 16. getStaticPages

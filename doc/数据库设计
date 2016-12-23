@@ -8,7 +8,7 @@
 		id_num:
 		has_update:[acid]: 
 		
-mongodb:
+mongodb: 
 	online_user_collection[user.online]:
 		user_id:[index]
 		location:[x,y][index]
