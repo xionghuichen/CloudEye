@@ -120,8 +120,8 @@ Index.py
         - delete track list[has_find_person]
         - delete person_id in missing_person_collection [has_find_person]
         - delete track list in track_collection[has_find_person]
-    - SSDCoreModel;
-        - upload image to aliyun[upload_opencv,user_upload_image,call_for_help]
+    - OSSCoreModel;
+        - O[upload_opencv,user_upload_image,call_for_help]
         - get image from key
     - FaceSetCoreModel;
         - detect [upload_opencv, user_upload_image]

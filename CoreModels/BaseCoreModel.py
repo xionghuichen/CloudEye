@@ -7,3 +7,5 @@ class BaseCoreModel(object):
         self.mongodb = argkw['mongodb']
         self.session = argkw['sqlsession']
         self.facepp = argkw['facepp']
+        self.ali_service = argkw['ali_service']
+        self.ali_bucket = argkw['ali_bucket']

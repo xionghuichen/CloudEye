@@ -43,4 +43,8 @@ mongodb:
 		confidence.
 		[if person] person_id.
 
+	face.info:
+		key[index]
+		face_token:
+		face_rectangle:{'height','left','top','width'}
 redis:

@@ -19,7 +19,7 @@ print resp.getcode() == 200
 print the_page
 
 _xsrf = json.loads(the_page)['Data']['_xsrf']
-
+print "_xsrf:",_xsrf
 def set_resquest(api,data,method):
     # data is dictory.
     # method can be get put delete post ?
@@ -74,18 +74,19 @@ def callhelp():
         content = f.read()
     
     data = {
-        'base64ImgStr_list':[base64.b64encode(content)],
-    }
+        'base64ImgStr_list':[base64.b64encode(content)]
+        }
     print data
     req = set_resquest("/find/callhelp",data,"POST")
     response = urllib2.urlopen(req)
     the_page = response.read()
     print the_page
 
-# callhelp()
 # register()
 # login()
-upload()
+callhelp()
+
+#  upload()
 # def setMessage(message,num,content):
 #    message[num] = "No.%s "%num + content + "\r\n"
 

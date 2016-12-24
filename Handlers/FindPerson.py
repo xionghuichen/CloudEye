@@ -8,6 +8,8 @@ import logging
 import tornado.web
 import tornado.gen
 
+from Base import throwBaseException
+from _exceptions.http_error import MyMissingArgumentError
 from Base import BaseHandler
 from config.globalVal import ReturnStruct
 
@@ -15,7 +17,7 @@ class SearchPersonHandler(BaseHandler):
     def __init__(self, *argc, **argkw):
         super(SearchPersonHandler, self).__init__(*argc, **argkw)
         self.confidence_threshold = 95
-
+    @throwBaseException
     @tornado.web.asynchronous
     @tornado.gen.coroutine
     def post(self):
@@ -47,6 +49,7 @@ class CallHelpHandler(BaseHandler):
     def __init__(self, *argc, **argkw):
         super(CallHelpHandler, self).__init__(*argc, **argkw)
 
+    @throwBaseException
     @tornado.web.asynchronous
     @tornado.gen.coroutine
     def post(self):
@@ -54,16 +57,29 @@ class CallHelpHandler(BaseHandler):
         'empty image'
         ]
         result =ReturnStruct(message_mapping)
+        
         base64ImgStr_list = eval(self.get_argument('base64ImgStr_list'))
+        user_id = self.get_secure_cookie("user_id")
+        if user_id == None or user_id == '':
+            raise MyMissingArgumentError("cookie: user_id ")
         imgBytes_list = []
         if base64ImgStr_list == []:
             result.code = 0
         else:
+            # has image
             for image_str in base64ImgStr_list:
                 imgBytes_list.append(base64.b64decode(image_str))
             # get face_token _list
-            result2 = yield tornado.gen.Task(self.face_model.detect_img_list, imgBytes_list)
-        result.mergeInfo(result2)
+            result_detect = yield tornado.gen.Task(self.face_model.detect_img_list, imgBytes_list)
+            result.mergeInfo(result_detect)
+            if result_detect.code == 0:
+                # upload pictures.
+                result_pic_key = yield tornado.gen.Task(self.picture_model.store_pictures,imgBytes_list,user_id)
+                # todo, error handler
+                # store information.[track and person]
+
+            # send message
+            detect_result_list = result_detect.data
             # get oss key list
 
         self.return_to_client(result)

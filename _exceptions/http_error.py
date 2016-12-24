@@ -17,6 +17,7 @@ class MyMissingArgumentError(MyHTTPError):
         self.res_name = arg_name
         self.status_code = 404
         self.reason = "参数名称:{} 没有被找到,请检查你的参数".format(arg_name)
+        
 class DBError(MyHTTPError):
     def __init__(self, reason):
         self.status_code = 500

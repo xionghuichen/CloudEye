@@ -2,8 +2,6 @@
 # coding=utf-8
 # FaceSetBuizModel.py
 
-import tornado.web
-import tornado.gen
 
 from BaseBuizModel import BaseBuizModel
 from config.globalVal import ReturnStruct
@@ -50,7 +48,7 @@ class FaceSetBuizModel(BaseBuizModel):
             'low quality picture'
         ]
         to_return = ReturnStruct(message_mapping)
-        face_token_list = []
+        detect_result_list = []
         count = 0
         for imgBytes in imgBytes_list:
             # detect.
@@ -72,9 +70,9 @@ class FaceSetBuizModel(BaseBuizModel):
                     item_count += 1
                 detect_result = detect_result[max_index]
                 # appends. 
-                face_token_list.append(detect_result)
+                detect_result_list.append(detect_result)
             count +=1
 
         if to_return.code != 1:
-            to_return.data = {'face_token_list':face_token_list}        
+            to_return.data = {'detect_result_list':detect_result_list}        
         callback(to_return)
