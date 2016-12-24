@@ -94,6 +94,7 @@ class CallHelpHandler(BaseHandler):
                 # store information.[track and person]
                 detect_result_list = result_detect.data['detect_result_list']
                 self.person_model.store_new_person(result_pic_key, detect_result_list, info_data)
+                result.data = {}
             # send message
 
             # get oss key list

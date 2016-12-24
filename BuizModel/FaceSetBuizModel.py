@@ -44,7 +44,7 @@ class FaceSetBuizModel(BaseBuizModel):
                 if code == 0: return the face token list in data. 
         """
         message_mapping =[
-            'detect success',
+            'detect all pictures successful',
             'low quality picture'
         ]
         to_return = ReturnStruct(message_mapping)

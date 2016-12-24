@@ -120,3 +120,27 @@ class FaceSetCoreModel(BaseCoreModel):
         result = self.facepp.face.setuserid(face_token=face_token,user_id=person_id)
         logging.info("set person_id to face:%s \n"%result)
         return result
+
+    def add_faces_to_faceset(self,face_tokens):
+        """Add face tokens to faceset;
+
+        Args:
+            face_tokens list.
+
+        Returns:
+        {
+            "faceset_token": "42fb0d5bf81c5ac57c52344dddc3e7c9",
+            "time_used": 479,
+            "face_count": 1,
+            "face_added": 1,
+            "request_id": "1470293555,78637cd1-f773-47c6-8ba4-5af7153e4e00",
+            "outer_id": "uabREDWZvshpHISwVsav",
+            "failure_detail": []
+        } 
+        """
+        string_token=''
+        for item in face_tokens:
+            string_token = string_token+item+','
+        string_token = string_token[0:-1]
+        result = self.facepp.faceset.addface(faceset_token=self.temp_faceset_token,face_tokens=string_token)
+        return result

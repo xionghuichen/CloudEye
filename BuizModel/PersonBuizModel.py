@@ -34,8 +34,10 @@ class PersonBuizModel(BaseBuizModel):
         # add to faceset
         self.face_model.insert_faces_info(pic_key, detect_result)
         # add setUserId
+        face_token_list = []
         for item in detect_result:
             self.face_model.set_person_id_to_face(person_id,item['face_token'])
+            face_token_list.append(item['face_token'])
+        self.face_model.add_faces_to_faceset(face_token_list)
         # add missing_person_id into person.missing collection
         self.user_model.insert_missing_person_by_uid(info_data['relation_id'],[person_id])
-        

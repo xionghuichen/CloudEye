@@ -530,19 +530,15 @@ response:
 		code,message.
 	++
 	1. upload, 
-	2. get bianry stream file.
-	
-	# detect
-	# store 
+		upload to oss
+		upload to face++
+	2. store
 		store to oss --[userid]key
-		store to mongodb --[key]person id
-		store to faceset--[face_token, user_id]
-	# 
-	3. get oss key
-	4. upload to face++ to get face_token
-	5. insert person_list_info [key user_id]
-	6. setUserId in face++
-	7. addface.
+		store to mongodb [person.info,user.personlist,face.info]
+				--[key]person id
+		store to faceset--[face_token, user_id]	
+		set userid
+	3. send message 
 
 		[UploadPictureBuizModel]
 			[SSDCoreModel]
