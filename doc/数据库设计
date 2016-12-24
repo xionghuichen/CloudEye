@@ -19,7 +19,8 @@ mongodb:
 		missing_person_list:[array of missing_person_objectId]
 	missing_person_collection[pserson.missing]:
 		person_id:[person,index for 5,7]
-		faceplusplus_person_id:[this id is used to recognized missing person]
+		#　faceplusplus_person_id:[this id is used to recognized missing person]
+		
 		name:String
 		sex:boolean
 		age:int
@@ -28,13 +29,13 @@ mongodb:
 		relation_id:[can be empty if upload this data offline.]
 		lost_time:String
 		lost_spot:String
-		photo_key:key list
+		picture_key_list:key list
 		description:String
 		formal:boolean
 		track_list:[array of track_objectId]
 		last_update_time:[Date]
 		last_update_spot:[string]
-		[new add] isFinished：
+		[new add] isFinｆished：
 	track_collection:[person.track]
 		type:[camera or person]
 		snap_time:
@@ -44,7 +45,7 @@ mongodb:
 		[if person] person_id.
 
 	face.info:
-		key[index]
+		picture_key[index]
 		face_token:
 		face_rectangle:{'height','left','top','width'}
 redis:

@@ -82,7 +82,7 @@ class UserCoreModel(BaseCoreModel):
         person_list = []
         if cursor != None:
             for item in cursor:
-                person_list.append(str(item['_id']))
+                person_list.append(item['_id'])
         return person_list
 
 
@@ -91,17 +91,18 @@ class UserCoreModel(BaseCoreModel):
 
         Args:
             uid: user's id in mysql.
-        
+            person_list: missing person list in mongodb[person.info]
+                if just want to push single person, just pass as ['person_id']
         Returns:
             result : true for insert success, false otherwise.
 
         Exception:
             DBError: when insert error.
         """
-        person_list_doc = {'user_id':user_id,'missing_person_list':person_list}
-        result = True
+        update_filter = {'user_id':user_id}
+        update_data = {"$pushAll":{'missing_person_list':person_list}}
         # try:
-        self.mongodb.user.personlist.insert(person_list_doc)
+        self.mongodb.user.personlist.update_one(update_filter,update_data,upsert=True)
         # except BaseException as e:
         #     result = False
         #     raise DBError('mongodb数据插入出现异常，insert_missing_person_by_uid')

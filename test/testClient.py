@@ -7,6 +7,8 @@ import json
 import random
 import hashlib
 import base64
+import time
+import datetime
 # prefix ="http://139.196.207.155:9000"
 prefix = "http://127.0.0.1:9000"
 cj = cookielib.CookieJar()
@@ -74,16 +76,23 @@ def callhelp():
         content = f.read()
     
     data = {
-        'base64ImgStr_list':[base64.b64encode(content)]
+        'base64ImgStr_list':[base64.b64encode(content), base64.b64encode(content)],
+        'name':'chenxionghui',
+        'sex':0,
+        'age':20,
+        'relation_telephone':'15195861108',
+        'relation_name':'chenxionghui',
+        'lost_time':time.mktime(datetime.datetime.now().timetuple()),
+        'lost_spot':[23.9,23.9],
+        'description':'please help me dear!!!!'
         }
-    print data
     req = set_resquest("/find/callhelp",data,"POST")
     response = urllib2.urlopen(req)
     the_page = response.read()
     print the_page
 
 # register()
-# login()
+login()
 callhelp()
 
 #  upload()

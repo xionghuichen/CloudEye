@@ -2,7 +2,7 @@
 # coding=utf-8
 # FaceSetCoreModel.py
 import functools
-
+import logging
 from BaseCoreModel import BaseCoreModel
 from _exceptions.http_error import DBError
 from facepp_sdk.facepp import APIError, File
@@ -75,4 +75,48 @@ class FaceSetCoreModel(BaseCoreModel):
                 else:
                     result[count]['attributes']['facequality'] = facequality['value'] - facequality['threshold']
                     count += 1
+        return result
+
+    def insert_faces_info(self, pic_key, detect_result):
+        """Intert face information into mongodb.
+
+        Args:
+            pic_key: oss key list.
+            detect_result:
+                'face_rectangle':# image size. 
+                        {
+                            'height': 180,
+                            'left': 99,
+                            'top': 88,
+                            'width': 180
+                        },
+                  'face_token': '24f7e27d20113c0d398a33486260e348'# face identify
+        Returns:
+            [ObjectId('...'), ObjectId('...')]
+        """
+        for index, item in enumerate(detect_result):
+            logging.info("index is :%s"%index)
+            detect_result[index]['picture_key'] = pic_key[index]
+
+        result = self.mongodb.face.info.insert_many(detect_result)
+        return result.inserted_ids
+
+    @repeat_send
+    def set_person_id_to_face(self,person_id,face_token):
+        """label face with person_id.
+
+        Args:
+            person_id
+            face_token
+
+        Returns:
+        {
+            "user_id": "234723hgfd",
+            "request_id": "1470481019,fd7c8a99-93fc-45d4-9eb6-9aaf6fb59f32",
+            "time_used": 15,
+            "face_token": "4dc8ba0650405fa7a4a5b0b5cb937f0b"
+        }
+        """
+        result = self.facepp.face.setuserid(face_token=face_token,user_id=person_id)
+        logging.info("set person_id to face:%s \n"%result)
         return result

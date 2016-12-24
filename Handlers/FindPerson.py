@@ -17,7 +17,7 @@ class SearchPersonHandler(BaseHandler):
     def __init__(self, *argc, **argkw):
         super(SearchPersonHandler, self).__init__(*argc, **argkw)
         self.confidence_threshold = 95
-    @throwBaseException
+
     @tornado.web.asynchronous
     @tornado.gen.coroutine
     def post(self):
@@ -28,7 +28,10 @@ class SearchPersonHandler(BaseHandler):
         ]
         result = ReturnStruct(message_mapping)
         # 1. [todo]upload
-        url = self.get_argument("url")# fade url just for test
+        try:
+            url = self.get_argument("url")# fade url just for test
+        except tornado.web.MissingArgumentError, e:
+            raise MyMissingArgumentError(e.arg_name)   
         # 2. search_person
         searchResult =yield tornado.gen.Task(self.face_model.search_person, url)
         if result != None:
@@ -49,17 +52,29 @@ class CallHelpHandler(BaseHandler):
     def __init__(self, *argc, **argkw):
         super(CallHelpHandler, self).__init__(*argc, **argkw)
 
-    @throwBaseException
-    @tornado.web.asynchronous
     @tornado.gen.coroutine
     def post(self):
         message_mapping = [
         'empty image'
         ]
         result =ReturnStruct(message_mapping)
-        
-        base64ImgStr_list = eval(self.get_argument('base64ImgStr_list'))
-        user_id = self.get_secure_cookie("user_id")
+        try:
+            base64ImgStr_list = eval(self.get_argument('base64ImgStr_list'))
+            user_id = self.get_secure_cookie("user_id")
+            info_data={
+                'name':self.get_argument('name'),
+                'sex':int(self.get_argument('sex')),
+                'age':int(self.get_argument('age')),
+                'relation_telephone':self.get_argument('relation_telephone'),
+                'relation_name':self.get_argument('relation_name'),
+                'relation_id': user_id,
+                'lost_time':self.get_argument('lost_time'),
+                'lost_spot':self.get_argument('lost_spot'),
+                'description':self.get_argument('description')
+            }
+        except tornado.web.MissingArgumentError, e:
+            raise MyMissingArgumentError(e.arg_name)     
+
         if user_id == None or user_id == '':
             raise MyMissingArgumentError("cookie: user_id ")
         imgBytes_list = []
@@ -77,9 +92,10 @@ class CallHelpHandler(BaseHandler):
                 result_pic_key = yield tornado.gen.Task(self.picture_model.store_pictures,imgBytes_list,user_id)
                 # todo, error handler
                 # store information.[track and person]
-
+                detect_result_list = result_detect.data['detect_result_list']
+                self.person_model.store_new_person(result_pic_key, detect_result_list, info_data)
             # send message
-            detect_result_list = result_detect.data
+
             # get oss key list
 
         self.return_to_client(result)

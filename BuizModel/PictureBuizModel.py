@@ -22,6 +22,7 @@ class PictureBuizModel(BaseBuizModel):
             user_id: set as the key prefix
         Returns:
             key_list: OSS key list which correcpongding every image input
+                example:['string','string']
         """
         key_list = []
         if imgBytes_list != []:

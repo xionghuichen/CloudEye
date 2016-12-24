@@ -15,6 +15,7 @@ import json
 from BuizModel.UserBuizModel import UserBuizModel 
 from BuizModel.FaceSetBuizModel import FaceSetBuizModel
 from BuizModel.PictureBuizModel import PictureBuizModel
+from BuizModel.PersonBuizModel import PersonBuizModel
 from _exceptions.http_error import MyMissingArgumentError
 
 def throwBaseException(method):
@@ -24,7 +25,6 @@ def throwBaseException(method):
     """
     @functools.wraps(method)
     def wrapper(self, *args, **kwargs):
-        success = True
         try:
             return method(self, *args, **kwargs)
         except tornado.web.MissingArgumentError, e:
@@ -45,6 +45,12 @@ class BaseHandler(tornado.web.RequestHandler):
         self._user_model = UserBuizModel(**para) 
         self._face_model = FaceSetBuizModel(**para)
         self._picture_model = PictureBuizModel(**para)
+        self._person_model = PersonBuizModel(**para)
+
+    @property
+    def person_model(self):
+        return self._person_model
+        
     @property
     def user_model(self):
         return self._user_model
@@ -60,8 +66,38 @@ class BaseHandler(tornado.web.RequestHandler):
     def __del__(self):
         self.session.close()
 
+
+    def change_custom_string_to_json(self, dic):
+        # logging.info("in change custom string to json")
+        if isinstance(dic, dict):
+            for key, value in dic.items():
+                # print "in dictory : ",key, value
+                # logging.info(" print key %s and value %s"%(key,value))
+                if type(value) == bool:
+                    # logging.info("in bool value ,key is%s"%key)
+                    dic[key] = str(value)
+                elif key == '_id':
+                    dic[key] = str(dic[key])
+                # elif key == 'image_urls' and isinstance(value, list) and dic[key] != []:
+                #     count = 0
+                #     while count < len(value):
+                #         dic[key][count] = value[count]['origin']
+                #         dic[key][count] = Aliyun().parseUrlByFakeKey(
+                #             dic[key][count])
+                #         count += 1
+                # elif key == 'circle_url' and dic[key] != {}:
+                #     dic[key] = Aliyun().parseUrlByFakeKey(dic[key])
+                if isinstance(value, dict):
+                    self.change_custom_string_to_json(value)
+                elif isinstance(value, list):
+                    # print " out of list ", value
+                    for list_value in value:
+                        # print "in list : "+str(list_value)
+                        self.change_custom_string_to_json(list_value)
+
     def return_to_client(self,return_struct):
-        return_struct.print_info()
+        self.change_custom_string_to_json(return_struct.data)
+        return_struct.print_info("after change")
         temp_json = json.dumps({'code':return_struct.code,
             'message':return_struct.message_mapping[return_struct.code],
             'data':return_struct.data})
