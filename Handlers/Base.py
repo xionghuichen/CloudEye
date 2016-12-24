@@ -22,6 +22,8 @@ class BaseHandler(tornado.web.RequestHandler):
         self.session = self.application.sqldb() 
         para['sqlsession'] = self.session
         para['facepp'] = self.application.facepp
+        para['ali_service'] = self.application.ali_service
+        para['ali_bucket'] = self.application.ali_bucket
         self._user_model = UserBuizModel(**para) 
         self._face_model = FaceSetBuizModel(**para)
 

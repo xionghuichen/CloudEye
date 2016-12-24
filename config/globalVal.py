@@ -8,9 +8,10 @@ regex_dict = {
 'id_number':ur"/^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$|^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/",
 }        
 class ReturnStruct(object):
-    def __init__(self):
-        self.max_code = 0
+    def __init__(self, message_mapping = None):
+        self.max_code = len(message_mapping)
         self.code = 0
+        self.message_mapping = message_mapping
         self.message = 'empty'
         self.data = {}
 
@@ -19,3 +20,4 @@ class ReturnStruct(object):
         self.code = self.max_code + new_struct.code
         self.message = new_struct.message
         self.data = new_struct.data
+        self.message_mapping.extend(new_struct.message_mapping)

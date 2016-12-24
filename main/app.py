@@ -10,6 +10,7 @@ sys.path.append(location)
 
 import ConfigParser
 import logging
+import oss2
 
 import tornado.web
 import tornado.httpserver
@@ -25,7 +26,7 @@ from facepp_sdk.facepp import API, File
 from config.globalVal import AP
 from Handlers.Index import IndexHandler
 from Handlers.User import RegisterHandler, LoginHandler
-from Handlers.FindPerson import SearchPersonHandler
+from Handlers.FindPerson import SearchPersonHandler, CallHelpHandler
 define("port", default=9000, help="run on the given port", type=int)
 define("host", default="139.196.207.155", help="community database host")
 define("mysql_database", default="cloudeye",
@@ -47,6 +48,8 @@ class Application(tornado.web.Application):
         COOKIE_SECRET = config.get("app", "COOKIE_SECRET")
         FACE_API_KEY = config.get("app", "FACE_API_KEY")
         FACE_API_SECRET = config.get("app","FACE_API_SECRET")
+        ALIYUN_KEY = config.get("app","ALIYUN_KEY")
+        ALIYUN_SECRET = config.get("app","ALIYUN_SECRET")
         template_path = os.path.join(AP + "template")
         static_path = os.path.join(AP + "static")
         logging.info("start server.")
@@ -62,7 +65,8 @@ class Application(tornado.web.Application):
             (r'/', IndexHandler),
             (r'/user/register',RegisterHandler),
             (r'/user/login',LoginHandler),
-            (r'/find/searchperson',SearchPersonHandler)
+            (r'/find/searchperson',SearchPersonHandler),
+            (r'/find/callhelp',CallHelpHandler)
         ]
 
         tornado.web.Application.__init__(self, handlers, **settings)
@@ -82,6 +86,11 @@ class Application(tornado.web.Application):
         client.cloudeye.authenticate(options.mongo_user,options.mongo_password)
         self.mongodb = client.cloudeye
         self.facepp = API(FACE_API_KEY, FACE_API_SECRET)
+        auth = oss2.Auth(ALIYUN_KEY,ALIYUN_SECRET)
+        endpoint = r'http://oss-cn-shanghai.aliyuncs.com'
+        bucketName = 'cloudeye'
+        self.ali_service = oss2.Service(auth, endpoint)
+        self.ali_bucket = oss2.Bucket(auth, endpoint, bucketName)
 
 def main():
     tornado.options.parse_command_line()

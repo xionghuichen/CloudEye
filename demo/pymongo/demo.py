@@ -21,7 +21,7 @@ client.cloudeye.authenticate("burningbear","zp19950310")
 # post_id = posts.insert(post)
 
 
-results = db.person.info.find({"parent_telephone":"15195861108"})
+results = db.person.info.find({"relation_telephone":"15195861108"})
 # if results == None:
 #     for result in results:
 #         print 'hello'

@@ -20,6 +20,10 @@ face_search = './demo.jpeg'
 # Import system libraries and define helper functions
 # 导入系统库并定义辅助函数
 from pprint import pformat
+import logging
+logging.basicConfig(level=logging.INFO,
+                    filename='log.log',
+                    filemode='w')
 
 
 def print_result(hit, result):
@@ -65,6 +69,11 @@ Face = {}
 # time.sleep(5)
 # 对待比对的图片进行检测，再搜索相似脸
 # detect image and search same face
+
+# with open(face_two, 'rb') as f:
+#     content = f.read()
+# ret = api.detect(image_file=File(content=content))
+# print_result("detect", ret)
 again = True
 while(again):
     again = False

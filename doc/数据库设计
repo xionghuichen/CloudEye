@@ -7,6 +7,7 @@
 		password:
 		id_num:
 		has_update:[acid]: 
+	plice
 		
 mongodb: 
 	online_user_collection[user.online]:
@@ -22,23 +23,24 @@ mongodb:
 		name:String
 		sex:boolean
 		age:int
-		parent_telephone:[index]
-		parent_id:[can be empty if upload this data offline.]
-		family_tel:String
-		losenTime:String
-		losenSpot:String
-		standard_photo_key:key list
+		relation_telephone:[index]
+		relation_name:
+		relation_id:[can be empty if upload this data offline.]
+		lost_time:String
+		lost_spot:String
+		photo_key:key list
 		description:String
-		hasRecord:boolean
+		formal:boolean
 		track_list:[array of track_objectId]
-		lastTrackDate:[Date]
+		last_update_time:[Date]
+		last_update_spot:[string]
 		[new add] isFinished：
 	track_collection:[person.track]
 		type:[camera or person]
-		snapTime:
-		location:[x,y]
-		snapImageKey.
+		snap_time:
+		snap_spot:[x,y]
+		snap_shoot_key.
 		confidence.
 		[if person] person_id.
-		date.
+
 redis:

@@ -78,7 +78,7 @@ class UserCoreModel(BaseCoreModel):
         Returns:
             person_list: missing person list identify by '_id'
         """
-        cursor = self.mongodb.person.info.find({'parent_telephone':telephone})
+        cursor = self.mongodb.person.info.find({'relation_telephone':telephone})
         person_list = []
         if cursor != None:
             for item in cursor:

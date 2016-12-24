@@ -9,7 +9,7 @@ __all__ = ['File', 'APIError', 'API']
 
 
 DEBUG_LEVEL = 1
-
+from pprint import pformat
 import sys
 import socket
 import urllib2
@@ -21,7 +21,7 @@ import mimetypes
 import time
 import tempfile
 from collections import Iterable
-
+import logging
 
 class File(object):
 
@@ -29,18 +29,24 @@ class File(object):
     path = None
     content = None
 
-    def __init__(self, path):
-        self.path = path
-        self._get_content()
+    def __init__(self, path=None,content=None):
+        if content != None:
+            self.content = content
+            self.path = path
+        else:
+            self.path = path
+            self._get_content()
 
     def _get_content(self):
         """read image content"""
-
         if os.path.getsize(self.path) > 2 * 1024 * 1024:
             raise APIError(-1, None, 'image file size too large')
+
         else:
             with open(self.path, 'rb') as f:
                 self.content = f.read()
+                # logging.info("content2 %s"%self.content)
+
 
     def get_filename(self):
         return os.path.basename(self.path)
@@ -109,15 +115,18 @@ def _setup_apiobj(self, api, path):
     if self is not api:
         self._api = api
         self._urlbase = api.server + '/'.join(path)
-
+    # print "join path is :", path
     lvl = len(path)
+    # print "lvl is :", lvl
     done = set()
     for i in _APIS:
+        # print "i is :", i
         if len(i) <= lvl:
             continue
         cur = i[lvl]
         if i[:lvl] == path and cur not in done:
             done.add(cur)
+            # print "done:", done
             setattr(self, cur, _APIProxy(api, i[:lvl + 1]))
 
 
@@ -147,7 +156,7 @@ class _APIProxy(object):
         request.add_header('Content-type', form.get_content_type())
         request.add_header('Content-length', str(len(body)))
         request.add_data(body)
-
+        #prn_obj(request)
         self._api.update_request(request)
 
         retry = self._api.max_retries
@@ -211,7 +220,7 @@ class _MultiPartForm(object):
         """Add a simple field to the form data."""
         self.form_fields.append((name, value))
         return
-
+    #form.add_file(k, v.get_filename(), v.content)
     def add_file(self, fieldname, filename, content, mimetype=None):
         """Add a file to be uploaded."""
         if mimetype is None:
@@ -276,3 +285,32 @@ _APIS = [
 ]
 
 _APIS = [i.split('/')[1:] for i in _APIS]
+API_KEY = "qZAdC0nEQDEDgC4tdvLiHjwnZWlw08Bm"
+API_SECRET = "fd0uEymgpqkdrhZCc-h5QLBYavDD0g0j"
+
+## test function 
+# def print_result(hit, result):
+#     def encode(obj):
+#         if type(obj) is unicode:
+#             return obj.encode('utf-8')
+#         if type(obj) is dict:
+#             return {encode(v): encode(k) for (v, k) in obj.iteritems()}
+#         if type(obj) is list:
+#             return [encode(i) for i in obj]
+#         return obj
+#     print hit
+#     result = encode(result)
+#     print '\n'.join("  " + i for i in pformat(result, width=75).split('\n'))
+
+
+# def prn_obj(obj):
+#     result = '\n'.join(['%s:%s' % item for item in obj.__dict__.items()])
+#     logging.info("print obj %s"%result)
+
+# api = API(API_KEY, API_SECRET)
+# with open('./demo.jpeg', 'rb') as f:
+#     content = f.read()
+# ret = api.detect(image_file=File(path='./d12.jpeg',content=content),return_attributes='facequality')
+# # print ret
+# del ret['faces'][0]
+# print_result("detect", ret)

@@ -6,6 +6,7 @@ import cookielib
 import json
 import random
 import hashlib
+import base64
 # prefix ="http://139.196.207.155:9000"
 prefix = "http://127.0.0.1:9000"
 cj = cookielib.CookieJar()
@@ -67,9 +68,24 @@ def upload():
     response = urllib2.urlopen(req)
     the_page = response.read()
     print the_page
+
+def callhelp():
+    with open('./demo.jpeg', 'rb') as f:
+        content = f.read()
+    
+    data = {
+        'base64ImgStr_list':[base64.b64encode(content)],
+    }
+    print data
+    req = set_resquest("/find/callhelp",data,"POST")
+    response = urllib2.urlopen(req)
+    the_page = response.read()
+    print the_page
+
+callhelp()
 # register()
 # login()
-upload()
+# upload()
 # def setMessage(message,num,content):
 #    message[num] = "No.%s "%num + content + "\r\n"
 

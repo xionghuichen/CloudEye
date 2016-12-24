@@ -38,7 +38,7 @@ response:
 			[PersonCoreModel]
 				[opt] import missing person table.
 					[input] telephone:
-						Find parent_telephone = telephone 
+						Find relation_telephone = telephone 
 						From missing_person_collection
 						in MongoDB
 						append to missing_person_list.
@@ -529,6 +529,14 @@ response:
 	response:
 		code,message.
 	++
+	1. upload, 
+	2. get bianry stream file.
+	3. get oss key
+	4. upload to face++ to get face_token
+	5. insert person_list_info [key user_id]
+	6. setUserId in face++
+	7. addface.
+	
 		[UploadPictureBuizModel]
 			[SSDCoreModel]
 				[opt] upload image to aliyun--> get url get key.
