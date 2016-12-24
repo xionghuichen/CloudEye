@@ -32,7 +32,7 @@ class FaceSetCoreModel(BaseCoreModel):
         self.temp_faceset_token='468d4f8ba70bddbf41aa9b3d2deeb04a'
         self.fade_file_path = './demo.jpeg'
     @repeat_send
-    def search_person(self,url):
+    def search_face(self,url):
         return self.facepp.search(image_url=url,faceset_token=self.temp_faceset_token)
 
     @repeat_send

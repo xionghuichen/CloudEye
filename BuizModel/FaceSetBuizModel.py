@@ -49,7 +49,7 @@ class FaceSetBuizModel(BaseBuizModel):
             'detect success',
             'low quality picture'
         ]
-        to_return = ReturnStruct()
+        to_return = ReturnStruct(message_mapping)
         face_token_list = []
         count = 0
         for imgBytes in imgBytes_list:
@@ -76,7 +76,5 @@ class FaceSetBuizModel(BaseBuizModel):
             count +=1
 
         if to_return.code != 1:
-            to_return.data = {'face_token_list':face_token_list}
-        to_return.max_code = 1
-        
+            to_return.data = {'face_token_list':face_token_list}        
         callback(to_return)

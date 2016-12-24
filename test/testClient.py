@@ -39,7 +39,7 @@ def set_resquest(api,data,method):
 
 def register():
     data = {
-        "telephone":"15195861109",
+        "telephone":"15195861110",
         "password":"zp19950310",
         "real_name":"chenxionghui",
         "nick_name":"burningbear",
@@ -82,10 +82,10 @@ def callhelp():
     the_page = response.read()
     print the_page
 
-callhelp()
+# callhelp()
 # register()
 # login()
-# upload()
+upload()
 # def setMessage(message,num,content):
 #    message[num] = "No.%s "%num + content + "\r\n"
 

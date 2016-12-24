@@ -24,7 +24,7 @@ class SearchPersonHandler(BaseHandler):
             'search success but confidence does not higher than %s'%self.confidence_threshold,
             'search failed'
         ]
-        result = ReturnStruct()
+        result = ReturnStruct(message_mapping)
         # 1. [todo]upload
         url = self.get_argument("url")# fade url just for test
         # 2. search_person
@@ -40,7 +40,6 @@ class SearchPersonHandler(BaseHandler):
         # 3. get person_detail.
         # 4. update track.
         # 5. push message.
-        result.message = message_mapping[result.code]
         self.return_to_client(result)
         self.finish()
 
@@ -51,26 +50,21 @@ class CallHelpHandler(BaseHandler):
     @tornado.web.asynchronous
     @tornado.gen.coroutine
     def post(self):
-        result =ReturnStruct()
         message_mapping = [
-        '',
-        '',
-        'low quality of pictures'
+        'empty image'
         ]
+        result =ReturnStruct(message_mapping)
         base64ImgStr_list = eval(self.get_argument('base64ImgStr_list'))
         imgBytes_list = []
         if base64ImgStr_list == []:
             result.code = 0
-            result.message ='empty image'
-            result.max_code = 1
         else:
             for image_str in base64ImgStr_list:
                 imgBytes_list.append(base64.b64decode(image_str))
             # get face_token _list
             result2 = yield tornado.gen.Task(self.face_model.detect_img_list, imgBytes_list)
-
         result.mergeInfo(result2)
             # get oss key list
-        result.message = message_mapping[result.code]
+
         self.return_to_client(result)
         self.finish()

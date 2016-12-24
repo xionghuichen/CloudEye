@@ -8,16 +8,21 @@ regex_dict = {
 'id_number':ur"/^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$|^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/",
 }        
 class ReturnStruct(object):
-    def __init__(self, message_mapping = None):
+    def __init__(self, message_mapping = []):
         self.max_code = len(message_mapping)
         self.code = 0
         self.message_mapping = message_mapping
-        self.message = 'empty'
         self.data = {}
 
     def mergeInfo(self,new_struct):
-        self.max_code = self.max_code + new_struct.max_code
         self.code = self.max_code + new_struct.code
-        self.message = new_struct.message
+        self.max_code = self.max_code + new_struct.max_code
         self.data = new_struct.data
         self.message_mapping.extend(new_struct.message_mapping)
+
+    def print_info(self,tag ='default'):
+        print "print return struct, tag = %s...."%tag
+        print "max_code:",self.max_code
+        print "code:",self.code
+        print "message_mapping:",self.message_mapping
+        print "data:",self.data

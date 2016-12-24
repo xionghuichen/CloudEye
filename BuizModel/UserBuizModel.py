@@ -29,14 +29,12 @@ class UserBuizModel(BaseBuizModel):
         "telephone format error",# 1
         "telephone has been registed"# 2
         ]
-        result = ReturnStruct()
+        result = ReturnStruct(message_mapping)
         if re.match(regex_dict['telephone'], telephone):
             if self.user_model.is_telephone_exist(telephone):
                 result.code = 2
         else:
             result.code = 1
-        result.message = message_mapping[result.code]
-        result.max_code = len(message_mapping)
         return result
 
     def register_new_user(self, telephone, password, real_name, nick_name, id_number):
@@ -53,7 +51,7 @@ class UserBuizModel(BaseBuizModel):
             ReturnStruct, look message_mapping for detail
 
         """
-        result = ReturnStruct()
+
         message_mapping = [
         "success",# 0
         "real_name format error", # 1
@@ -61,6 +59,7 @@ class UserBuizModel(BaseBuizModel):
         "id_number format error",# 3
         "insert conflit: " # 4
         ]
+        result = ReturnStruct(message_mapping)
         if not re.match(regex_dict['real_name'],real_name):
             result.code = 1 
         if re.match(regex_dict['nick_name'],nick_name):
@@ -73,8 +72,7 @@ class UserBuizModel(BaseBuizModel):
             result.code = 0
         else:
             result.code = 4
-            message_mapping[4] = message_mapping[4] + message
-        result.message = message_mapping[result.code]
+            result.message_mapping[4] = message_mapping[4] + message
         return result
         # def import_missing_person_list(self,)
 
@@ -115,7 +113,7 @@ class UserBuizModel(BaseBuizModel):
             "no such user",# 1
             "telephone format error", # 2
         ]
-        result = ReturnStruct()
+        result = ReturnStruct(message_mapping)
         if re.match(regex_dict['telephone'], telephone):
             user_info = self.user_model.identify_check(telephone,password)
             if user_info is None:
@@ -125,7 +123,6 @@ class UserBuizModel(BaseBuizModel):
                 result.data['user_id'] = user_info.user_id
         else:
             result.code = 2
-        result.message = message_mapping[result.code]
         return result
 
     def get_missing_person_list(self, user_id):

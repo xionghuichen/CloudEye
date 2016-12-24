@@ -39,8 +39,9 @@ class BaseHandler(tornado.web.RequestHandler):
         self.session.close()
 
     def return_to_client(self,return_struct):
+        return_struct.print_info()
         temp_json = json.dumps({'code':return_struct.code,
-            'message':return_struct.message,
+            'message':return_struct.message_mapping[return_struct.code],
             'data':return_struct.data})
         temp_json.replace("null", "\'empty\'")
         self.write(temp_json)
