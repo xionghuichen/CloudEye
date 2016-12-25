@@ -63,8 +63,12 @@ def login():
     print the_page
 
 def upload():
+    with open('./demo.jpeg', 'rb') as f:
+        content = f.read()
     data = {
-        "url":'http://bj-mc-prod-asset.oss-cn-beijing.aliyuncs.com/mc-official/images/face/demo-pic11.jpg',
+        'search_picture':base64.b64encode(content),
+        'coordinate':[22.9,22.9],
+        'camera_id':1
     }
     req = set_resquest("/find/searchperson",data,"POST")
     response = urllib2.urlopen(req)
@@ -76,7 +80,7 @@ def callhelp():
         content = f.read()
     
     data = {
-        'base64ImgStr_list':[base64.b64encode(content), base64.b64encode(content)],
+        'picture_list':[base64.b64encode(content), base64.b64encode(content)],
         'name':'chenxionghui',
         'sex':0,
         'age':20,
@@ -101,9 +105,8 @@ def updatestatus():
 # register()
 login()
 # updatestatus()
-callhelp()
-
-#  upload()
+# callhelp()
+upload()
 # def setMessage(message,num,content):
 #    message[num] = "No.%s "%num + content + "\r\n"
 

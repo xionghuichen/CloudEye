@@ -26,26 +26,54 @@ class SearchPersonHandler(BaseHandler):
             'search failed'
         ]
         result = ReturnStruct(message_mapping)
-        # 1. [todo]upload
+        # 1. upload
         try:
-            url = self.get_argument("url")# fade url just for test
+            search_picture = self.get_argument("search_picture")
+            coordinate = eval(self.get_argument("coordinate"))
+            camera_id = int(self.get_argument("camera_id"))
         except tornado.web.MissingArgumentError, e:
             raise MyMissingArgumentError(e.arg_name)   
+        # change base64 to binary file
+        try:
+            imgBytes = base64.b64decode(search_picture)
+        except TypeError as e:
+            raise ArgumentTypeError('search_picture')
         # 2. search_person
-        searchResult =yield tornado.gen.Task(self.face_model.search_person, url)
-        if result != None:
+        result_detect_struct = yield tornado.gen.Task(self.face_model.detect_img_list, [imgBytes])
+        result.mergeInfo(result_detect_struct)
+        if result_detect_struct.code == 0:
+            # has high quality picture:
+            face_token = result_detect_struct.data['detect_result_list'][0]['face_token']
+            searchResult =yield tornado.gen.Task(self.face_model.search_person, face_token)
+        if searchResult != None:
+            # has search result.
             if searchResult['confidence'] > self.confidence_threshold:
+                # has high confidence
                 result.code = 0
-                result.data = searchResult
+                # 3. get missing person_detail.
+                person_id = searchResult['user_id']
+                # upload picture
+                detect_result = result_detect_struct.data['detect_result_list']
+                pic_key_list = yield tornado.gen.Task(self.picture_model.store_pictures,[imgBytes], "camera"+str(camera_id), detect_result)
+                # 4. update track　and person information
+                self.person_model.update_person_status(person_id, self.person_model.CAMERA, coordinate, searchResult['confidence'], pic_key_list[0])
+                # 5. send message
+                message_data = {
+                    'person_id':person_id,
+                    'spot':coordinate   
+                }
+                self.message_model.send_message_factory(self.message_model.SEARCH, coordinate, message_data)
+               
             else:
                 result.code = 1
         else:
             result.code = 2
-        # 3. get person_detail.
-        # 4. update track.
+        
+
         # 5. push message.
         self.return_to_client(result)
         self.finish()
+
 
 class CallHelpHandler(BaseHandler):
     def __init__(self, *argc, **argkw):
@@ -58,7 +86,7 @@ class CallHelpHandler(BaseHandler):
         ]
         result =ReturnStruct(message_mapping)
         try:
-            base64ImgStr_list = eval(self.get_argument('base64ImgStr_list'))
+            picture_list = eval(self.get_argument('picture_list'))
             user_id = int(self.get_secure_cookie("user_id"))
             info_data={
                 'name':self.get_argument('name'),
@@ -75,38 +103,41 @@ class CallHelpHandler(BaseHandler):
             raise MyMissingArgumentError(e.arg_name)     
 
         if user_id == None or user_id == '':
-            raise MyMissingArgumentError("cookie: user_id ")
+            raise MyMissingArgumentError("cookie: user_id [maybe did not login yet]")
         imgBytes_list = []
-        if base64ImgStr_list == []:
+        if picture_list == []:
             result.code = 0
         else:
             # has image
-            for image_str in base64ImgStr_list:
+            for image_str in picture_list:
                 # decode base64 to binary file
                 try:
                     imgBytes_list.append(base64.b64decode(image_str))
                 except TypeError as e:
-                    raise ArgumentTypeError('base64ImgStr_list')
+                    raise ArgumentTypeError('picture_list')
 
             # get face_token _list
             result_detect = yield tornado.gen.Task(self.face_model.detect_img_list, imgBytes_list)
             result.mergeInfo(result_detect)
             if result_detect.code == 0:
                 # upload pictures.
-                result_pic_key = yield tornado.gen.Task(self.picture_model.store_pictures,imgBytes_list,user_id)
+                detect_result_list = result_detect.data['detect_result_list']
+                result_pic_key = yield tornado.gen.Task(self.picture_model.store_pictures,imgBytes_list, user_id, detect_result_list)
                 # todo, error handler
                 # store information.[track and person]
-                detect_result_list = result_detect.data['detect_result_list']
                 person_id = self.person_model.store_new_person(result_pic_key, detect_result_list, info_data, user_id)
                 message_data = {
                     'name': info_data['name'],
                     'std_pic_key':result_pic_key[0],
                     'spot':info_data['lost_spot'],
                     'date':info_data['lost_time'],
+                    'age':info_data['age'],
+                    'sex':info_data['sex'],
                     # 'description':info_data['description'],
-                    'person_id':person_id
+                    'person_id':person_id,
+                    'report_user_id':user_id
                 }
-                self.message_model.send_message_factory(self.message_model.CALL_HELP, info_data['lost_spot'], message_data, user_id)
+                self.message_model.send_message_factory(self.message_model.CALL_HELP, info_data['lost_spot'], message_data)
                 result.data = {}
             # send message
         self.return_to_client(result)

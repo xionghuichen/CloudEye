@@ -31,9 +31,11 @@ class FaceSetCoreModel(BaseCoreModel):
         super(FaceSetCoreModel, self).__init__(*argc, **argkw)  
         self.temp_faceset_token='468d4f8ba70bddbf41aa9b3d2deeb04a'
         self.fade_file_path = './demo.jpeg'
+
     @repeat_send
-    def search_face(self,url):
-        return self.facepp.search(image_url=url,faceset_token=self.temp_faceset_token)
+    def search_face(self, face_token):
+        return self.facepp.search(face_token=face_token,
+            faceset_token=self.temp_faceset_token)
 
     @repeat_send
     def detect_faces(self,imgBytes):
@@ -95,10 +97,11 @@ class FaceSetCoreModel(BaseCoreModel):
             [ObjectId('...'), ObjectId('...')]
         """
         for index, item in enumerate(detect_result):
-            logging.info("index is :%s"%index)
             detect_result[index]['picture_key'] = pic_key[index]
 
+        logging.info("detect_result is %s"%detect_result)
         result = self.mongodb.face.info.insert_many(detect_result)
+        logging.info("insert faces info result is %s "%result.inserted_ids)
         return result.inserted_ids
 
     @repeat_send

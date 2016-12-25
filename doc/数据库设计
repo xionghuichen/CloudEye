@@ -19,8 +19,6 @@ mongodb:
 		missing_person_list:[array of missing_person_objectId]
 	missing_person_collection[pserson.missing]:
 		person_id:[person,index for 5,7]
-		#　faceplusplus_person_id:[this id is used to recognized missing person]
-		
 		name:String
 		sex:boolean
 		age:int
@@ -42,7 +40,7 @@ mongodb:
 		snap_spot:[x,y]
 		snap_shoot_key.
 		confidence.
-		[if person] person_id.
+		[if person] shoot_user_id.
 
 	face.info:
 		picture_key[index]
@@ -52,11 +50,20 @@ mongodb:
 	message:
 		type:
 		person_id:
-		description
+		description:
 		name:
 		std_pic_key:
 		spot:
 		date:
+
+redis
+	usermessage:id [document]
+		item:{
+			type:
+			person_id:
+			date:
+			...
+		}
 
 8. push msg to missing person's parents.
 request:
