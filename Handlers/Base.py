@@ -18,7 +18,7 @@ from BuizModel.PictureBuizModel import PictureBuizModel
 from BuizModel.PersonBuizModel import PersonBuizModel
 from _exceptions.http_error import MyMissingArgumentError
 
-def throwBaseException(method):
+def throw_base_exception(method):
     """This is a decorator to handler all of common exception in this App
 
     Should be add in all of post or get method in xxxHandler.
@@ -42,6 +42,7 @@ class BaseHandler(tornado.web.RequestHandler):
         para['facepp'] = self.application.facepp
         para['ali_service'] = self.application.ali_service
         para['ali_bucket'] = self.application.ali_bucket
+        para['redis'] = self.application.redis
         self._user_model = UserBuizModel(**para) 
         self._face_model = FaceSetBuizModel(**para)
         self._picture_model = PictureBuizModel(**para)

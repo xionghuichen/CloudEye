@@ -6,14 +6,16 @@
 from Base import BaseHandler
 
 from _exceptions.http_error import DBError
-from Base import throwBaseException
+from Base import throw_base_exception
 from tornado.web import MissingArgumentError
 from config.globalVal import ReturnStruct
+
+
 class RegisterHandler(BaseHandler):
     def __init__(self, *argc, **argkw):
         super(RegisterHandler, self).__init__(*argc, **argkw)
         
-    @throwBaseException        
+    @throw_base_exception        
     def post(self):
         telephone = self.get_argument("telephone")
         password = self.get_argument("password")
@@ -40,7 +42,7 @@ class LoginHandler(BaseHandler):
     def __init__(self, *argc, **argkw):
         super(LoginHandler, self).__init__(*argc, **argkw)    
 
-    @throwBaseException
+    @throw_base_exception
     def post(self):
         telephone = self.get_argument("telephone")
         password = self.get_argument("password")
@@ -54,3 +56,22 @@ class LoginHandler(BaseHandler):
             self.set_secure_cookie('user_id',str(result.data['user_id']))
         self.return_to_client(result)
         self.finish()   
+
+
+class UpdateStatusHandler(BaseHandler):
+    def __init__(self, *argc, **argkw):
+        super(UpdateStatusHandler, self).__init__(*argc, **argkw)
+
+    @throw_base_exception
+    def post(self):
+        message_mapping = [
+            'update status success'
+        ]
+        result = ReturnStruct(message_mapping)
+        corrdinate = eval(self.get_argument("corrdinate"))
+        user_id = self.get_secure_cookie("user_id")
+        # update location.
+        self.user_model.update_location(corrdinate, user_id)
+        # check message.
+        self.return_to_client(result)
+        self.finish()

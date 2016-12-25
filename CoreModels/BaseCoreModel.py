@@ -9,3 +9,4 @@ class BaseCoreModel(object):
         self.facepp = argkw['facepp']
         self.ali_service = argkw['ali_service']
         self.ali_bucket = argkw['ali_bucket']
+        self.redis = argkw['redis']

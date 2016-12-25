@@ -12,13 +12,13 @@ def repeat_send(method):
     def wrapper(self, *args, **kwargs):
         again = True
         count = 0
-        while(again):
+        while again :
             again = False
             count +=1
             try:
                 return method(self, *args, **kwargs)
             except APIError as e:
-                print "error happen:",str(e.body)
+                logging.info("error happen:%s"%str(e.body))
                 again = True
                 if count > 10:
                     raise DBError("face plus plus databases error!")

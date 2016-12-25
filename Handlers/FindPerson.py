@@ -8,8 +8,7 @@ import logging
 import tornado.web
 import tornado.gen
 
-from Base import throwBaseException
-from _exceptions.http_error import MyMissingArgumentError
+from _exceptions.http_error import MyMissingArgumentError, ArgumentTypeError
 from Base import BaseHandler
 from config.globalVal import ReturnStruct
 
@@ -83,7 +82,12 @@ class CallHelpHandler(BaseHandler):
         else:
             # has image
             for image_str in base64ImgStr_list:
-                imgBytes_list.append(base64.b64decode(image_str))
+                # decode base64 to binary file
+                try:
+                    imgBytes_list.append(base64.b64decode(image_str))
+                except TypeError as e:
+                    raise ArgumentTypeError('base64ImgStr_list')
+
             # get face_token _list
             result_detect = yield tornado.gen.Task(self.face_model.detect_img_list, imgBytes_list)
             result.mergeInfo(result_detect)
@@ -93,11 +97,8 @@ class CallHelpHandler(BaseHandler):
                 # todo, error handler
                 # store information.[track and person]
                 detect_result_list = result_detect.data['detect_result_list']
-                self.person_model.store_new_person(result_pic_key, detect_result_list, info_data)
+                self.person_model.store_new_person(result_pic_key, detect_result_list, info_data, user_id)
                 result.data = {}
             # send message
-
-            # get oss key list
-
         self.return_to_client(result)
         self.finish()

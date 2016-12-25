@@ -17,7 +17,7 @@ class ReturnStruct(object):
     def mergeInfo(self,new_struct):
         self.code = self.max_code + new_struct.code
         self.max_code = self.max_code + new_struct.max_code
-        self.data = new_struct.data
+        self.data = dict(self.data, **new_struct.data)
         self.message_mapping.extend(new_struct.message_mapping)
 
     def print_info(self,tag ='default'):

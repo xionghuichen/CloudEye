@@ -9,7 +9,7 @@ class PersonBuizModel(BaseBuizModel):
     def __init__(self, *argc, **argkw):
         super(PersonBuizModel, self).__init__(*argc, **argkw) 
 
-    def store_new_person(self,pic_key,detect_result,info_data):
+    def store_new_person(self,pic_key,detect_result,info_data, user_id):
         """after upload all of resourse, We should store those record into databases.
 
         Args:
@@ -25,7 +25,7 @@ class PersonBuizModel(BaseBuizModel):
                 'lost_time':self.get_argument('lost_time'),
                 'lost_spot':self.get_argument('lost_spot'),
                 'description':self.get_argument('description')
-
+            user_id:
         Returns:
             None
         """
@@ -40,4 +40,4 @@ class PersonBuizModel(BaseBuizModel):
             face_token_list.append(item['face_token'])
         self.face_model.add_faces_to_faceset(face_token_list)
         # add missing_person_id into person.missing collection
-        self.user_model.insert_missing_person_by_uid(info_data['relation_id'],[person_id])
+        self.user_model.insert_missing_person_by_uid(user_id,[person_id])

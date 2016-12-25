@@ -18,6 +18,6 @@ class OSSCoreModel(BaseCoreModel):
             true for success, false for failed.
         """
         result = self.ali_bucket.put_object(key, imgBytes)
-        if (result.status != 200):
+        if result.status != 200:
             return False
         return True

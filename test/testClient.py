@@ -90,10 +90,18 @@ def callhelp():
     response = urllib2.urlopen(req)
     the_page = response.read()
     print the_page
-
+def updatestatus():
+    data = {
+        'corrdinate':[23.9,23.9]
+    }
+    req = set_resquest("/user/updatestatus",data,"POST")
+    response = urllib2.urlopen(req)
+    the_page = response.read()
+    print the_page
 # register()
 login()
-callhelp()
+updatestatus()
+# callhelp()
 
 #  upload()
 # def setMessage(message,num,content):

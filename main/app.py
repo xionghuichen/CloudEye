@@ -11,6 +11,7 @@ sys.path.append(location)
 import ConfigParser
 import logging
 import oss2
+import redis
 
 import tornado.web
 import tornado.httpserver
@@ -25,7 +26,7 @@ from facepp_sdk.facepp import API, File
 
 from config.globalVal import AP
 from Handlers.Index import IndexHandler
-from Handlers.User import RegisterHandler, LoginHandler
+from Handlers.User import RegisterHandler, LoginHandler, UpdateStatusHandler
 from Handlers.FindPerson import SearchPersonHandler, CallHelpHandler
 define("port", default=9000, help="run on the given port", type=int)
 define("host", default="139.196.207.155", help="community database host")
@@ -65,8 +66,9 @@ class Application(tornado.web.Application):
             (r'/', IndexHandler),
             (r'/user/register',RegisterHandler),
             (r'/user/login',LoginHandler),
+            (r'/user/updatestatus',UpdateStatusHandler),
             (r'/find/searchperson',SearchPersonHandler),
-            (r'/find/callhelp',CallHelpHandler)
+            (r'/find/callhelp',CallHelpHandler),
         ]
 
         tornado.web.Application.__init__(self, handlers, **settings)
@@ -85,13 +87,16 @@ class Application(tornado.web.Application):
         client = pymongo.MongoClient(options.host,27017)
         client.cloudeye.authenticate(options.mongo_user,options.mongo_password)
         self.mongodb = client.cloudeye
+        # bind face++ cloud service
         self.facepp = API(FACE_API_KEY, FACE_API_SECRET)
+        # bind ali cloud service
         auth = oss2.Auth(ALIYUN_KEY,ALIYUN_SECRET)
         endpoint = r'http://oss-cn-shanghai.aliyuncs.com'
         bucketName = 'cloudeye'
         self.ali_service = oss2.Service(auth, endpoint)
         self.ali_bucket = oss2.Bucket(auth, endpoint, bucketName)
-
+        # bind redis service
+        self.redis = redis.Redis(host='localhost',port=6379)
 def main():
     tornado.options.parse_command_line()
     http_server = tornado.httpserver.HTTPServer(Application())

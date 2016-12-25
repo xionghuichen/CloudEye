@@ -48,4 +48,8 @@ mongodb:
 		picture_key[index]
 		face_token:
 		face_rectangle:{'height','left','top','width'}
+	
+	message
+
 redis:
+	user_id:[message_list[objectId]]

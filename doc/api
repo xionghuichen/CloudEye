@@ -643,3 +643,18 @@ request:
 	null.
 response:
 	url_list.
+
+
+17. getMyMessage:
+request:
+	null.
+response:
+	message_list1:[]
+
+	message_list2:[]
+
+	message_list3:[]
+
+	message_list4:[]
+
+18. clearMessage:

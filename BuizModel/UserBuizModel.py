@@ -7,7 +7,7 @@ import re
 from BaseBuizModel import BaseBuizModel
 from config.globalVal import regex_dict
 from config.globalVal import ReturnStruct
-from _exceptions.http_error import DBError
+from _exceptions.http_error import DBError, ArgumentTypeError
 class UserBuizModel(BaseBuizModel):
     def __init__(self, *argc, **argkw):
         super(UserBuizModel, self).__init__(*argc, **argkw)   
@@ -130,3 +130,9 @@ class UserBuizModel(BaseBuizModel):
             return self.user_model.get_missing_person_list(user_id)
         except Exception as e:
             raise DBError("获取遗失用户id列表错误")
+
+    def update_location(self, corrdinate, user_id):
+        if isinstance(corrdinate,list) and len(corrdinate) == 2:
+            self.location_model.update_user_location(corrdinate, user_id)
+        else:
+            raise ArgumentTypeError("corrdinate 必须是一个二元数组")
