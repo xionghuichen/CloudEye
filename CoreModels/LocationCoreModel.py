@@ -3,13 +3,24 @@
 # LocationCoreModel.py
 
 from BaseCoreModel import BaseCoreModel
-
+import logging
 class LocationCoreModel(BaseCoreModel):
     def __init__(self, *argc, **argkw):
         super(LocationCoreModel, self).__init__(*argc, **argkw)
 
-    def find_user_in_range(self, coordinate):
-        pass
+    def find_user_in_range(self, coordinate, distance):
+        cursor = self.mongodb.user.online.find({
+                'coordinate':{
+                    '$geoWithin':{
+                        '$center':[coordinate,distance]
+                    }
+                }
+            })
+        user_id_list = []
+        if cursor != None:
+            for item in cursor:
+                user_id_list.append(item['user_id'])
+        return user_id_list
 
     def update_user_location(self, corrdinate, user_id):
         """Update user's location by user_id.
@@ -22,7 +33,7 @@ class LocationCoreModel(BaseCoreModel):
             1 for success 0 for failed
         """
         update_filter = {'user_id':user_id}
-        update_data = {"$set":{'corrdinate':corrdinate}}
+        update_data = {"$set":{'coordinate':corrdinate}}
         self.mongodb.user.online.update_one(update_filter, update_data, upsert=True)
 
 

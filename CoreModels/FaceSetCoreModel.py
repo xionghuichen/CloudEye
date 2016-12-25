@@ -121,6 +121,8 @@ class FaceSetCoreModel(BaseCoreModel):
         logging.info("set person_id to face:%s \n"%result)
         return result
 
+        
+    @repeat_send
     def add_faces_to_faceset(self,face_tokens):
         """Add face tokens to faceset;
 

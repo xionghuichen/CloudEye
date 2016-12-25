@@ -16,6 +16,8 @@ from BuizModel.UserBuizModel import UserBuizModel
 from BuizModel.FaceSetBuizModel import FaceSetBuizModel
 from BuizModel.PictureBuizModel import PictureBuizModel
 from BuizModel.PersonBuizModel import PersonBuizModel
+from BuizModel.MessageBuizModel import MessageBuizModel
+
 from _exceptions.http_error import MyMissingArgumentError
 
 def throw_base_exception(method):
@@ -47,6 +49,11 @@ class BaseHandler(tornado.web.RequestHandler):
         self._face_model = FaceSetBuizModel(**para)
         self._picture_model = PictureBuizModel(**para)
         self._person_model = PersonBuizModel(**para)
+        self._message_model = MessageBuizModel(**para)
+
+    @property
+    def message_model(self):
+        return self._message_model
 
     @property
     def person_model(self):
@@ -79,6 +86,9 @@ class BaseHandler(tornado.web.RequestHandler):
                     dic[key] = str(value)
                 elif key == '_id':
                     dic[key] = str(dic[key])
+                elif key == 'missing_person_list':
+                    for index,item in enumerate(dic[key]):
+                        dic[key][index]= str(item)
                 # elif key == 'image_urls' and isinstance(value, list) and dic[key] != []:
                 #     count = 0
                 #     while count < len(value):

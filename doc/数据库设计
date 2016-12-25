@@ -49,7 +49,43 @@ mongodb:
 		face_token:
 		face_rectangle:{'height','left','top','width'}
 	
-	message
+	message:
+		type:
+		person_id:
+		description
+		name:
+		std_pic_key:
+		spot:
+		date:
 
+8. push msg to missing person's parents.
+request:
+need not requset:
+response:
+	name
+	standdard_photo
+	snap_spot
+	lastTrack_date
+
+9. has receive push msg, set hasUpdate to false.
+request:
+	user_id
+response:
+	code,message.
+
+
+10. push msg to user list.
+request:
+need not requset:
+response:
+	push_time:String;
+	losenTime:String;?
+	losenSpot:String;?
+	standdard_photo:?type
+	person_id
+	lastTrack_date:[Date]
+
+11. push message to police.
+[mark? the same to api:10?]
 redis:
 	user_id:[message_list[objectId]]

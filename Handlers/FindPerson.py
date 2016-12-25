@@ -59,7 +59,7 @@ class CallHelpHandler(BaseHandler):
         result =ReturnStruct(message_mapping)
         try:
             base64ImgStr_list = eval(self.get_argument('base64ImgStr_list'))
-            user_id = self.get_secure_cookie("user_id")
+            user_id = int(self.get_secure_cookie("user_id"))
             info_data={
                 'name':self.get_argument('name'),
                 'sex':int(self.get_argument('sex')),
@@ -67,8 +67,8 @@ class CallHelpHandler(BaseHandler):
                 'relation_telephone':self.get_argument('relation_telephone'),
                 'relation_name':self.get_argument('relation_name'),
                 'relation_id': user_id,
-                'lost_time':self.get_argument('lost_time'),
-                'lost_spot':self.get_argument('lost_spot'),
+                'lost_time':float(self.get_argument('lost_time')),
+                'lost_spot':eval(self.get_argument('lost_spot')),
                 'description':self.get_argument('description')
             }
         except tornado.web.MissingArgumentError, e:
@@ -97,7 +97,16 @@ class CallHelpHandler(BaseHandler):
                 # todo, error handler
                 # store information.[track and person]
                 detect_result_list = result_detect.data['detect_result_list']
-                self.person_model.store_new_person(result_pic_key, detect_result_list, info_data, user_id)
+                person_id = self.person_model.store_new_person(result_pic_key, detect_result_list, info_data, user_id)
+                message_data = {
+                    'name': info_data['name'],
+                    'std_pic_key':result_pic_key[0],
+                    'spot':info_data['lost_spot'],
+                    'date':info_data['lost_time'],
+                    # 'description':info_data['description'],
+                    'person_id':person_id
+                }
+                self.message_model.send_message_factory(self.message_model.CALL_HELP, info_data['lost_spot'], message_data, user_id)
                 result.data = {}
             # send message
         self.return_to_client(result)

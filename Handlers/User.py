@@ -69,7 +69,7 @@ class UpdateStatusHandler(BaseHandler):
         ]
         result = ReturnStruct(message_mapping)
         corrdinate = eval(self.get_argument("corrdinate"))
-        user_id = self.get_secure_cookie("user_id")
+        user_id = int(self.get_secure_cookie("user_id"))
         # update location.
         self.user_model.update_location(corrdinate, user_id)
         # check message.

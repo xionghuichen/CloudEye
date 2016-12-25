@@ -54,7 +54,7 @@ def register():
 
 def login():
     data = {
-        "telephone":"15195861109",
+        "telephone":"15195861108",
         "password":"zp19950310"
     }
     req = set_resquest("/user/login",data,"POST")
@@ -83,7 +83,7 @@ def callhelp():
         'relation_telephone':'15195861108',
         'relation_name':'chenxionghui',
         'lost_time':time.mktime(datetime.datetime.now().timetuple()),
-        'lost_spot':[23.9,23.9],
+        'lost_spot':[22.9,22.9],
         'description':'please help me dear!!!!'
         }
     req = set_resquest("/find/callhelp",data,"POST")
@@ -100,8 +100,8 @@ def updatestatus():
     print the_page
 # register()
 login()
-updatestatus()
-# callhelp()
+# updatestatus()
+callhelp()
 
 #  upload()
 # def setMessage(message,num,content):

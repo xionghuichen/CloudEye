@@ -19,7 +19,7 @@ class PictureBuizModel(BaseBuizModel):
 
         Args:
             imageBytes_list: a list of bianry stream file
-            user_id: set as the key prefix
+            user_id: set as the key prefix [int]
         Returns:
             key_list: OSS key list which correcpongding every image input
                 example:['string','string']
@@ -27,7 +27,7 @@ class PictureBuizModel(BaseBuizModel):
         key_list = []
         if imgBytes_list != []:
             for imgBytes in imgBytes_list:
-                key = self._gen_key(user_id)
+                key = self._gen_key(str(user_id))
                 success = self.pic_model.upload_picture(key,imgBytes)
                 if not success:
                     raise DBError("oss服务器出错！")

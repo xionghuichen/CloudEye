@@ -126,10 +126,10 @@ class UserBuizModel(BaseBuizModel):
         return result
 
     def get_missing_person_list(self, user_id):
-        try:
+        #try:
             return self.user_model.get_missing_person_list(user_id)
-        except Exception as e:
-            raise DBError("获取遗失用户id列表错误")
+        #except Exception as e:
+        #    raise DBError("获取遗失用户id列表错误")
 
     def update_location(self, corrdinate, user_id):
         if isinstance(corrdinate,list) and len(corrdinate) == 2:

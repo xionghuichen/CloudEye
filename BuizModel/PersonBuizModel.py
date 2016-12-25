@@ -27,7 +27,7 @@ class PersonBuizModel(BaseBuizModel):
                 'description':self.get_argument('description')
             user_id:
         Returns:
-            None
+            person_id
         """
         # add person_info in mongodb.[get person_id]
         person_id = self.person_model.insert_person_info(pic_key, info_data)
@@ -41,3 +41,4 @@ class PersonBuizModel(BaseBuizModel):
         self.face_model.add_faces_to_faceset(face_token_list)
         # add missing_person_id into person.missing collection
         self.user_model.insert_missing_person_by_uid(user_id,[person_id])
+        return person_id
