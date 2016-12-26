@@ -27,7 +27,7 @@ from facepp_sdk.facepp import API, File
 from config.globalVal import AP
 from Handlers.Index import IndexHandler
 from Handlers.User import RegisterHandler, LoginHandler, UpdateStatusHandler
-from Handlers.FindPerson import SearchPersonHandler, CallHelpHandler
+from Handlers.FindPerson import SearchPersonHandler, CallHelpHandler, ComparePersonHandler
 define("port", default=9000, help="run on the given port", type=int)
 define("host", default="139.196.207.155", help="community database host")
 define("mysql_database", default="cloudeye",
@@ -64,11 +64,12 @@ class Application(tornado.web.Application):
         handlers = [
             # test
             (r'/', IndexHandler),
-            (r'/user/register',RegisterHandler),
-            (r'/user/login',LoginHandler),
-            (r'/user/updatestatus',UpdateStatusHandler),
-            (r'/find/searchperson',SearchPersonHandler),
-            (r'/find/callhelp',CallHelpHandler),
+            (r'/user/register', RegisterHandler),
+            (r'/user/login', LoginHandler),
+            (r'/user/updatestatus', UpdateStatusHandler),
+            (r'/find/searchperson', SearchPersonHandler),
+            (r'/find/callhelp', CallHelpHandler),
+            (r'/find/compare', ComparePersonHandler)
         ]
 
         tornado.web.Application.__init__(self, handlers, **settings)
@@ -80,9 +81,9 @@ class Application(tornado.web.Application):
                 autocommit=False, 
                 autoflush=True,
                 expire_on_commit=False)
-        BaseModel = declarative_base()
+        base_model = declarative_base()
         # create all of model inherit from BaseModel 
-        BaseModel.metadata.create_all(engine) 
+        base_model.metadata.create_all(engine) 
         # use pymongo to connectino to mongodb
         client = pymongo.MongoClient(options.host,27017)
         client.cloudeye.authenticate(options.mongo_user,options.mongo_password)
@@ -92,9 +93,9 @@ class Application(tornado.web.Application):
         # bind ali cloud service
         auth = oss2.Auth(ALIYUN_KEY,ALIYUN_SECRET)
         endpoint = r'http://oss-cn-shanghai.aliyuncs.com'
-        bucketName = 'cloudeye'
+        bucket_name = 'cloudeye'
         self.ali_service = oss2.Service(auth, endpoint)
-        self.ali_bucket = oss2.Bucket(auth, endpoint, bucketName)
+        self.ali_bucket = oss2.Bucket(auth, endpoint, bucket_name)
         # bind redis service
         self.redis = redis.Redis(host='localhost',port=6379)
 def main():
