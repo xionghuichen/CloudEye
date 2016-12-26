@@ -84,7 +84,7 @@ class UserBuizModel(BaseBuizModel):
 
         Returns:
         """
-        person_list = self.user_model.find_missing_person_list_by_telephone(telephone)
+        person_list = self.user_model.find_persons_by_tele(telephone)
         uid = self.user_model.get_uid_by_telephone(telephone)
         self.user_model.insert_missing_person_by_uid(uid,person_list)
 
@@ -132,7 +132,44 @@ class UserBuizModel(BaseBuizModel):
         #    raise DBError("获取遗失用户id列表错误")
 
     def update_location(self, corrdinate, user_id):
+        """Update user's location in user.online. user.onlilne is use to push message by information.
+
+        Args:
+            corrdinate: user's location pass by [x,y] list.
+            user_id: user's identify.
+
+        """
         if isinstance(corrdinate,list) and len(corrdinate) == 2:
             self.location_model.update_user_location(corrdinate, user_id)
         else:
             raise ArgumentTypeError("corrdinate 必须是一个二元数组")
+
+    def check_message(self, user_id):
+        """ check if user has new message which is unread yet.
+
+        Args:
+            None:
+
+        Returns
+        """
+        message_mapping = [
+            'non update',
+            'user\'s report missing person status has updated',
+            'location push message has updated',
+            'both missing person status and location message has updated'
+        ]
+        result =ReturnStruct(message_mapping)
+        # 1. check reporter user message.
+        has_update = self.user_model.check_update(user_id)
+        if has_update:
+            result.code = 1
+        # 2. check location push message.
+        message_queue = self.message_model.get_user_message_queue(user_id)
+        if message_queue != []:
+            # if has_update = 0, code = 2, if has_update = 1, code = 3 
+            result.code = result.code + 2     
+            
+        # 3. set return.    
+        result.data['has_update'] = has_update
+        result.data['message_queue'] = message_queue
+        return result

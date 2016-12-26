@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # coding=utf-8
 # UserCoreModel.py
+import logging
+
 from BaseCoreModel import BaseCoreModel
 from ORMClass import UserInfo
 from sqlalchemy.sql.expression import and_
@@ -9,7 +11,7 @@ from _exceptions.http_error import DBError
 class UserCoreModel(BaseCoreModel):
     def __init__(self, *argc, **argkw):
         super(UserCoreModel, self).__init__(*argc, **argkw)  
-    
+        
     def is_telephone_exist(self, telephone):
         """check if the input telephone has been used in mysql.
 
@@ -43,6 +45,31 @@ class UserCoreModel(BaseCoreModel):
         else:
             return userinfo.user_id
 
+    def get_user_info(self,user_id):
+        """get user infomation by user_id
+
+        Args:
+            user_id
+        
+        Returns:
+                user_id:
+                telephone:
+                real_name:
+                nick_name:
+                password:
+                id_number:
+                has_update:[acid]:
+
+        """
+        userinfo = self.session.query(UserInfo).filter(UserInfo.user_id==user_id).first()
+        result = {
+            'telephone':userinfo.telephone,
+            'real_name':userinfo.real_name,
+            'nick_name':userinfo.nick_name,
+            'id_number':userinfo.id_number
+        }
+        return result
+
     def get_missing_person_list(self,user_id):
         """get missing person list from mongodb by user_id.
 
@@ -54,6 +81,7 @@ class UserCoreModel(BaseCoreModel):
         """
         result = self.mongodb.user.personlist.find_one({'user_id':user_id})
         return result['missing_person_list']
+
     def identify_check(self, telephone, password):
         """check the telephone and password in mysql databases.
 
@@ -69,7 +97,7 @@ class UserCoreModel(BaseCoreModel):
         scalar() 
         return result
 
-    def find_missing_person_list_by_telephone(self,telephone):
+    def find_persons_by_tele(self,telephone):
         """query from person.info by telephone.
 
         Args && example:
@@ -147,5 +175,31 @@ class UserCoreModel(BaseCoreModel):
         Args:
             telephone: the user's telephone to be removed.
         """
-        self.session.query(UserInfo).filter(UserInfo.telephone == telephone).delete(synchronize_session=False)
+        self.session.query(UserInfo).filter(UserInfo.telephone == telephone).\
+            delete(synchronize_session=False)
         self.session.commit()
+
+    def update_reporter_status(self, reporter_user_id):
+        """user's misssing person [identify by person_id] has upadated
+
+        Args:
+            reporter_user_id
+            person_id[ObjectId] --- did not use it now
+        """
+        self.session.query(UserInfo).filter(UserInfo.user_id == int(reporter_user_id)).\
+            update({UserInfo.has_update: True})
+        self.session.commit()
+        
+    def check_update(self, user_id):
+        """check if there are new missing person messsage reporter by user_id 
+
+        Args:
+            user_id:
+
+        Returns:
+        """
+        result = self.session.query(UserInfo.has_update).\
+        filter(UserInfo.user_id==user_id).\
+        first()
+        logging.info("result of check update query from sql is %s"%str(result))
+        return result.has_update

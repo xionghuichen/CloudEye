@@ -84,11 +84,13 @@ class BaseHandler(tornado.web.RequestHandler):
                 if type(value) == bool:
                     # logging.info("in bool value ,key is%s"%key)
                     dic[key] = str(value)
-                elif key == '_id':
+                elif key == '_id' or key == 'person_id' or key == 'message_id':
                     dic[key] = str(dic[key])
                 elif key == 'missing_person_list':
                     for index,item in enumerate(dic[key]):
                         dic[key][index]= str(item)
+                elif key == 'std_pic_key':
+                    dic[key] = self.picture_model.get_url(value)
                 # elif key == 'image_urls' and isinstance(value, list) and dic[key] != []:
                 #     count = 0
                 #     while count < len(value):
@@ -98,12 +100,11 @@ class BaseHandler(tornado.web.RequestHandler):
                 #         count += 1
                 # elif key == 'circle_url' and dic[key] != {}:
                 #     dic[key] = Aliyun().parseUrlByFakeKey(dic[key])
+                # logging.info("is instance list of key %s, %s"%(key, isinstance(value, list)))
                 if isinstance(value, dict):
                     self.change_custom_string_to_json(value)
                 elif isinstance(value, list):
-                    # print " out of list ", value
                     for list_value in value:
-                        # print "in list : "+str(list_value)
                         self.change_custom_string_to_json(list_value)
 
     def return_to_client(self,return_struct):

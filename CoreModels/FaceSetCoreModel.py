@@ -16,6 +16,7 @@ def repeat_send(method):
             again = False
             count +=1
             try:
+                logging.info("trying connecting to face++")
                 return method(self, *args, **kwargs)
             except APIError as e:
                 logging.info("error happen:%s"%str(e.body))
@@ -23,7 +24,7 @@ def repeat_send(method):
                 if count > 10:
                     raise DBError("face plus plus databases error!")
                 else:
-                    time.sleep(2)
+                    time.sleep(1)
     return wrapper
 
 class FaceSetCoreModel(BaseCoreModel):
@@ -38,11 +39,11 @@ class FaceSetCoreModel(BaseCoreModel):
             faceset_token=self.temp_faceset_token)
 
     @repeat_send
-    def detect_faces(self,imgBytes):
+    def detect_faces(self,binary_picture):
         """ detect faces from an byte image, return faces information dictories
 
         Args:
-            imgBytes:[list]
+            binary_picture:[list]
 
         Returns:
             return a list, the following is the element of the array:
@@ -65,7 +66,7 @@ class FaceSetCoreModel(BaseCoreModel):
               'face_token': '24f7e27d20113c0d398a33486260e348'# face identify
             }
         """
-        result = self.facepp.detect(image_file=File(path=self.fade_file_path, content=imgBytes), return_attributes='facequality')
+        result = self.facepp.detect(image_file=File(path=self.fade_file_path, content=binary_picture), return_attributes='facequality')
         result = result['faces']
         if result != []:
             count = 0
@@ -123,8 +124,7 @@ class FaceSetCoreModel(BaseCoreModel):
         result = self.facepp.face.setuserid(face_token=face_token,user_id=person_id)
         logging.info("set person_id to face:%s \n"%result)
         return result
-
-        
+ 
     @repeat_send
     def add_faces_to_faceset(self,face_tokens):
         """Add face tokens to faceset;
@@ -149,3 +149,50 @@ class FaceSetCoreModel(BaseCoreModel):
         string_token = string_token[0:-1]
         result = self.facepp.faceset.addface(faceset_token=self.temp_faceset_token,face_tokens=string_token)
         return result
+
+    @repeat_send
+    def compare_face(self, std_face_token, detect_face_token):
+        """Compare two face token.
+
+        Args:
+            std_face_token
+            detect_face_token
+
+        Returns:
+            {
+              "time_used": 473,
+              "confidence": 96.46,
+              "thresholds": {
+                "1e-3": 65.3,
+                "1e-5": 76.5,
+                "1e-4": 71.8
+              },
+              "request_id": "1469761507,07174361-027c-46e1-811f-ba0909760b18"
+            }
+        """
+        result = self.facepp.compare(face_token1=std_face_token, face_token2=detect_face_token)
+        logging.info("result of compare face is %s"%result)
+        return result
+        
+    def get_face_info(self, pic_key):
+        """
+
+        Args:
+            pic_key: picture_key
+        Returns:
+        {
+            "_id" : ObjectId("5860bebb16b2d6496b363ab0"),
+            "attributes" : {
+                "facequality" : 20.678
+            },
+            "face_token" : "c16309f7c33738c59fad4044cd34c51c",
+            "picture_key" : "camera1::1482735290.95.jpeg",
+            "face_rectangle" : {
+                "width" : 180,
+                "top" : 88,
+                "height" : 180,
+                "left" : 99
+            }
+        }
+        """
+        return self.mongodb.face.info.find_one({'picture_key':pic_key})

@@ -20,7 +20,7 @@ the_page = resp.read()
 print resp.getcode() == 200
 print the_page
 
-_xsrf = json.loads(the_page)['Data']['_xsrf']
+_xsrf = json.loads(the_page)['data']['_xsrf']
 print "_xsrf:",_xsrf
 def set_resquest(api,data,method):
     # data is dictory.
@@ -54,7 +54,7 @@ def register():
 
 def login():
     data = {
-        "telephone":"15195861108",
+        "telephone":"15195861109",
         "password":"zp19950310"
     }
     req = set_resquest("/user/login",data,"POST")
@@ -94,6 +94,7 @@ def callhelp():
     response = urllib2.urlopen(req)
     the_page = response.read()
     print the_page
+
 def updatestatus():
     data = {
         'corrdinate':[23.9,23.9]
@@ -102,11 +103,28 @@ def updatestatus():
     response = urllib2.urlopen(req)
     the_page = response.read()
     print the_page
+
+def compare():
+    with open('./demo.jpeg', 'rb') as f:
+        content = f.read()
+    data = {
+        'person_id':'585f770e16b2d67f300ec3d8',
+        'picture':base64.b64encode(content),
+        'coordinate':[22.9,22.9],
+        'description':'maybe I find this missing child!'
+    }
+    req = set_resquest("/find/compare",data,"POST")
+    response = urllib2.urlopen(req)
+    the_page = response.read()
+    print the_page
+
 # register()
 login()
-# updatestatus()
+updatestatus()
+compare()
 # callhelp()
-upload()
+# upload()
+
 # def setMessage(message,num,content):
 #    message[num] = "No.%s "%num + content + "\r\n"
 

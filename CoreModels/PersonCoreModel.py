@@ -37,6 +37,8 @@ class PersonCoreModel(BaseCoreModel):
         inserted_id = None
         if shoot_type == self.CAMERA:
            inserted_id = self.mongodb.tracklist.insert_one(track_info).inserted_id
+        elif shoot_type ==self.PERSON:
+           inserted_id = self.mongodb.tracklist.insert_one(track_info).inserted_id
         return inserted_id
 
     def update_person_info(self, track_id, person_id, coordinate, date):

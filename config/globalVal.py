@@ -1,5 +1,6 @@
 # globalVal.py
 import os
+import logging
 AP = str(os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir)))+'/'
 regex_dict = {
 'telephone':ur"^13[\d]{9}$|^14[5,7]{1}\d{8}$|^15[^4]{1}\d{8}$|^17[0,6,7,8]{1}\d{8}$|^18[\d]{9}$\Z",
@@ -14,15 +15,15 @@ class ReturnStruct(object):
         self.message_mapping = message_mapping
         self.data = {}
 
-    def mergeInfo(self,new_struct):
+    def merge_info(self,new_struct):
         self.code = self.max_code + new_struct.code
         self.max_code = self.max_code + new_struct.max_code
         self.data = dict(self.data, **new_struct.data)
         self.message_mapping.extend(new_struct.message_mapping)
 
     def print_info(self,tag ='default'):
-        print "print return struct, tag = %s...."%tag
-        print "max_code:",self.max_code
-        print "code:",self.code
-        print "message_mapping:",self.message_mapping
-        print "data:",self.data
+        logging.info("print return struct, tag = %s...."%tag)
+        logging.info("max_code:%s"%self.max_code)
+        logging.info("code: %s"%self.code)
+        logging.info("message_mapping: %s"%self.message_mapping)
+        logging.info("data: %s"%self.data)

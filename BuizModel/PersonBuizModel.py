@@ -44,7 +44,7 @@ class PersonBuizModel(BaseBuizModel):
         self.user_model.insert_missing_person_by_uid(user_id,[person_id])
         return person_id
 
-    def _track_info_creator(self, shoot_type, info_data):
+    def _track_info_creator(self, shoot_type, info_data, shooter_info=None):
         track_info = {}
         if shoot_type == self.CAMERA:
             track_info = {
@@ -59,23 +59,56 @@ class PersonBuizModel(BaseBuizModel):
                 'coordinate':info_data['coordinate'],
                 'date':info_data['date']
             }
+        elif shoot_type == self.PERSON:
+            user_info = self.user_model.get_user_info(shooter_info['user_id'])
+            shooter_info['user_nick_name'] = user_info['nick_name']
+            track_info = {
+                # 'name':info_data['name'],
+                # 'sex':info_data['sex'],
+                # 'age':info_data['age'],
+                # 'person_'
+                # 'shoot_user_id':person_id_obj,
+                'pic_key':info_data['pic_key'],
+                'type':self.PERSON,
+                'confidence':info_data['confidence'],
+                'coordinate':info_data['coordinate'],
+                'date':info_data['date'],
+                'user_id':shooter_info['user_id'],
+                'user_nick_name':shooter_info['user_nick_name'],
+                'description':shooter_info['description']
+            }
         return track_info
 
-    def update_person_status(self, person_id, shoot_type, coordinate, confidence, pic_key, shoot_user_id = None):
+    def update_person_status(self,shoot_type, event_info, shooter_info = None):
         """update databases infomastion of person_id
         1. update track list infomation 
         2. update person.info [last track list; last update time and last update spot]
+        
+        Args:
+            person_id: missing person id
+            shoot_type: camera or person
+            coordinate: location of shoot spot
+            confidence: 
+            pic_key:
+            shooter_info:
+                user_id:
+                description:
         """
         # result = self.person_model.get_person_detail(person_id_obj)
         # if result != None:
-        person_id_obj = ObjectId(person_id)
+        person_id_obj = ObjectId(event_info['person_id'])
         info_data = {}
-        info_data['confidence'] = confidence
-        info_data['coordinate'] = coordinate
+        info_data['confidence'] = event_info['confidence']
+        info_data['coordinate'] = event_info['coordinate']
         info_data['person_id'] = person_id_obj
-        info_data['pic_key'] = pic_key
-        info_data['date'] = float(time.mktime(datetime.datetime.now().timetuple()))
-
-        track_info = self._track_info_creator(shoot_type, info_data)
+        info_data['pic_key'] = event_info['pic_key']
+        info_data['date'] = event_info['date']
+        track_info = self._track_info_creator(shoot_type, info_data, shooter_info)
         track_id = self.person_model.insert_new_track(shoot_type, track_info)
-        self.person_model.update_person_info(track_id, person_id_obj, coordinate, info_data['date'])
+        self.person_model.update_person_info(track_id, person_id_obj, event_info['coordinate'], event_info['date'])
+
+    def get_person_std_pic(self, person_id):
+        person_info = self.person_model.get_person_detail(person_id)
+        pri_picture_key = person_info['picture_key_list'][0]
+        face_info = self.face_model.get_face_info(pri_picture_key)
+        return face_info['face_token']
