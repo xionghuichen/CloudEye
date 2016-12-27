@@ -57,7 +57,8 @@ class MessageBuizModel(BaseBuizModel):
             'age':person_detail_info['age'],
             'person_id':info['person_id'],
             'formal':person_detail_info['formal'],
-            'std_pic_key':person_detail_info['picture_key_list'][0]
+            'std_pic_key':person_detail_info['picture_key_list'][0],
+            'pic_key':info['pic_key']
 
         }
         message_id = self.message_model.insert_message_detail(self.COMPARE, message_info)
@@ -66,7 +67,7 @@ class MessageBuizModel(BaseBuizModel):
             # this is a formal case and the relation user has not reigster our system yet.
             pass
         else:
-            self.user_model.update_reporter_status(reporter_user_id)
+            self.user_model.update_reporter_status(reporter_user_id, True)
             # message_queue_info = {
             #     "message_id":message_id,
             #     "date":message_info['date'],
@@ -104,7 +105,8 @@ class MessageBuizModel(BaseBuizModel):
             'age':person_detail_info['age'],
             'person_id':info['person_id'],
             'formal':person_detail_info['formal'],
-            'std_pic_key':person_detail_info['picture_key_list'][0]
+            'std_pic_key':person_detail_info['picture_key_list'][0],
+            'pic_key':info['pic_key']
 
         }
         message_id = self.message_model.insert_message_detail(self.SEARCH, message_info)
@@ -113,7 +115,7 @@ class MessageBuizModel(BaseBuizModel):
             # this is a formal case and the relation user has not reigster our system yet.
             pass
         else:
-            self.user_model.update_reporter_status(reporter_user_id)
+            self.user_model.update_reporter_status(reporter_user_id, True)
             # message_queue_info = {
             #     "message_id":message_id,
             #     "date":message_info['date'],
@@ -157,7 +159,6 @@ class MessageBuizModel(BaseBuizModel):
             'person_id':info['person_id'],
             'formal':0,# default value, 0 for not formal 
             'std_pic_key':info['std_pic_key']
-
         }
         message_id = self.message_model.insert_message_detail(self.CALL_HELP, message_info)
         user_id_list = self.location_model.find_user_in_range(info['spot'], self._inform_distance)

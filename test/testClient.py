@@ -33,7 +33,7 @@ def set_resquest(api,data,method):
         data['_xsrf'] = _xsrf
     data = urllib.urlencode(data)
     url = prefix + api
-    if method == 'GET':
+    if method == 'GET': 
         url = url + "?"+ data
     request = urllib2.Request(url,data)
     request.get_method = lambda: method # or 'DELETE' 
@@ -51,7 +51,7 @@ def register():
     response = urllib2.urlopen(req)
     the_page = response.read()
     print the_page
-
+# db.tracklist.find().sort({_id:-1}).limit(1)
 def login():
     data = {
         "telephone":"15195861109",
@@ -118,12 +118,26 @@ def compare():
     the_page = response.read()
     print the_page
 
+def confirm():
+    req = set_resquest("/user/confirm",{},"POST")
+    response = urllib2.urlopen(req)
+    the_page = response.read()
+    print the_page
+
+def logout():
+    req = set_resquest("/user/logout",{},"POST")
+    response = urllib2.urlopen(req)
+    the_page = response.read()
+    print the_page
+    
 # register()
 login()
 updatestatus()
-compare()
+# confirm()
+# logout()
+# compare()
 # callhelp()
-# upload()
+upload()
 
 # def setMessage(message,num,content):
 #    message[num] = "No.%s "%num + content + "\r\n"

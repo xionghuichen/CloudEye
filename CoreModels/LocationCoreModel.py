@@ -37,6 +37,6 @@ class LocationCoreModel(BaseCoreModel):
         self.mongodb.user.online.update_one(update_filter, update_data, upsert=True)
 
 
-    def clear_user_location(self, corrdinate):
-        pass
-    
+    def clear_user_location(self, user_id):
+        result = self.mongodb.user.online.delete_one({"user_id":user_id})
+        return result.deleted_count

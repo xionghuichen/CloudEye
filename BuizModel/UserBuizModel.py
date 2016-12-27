@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding=utf-8
 # UserBuizModel.py
- 
+import logging
 import re
 
 from BaseBuizModel import BaseBuizModel
@@ -144,11 +144,30 @@ class UserBuizModel(BaseBuizModel):
         else:
             raise ArgumentTypeError("corrdinate 必须是一个二元数组")
 
+    def clear_update_status(self, user_id):
+        """Clear user's has_update_status, set to false.
+
+        Args:
+            user_id:
+
+        Returns:
+        """
+        self.user_model.update_reporter_status(user_id, False)
+
+    def clear_online_status(self, user_id):
+        """Clear user's has_update_status, set to false.
+
+        Args:
+            user_id:
+
+        Returns:
+        """
+
     def check_message(self, user_id):
         """ check if user has new message which is unread yet.
 
         Args:
-            None:
+            user_id:
 
         Returns
         """
@@ -172,4 +191,16 @@ class UserBuizModel(BaseBuizModel):
         # 3. set return.    
         result.data['has_update'] = has_update
         result.data['message_queue'] = message_queue
+        logging.info("result of check_message: %s"%result.data)
         return result
+
+    def clear_message(self, user_id):
+        """Clear user's message queue.
+
+        Args:
+            user_id
+
+        Returns:
+            None.
+        """
+        self.location_model.clear_user_location(user_id)

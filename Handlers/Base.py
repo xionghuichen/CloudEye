@@ -91,16 +91,6 @@ class BaseHandler(tornado.web.RequestHandler):
                         dic[key][index]= str(item)
                 elif key == 'std_pic_key':
                     dic[key] = self.picture_model.get_url(value)
-                # elif key == 'image_urls' and isinstance(value, list) and dic[key] != []:
-                #     count = 0
-                #     while count < len(value):
-                #         dic[key][count] = value[count]['origin']
-                #         dic[key][count] = Aliyun().parseUrlByFakeKey(
-                #             dic[key][count])
-                #         count += 1
-                # elif key == 'circle_url' and dic[key] != {}:
-                #     dic[key] = Aliyun().parseUrlByFakeKey(dic[key])
-                # logging.info("is instance list of key %s, %s"%(key, isinstance(value, list)))
                 if isinstance(value, dict):
                     self.change_custom_string_to_json(value)
                 elif isinstance(value, list):

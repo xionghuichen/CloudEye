@@ -179,7 +179,7 @@ class UserCoreModel(BaseCoreModel):
             delete(synchronize_session=False)
         self.session.commit()
 
-    def update_reporter_status(self, reporter_user_id):
+    def update_reporter_status(self, reporter_user_id, status = True):
         """user's misssing person [identify by person_id] has upadated
 
         Args:
@@ -187,7 +187,7 @@ class UserCoreModel(BaseCoreModel):
             person_id[ObjectId] --- did not use it now
         """
         self.session.query(UserInfo).filter(UserInfo.user_id == int(reporter_user_id)).\
-            update({UserInfo.has_update: True})
+            update({UserInfo.has_update: status})
         self.session.commit()
         
     def check_update(self, user_id):

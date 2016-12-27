@@ -26,7 +26,7 @@ from facepp_sdk.facepp import API, File
 
 from config.globalVal import AP
 from Handlers.Index import IndexHandler
-from Handlers.User import RegisterHandler, LoginHandler, UpdateStatusHandler
+from Handlers.User import RegisterHandler, LoginHandler, UpdateStatusHandler, ConfirmHandler, LogoutHandler
 from Handlers.FindPerson import SearchPersonHandler, CallHelpHandler, ComparePersonHandler
 define("port", default=9000, help="run on the given port", type=int)
 define("host", default="139.196.207.155", help="community database host")
@@ -66,10 +66,12 @@ class Application(tornado.web.Application):
             (r'/', IndexHandler),
             (r'/user/register', RegisterHandler),
             (r'/user/login', LoginHandler),
+            (r'/user/logout', LogoutHandler),
+            (r'/user/confirm', ConfirmHandler),
             (r'/user/updatestatus', UpdateStatusHandler),
             (r'/find/searchperson', SearchPersonHandler),
             (r'/find/callhelp', CallHelpHandler),
-            (r'/find/compare', ComparePersonHandler)
+            (r'/find/compare', ComparePersonHandler),
         ]
 
         tornado.web.Application.__init__(self, handlers, **settings)

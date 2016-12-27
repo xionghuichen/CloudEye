@@ -75,9 +75,10 @@ class SearchPersonHandler(BaseHandler):
                         message_data = {
                             'person_id':person_id,
                             'spot':coordinate,
-                            'date':event_happen_date
+                            'date':event_happen_date,
+                            'pic_key':pic_key_list[0]
                         }
-                        self.message_model.send_message_factory(self.message_model.SEARCH, coordinate, message_data)
+                        self.message_model.send_message_factory(self.message_model.SEARCH, message_data)
                         break
                     else:
                         result.code = 1
@@ -224,7 +225,8 @@ class ComparePersonHandler(BaseHandler):
                     'spot':coordinate,
                     'date':event_happen_date,
                     'person_id':person_id,
-                    'upload_user_id':user_id
+                    'upload_user_id':user_id,
+                    'pic_key':pic_key_list[0]
                 }
                 self.message_model.send_message_factory(self.message_model.COMPARE, message_data)
             else:

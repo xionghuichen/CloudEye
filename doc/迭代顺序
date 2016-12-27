@@ -1,41 +1,38 @@
  User.py
 
-    1. Register 
-    2. Login--- 
-    4. Logout---
+    1. Register [ok]
+    2. Login--- [ok]
+    4. Logout---[todo]
 
 Upload.py
 
-    13. user upload image:
-    14. call for help.
-    7. upload opencv:
+    13. user upload image:[ok]
+    14. call for help.[ok]
+    7. upload opencv:[ok]
 
 
 Location.py 
 
-    4. SetLocation.
-    3. UpdateLocation
-
-
+    4. SetLocation.[merge to 5]
+    3. UpdateLocation[merge to 5]
 Update.py
 
-    5. CheckUpdateStatus----[check if missing person has new situation]
-    9. has receive push msg, set hasUpdate to false.
-    
-    15.Has find my child:
-
+    5. CheckUpdateStatus[ok]
+    9. has receive push msg, set hasUpdate to false.[todo]
+    15.Has find my child:[todo]
+    17.update missing person infomation[todo 2.0]
 
 GetInfo.py
-6.  Get [post list]
-7.  get [missing person detail and track_list  
 
+    6.  Get [post list][todo]
+    7.  get [missing person detail and track_list[todo]  
 
 PushToClient.py
-10. push msg to user list.
-11. push message to police.
-8. push msg to missing person's parents.
 
-
+    10. push msg to user list.[merge to 5]
+    11. push message to police.[web]
+    8. push msg to missing person's parents.[merge to 5]
 
 Index.py
-16. getStaticPages
+
+    16. getStaticPages[todo]

@@ -47,8 +47,6 @@ class LoginHandler(BaseHandler):
     def post(self):
         telephone = self.get_argument("telephone")
         password = self.get_argument("password")
-        
-        result = ReturnStruct()
         result = self.user_model.identify_check(telephone,password)
         if result.code == 0:
             # identify_check success.
@@ -70,6 +68,34 @@ class UpdateStatusHandler(BaseHandler):
         self.user_model.update_location(corrdinate, user_id)
         # check message.
         result = self.user_model.check_message(user_id)
-        logging.info("update status is ")
+        self.return_to_client(result)
+        self.finish()
+
+class ConfirmHandler(BaseHandler):
+    def __init__(self, * argc, ** argkw):
+        super(ConfirmHandler, self).__init__(*argc, **argkw)
+
+    @throw_base_exception
+    def post(self):
+        result = ReturnStruct()
+        # get user_id
+        user_id = int(self.get_secure_cookie("user_id"))
+        # clear has_update_status
+        self.user_model.clear_update_status(user_id)
+        # clear message.
+        self.user_model.clear_message(user_id)
+        self.return_to_client(result)
+        self.finish()
+
+class LogoutHandler(BaseHandler):
+    def __init__(self, * argc, ** argkw):
+        super(LogoutHandler, self).__init__(*argc, **argkw)
+    
+    @throw_base_exception
+    def post(self):
+        result = ReturnStruct()
+        # get user_id
+        user_id = int(self.get_secure_cookie("user_id"))
+        self.user_model.clear_online_status(user_id)
         self.return_to_client(result)
         self.finish()

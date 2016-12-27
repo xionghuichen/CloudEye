@@ -83,4 +83,6 @@ class MessageCoreModel(BaseCoreModel):
                 result[index] = self.get_message_detail(item['message_id'])
         return result
  
-
+    def clear_message_queue(self, user_id):
+        key = key_gen(user_id)
+        self.redis.delete(key)

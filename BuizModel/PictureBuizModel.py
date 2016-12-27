@@ -2,10 +2,11 @@
 # coding=utf-8
 # PictureBuizModel.py
 import time
+import os
 import logging
-
+import Image, ImageDraw
 from BaseBuizModel import BaseBuizModel
-from config.globalVal import ReturnStruct
+from config.globalVal import ReturnStruct, AP
 
 
 def gen_key(prefix):
@@ -16,12 +17,42 @@ class PictureBuizModel(BaseBuizModel):
     def __init__(self, *argc, **argkw):
         super(PictureBuizModel, self).__init__(*argc, **argkw)   
 
+    def _add_box_to_picture(self, key, detect_info, binary_picture):
+        """ add the box with the detect picture.
+
+        Args:
+            detect_info:
+            binary_picture:
+
+        Returns:
+            content: binary file
+        """
+        path = AP+'static/temp_img/'+key
+        top = detect_info['face_rectangle']['top']
+        left = detect_info['face_rectangle']['left']
+        buttom = detect_info['face_rectangle']['height'] + top
+        right = detect_info['face_rectangle']['width'] + left
+        box = [(left, top),(right, buttom)]
+        file = open(path,'wb')
+        file.write(binary_picture)
+        file.close()
+        file = open(path,'r+b')
+        im = Image.open(file)
+        draw = ImageDraw.Draw(im)
+        draw.rectangle(box,outline=(0,255,0,0))
+        im.save(path,'jpeg')
+        content = file.read()
+        file.close()
+        os.remove(path)
+        return content
+
     def store_pictures(self,binary_picture_list, pic_key, detect_result, callback):
         """Upload pictures (pass as binary stream file) to OSS databases and mongodb[face.info]
 
         Args:
             imageBytes_list: a list of bianry stream file
             pic_key: set as the key prefix [int]
+            
         Returns:
             key_list: OSS key list which correcpongding every image input
                 example:
@@ -29,8 +60,10 @@ class PictureBuizModel(BaseBuizModel):
         """
         key_list = []
         if binary_picture_list != []:
-            for binary_picture in binary_picture_list:
+            for index, binary_picture in enumerate(binary_picture_list):
                 key = gen_key(str(pic_key))
+                # add detect part in origin picture.
+                binary_picture = self._add_box_to_picture(key, detect_result[index], binary_picture)
                 success = self.pic_model.upload_picture(key, binary_picture)
                 # add to faceset
                 if not success:
