@@ -108,7 +108,7 @@ def compare():
     with open('./demo.jpeg', 'rb') as f:
         content = f.read()
     data = {
-        'person_id':'585f770e16b2d67f300ec3d8',
+        'person_id':'586292fe16b2d666bab87c12',
         'picture':base64.b64encode(content),
         'coordinate':[22.9,22.9],
         'description':'maybe I find this missing child!'
@@ -134,10 +134,10 @@ def logout():
 login()
 updatestatus()
 # confirm()
-# logout()
 # compare()
 # callhelp()
-upload()
+# upload()
+# logout()
 
 # def setMessage(message,num,content):
 #    message[num] = "No.%s "%num + content + "\r\n"

@@ -4,6 +4,9 @@
     - 第二位：+[optional]: 标记可以同时读写
     - 第三位：b[optional]: 标记是否以二进制形式打开，
 
+3. 文件删除
+import os
+os.remove('file name string')
 ----
 Image库的使用
 1. Image.open(fp,mode='r')

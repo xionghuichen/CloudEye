@@ -49,8 +49,6 @@ class PersonCoreModel(BaseCoreModel):
                 'person_id':info_data['date']
             }
         elif shoot_type == self.PERSON:
-            user_info = self.user_model.get_user_info(shooter_info['user_id'])
-            shooter_info['user_nick_name'] = user_info['nick_name']
             track_info = {
                 # 'name':info_data['name'],
                 # 'sex':info_data['sex'],

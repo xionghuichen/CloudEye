@@ -68,6 +68,8 @@ class PersonBuizModel(BaseBuizModel):
         info_data['person_id'] = person_id_obj
         info_data['pic_key'] = event_info['pic_key']
         info_data['date'] = event_info['date']
+        user_info = self.user_model.get_user_info(shooter_info['user_id'])
+        shooter_info['user_nick_name'] = user_info['nick_name']
         track_id = self.person_model.insert_new_track(shoot_type, info_data, shooter_info)
         self.person_model.update_person_info(track_id, person_id_obj, event_info['coordinate'], event_info['date'])
 
