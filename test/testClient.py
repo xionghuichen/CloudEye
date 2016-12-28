@@ -107,11 +107,12 @@ def updatestatus():
     print the_page
 
 def compare():
-    with open('./ymh2.jpg', 'rb') as f:
+    with open('./test_img/ymh3.jpg', 'rb') as f:
         content = f.read()
     data = {
-        'person_id':'5863144116b2d67b38f27f64',
+        'person_id':'58632c3716b2d6016ac7c859',
         'picture':base64.b64encode(content),
+        'pic_type':'jpg',
         'coordinate':[22.9,22.9],
         'description':'maybe I find this missing child!'
     }
@@ -131,15 +132,31 @@ def logout():
     response = urllib2.urlopen(req)
     the_page = response.read()
     print the_page
-    
+
+def getUpdatePersonList():
+    data = {
+        'spot':[22.9,22.9],
+        'max_distance':3,
+        'formal':0,
+        'page':0,
+        'size':10
+    }
+    req = set_resquest("/get/updateperson",data,"POST")
+    response = urllib2.urlopen(req)
+    the_page = response.read()
+    print the_page
+
 # register()
 login()
-# updatestatus()
+updatestatus()
 # confirm()
-# compare()
-callhelp()
+compare()
+# callhelp()
 # upload()
 # logout()
+
+# for web 
+# getUpdatePersonList()
 
 # def setMessage(message,num,content):
 #    message[num] = "No.%s "%num + content + "\r\n"

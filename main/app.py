@@ -28,6 +28,8 @@ from config.globalVal import AP
 from Handlers.Index import IndexHandler
 from Handlers.User import RegisterHandler, LoginHandler, UpdateStatusHandler, ConfirmHandler, LogoutHandler
 from Handlers.FindPerson import SearchPersonHandler, CallHelpHandler, ComparePersonHandler
+from Handlers.MissPerson import LastestUpdatePersonHandler
+
 define("port", default=9000, help="run on the given port", type=int)
 define("host", default="139.196.207.155", help="community database host")
 define("mysql_database", default="cloudeye",
@@ -72,6 +74,7 @@ class Application(tornado.web.Application):
             (r'/find/searchperson', SearchPersonHandler),
             (r'/find/callhelp', CallHelpHandler),
             (r'/find/compare', ComparePersonHandler),
+            (r'/get/updateperson',LastestUpdatePersonHandler)
         ]
 
         tornado.web.Application.__init__(self, handlers, **settings)

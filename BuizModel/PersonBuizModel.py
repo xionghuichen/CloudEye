@@ -92,8 +92,8 @@ class PersonBuizModel(BaseBuizModel):
         face_info = self.face_model.get_face_info(pri_picture_key)
         return face_info['face_token']
 
-    def get_lastest_case(self, spot, max_distance):
-        """Get the lastes case filter by spot and max_distance.
+    def get_lastest_person(self, spot, max_distance, formal, page, size):
+        """Get the lastes update person filter by spot and max_distance.
 
         Args:
             spot[list]
@@ -104,5 +104,16 @@ class PersonBuizModel(BaseBuizModel):
             'spot':spot,
             'max_distance':max_distance
         }
-        self.person_model.get_tracks_detail(self, self.POLICE, filter_info)
-
+        offset = {
+            'page':page,
+            'size':size
+        }
+        person_info = self.person_model.get_person_info_by_date(filter_info,offset,formal)
+        result = []
+        for item in person_info:
+            result.append({
+            'picture_key':item['picture_key_list'][0],
+            'person_id':item['_id'],
+            'name':item['name']
+            })
+        return result

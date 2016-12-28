@@ -21,6 +21,7 @@ Update.py
     9. has receive push msg, set hasUpdate to false.[todo]
     15.Has find my child:[todo]
     17.update missing person infomation[todo 2.0]
+    confirmMessage[ok]
 
 GetInfo.py
 
@@ -36,3 +37,12 @@ PushToClient.py
 Index.py
 
     16. getStaticPages[todo]
+
+
+获得报案人员最新进展列表[timeline]
+获得未报案人员最新进展列表[timeline]
+最新动态获得用户的失踪人员列表
+获得一个失踪人员的详情信息
+获得一个失踪人员的进展轨迹信息
+[暂不实现，修改并非重点功能]修改失踪人员信息
+结案

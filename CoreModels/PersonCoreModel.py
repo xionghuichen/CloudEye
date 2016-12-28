@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 # coding=utf-8
 # PersonCoreModel.py
+import logging
 import datetime
+import pprint
 from BaseCoreModel import BaseCoreModel
 from bson import ObjectId
 class PersonCoreModel(BaseCoreModel):
@@ -19,6 +21,32 @@ class PersonCoreModel(BaseCoreModel):
         info_data['last_update_spot'] = info_data['lost_spot']
 
         return self.mongodb.person.info.insert_one(info_data).inserted_id
+
+    def get_person_info_by_date(self, filter_info,offset,is_formal):
+        """filter person info by last update time.
+
+        Args:
+            filter_info
+            offset
+            is_formal
+
+        Returns:
+        """
+        skip = offset['page'] * offset['size']
+        size = offset['size']
+        find_info = {
+            'last_update_spot':{
+                '$geoWithin':{
+                    '$center':[filter_info['spot'],filter_info['max_distance']]
+                }
+            },
+            'formal':is_formal
+        }
+        logging.info(" filter dictory result is %s"%find_info)
+        result = self.mongodb.person.info.find(find_info).\
+        sort([('last_update_time',-1)]).limit(size).skip(skip)
+
+        return result
 
     def get_person_detail(self,person_id):
         """get missing person information by person_id
@@ -85,6 +113,6 @@ class PersonCoreModel(BaseCoreModel):
             }
         self.mongodb.person.info.update_one(update_filter, update_data)
 
-    def get_tracks_detail(self, track_type, filter_info):
-        if track_type == self.POLICE:
-            self.mongodb.tracklist.find().sort({'_id':-1}).limit(1)
+    # def get_tracks_detail(self, track_type, filter_info):
+    #     if track_type == self.POLICE:
+    #         self.mongodb.tracklist.find().sort({'_id':-1}).limit(1)
