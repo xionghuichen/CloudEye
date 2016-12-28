@@ -26,7 +26,7 @@ from facepp_sdk.facepp import API, File
 
 from config.globalVal import AP
 from Handlers.Index import IndexHandler
-from Handlers.User import RegisterHandler, LoginHandler, UpdateStatusHandler, ConfirmHandler, LogoutHandler
+from Handlers.User import RegisterHandler, LoginHandler, UpdateStatusHandler, ConfirmHandler, LogoutHandler, MyPersonListHandler
 from Handlers.FindPerson import SearchPersonHandler, CallHelpHandler, ComparePersonHandler
 from Handlers.MissPerson import LastestUpdatePersonHandler, LastestUpdateMessageHandler, GetMissingPersonDetail
 
@@ -70,13 +70,15 @@ class Application(tornado.web.Application):
             (r'/user/login', LoginHandler),
             (r'/user/logout', LogoutHandler),
             (r'/user/confirm', ConfirmHandler),
+            (r'/user/peronlistinfo',MyPersonListHandler),
             (r'/user/updatestatus', UpdateStatusHandler),
             (r'/find/searchperson', SearchPersonHandler),
             (r'/find/callhelp', CallHelpHandler),
             (r'/find/compare', ComparePersonHandler),
             (r'/get/updateperson',LastestUpdatePersonHandler),
             (r'/get/updatemessage',LastestUpdateMessageHandler),
-            (r'/get/persondetail',GetMissingPersonDetail)
+            (r'/get/persondetail',GetMissingPersonDetail),
+            
         ]
 
         tornado.web.Application.__init__(self, handlers, **settings)

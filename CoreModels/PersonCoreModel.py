@@ -56,9 +56,12 @@ class PersonCoreModel(BaseCoreModel):
 
         Returns:
         """
-        person_id = ObjectId(person_id)
-        result = self.mongodb.person.info.find_one({'_id':person_id})
-        return result
+        if type(person_id) == list:
+            return self.mongodb.person.info.find({"_id":{"$in":person_id}}) 
+        else:
+            person_id = ObjectId(person_id)
+            result = self.mongodb.person.info.find_one({'_id':person_id})
+            return result
 
     def _track_info_creator(self, shoot_type, info_data, shooter_info=None):
         track_info = {}

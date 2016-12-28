@@ -168,8 +168,14 @@ def getPersonDetail():
     the_page = response.read()
     print the_page
 
+def get_personlist_info():
+    req = set_resquest("/user/peronlistinfo",{},"POST")
+    response = urllib2.urlopen(req)
+    the_page = response.read()
+    print the_page
+
 # register()
-# login()
+login()
 #updatestatus()
 # confirm()
 # compare()
@@ -180,7 +186,8 @@ def getPersonDetail():
 # for web 
 # getUpdatePersonList()
 # getUpdateMessageList()
-getPersonDetail()
+# getPersonDetail()
+get_personlist_info()
 # def setMessage(message,num,content):
 #    message[num] = "No.%s "%num + content + "\r\n"
 

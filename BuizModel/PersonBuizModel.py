@@ -92,6 +92,29 @@ class PersonBuizModel(BaseBuizModel):
         face_info = self.face_model.get_face_info(pri_picture_key)
         return face_info['face_token']
 
+    def get_person_brief_info(self, person_id_list):
+        """Get person's brief information by person_id_list.
+
+        Args:
+            person_id_list:
+
+        Returns:
+
+        """
+        person_info = self.person_model.get_person_detail(person_id_list)
+        brief_info = []
+        if person_info != []:
+            for item in person_info:
+                item_info = {
+                    'person_id':item['_id'],
+                    'last_update_time':item['last_update_time'],
+                    'std_photo_key':item['picture_key_list'][0],
+                    'last_update_spot':item['last_update_spot'],
+                    'name':item['name']
+                }
+                brief_info.append(item_info)
+        return brief_info
+
     def get_lastest_person(self, spot, max_distance, formal, page, size):
         """Get the lastes update person filter by spot and max_distance.
 

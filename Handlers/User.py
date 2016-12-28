@@ -99,3 +99,51 @@ class LogoutHandler(BaseHandler):
         self.user_model.clear_online_status(user_id)
         self.return_to_client(result)
         self.finish()
+
+
+class MyPersonListHandler(BaseHandler):
+    def __init__(self, * argc, ** argkw):
+        super(MyPersonListHandler, self).__init__(*argc, **argkw)
+    
+    @throw_base_exception    
+    def post(self):
+        """
+        Args:
+            user_id:
+        
+        Returns:
+            {
+                "message": "default message",
+                "code": 0,
+                "data": {
+                    "peron_brief_info": [
+                        {
+                            "person_id": "5863140516b2d67b38f27f60",
+                            "last_update_time": 1482888193,
+                            "last_update_spot": [
+                                22.9,
+                                22.9
+                            ],
+                            "name": "chenxionghui",
+                            "std_photo_key": "reporter:48::1482888196.89.jpeg"
+                        },
+                        {
+                            "person_id": "58632a7e16b2d67fa66fa9e9",
+                            "last_update_time": 1482912276,
+                            "last_update_spot": [
+                                22.9,
+                                22.9
+                            ],
+                            "name": "俞敏洪",
+                            "std_photo_key": "reporter:48::1482893949.95.jpg"
+                        }
+                    ]
+                }
+            }
+        """
+        result = ReturnStruct()
+        user_id = int(self.get_secure_cookie('user_id'))
+        person_id_list = self.user_model.get_missing_person_list(user_id)
+        result.data['peron_brief_info'] = self.person_model.get_person_brief_info(person_id_list)
+        self.return_to_client(result)
+        self.finish()
