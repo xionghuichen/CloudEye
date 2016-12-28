@@ -47,7 +47,7 @@ class PictureBuizModel(BaseBuizModel):
         file = open(path,'r+b')
         content = file.read()
         file.close()
-        # os.remove(path)
+        os.remove(path)
         return content
 
     def store_pictures(self,binary_picture_list, pic_key, pic_type, detect_result, callback):

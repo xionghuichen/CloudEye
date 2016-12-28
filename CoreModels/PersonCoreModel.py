@@ -116,3 +116,9 @@ class PersonCoreModel(BaseCoreModel):
     # def get_tracks_detail(self, track_type, filter_info):
     #     if track_type == self.POLICE:
     #         self.mongodb.tracklist.find().sort({'_id':-1}).limit(1)
+
+    def get_tracks_detail(self, track_id):
+        if type(track_id) == list:
+            return self.mongodb.tracklist.find({"_id":{"$in":track_id}})
+        else:
+            return self.mongodb.tracklist.find_one({"_id":track_id})    

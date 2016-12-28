@@ -30,7 +30,24 @@ class FaceSetBuizModel(BaseBuizModel):
         """
         result = self.face_model.search_face(face_token)
         if result.has_key('results'):
-            callback(result['results'][0])
+            level1 = float(result['thresholds']['1e-3'])
+            level2 = float(result['thresholds']['1e-4'])
+            level3 = float(result['thresholds']['1e-5'])
+            confidence = float(result['results'][0]['confidence'])
+            level = self.LOW_CONFIDENCE
+            if confidence >= level3:
+                level =  self.VERY_HIGH_CONFIDENCE
+            elif confidence >= level2:
+                level = self.HIGH_CONFIDENCE
+            elif confidence >= level1:
+                level = self.MIDDLE_CONFIDENCE
+            logging.info("result of search, the confidence is %s"%confidence)
+            to_return = {
+                'level':level, 
+                'confidence':confidence,
+                'info':result['results'][0]
+            }
+            callback(to_return)
         else:
             # do not search an possible face
             callback(None)

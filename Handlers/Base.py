@@ -94,6 +94,9 @@ class BaseHandler(tornado.web.RequestHandler):
                     if dic[key] =='empty':
                         continue
                     dic[key] = self.picture_model.get_url(value)
+                elif key == 'picture_key_list':
+                    for index,item in enumerate(dic[key]):
+                        dic[key][index]= self.picture_model.get_url(item)
                 if isinstance(value, dict):
                     self.change_custom_string_to_json(value)
                 elif isinstance(value, list):

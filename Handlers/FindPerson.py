@@ -23,8 +23,8 @@ class SearchPersonHandler(BaseHandler):
     @tornado.gen.coroutine
     def post(self):
         message_mapping = [
-            'search success and confidence higher than %s'%self.confidence_threshold,
-            'search success but confidence does not higher than %s'%self.confidence_threshold,
+            'search success and confidence higher than level: %s'%self.face_model.HIGH_CONFIDENCE,
+            'search success but confidence does not higher than level:%s'%self.face_model.HIGH_CONFIDENCE,
             'search failed'
         ]
         result = ReturnStruct(message_mapping)
@@ -33,7 +33,7 @@ class SearchPersonHandler(BaseHandler):
             search_picture = self.get_argument("search_picture")
             coordinate = eval(self.get_argument("coordinate"))
             camera_id = int(self.get_argument("camera_id"))
-            pic_type = self.get_argument('pic_key')
+            pic_type = self.get_argument('pic_type')
         except tornado.web.MissingArgumentError, e:
             raise MyMissingArgumentError(e.arg_name)   
         # change base64 to binary file
@@ -54,11 +54,11 @@ class SearchPersonHandler(BaseHandler):
                 searchResult = yield tornado.gen.Task(self.face_model.search_person, face_token)
                 if searchResult != None:
                     # has search result.
-                    if searchResult['confidence'] > self.confidence_threshold:
+                    if searchResult['level'] >= self.face_model.HIGH_CONFIDENCE:
                         # has high confidence
                         result.code = 0
                         # 3. get missing person_detail.
-                        person_id = searchResult['user_id']
+                        person_id = searchResult['info']['user_id']
                         # upload picture
                         detect_result = item
                         # [todo] delete unreadable '[]'

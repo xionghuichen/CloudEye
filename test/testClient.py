@@ -63,10 +63,11 @@ def login():
     print the_page
 
 def upload():
-    with open('./demo.jpeg', 'rb') as f:
+    with open('./test_img/ymh3.jpg', 'rb') as f:
         content = f.read()
     data = {
         'search_picture':base64.b64encode(content),
+        'pic_type':'jpg',
         'coordinate':[22.9,22.9],
         'camera_id':1
     }
@@ -107,10 +108,10 @@ def updatestatus():
     print the_page
 
 def compare():
-    with open('./test_img/ymh3.jpg', 'rb') as f:
+    with open('./test_img/ymh2.jpg', 'rb') as f:
         content = f.read()
     data = {
-        'person_id':'58632c3716b2d6016ac7c859',
+        'person_id':'58632a7e16b2d67fa66fa9e9',
         'picture':base64.b64encode(content),
         'pic_type':'jpg',
         'coordinate':[22.9,22.9],
@@ -158,18 +159,28 @@ def getUpdateMessageList():
     the_page = response.read()
     print the_page
 
+def getPersonDetail():
+    data = {
+        'person_id':"58632a7e16b2d67fa66fa9e9"
+    }
+    req = set_resquest("/get/persondetail",data,"POST")
+    response = urllib2.urlopen(req)
+    the_page = response.read()
+    print the_page
+
 # register()
-#login()
+# login()
 #updatestatus()
 # confirm()
-#compare()
+# compare()
 # callhelp()
 # upload()
 # logout()
 
 # for web 
 # getUpdatePersonList()
-getUpdateMessageList()
+# getUpdateMessageList()
+getPersonDetail()
 # def setMessage(message,num,content):
 #    message[num] = "No.%s "%num + content + "\r\n"
 

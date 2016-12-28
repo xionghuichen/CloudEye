@@ -117,3 +117,49 @@ class PersonBuizModel(BaseBuizModel):
             'name':item['name']
             })
         return result
+
+    def get_person_detail(self, person_id):
+        """Get the person's detail information.
+
+        Args:
+            person_id
+
+        Returns:
+            person_info:
+            machine_track
+            person_track
+        """
+        person_info = self.person_model.get_person_detail(person_id)
+        track_id_list = person_info['track_list']
+        track_detail = self.person_model.get_tracks_detail(track_id_list)
+        machine_track = []
+        person_track = []
+        for item in track_detail:
+            if item['type'] == self.person_model.CAMERA:
+                machine_track_info = {
+                    'date':item['date'],
+                    'pic_key':item['pic_key'],
+                    'confidence':item['confidence'],
+                    'coordinate':item['coordinate']
+                }
+                machine_track.append(machine_track_info)
+            elif item['type'] == self.person_model.PERSON:
+                person_track_info = {
+                    'date':item['date'],
+                    'pic_key':item['pic_key'],
+                    'confidence':item['confidence'],
+                    'coordinate':item['coordinate'],
+                    'user_id':item['user_id'],
+                    'user_nick_name':item['user_nick_name'],
+                    'description':item['description']
+                }
+                person_track.append(person_track_info)                
+        # delete useless key in person_info
+        del person_info['track_list']
+        result = {
+            'person_info':person_info,
+            'machine_track':machine_track,
+            'person_track':person_track
+        }
+        return result
+    
