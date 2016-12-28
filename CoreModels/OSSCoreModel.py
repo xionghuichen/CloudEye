@@ -24,5 +24,17 @@ class OSSCoreModel(BaseCoreModel):
             return False
         return True
 
+    def delete_picture_by_key(self,key):
+        """Delete picture which key is parameter 'key'
+
+        Args:
+
+        Returns:
+        """
+        result = self.ali_bucket.delete_object(key)
+        if result.status != 200:
+            return False
+        return True
+
     def get_url(self,key):
         return self.ali_bucket.sign_url('GET', key, self._sign_time)

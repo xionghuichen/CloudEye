@@ -58,6 +58,9 @@ class PersonBuizModel(BaseBuizModel):
             shooter_info:
                 user_id:
                 description:
+
+        Returns:
+            track_id
         """
         # result = self.person_model.get_person_detail(person_id_obj)
         # if result != None:
@@ -68,10 +71,12 @@ class PersonBuizModel(BaseBuizModel):
         info_data['person_id'] = person_id_obj
         info_data['pic_key'] = event_info['pic_key']
         info_data['date'] = event_info['date']
-        user_info = self.user_model.get_user_info(shooter_info['user_id'])
-        shooter_info['user_nick_name'] = user_info['nick_name']
+        if shoot_type != self.CAMERA:
+            user_info = self.user_model.get_user_info(shooter_info['user_id'])
+            shooter_info['user_nick_name'] = user_info['nick_name']
         track_id = self.person_model.insert_new_track(shoot_type, info_data, shooter_info)
         self.person_model.update_person_info(track_id, person_id_obj, event_info['coordinate'], event_info['date'])
+        return track_id
 
     def get_person_std_pic(self, person_id):
         """get a messing person's standard picture [upload by reporter] by person_id.
@@ -100,3 +105,4 @@ class PersonBuizModel(BaseBuizModel):
             'max_distance':max_distance
         }
         self.person_model.get_tracks_detail(self, self.POLICE, filter_info)
+

@@ -30,7 +30,7 @@ def repeat_send(method):
 class FaceSetCoreModel(BaseCoreModel):
     def __init__(self, *argc, **argkw):
         super(FaceSetCoreModel, self).__init__(*argc, **argkw)  
-        self.temp_faceset_token='468d4f8ba70bddbf41aa9b3d2deeb04a'
+        self.temp_faceset_token='9621152487583047095b9c38bbeb96e3'
         self.fade_file_path = './demo.jpeg'
 
     @repeat_send
@@ -80,7 +80,7 @@ class FaceSetCoreModel(BaseCoreModel):
                     count += 1
         return result
 
-    def insert_faces_info(self, pic_key, detect_result):
+    def insert_faces_info(self, pic_key, pic_type, detect_result):
         """Intert face information into mongodb.
 
         Args:
@@ -99,11 +99,14 @@ class FaceSetCoreModel(BaseCoreModel):
         """
         for index, item in enumerate(detect_result):
             detect_result[index]['picture_key'] = pic_key[index]
-
+            detect_result[index]['pic_type'] = pic_type
         logging.info("detect_result is %s"%detect_result)
         result = self.mongodb.face.info.insert_many(detect_result)
         logging.info("insert faces info result is %s "%result.inserted_ids)
         return result.inserted_ids
+
+    def delete_faces_info_by_key(self, key):
+        self.mongodb.face.info.delete_many({'picture_key':key})
 
     @repeat_send
     def set_person_id_to_face(self,person_id,face_token):

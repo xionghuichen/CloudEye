@@ -9,13 +9,15 @@ from BaseBuizModel import BaseBuizModel
 from config.globalVal import ReturnStruct, AP
 
 
-def gen_key(prefix):
-    current_time = time.time()
-    return prefix + "::" + str(current_time) + '.jpeg'
 
 class PictureBuizModel(BaseBuizModel):
     def __init__(self, *argc, **argkw):
         super(PictureBuizModel, self).__init__(*argc, **argkw)   
+        self._pic_type = 'jpeg'
+
+    def gen_key(self, prefix):
+        current_time = time.time()
+        return prefix + "::" + str(current_time) + '.' + self._pic_type
 
     def _add_box_to_picture(self, key, detect_info, binary_picture):
         """ add the box with the detect picture.
@@ -40,18 +42,20 @@ class PictureBuizModel(BaseBuizModel):
         im = Image.open(file)
         draw = ImageDraw.Draw(im)
         draw.rectangle(box,outline=(0,255,0,0))
-        im.save(path,'jpeg')
+        im.save(path)
+        file.close()
+        file = open(path,'r+b')
         content = file.read()
         file.close()
-        os.remove(path)
+        # os.remove(path)
         return content
 
-    def store_pictures(self,binary_picture_list, pic_key, detect_result, callback):
+    def store_pictures(self,binary_picture_list, pic_key, pic_type, detect_result, callback):
         """Upload pictures (pass as binary stream file) to OSS databases and mongodb[face.info]
 
         Args:
             imageBytes_list: a list of bianry stream file
-            pic_key: set as the key prefix [int]
+            pic_key: set as the key prefix [int] + picture_type
             
         Returns:
             key_list: OSS key list which correcpongding every image input
@@ -59,9 +63,10 @@ class PictureBuizModel(BaseBuizModel):
                     ['camera1::1482730528.67.jpeg']
         """
         key_list = []
+        self._pic_type = str(pic_type)
         if binary_picture_list != []:
             for index, binary_picture in enumerate(binary_picture_list):
-                key = gen_key(str(pic_key))
+                key = self.gen_key(str(pic_key))
                 # add detect part in origin picture.
                 binary_picture = self._add_box_to_picture(key, detect_result[index], binary_picture)
                 success = self.pic_model.upload_picture(key, binary_picture)
@@ -70,10 +75,17 @@ class PictureBuizModel(BaseBuizModel):
                     raise DBError("oss服务器出错！")
                 else:
                     key_list.append(key)
-        self.face_model.insert_faces_info(key_list, detect_result)
+        self.face_model.insert_faces_info(key_list, pic_type, detect_result)
         logging.info("result in store_pictures function is %s"%key_list)
         callback(key_list)
             # [todo] error handler.
 
     def get_url(self, key):
         return self.pic_model.get_url(key)
+
+    def delete_pictures(self, key, pic_type):
+        self._pic_type = pic_key
+        key = self.gen_key(str(key))
+        self.pic_model.delete_picture_by_key(key)
+        self.face_model.delete_faces_info_by_key(key)
+        

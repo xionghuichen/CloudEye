@@ -46,7 +46,7 @@ class PersonCoreModel(BaseCoreModel):
                 'confidence':info_data['confidence'],
                 'coordinate':info_data['coordinate'],
                 'date':info_data['date'],
-                'person_id':info_data['date']
+                'person_id':info_data['person_id']
             }
         elif shoot_type == self.PERSON:
             track_info = {
@@ -63,7 +63,7 @@ class PersonCoreModel(BaseCoreModel):
                 'user_id':shooter_info['user_id'],
                 'user_nick_name':shooter_info['user_nick_name'],
                 'description':shooter_info['description'],
-                'person_id':info_data['date']
+                'person_id':info_data['person_id']
             }
         return track_info
 

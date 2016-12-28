@@ -10,7 +10,7 @@ import datetime
 import tornado.web
 import tornado.gen
 
-from _exceptions.http_error import MyMissingArgumentError, ArgumentTypeError
+from _exceptions.http_error import MyMissingArgumentError, ArgumentTypeError, InnerError
 from Base import BaseHandler
 from config.globalVal import ReturnStruct
 
@@ -33,6 +33,7 @@ class SearchPersonHandler(BaseHandler):
             search_picture = self.get_argument("search_picture")
             coordinate = eval(self.get_argument("coordinate"))
             camera_id = int(self.get_argument("camera_id"))
+            pic_type = self.get_argument('pic_key')
         except tornado.web.MissingArgumentError, e:
             raise MyMissingArgumentError(e.arg_name)   
         # change base64 to binary file
@@ -61,7 +62,7 @@ class SearchPersonHandler(BaseHandler):
                         # upload picture
                         detect_result = item
                         # [todo] delete unreadable '[]'
-                        pic_key_list = yield tornado.gen.Task(self.picture_model.store_pictures,[binary_picture], "camera"+str(camera_id), [detect_result])
+                        pic_key_list = yield tornado.gen.Task(self.picture_model.store_pictures,[binary_picture], "camera"+str(camera_id), pic_type, [detect_result])
                         # 4. update track　and person information
                         event_info = {
                             'coordinate':coordinate,
@@ -70,7 +71,13 @@ class SearchPersonHandler(BaseHandler):
                             'person_id':person_id,
                             'date':event_happen_date
                         }
-                        self.person_model.update_person_status(self.person_model.CAMERA, event_info)
+                        try:
+                            track_id = self.person_model.update_person_status(self.person_model.CAMERA, event_info)
+                        except Exception as e:
+                            key = "camera"+str(camera_id)
+                            self.picture_model.delete_pictures("camera"+str(camera_id), pic_type)
+                            raise InnerError("正在search请求中更新用户信息时")
+
                         # 5. send message
                         message_data = {
                             'person_id':person_id,
@@ -78,7 +85,12 @@ class SearchPersonHandler(BaseHandler):
                             'date':event_happen_date,
                             'pic_key':pic_key_list[0]
                         }
-                        self.message_model.send_message_factory(self.message_model.SEARCH, message_data)
+                        try:
+                            self.message_model.send_message_factory(self.message_model.SEARCH, message_data)
+                        except Exception as e:
+                            key = "camera"+str(camera_id)
+                            self.picture_model.delete_pictures("camera"+str(camera_id), pic_type)
+                            raise InnerError("正在search请求中发送消息时")
                         break
                     else:
                         result.code = 1
@@ -102,6 +114,7 @@ class CallHelpHandler(BaseHandler):
         try:
             picture_list = eval(self.get_argument('picture_list'))
             user_id = int(self.get_secure_cookie("user_id"))
+            pic_type = self.get_argument('pic_key')
             info_data={
                 'name':self.get_argument('name'),
                 'sex':int(self.get_argument('sex')),
@@ -111,7 +124,7 @@ class CallHelpHandler(BaseHandler):
                 'relation_id': user_id,
                 'lost_time':float(self.get_argument('lost_time')),
                 'lost_spot':eval(self.get_argument('lost_spot')),
-                'description':self.get_argument('description')
+                'description':self.get_argument('description'),
             }
         except tornado.web.MissingArgumentError, e:
             raise MyMissingArgumentError(e.arg_name)     
@@ -137,7 +150,7 @@ class CallHelpHandler(BaseHandler):
                 # upload pictures.
                 detect_result_list = result_detect.data['detect_result_list']
                 result_pic_key = yield tornado.gen.Task(
-                    self.picture_model.store_pictures,binary_picture_list, "reporter:"+str(user_id), detect_result_list)
+                    self.picture_model.store_pictures,binary_picture_list, "reporter:"+str(user_id), pic_type, detect_result_list)
                 # todo, error handler
                 # store information.[track and person]
 
@@ -178,6 +191,7 @@ class ComparePersonHandler(BaseHandler):
             picture = self.get_argument('picture')
             description = self.get_argument('description')
             user_id = int(self.get_secure_cookie('user_id'))
+            pic_type = self.get_argument('pic_type')
         except tornado.web.MissingArgumentError as e:
             raise MyMissingArgumentError(e.arg_name)     
         try:
@@ -206,7 +220,7 @@ class ComparePersonHandler(BaseHandler):
             if confidence['level'] >= self.face_model.HIGH_CONFIDENCE:    
                 # 4. update info
                 result.code = 0
-                pic_key_list = yield tornado.gen.Task(self.picture_model.store_pictures,[binary_picture], "user"+str(user_id), detect_result)
+                pic_key_list = yield tornado.gen.Task(self.picture_model.store_pictures,[binary_picture], "user"+str(user_id), pic_type, detect_result)
                 # 4. update track　and person information
                 shooter_info = {
                     'user_id':user_id,

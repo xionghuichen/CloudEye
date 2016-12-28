@@ -41,7 +41,7 @@ def set_resquest(api,data,method):
 
 def register():
     data = {
-        "telephone":"15195861110",
+        "telephone":"15195861111",
         "password":"zp19950310",
         "real_name":"chenxionghui",
         "nick_name":"burningbear",
@@ -54,7 +54,7 @@ def register():
 # db.tracklist.find().sort({_id:-1}).limit(1)
 def login():
     data = {
-        "telephone":"15195861109",
+        "telephone":"15195861108",
         "password":"zp19950310"
     }
     req = set_resquest("/user/login",data,"POST")
@@ -74,14 +74,16 @@ def upload():
     response = urllib2.urlopen(req)
     the_page = response.read()
     print the_page
-
+# [todo]: if jpg ok?
 def callhelp():
-    with open('./demo.jpeg', 'rb') as f:
-        content = f.read()
-    
+    with open('./test_img/ymh.jpg', 'rb') as f:
+        content1 = f.read()
+    with open('./test_img/ymh2.jpg', 'rb') as f:
+        content2 = f.read()
     data = {
-        'picture_list':[base64.b64encode(content), base64.b64encode(content)],
-        'name':'chenxionghui',
+        'picture_list':[base64.b64encode(content1), base64.b64encode(content2)],
+        'pic_key':'jpg',
+        'name':'俞敏洪',
         'sex':0,
         'age':20,
         'relation_telephone':'15195861108',
@@ -105,10 +107,10 @@ def updatestatus():
     print the_page
 
 def compare():
-    with open('./demo.jpeg', 'rb') as f:
+    with open('./ymh2.jpg', 'rb') as f:
         content = f.read()
     data = {
-        'person_id':'586292fe16b2d666bab87c12',
+        'person_id':'5863144116b2d67b38f27f64',
         'picture':base64.b64encode(content),
         'coordinate':[22.9,22.9],
         'description':'maybe I find this missing child!'
@@ -132,10 +134,10 @@ def logout():
     
 # register()
 login()
-updatestatus()
+# updatestatus()
 # confirm()
 # compare()
-# callhelp()
+callhelp()
 # upload()
 # logout()
 
