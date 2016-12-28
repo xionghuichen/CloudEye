@@ -146,18 +146,30 @@ def getUpdatePersonList():
     the_page = response.read()
     print the_page
 
+def getUpdateMessageList():
+    data = {
+        'spot':[22.9,22.9],
+        'max_distance':3,
+        'page':0,
+        'size':10
+    }
+    req = set_resquest("/get/updatemessage",data,"POST")
+    response = urllib2.urlopen(req)
+    the_page = response.read()
+    print the_page
+
 # register()
-login()
-updatestatus()
+#login()
+#updatestatus()
 # confirm()
-compare()
+#compare()
 # callhelp()
 # upload()
 # logout()
 
 # for web 
 # getUpdatePersonList()
-
+getUpdateMessageList()
 # def setMessage(message,num,content):
 #    message[num] = "No.%s "%num + content + "\r\n"
 

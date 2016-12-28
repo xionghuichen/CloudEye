@@ -58,10 +58,11 @@ class MessageBuizModel(BaseBuizModel):
             'person_id':info['person_id'],
             'formal':person_detail_info['formal'],
             'std_pic_key':person_detail_info['picture_key_list'][0],
-            'pic_key':info['pic_key']
+            'pic_key':info['pic_key'],
+            'type':self.COMPARE
 
         }
-        message_id = self.message_model.insert_message_detail(self.COMPARE, message_info)
+        message_id = self.message_model.insert_message_detail( message_info)
         reporter_user_id = person_detail_info['relation_id']
         if reporter_user_id == None:
             # this is a formal case and the relation user has not reigster our system yet.
@@ -106,10 +107,11 @@ class MessageBuizModel(BaseBuizModel):
             'person_id':info['person_id'],
             'formal':person_detail_info['formal'],
             'std_pic_key':person_detail_info['picture_key_list'][0],
-            'pic_key':info['pic_key']
+            'pic_key':info['pic_key'],
+            'type':self.SEARCH
 
         }
-        message_id = self.message_model.insert_message_detail(self.SEARCH, message_info)
+        message_id = self.message_model.insert_message_detail(message_info)
         reporter_user_id = person_detail_info['relation_id']
         if reporter_user_id == None:
             # this is a formal case and the relation user has not reigster our system yet.
@@ -158,9 +160,11 @@ class MessageBuizModel(BaseBuizModel):
             'age':info['age'],
             'person_id':info['person_id'],
             'formal':0,# default value, 0 for not formal 
-            'std_pic_key':info['std_pic_key']
+            'std_pic_key':info['std_pic_key'],
+            'pic_key':'empty',
+            'type':self.CALL_HELP
         }
-        message_id = self.message_model.insert_message_detail(self.CALL_HELP, message_info)
+        message_id = self.message_model.insert_message_detail(message_info)
         user_id_list = self.location_model.find_user_in_range(info['spot'], self._inform_distance)
         reporter_user_id = info['reporter_user_id']
         # take apart report user by user_id
@@ -174,3 +178,40 @@ class MessageBuizModel(BaseBuizModel):
         }
         self.message_model.add_to_users(user_id_list, message_queue_info)
         
+    def get_lastest_message(self,spot, max_distance, page, size):
+        """Get the lastes update message list filter by spot and max_distance.
+
+        Args:
+            spot[list]
+            max_distance:[float]
+            page:
+            size
+        Returns:
+        """
+        filter_info = {
+            'spot':spot,
+            'max_distance':max_distance
+        }
+        offset = {
+            'page':page,
+            'size':size
+        }
+        message_info = self.message_model.get_message_timeline(filter_info,offset)
+        result = []
+        for item in message_info:
+            logging.info("item in lastest message is %s"%item)
+            append_item = {
+            'std_pic_key':item['std_pic_key'][0],
+            'person_id':item['_id'],
+            'name':item['name'],
+            'type':item['type'],
+            'date':item['date'],
+            'spot':item['spot']
+            }
+            if not item.has_key('pic_key'):
+                append_item['pic_key']= 'empty'
+            else:
+                append_item['pic_key']=item['pic_key']
+            result.append(append_item)
+
+        return result

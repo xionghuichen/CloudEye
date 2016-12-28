@@ -4,6 +4,7 @@
 import logging
 from bson import ObjectId
 from BaseCoreModel import BaseCoreModel
+from _exceptions.http_error import DBError
 def key_gen(prefix_key):
     return "user:message:"+str(prefix_key)
 
@@ -11,24 +12,27 @@ class MessageCoreModel(BaseCoreModel):
     def __init__(self, *argc, **argkw):
         super(MessageCoreModel, self).__init__(*argc, **argkw)
 
+    def get_message_timeline(self,filter_info,offset):
+        skip = offset['page'] * offset['size']
+        size = offset['size']
+        find_info = {
+            'spot':{
+                '$geoWithin':{
+                    '$center':[filter_info['spot'],filter_info['max_distance']]
+                }
+            }
+        }
+        logging.info("message timeline query is %s"%find_info)
+        result = self.mongodb.message.info.find(find_info).\
+        sort([('_id',-1)]).limit(size).skip(skip)
+        return result
 
     def get_message_detail(self,message_id):
         return self.mongodb.message.info.find_one({"_id":message_id})
     
-    def insert_message_detail(self, mes_type, info):
-        insert_data = {
-            "type": mes_type,
-            "person_id": info['person_id'],
-            "name": info['name'],
-            "std_pic_key": info['std_pic_key'],
-            "spot": info['spot'],
-            "date": info['date'],
-            'age': info['age'],
-            'sex': info['sex'],
-            'formal': info['formal']
-        }
+    def insert_message_detail(self, info):
         try:
-            return self.mongodb.message.info.insert_one(insert_data).inserted_id
+            return self.mongodb.message.info.insert_one(info).inserted_id
         except Exception as e:
             raise DBError("内部错误，插入mongodb.message过程出错")
 

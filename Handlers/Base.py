@@ -90,7 +90,9 @@ class BaseHandler(tornado.web.RequestHandler):
                 elif key == 'missing_person_list':
                     for index,item in enumerate(dic[key]):
                         dic[key][index]= str(item)
-                elif key == 'std_pic_key' or key == 'picture_key':
+                elif key == 'std_pic_key' or key == 'picture_key' or key == 'pic_key':
+                    if dic[key] =='empty':
+                        continue
                     dic[key] = self.picture_model.get_url(value)
                 if isinstance(value, dict):
                     self.change_custom_string_to_json(value)
