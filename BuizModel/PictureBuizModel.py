@@ -84,6 +84,15 @@ class PictureBuizModel(BaseBuizModel):
         return self.pic_model.get_url(key)
 
     def delete_pictures(self, key, pic_type):
+        """delete picture from oss database and face.info in mongodb.
+
+        Args:
+            key: picture's key, format:'uploadtype'+id, example:'camera::1'
+            pic_type: picture's type, example: 'jpg','jpeg'
+
+        Returns:
+            None.
+        """
         self._pic_type = pic_key
         key = self.gen_key(str(key))
         self.pic_model.delete_picture_by_key(key)

@@ -14,6 +14,12 @@ class MessageBuizModel(BaseBuizModel):
         self._inform_distance = 4
 
     def send_message_factory(self, message_type, info):
+        """factory function to create several message information and send it.
+
+        Args:
+            message_type:
+            infomation: dictory, the key-values depend on different type message.
+        """
         factory = [
             self._send_call_help_message,# CALL_HELP
             self._send_search_message,#SEARCH
@@ -69,12 +75,6 @@ class MessageBuizModel(BaseBuizModel):
             pass
         else:
             self.user_model.update_reporter_status(reporter_user_id, True)
-            # message_queue_info = {
-            #     "message_id":message_id,
-            #     "date":message_info['date'],
-            #     "type":self.SEARCH 
-            # }
-            # self.message_model.add_to_single_user(reporter_user_id, message_queue_info)
         # find the users in range.
         user_id_list = self.location_model.find_user_in_range(info['spot'], self._inform_distance)
         user_id_list = self._filter_user(user_id_list, reporter_user_id)
@@ -90,11 +90,13 @@ class MessageBuizModel(BaseBuizModel):
     def _send_search_message(self, info):
         """send message to nearby person and reporter.
         
+        Args:
             info:
                 'person_id'
                 'spot'
                 'date'
-
+        
+        Returns:
         """
         person_detail_info = self.person_model.get_person_detail(info['person_id'])
         message_info = {
@@ -148,6 +150,9 @@ class MessageBuizModel(BaseBuizModel):
                 'sex'
                 'person_id'
                 'reporter_user_id': the user who report the call help information.
+
+        Returns:
+
         """
         # add to message.info collection
         # find the users in range.
@@ -186,6 +191,7 @@ class MessageBuizModel(BaseBuizModel):
             max_distance:[float]
             page:
             size
+            
         Returns:
         """
         filter_info = {

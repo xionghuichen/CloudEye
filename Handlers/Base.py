@@ -103,13 +103,15 @@ class BaseHandler(tornado.web.RequestHandler):
                     for list_value in value:
                         self.change_custom_string_to_json(list_value)
 
-    def return_to_client(self,return_struct):
+    def return_to_client(self,return_struct, JQuery=''):
         self.change_custom_string_to_json(return_struct.data)
         return_struct.print_info("after change")
         temp_json = json.dumps({'code':return_struct.code,
             'message':return_struct.message_mapping[return_struct.code],
             'data':return_struct.data})
         temp_json.replace("null", "\'empty\'")
+        if JQuery != '':
+            temp_json = JQuery+'('+temp_json+')'
         self.write(temp_json)
 
 

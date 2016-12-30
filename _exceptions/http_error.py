@@ -16,19 +16,19 @@ class MyMissingArgumentError(MyHTTPError):
     def __init__(self, arg_name):
         self.res_name = arg_name
         self.status_code = 404
-        self.reason = "参数名称:{} 没有被找到,请检查你的参数".format(arg_name)
+        self.reason = "parameter :{} can not been find, place check it.".format(arg_name)
         
 class DBError(MyHTTPError):
     def __init__(self, reason):
         self.status_code = 500
-        self.reason = "数据库相关错误，：{}".format(reason) 
+        self.reason = "some error about databases in server，：{}".format(reason) 
 
 class ArgumentTypeError(MyHTTPError):
     def __init__(self, arg_name):
         self.status_code = 404
-        self.reason =  "参数类型传输错误，服务器无法解析: {}".format(arg_name)
+        self.reason =  "you pass a parameter which type is error {}".format(arg_name)
 
 class InnerError(MyHTTPError):
     def __init__(self, arg_name):
         self.status_code = 400
-        self.reason =  "服务器内部出现错误: {}".format(arg_name)
+        self.reason =  "server inner error: {}".format(arg_name)

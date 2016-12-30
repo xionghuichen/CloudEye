@@ -22,6 +22,20 @@ class SearchPersonHandler(BaseHandler):
     @tornado.web.asynchronous
     @tornado.gen.coroutine
     def post(self):
+        """Find if there are high confidence face in face databses.
+
+        Args:
+            search_picture: single picture encode in base64
+            coordinate: location of the place shoot the picture,
+            camera_id: device id.
+            pic_type: example:'jpg','jpeg'
+
+        Returns:
+            needn't return to client. But there are three status:
+                'search success and confidence higher than level 2: 
+                'search success but confidence does not higher than level:2'
+                'search failed'
+        """
         message_mapping = [
             'search success and confidence higher than level: %s'%self.face_model.HIGH_CONFIDENCE,
             'search success but confidence does not higher than level:%s'%self.face_model.HIGH_CONFIDENCE,
@@ -107,6 +121,13 @@ class CallHelpHandler(BaseHandler):
 
     @tornado.gen.coroutine
     def post(self):
+        """ Upload person information which is missing recently. 
+        Syetem will push message to police and person around this person.
+
+        Args:
+
+        Returns:
+        """
         message_mapping = [
         'empty image'
         ]
@@ -178,11 +199,18 @@ class ComparePersonHandler(BaseHandler):
    
     @tornado.gen.coroutine
     def post(self):
-        """
+        """User can upload a picture for a specific person_id. 
+        System will compare it and tell user if this is a high confidence face.
+        Besides, if it is a high confidence face, we should store this new message and pugh this message though LBS and pilice man.
+
+        Args:
+
             person_id:
             picture:
             coordinate:
             user_id
+
+        Returns:
 
         """
         try:

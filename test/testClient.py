@@ -142,7 +142,7 @@ def getUpdatePersonList():
         'page':0,
         'size':10
     }
-    req = set_resquest("/get/updateperson",data,"POST")
+    req = set_resquest("/get/updateperson",data,"GET")
     response = urllib2.urlopen(req)
     the_page = response.read()
     print the_page
@@ -154,7 +154,7 @@ def getUpdateMessageList():
         'page':0,
         'size':10
     }
-    req = set_resquest("/get/updatemessage",data,"POST")
+    req = set_resquest("/get/updatemessage",data,"GET")
     response = urllib2.urlopen(req)
     the_page = response.read()
     print the_page
@@ -163,7 +163,17 @@ def getPersonDetail():
     data = {
         'person_id':"58632a7e16b2d67fa66fa9e9"
     }
-    req = set_resquest("/get/persondetail",data,"POST")
+    req = set_resquest("/get/persondetail/web",data,"POST")
+    response = urllib2.urlopen(req)
+    the_page = response.read()
+    print the_page
+
+
+def getPersonDetailforweb():
+    data = {
+        'person_id':"58632a7e16b2d67fa66fa9e9"
+    }
+    req = set_resquest("/get/persondetail/web",data,"GET")
     response = urllib2.urlopen(req)
     the_page = response.read()
     print the_page
@@ -175,19 +185,19 @@ def get_personlist_info():
     print the_page
 
 # register()
-login()
-#updatestatus()
+# login()
+# updatestatus()
 # confirm()
 # compare()
 # callhelp()
 # upload()
 # logout()
-
+#getPersonDetail()
 # for web 
 # getUpdatePersonList()
 # getUpdateMessageList()
-# getPersonDetail()
-get_personlist_info()
+#getPersonDetailforweb()
+# get_personlist_info()
 # def setMessage(message,num,content):
 #    message[num] = "No.%s "%num + content + "\r\n"
 

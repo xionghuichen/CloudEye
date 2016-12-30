@@ -15,10 +15,20 @@ class IndexHandler(BaseHandler):
     def get(self):
         try:
             data = {"_xsrf":self.xsrf_token}
+            jquery = ''
+            try:
+                jquery = str(self.get_argument('jsoncallback'))
+            except Exception as e:
+                # do nothing.
+                pass
             # Data = json.dumps(Data)
             result = json.dumps({"code": 100,"message":self.xsrf_token,"data":data})
+            if jquery != '':
+                result = jquery + '('+result+')'
+
             self.write(result)
         except Exception, e:
             result = json.dumps({"code": 99,"message":"fail set cookie","data":{}})
             self.write(result)
             raise
+        self.finish()

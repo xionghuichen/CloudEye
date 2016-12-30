@@ -29,6 +29,7 @@ class PersonBuizModel(BaseBuizModel):
                 'lost_spot':self.get_argument('lost_spot'),
                 'description':self.get_argument('description')
             user_id:
+            
         Returns:
             person_id
         """

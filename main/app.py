@@ -28,7 +28,7 @@ from config.globalVal import AP
 from Handlers.Index import IndexHandler
 from Handlers.User import RegisterHandler, LoginHandler, UpdateStatusHandler, ConfirmHandler, LogoutHandler, MyPersonListHandler
 from Handlers.FindPerson import SearchPersonHandler, CallHelpHandler, ComparePersonHandler
-from Handlers.MissPerson import LastestUpdatePersonHandler, LastestUpdateMessageHandler, GetMissingPersonDetail
+from Handlers.MissPerson import LastestUpdatePersonHandler, LastestUpdateMessageHandler, GetMissingPersonDetailHandler, GetMissingPersonDetailWebHandler
 
 define("port", default=9000, help="run on the given port", type=int)
 define("host", default="139.196.207.155", help="community database host")
@@ -58,7 +58,7 @@ class Application(tornado.web.Application):
         logging.info("start server.")
         settings = dict(
             cookie_secret=COOKIE_SECRET,
-            xsrf_cookies=True,
+            xsrf_cookies=False,
             template_path=template_path,
             static_path=static_path
         )
@@ -77,7 +77,8 @@ class Application(tornado.web.Application):
             (r'/find/compare', ComparePersonHandler),
             (r'/get/updateperson',LastestUpdatePersonHandler),
             (r'/get/updatemessage',LastestUpdateMessageHandler),
-            (r'/get/persondetail',GetMissingPersonDetail),
+            (r'/get/persondetail',GetMissingPersonDetailHandler),
+            (r'/get/persondetail/web',GetMissingPersonDetailWebHandler)
             
         ]
 

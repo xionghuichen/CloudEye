@@ -8,6 +8,11 @@ from _exceptions.http_error import DBError
 from facepp_sdk.facepp import APIError, File
 import time
 def repeat_send(method):
+    """this decorator for face++ request. 
+    Beacuse face++ free appkey often send high concurrency error.
+    after add this decorator, request will send repeatly until response successfully.
+    
+    """
     @functools.wraps(method)
     def wrapper(self, *args, **kwargs):
         again = True

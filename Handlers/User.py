@@ -18,6 +18,12 @@ class RegisterHandler(BaseHandler):
         
     @throw_base_exception        
     def post(self):
+        """Register new user in system.
+
+        Args:
+
+        Returns:
+        """
         telephone = self.get_argument("telephone")
         password = self.get_argument("password")
         real_name = self.get_argument("real_name")
@@ -45,6 +51,12 @@ class LoginHandler(BaseHandler):
 
     @throw_base_exception
     def post(self):
+        """Login to system.
+
+        Args:
+
+        Returns:
+        """
         telephone = self.get_argument("telephone")
         password = self.get_argument("password")
         result = self.user_model.identify_check(telephone,password)
@@ -62,6 +74,15 @@ class UpdateStatusHandler(BaseHandler):
 
     @throw_base_exception
     def post(self):
+        """After user login successfully, 
+        client should send request to update his location and check if there are new message in user's message queue in regular.
+
+        Args:
+            coordinate: user's location, pass format: [x,y]
+            user_id:
+
+        Returns:
+        """
         corrdinate = eval(self.get_argument("corrdinate"))
         user_id = int(self.get_secure_cookie("user_id"))
         # update location.
@@ -77,6 +98,13 @@ class ConfirmHandler(BaseHandler):
 
     @throw_base_exception
     def post(self):
+        """If client has get his new message queue then it should send this request to clear message queue in server[redis].
+
+        Args:
+
+        Returns:
+
+        """
         result = ReturnStruct()
         # get user_id
         user_id = int(self.get_secure_cookie("user_id"))
@@ -93,6 +121,13 @@ class LogoutHandler(BaseHandler):
     
     @throw_base_exception
     def post(self):
+        """clear user's online status, user will not receive message after logout.
+
+        Args:
+
+        Returns:
+
+        """
         result = ReturnStruct()
         # get user_id
         user_id = int(self.get_secure_cookie("user_id"))
@@ -107,7 +142,8 @@ class MyPersonListHandler(BaseHandler):
     
     @throw_base_exception    
     def post(self):
-        """
+        """get user's reporter list.
+
         Args:
             user_id:
         
