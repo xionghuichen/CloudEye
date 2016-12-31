@@ -25,6 +25,7 @@ class MessageCoreModel(BaseCoreModel):
         logging.info("message timeline query is %s"%find_info)
         result = self.mongodb.message.info.find(find_info).\
         sort([('_id',-1)]).limit(size).skip(skip)
+        
         return result
 
     def get_message_detail(self,message_id):

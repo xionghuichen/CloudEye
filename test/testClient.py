@@ -185,19 +185,19 @@ def get_personlist_info():
     print the_page
 
 # register()
-login()
-updatestatus()
+#login()
+# updatestatus()
 # confirm()
-# compare()
+#compare()
 # callhelp()
 # upload()
 # logout()
-getPersonDetail()
+#getPersonDetail()
 # for web 
-getUpdatePersonList()
+#getUpdatePersonList()
 getUpdateMessageList()
-getPersonDetailforweb()
-get_personlist_info()
+#getPersonDetailforweb()
+#get_personlist_info()
 # def setMessage(message,num,content):
 #    message[num] = "No.%s "%num + content + "\r\n"
 

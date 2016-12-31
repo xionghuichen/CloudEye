@@ -81,6 +81,7 @@ class PictureBuizModel(BaseBuizModel):
             # [todo] error handler.
 
     def get_url(self, key):
+        logging.info("get url key is :%s"%key)
         return self.pic_model.get_url(key)
 
     def delete_pictures(self, key, pic_type):
