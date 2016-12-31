@@ -7,7 +7,7 @@ from BaseCoreModel import BaseCoreModel
 from ORMClass import UserInfo
 from sqlalchemy.sql.expression import and_
 from sqlalchemy.exc import IntegrityError
-from _exceptions.http_error import DBError 
+from _exceptions.http_error import DBError, DBQueryError
 class UserCoreModel(BaseCoreModel):
     def __init__(self, *argc, **argkw):
         super(UserCoreModel, self).__init__(*argc, **argkw)  
@@ -41,7 +41,7 @@ class UserCoreModel(BaseCoreModel):
         query = self.session.query(UserInfo)
         userinfo = query.filter(UserInfo.telephone==telephone).first()       
         if userinfo is None:
-            raise DBError('数据查找异常')
+            raise DBQueryError('error when get user_id by telephone') 
         else:
             return userinfo.user_id
 
@@ -62,6 +62,8 @@ class UserCoreModel(BaseCoreModel):
 
         """
         userinfo = self.session.query(UserInfo).filter(UserInfo.user_id==user_id).first()
+        if userinfo is None:
+            raise DBQueryError('error when get userinfo by userinfo') 
         result = {
             'telephone':userinfo.telephone,
             'real_name':userinfo.real_name,
@@ -80,6 +82,8 @@ class UserCoreModel(BaseCoreModel):
 
         """
         result = self.mongodb.user.personlist.find_one({'user_id':user_id})
+        if result is None:
+            raise DBQueryError('error when get missing_person_list by user_id') 
         return result['missing_person_list']
 
     def identify_check(self, telephone, password):

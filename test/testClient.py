@@ -100,7 +100,7 @@ def callhelp():
 
 def updatestatus():
     data = {
-        'corrdinate':[23.9,23.9]
+        'coordinates':[23.9,23.9]# update
     }
     req = set_resquest("/user/updatestatus",data,"POST")
     response = urllib2.urlopen(req)
@@ -163,7 +163,7 @@ def getPersonDetail():
     data = {
         'person_id':"58632a7e16b2d67fa66fa9e9"
     }
-    req = set_resquest("/get/persondetail/web",data,"POST")
+    req = set_resquest("/get/persondetail",data,"POST")
     response = urllib2.urlopen(req)
     the_page = response.read()
     print the_page
@@ -185,19 +185,19 @@ def get_personlist_info():
     print the_page
 
 # register()
-# login()
-# updatestatus()
+login()
+updatestatus()
 # confirm()
 # compare()
 # callhelp()
 # upload()
 # logout()
-#getPersonDetail()
+getPersonDetail()
 # for web 
-# getUpdatePersonList()
-# getUpdateMessageList()
-#getPersonDetailforweb()
-# get_personlist_info()
+getUpdatePersonList()
+getUpdateMessageList()
+getPersonDetailforweb()
+get_personlist_info()
 # def setMessage(message,num,content):
 #    message[num] = "No.%s "%num + content + "\r\n"
 

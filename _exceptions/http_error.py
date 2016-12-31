@@ -32,3 +32,7 @@ class InnerError(MyHTTPError):
     def __init__(self, arg_name):
         self.status_code = 400
         self.reason =  "server inner error: {}".format(arg_name)
+class DBQueryError(MyHTTPError):
+    def __init__(self, arg_name):
+        self.status_code = 404
+        self.reason = 'can not find corresponding record (or document) for your request, which is impossible in normal, check your parameter, detail: {}'.format(arg_name)

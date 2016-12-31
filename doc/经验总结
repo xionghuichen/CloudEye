@@ -70,3 +70,8 @@
 
         >var result = db.users.findOne({"name":"Tom Benzamin"},{"address_ids":1})
         >var addresses = db.address.find({"_id":{"$in":result["address_ids"]}})
+
+---
+异常处理
+
+1. 用户输入的数据可能不合法，你用它来查询数据库的时候可能出现查不到结果的情况，但是按照正常的业务逻辑，不可能查不到结果，这个时候需要抛出异常

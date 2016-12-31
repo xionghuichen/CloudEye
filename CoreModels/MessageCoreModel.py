@@ -28,8 +28,11 @@ class MessageCoreModel(BaseCoreModel):
         return result
 
     def get_message_detail(self,message_id):
-        return self.mongodb.message.info.find_one({"_id":message_id})
-    
+        result = self.mongodb.message.info.find_one({"_id":message_id})
+        if result == []or result == None:
+            raise DBQueryError('error when get message detail infomation by message_id')  
+        return result
+
     def insert_message_detail(self, info):
         try:
             return self.mongodb.message.info.insert_one(info).inserted_id

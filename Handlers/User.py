@@ -78,15 +78,15 @@ class UpdateStatusHandler(BaseHandler):
         client should send request to update his location and check if there are new message in user's message queue in regular.
 
         Args:
-            coordinate: user's location, pass format: [x,y]
+            coordinates: user's location, pass format: [x,y]
             user_id:
 
         Returns:
         """
-        corrdinate = eval(self.get_argument("corrdinate"))
+        coordinates = eval(self.get_argument("coordinates"))
         user_id = int(self.get_secure_cookie("user_id"))
         # update location.
-        self.user_model.update_location(corrdinate, user_id)
+        self.user_model.update_location(coordinates, user_id)
         # check message.
         result = self.user_model.check_message(user_id)
         self.return_to_client(result)

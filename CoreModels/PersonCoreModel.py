@@ -5,6 +5,7 @@ import logging
 import datetime
 import pprint
 from BaseCoreModel import BaseCoreModel
+from _exceptions.http_error import DBQueryError
 from bson import ObjectId
 class PersonCoreModel(BaseCoreModel):
     def __init__(self, *argc, **argkw):
@@ -45,23 +46,29 @@ class PersonCoreModel(BaseCoreModel):
         logging.info(" filter dictory result is %s"%find_info)
         result = self.mongodb.person.info.find(find_info).\
         sort([('last_update_time',-1)]).limit(size).skip(skip)
-
+        if result == []: 
+            raise DBQueryError('error when get person detail infomation by filter')
         return result
 
     def get_person_detail(self,person_id):
         """get missing person information by person_id
 
         Args:
-            person_id:
+            person_id: can be a list or a string or a objectid
 
         Returns:
         """
+        result = []
         if type(person_id) == list:
-            return self.mongodb.person.info.find({"_id":{"$in":person_id}}) 
+            result =  self.mongodb.person.info.find({"_id":{"$in":person_id}}) 
         else:
-            person_id = ObjectId(person_id)
+            if type(person_id) != ObjectId:
+                logging.info("in filter")
+                person_id = ObjectId(person_id)
             result = self.mongodb.person.info.find_one({'_id':person_id})
-            return result
+        if result == []or result == None:
+            raise DBQueryError('error when get person detail infomation by person_id')           
+        return result
 
     def _track_info_creator(self, shoot_type, info_data, shooter_info=None):
         track_info = {}
@@ -121,7 +128,17 @@ class PersonCoreModel(BaseCoreModel):
     #         self.mongodb.tracklist.find().sort({'_id':-1}).limit(1)
 
     def get_tracks_detail(self, track_id):
+        """Get track detail information (both camera track and human track are ok),
+
+        Args:
+            track_id: can be a list or a ObjectId or a String.
+        """
         if type(track_id) == list:
-            return self.mongodb.tracklist.find({"_id":{"$in":track_id}})
+            result =  self.mongodb.tracklist.find({"_id":{"$in":track_id}})
         else:
-            return self.mongodb.tracklist.find_one({"_id":track_id})    
+            if type(track_id) != ObjectId:
+                person_id = ObjectId(person_id)
+            result = self.mongodb.tracklist.find_one({"_id":track_id})    
+        if result == [] or result == None:
+            raise DBQueryError('error when get track detail infomation by track_id(track_id_list)')            
+        return result
