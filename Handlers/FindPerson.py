@@ -88,6 +88,7 @@ class SearchPersonHandler(BaseHandler):
                         try:
                             track_id = self.person_model.update_person_status(self.person_model.CAMERA, event_info)
                         except Exception as e:
+                            logging.info("infomation of exception %s"%str(e))
                             key = "camera"+str(camera_id)
                             self.picture_model.delete_pictures("camera"+str(camera_id), pic_type)
                             raise InnerError("正在search请求中更新用户信息时")
@@ -97,11 +98,13 @@ class SearchPersonHandler(BaseHandler):
                             'person_id':person_id,
                             'spot':coordinate,
                             'date':event_happen_date,
+                            'confidence':searchResult['confidence'],
                             'pic_key':pic_key_list[0]
                         }
                         try:
                             self.message_model.send_message_factory(self.message_model.SEARCH, message_data)
                         except Exception as e:
+                            logging.info("infomation of exception %s"%str(e))
                             key = "camera"+str(camera_id)
                             self.picture_model.delete_pictures("camera"+str(camera_id), pic_type)
                             raise InnerError("正在search请求中发送消息时")
@@ -268,6 +271,7 @@ class ComparePersonHandler(BaseHandler):
                     'date':event_happen_date,
                     'person_id':person_id,
                     'upload_user_id':user_id,
+                    'confidence':confidence['confidence'],
                     'pic_key':pic_key_list[0]
                 }
                 self.message_model.send_message_factory(self.message_model.COMPARE, message_data)

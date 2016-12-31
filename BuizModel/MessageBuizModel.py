@@ -65,6 +65,7 @@ class MessageBuizModel(BaseBuizModel):
             'formal':person_detail_info['formal'],
             'std_pic_key':person_detail_info['picture_key_list'][0],
             'pic_key':info['pic_key'],
+            'confidence':info['confidence'],
             'type':self.COMPARE
 
         }
@@ -110,6 +111,7 @@ class MessageBuizModel(BaseBuizModel):
             'formal':person_detail_info['formal'],
             'std_pic_key':person_detail_info['picture_key_list'][0],
             'pic_key':info['pic_key'],
+            'confidence':info['confidence'],
             'type':self.SEARCH
 
         }

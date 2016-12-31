@@ -94,7 +94,7 @@ class PictureBuizModel(BaseBuizModel):
         Returns:
             None.
         """
-        self._pic_type = pic_key
+        self._pic_type = pic_type
         key = self.gen_key(str(key))
         self.pic_model.delete_picture_by_key(key)
         self.face_model.delete_faces_info_by_key(key)

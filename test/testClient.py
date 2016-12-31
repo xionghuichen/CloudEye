@@ -77,14 +77,14 @@ def upload():
     print the_page
 # [todo]: if jpg ok?
 def callhelp():
-    with open('./test_img/ymh.jpg', 'rb') as f:
+    with open('./test_img/zxc2.jpg', 'rb') as f:
         content1 = f.read()
-    with open('./test_img/ymh2.jpg', 'rb') as f:
+    with open('./test_img/zxc3.jpg', 'rb') as f:
         content2 = f.read()
     data = {
         'picture_list':[base64.b64encode(content1), base64.b64encode(content2)],
         'pic_key':'jpg',
-        'name':'俞敏洪',
+        'name':'如果有期限，一万年',
         'sex':0,
         'age':20,
         'relation_telephone':'15195861108',
@@ -108,10 +108,10 @@ def updatestatus():
     print the_page
 
 def compare():
-    with open('./test_img/ymh2.jpg', 'rb') as f:
+    with open('./test_img/zxc2.jpg', 'rb') as f:
         content = f.read()
     data = {
-        'person_id':'58632a7e16b2d67fa66fa9e9',
+        'person_id':'5867b81b16b2d6121d8d8c3d',
         'picture':base64.b64encode(content),
         'pic_type':'jpg',
         'coordinate':[22.9,22.9],
@@ -138,7 +138,7 @@ def getUpdatePersonList():
     data = {
         'spot':[22.9,22.9],
         'max_distance':3,
-        'formal':0,
+        'formal':1,
         'page':0,
         'size':10
     }
@@ -185,17 +185,17 @@ def get_personlist_info():
     print the_page
 
 # register()
-#login()
+login()
 # updatestatus()
 # confirm()
-#compare()
+# compare()
 # callhelp()
 # upload()
 # logout()
 #getPersonDetail()
 # for web 
-#getUpdatePersonList()
-getUpdateMessageList()
+getUpdatePersonList()
+# getUpdateMessageList()
 #getPersonDetailforweb()
 #get_personlist_info()
 # def setMessage(message,num,content):

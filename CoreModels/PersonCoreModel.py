@@ -69,7 +69,7 @@ class PersonCoreModel(BaseCoreModel):
         if result == []or result == None:
             raise DBQueryError('error when get person detail infomation by person_id')   
         logging.info("get person_detail result is :%s"%result)
-        result['picture_key_list'] =  eval(result['picture_key_list'])      
+        # result['picture_key_list'] =  eval(result['picture_key_list'])      
         return result
 
     def _track_info_creator(self, shoot_type, info_data, shooter_info=None):
