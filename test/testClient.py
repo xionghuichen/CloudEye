@@ -161,7 +161,7 @@ def getUpdateMessageList():
 
 def getPersonDetail():
     data = {
-        'person_id':"58632a7e16b2d67fa66fa9e9"
+        'person_id':"5867b81b16b2d6121d8d8c3d"
     }
     req = set_resquest("/get/persondetail",data,"POST")
     response = urllib2.urlopen(req)
@@ -171,7 +171,7 @@ def getPersonDetail():
 
 def getPersonDetailforweb():
     data = {
-        'person_id':"58632a7e16b2d67fa66fa9e9"
+        'person_id':"5867b81b16b2d6121d8d8c3d"
     }
     req = set_resquest("/get/persondetail/web",data,"GET")
     response = urllib2.urlopen(req)
@@ -185,18 +185,18 @@ def get_personlist_info():
     print the_page
 
 # register()
-login()
+# login()
 # updatestatus()
 # confirm()
 # compare()
 # callhelp()
 # upload()
 # logout()
-#getPersonDetail()
+# getPersonDetail()
 # for web 
-getUpdatePersonList()
-# getUpdateMessageList()
-#getPersonDetailforweb()
+# getUpdatePersonList()
+getUpdateMessageList()
+getPersonDetailforweb()
 #get_personlist_info()
 # def setMessage(message,num,content):
 #    message[num] = "No.%s "%num + content + "\r\n"

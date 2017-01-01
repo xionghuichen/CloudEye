@@ -210,7 +210,7 @@ class MessageBuizModel(BaseBuizModel):
             logging.info("item in lastest message is %s"%item)
             append_item = {
             'std_pic_key':item['std_pic_key'],# this is just a key, not a list.
-            'person_id':item['_id'],
+            'person_id':item['person_id'],
             'name':item['name'],
             'type':item['type'],
             'date':item['date'],
