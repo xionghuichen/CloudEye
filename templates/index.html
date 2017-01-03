@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+
+<html lang="en" class="no-js">
+
+	<head>
+
+		<meta charset="UTF-8" />
+
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+		<title>Adaptive Thumbnail Pile Effect with Automatic Grouping</title>
+
+		<meta name="description" content="Thumbnail Pile Effect with Automatic Grouping" />
+
+		<meta name="keywords" content="jquery, pile, effect, images, grid, thumbnails, css3, grouping, albums" />
+
+		<meta name="author" content="Codrops" />
+
+		<link rel="shortcut icon" href="../favicon.ico"> 
+
+		<link rel="stylesheet" type="text/css" href="{{ static_url('css/demo.css') }}" />
+
+		<link rel="stylesheet" type="text/css" href="{{ static_url('css/stapel.css') }}" />
+
+		<link rel="stylesheet" type="text/css" href="{{ static_url('css/custom.css') }}" />
+
+		<script src="{{ static_url('js/modernizr.custom.63321.js') }}"></script>
+
+		<!--[if lte IE 7]><style>.support-note .note-ie{display:block;}</style><![endif]-->
+
+	</head>
+
+	<body>
+<!--立案未立案-->
+	
+		<nav class="codrops-demos tabs">
+
+					<a class="current-demo" href="#tab1">已立案案件列表</a>
+
+					<a href="#tab2" >未立案案件列表</a>
+
+					
+
+		</nav>
+		<div id="tab1" class="tab" style="display: block;">
+
+				<ul class="test" >
+					
+					<li href="#" class="register_case">
+						<a href="/web/details">
+						<!-- [todo] -->
+						<img class="image" src="{{ static_url('images/4/3.jpg') }}">
+						<span class="name">name</span>
+						</a>
+					</li>
+
+					<li href="#" class="register_case">
+						<a href="/web/details">
+						
+						<img class="image" src="{{ static_url('images/4/3.jpg') }}">
+						<span class="name">name</span>
+						</a>
+					</li>
+					<li href="#" class="register_case">
+						<a href="/web/details">
+						
+						<img class="image" src="{{ static_url('images/4/3.jpg') }}">
+						<span class="name">name</span>
+						</a>
+					</li>
+					<li href="#" class="register_case">
+						<a href="/web/details">
+						
+						<img class="image" src="{{ static_url('images/4/3.jpg') }}">
+						<span class="name">name</span>
+						</a>
+					</li>
+					<li href="#" class="register_case">
+						<a href="/web/details">
+						
+						<img class="image" src="{{ static_url('images/4/3.jpg') }}">
+						<span class="name">name</span>
+						</a>
+					</li>
+				</ul>
+				
+				</div>
+
+				<div id="tab2" class="tab" style="display: none;">
+				<ul class="test">
+					<li class="unregister_case">
+						<a href="/web/details">
+						
+						<img class="image" src="{{ static_url('images/4/3.jpg') }}">
+						<span class="name">name</span>
+						</a>
+					</li>
+					<li class="unregister_case">
+						<a href="/web/details">
+						
+						<img class="image" src="{{ static_url('images/4/3.jpg') }}">
+						<span class="name">name</span>
+						</a>
+					</li>
+					<li class="unregister_case">
+						<a href="/web/details">
+						
+						<img class="image" src="{{ static_url('images/4/3.jpg') }}">
+						<span class="name">name</span>
+						</a>
+					</li>
+					<li class="unregister_case">
+						<a href="/web/details">
+						
+						<img class="image" src="{{ static_url('images/4/3.jpg') }}">
+						<span class="name">name</span>
+						</a>
+					</li>
+					<li class="unregister_case">
+						<a href="/web/details">
+						
+						<img class="image" src="{{ static_url('images/4/3.jpg') }}">
+						<span class="name">name</span>
+						</a>
+					</li >
+					
+				</ul>
+					
+				
+				
+			</div>
+            
+			<!--立案未立案-->
+
+			<div class="indicator">
+                   <p> <button id="last"><</button></p>
+                    <p>  <button id="next">></button></p>
+                   
+                </div>
+
+		
+		<div class="container">	
+
+
+
+			<!-- Codrops top bar --><!--/ Codrops top bar -->
+
+			
+
+			<header class="clearfix">
+
+			<div class="support-note">
+
+					<span class="note-ie">Sorry, only modern browsers.</span>
+
+				</div>
+
+				
+
+			</header>
+
+			
+
+			<section class="main">
+
+				
+
+				<div class="wrapper">
+
+
+					<div class="topbar">
+
+						<span id="close" class="back">&larr;</span>
+
+						<h2>最新检测</h2><h3 id="name"></h3>
+
+					</div>
+
+					
+
+					<ul id="tp-grid" class="tp-grid">
+
+
+
+						<!-- first -->
+
+
+						<li id="first_item" class="latest_item" data-pile="first">
+
+							<a href="/web/details">
+
+								<span class="tp-info item_infor"><span>Flu You</span></span>
+
+								<img class="item_image" src="{{ static_url('images/1/1.jpg') }}" />
+
+							</a>
+
+						</li>
+
+						<li class="latest_item" data-pile="first">
+
+							<a href="/web/details">
+
+								<span class="tp-info item_infor"><span>Flu You</span></span>
+
+								<img class="item_image" src="{{ static_url('images/1/2.jpg') }}" />
+
+							</a>
+
+						</li>
+
+						
+
+
+						<!-- second -->
+
+						<li  class="latest_item" data-pile="second">
+
+							<a href="/web/details">
+
+								<span class="tp-info item_infor"><span>Flu You</span></span>
+
+								<img class="item_image" src="{{ static_url('images/1/1.jpg') }}" />
+
+							</a>
+
+						</li>
+
+						<li  class="latest_item" data-pile="second">
+
+							<a href="/web/details">
+
+								<span class="tp-info item_infor"><span>Flu You</span></span>
+
+								<img class="item_image" src="{{ static_url('images/1/1.jpg') }}" />
+
+							</a>
+
+						</li>
+
+						
+
+
+
+						<!-- third -->
+
+						<li class="latest_item"  data-pile="third">
+
+							<a href="/web/details">
+
+								<span class="tp-info item_infor"><span>Flu You</span></span>
+
+								<img class="item_image" src="{{ static_url('images/1/1.jpg') }}" />
+
+							</a>
+
+						</li>
+
+						<li  class="latest_item" data-pile="third">
+
+							<a href="/web/details">
+
+								<span class="tp-info item_infor"><span>Flu You</span></span>
+
+								<img class="item_image" src="{{ static_url('images/1/1.jpg') }}" />
+
+							</a>
+
+						</li>
+						
+					</ul>
+
+				</div>
+
+			</section>
+
+
+
+		</div><!-- /container -->
+		
+		<script src="http://www.jq22.com/jquery/1.7.2/jquery.min.js"></script>
+		<script type="text/javascript" src="{{ static_url('js/jquery.paginate.js') }}"></script>
+	
+		<script type="text/javascript" src="{{ static_url('js/jquery.stapel.js') }}"></script>
+
+	<script type="text/javascript">
+			<!--get json-->
+			function load_update(){
+				$.getJSON("/get/updatemessage?jsoncallback=?",{"spot":"[20,20]","max_distance":100.33,"page":0,"size":5},function(result){
+			 	
+			 	
+				 	if (result.code==0) {
+				 		//alert(result.data.message_list);
+			 		<!--initial updates-->
+			 		var update=result.data.message_list;
+			 		for(var i=0;i<6;i=i+2){
+		     		//message_list中每个元素数据绑定到每个data_pile的第一个DOM
+		     		var test=$(".latest_item")[i];
+					jQuery.data(test,"datas",update[i/2]);
+
+					$(".latest_item:eq("+i+") a span span").text(getLocalTime(jQuery.data(test,"datas").date));
+					$(".latest_item:eq("+i+") a").attr('href',$(".latest_item:eq("+i+") a").attr('href')+"?person_id="+jQuery.data(test,"datas").person_id);
+					//$(".latest_item:eq("+i+") a").css("background-color","red");
+					//alert(jQuery.data(test,"datas").person_id+","+$(".latest_item:eq("+i+") a").attr('href'));
+					
+					$(".latest_item:eq("+i+") a img").attr('src',jQuery.data(test,"datas").pic_key);
+					$(".latest_item:eq("+i+")").attr('data-pile',jQuery.data(test,"datas").name);
+					$(".latest_item:eq("+i+") div.tp-title span").text(jQuery.data(test,"datas").name);
+
+					
+					$(".latest_item:eq("+(i+1)+") a").attr('href',$(".latest_item:eq("+i+") a").attr('href'));
+					$(".latest_item:eq("+(i+1)+") a span span").text(jQuery.data(test,"datas").name);
+					$(".latest_item:eq("+(i+1)+") a img").attr('src',jQuery.data(test,"datas").std_pic_key);
+						$(".latest_item:eq("+(i+1)+")").attr('data-pile',jQuery.data(test,"datas").name);
+					}
+					//alert("update:"+result.data.size);
+					for(var i=result.data.size;i<4;i++){
+						//alert("update:"+i);
+						$(".latest_item:eq("+i+")").hide();
+					}
+
+				}
+				
+			 }
+			);
+			};
+			function load_register(){
+				 <!--initial registered cases-->
+			 $.getJSON("/get/updateperson?jsoncallback=?",{"formal":1,"spot":"[20,20]","max_distance":100.33,"page":0,"size":5},function(result){
+			 	//alert(result.code+result.data.person_list.length
+			 	//	);
+			 
+			 	
+				 	if (result.code==0) {
+			 		<!--initial updates-->
+			 		var r_cases=result.data.person_list;
+			 		for(var i=0;i<r_cases.length;i++){
+		     		
+		     		var test=$(".register_case")[i];
+					jQuery.data(test,"datas",r_cases[i]);
+					
+
+					$(".register_case:eq("+i+")").show();
+					$(".register_case:eq("+i+") a").attr('href',$(".register_case:eq("+i+") a").attr('href')+"?person_id="+jQuery.data(test,"datas").person_id);
+					
+					$(".register_case:eq("+i+") a span").text(jQuery.data(test,"datas").name);
+					$(".register_case:eq("+i+") a img").attr('src',jQuery.data(test,"datas").picture_key);
+					
+					}
+
+				}
+				
+			 }
+			);
+			};
+			function load_unregister(){
+				<!--initial unregistered cases-->
+			 $.getJSON("/get/updateperson?jsoncallback=?",{"formal":0,"spot":"[20,20]","max_distance":100.33,"page":0,"size":6},function(result){
+			 	//alert(result.code+result.data.person_list.length
+			 	//	);
+			 
+			 	
+				 	if (result.code==0) {
+			 		<!--initial updates-->
+			 		var ur_cases=result.data.person_list;
+			 		for(var i=0;i<ur_cases.length;i++){
+		     		
+		     		var test=$(".unregister_case")[i];
+					jQuery.data(test,"datas",ur_cases[i]);
+					$(".unregister_case:eq("+i+")").show();
+					$(".unregister_case:eq("+i+") a").attr('href',$(".unregister_case:eq("+i+") a").attr('href')+"?person_id="+jQuery.data(test,"datas").person_id);
+					$(".unregister_case:eq("+i+") a span").text(jQuery.data(test,"datas").name);
+					$(".unregister_case:eq("+i+") a img").attr('src',jQuery.data(test,"datas").picture_key);
+					
+					}
+
+				}
+				
+			 }
+			);
+			};
+			 
+
+			
+
+			 
+			 <!--tabs-->
+			 $(document).ready(function() {  
+  
+		    //Default Action  
+		    $(".tab").hide(); //Hide all content  
+		    $(".tabs a:first").addClass("current-demo").show(); //Activate first tab  
+		    $(".tab:first").show(); //Show first tab content  
+		      
+		    //On Click Event  
+		    $(".tabs a").click(function() {  
+		        $(".tabs a").removeClass("current-demo"); //Remove any "active" class  
+		        $(this).addClass("current-demo"); //Add "active" class to selected tab  
+		        $(".tab").hide(); //Hide all tab content  
+		        var activeTab = $(this).attr("href"); //Find the rel attribute value to identify the active tab + content  
+		        $(activeTab).fadeIn(); //Fade in the active content  
+		        return false;  
+		    });  
+		    load_update();
+		    load_register();
+		    load_unregister();
+		  
+		});  
+
+		</script>
+		<script type="text/javascript">	
+
+			$(function() {
+				var $grid = $( '#tp-grid' ),
+
+					$name = $( '#name' ),
+
+					$close = $( '#close' ),
+
+					$loader = $( '<div class="loader"><i></i><i></i><i></i><i></i><i></i><i></i><span>Loading...</span></div>' ).insertBefore( $grid ),
+
+					stapel = $grid.stapel( {
+
+						onLoad : function() {
+
+							$loader.remove();
+
+						},
+
+						onBeforeOpen : function( pileName ) {
+
+							$name.html( pileName );
+
+						},
+
+						onAfterOpen : function( pileName ) {
+
+							$close.show();
+
+						}
+
+					} );
+
+
+
+				$close.on( 'click', function() {
+
+					$close.hide();
+
+					$name.empty();
+
+					stapel.closePile();
+
+				} );
+
+
+
+			} );
+
+<!--polling-->
+   
+
+//Ajax定时访问服务端，不断获取数据 ，这里是1秒请求一次。
+
+window.setInterval(function(){
+	 $.getJSON("/get/updatemessage?jsoncallback=?",{"spot":"[20,20]","max_distance":100.33,"page":0,"size":6},function(result){
+	 	 var update=result.data.message_list;
+	 var test=$(".latest_item")[0];
+	// alert(update[0].date+","+jQuery.data(test,"datas").date);
+	 if(update.date>jQuery.data(test,"datas").date)
+	 	//flush data
+	 	//alert("new!"+update.date);
+		 if (result.code==0) {
+				 		<!--initial updates-->
+				 		//var update=result.data.message_list;
+				 		for(var i=0;i<6;i=i+2){
+			     		//message_list中每个元素数据绑定到每个data_pile的第一个DOM
+			     		var test=$(".latest_item")[i];
+						jQuery.data(test,"datas",update[i/2]);
+
+						$(".latest_item:eq("+i+") a span span").text(getLocalTime(jQuery.data(test,"datas").date));
+						$(".latest_item:eq("+i+") a img").attr('src',jQuery.data(test,"datas").pic_key);
+						$(".latest_item:eq("+i+")").attr('data-pile',jQuery.data(test,"datas").name);
+						$(".latest_item:eq("+i+") div.tp-title span").text(jQuery.data(test,"datas").name);
+
+						
+						$(".latest_item:eq("+(i+1)+") a span span").text(jQuery.data(test,"datas").name);
+						$(".latest_item:eq("+(i+1)+") a img").attr('src',jQuery.data(test,"datas").std_pic_key);
+
+							$(".latest_item:eq("+(i+1)+")").attr('data-pile',jQuery.data(test,"datas").name);
+						}
+
+					}
+
+
+
+	 });
+	
+	},100000);
+<!--translate timestamp-->
+<!--timestamp translate-->
+		function getLocalTime(nS) {     
+   return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');     
+}   
+<!--callback function-->
+$("#next").click(function(){
+  
+});
+$("#last").click(function(){
+  
+});
+
+		</script>
+
+	
+
+
+	</body>
+
+</html>
+

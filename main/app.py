@@ -29,7 +29,7 @@ from Handlers.Index import IndexHandler
 from Handlers.User import RegisterHandler, LoginHandler, UpdateStatusHandler, ConfirmHandler, LogoutHandler, MyPersonListHandler
 from Handlers.FindPerson import SearchPersonHandler, CallHelpHandler, ComparePersonHandler
 from Handlers.MissPerson import LastestUpdatePersonHandler, LastestUpdateMessageHandler, GetMissingPersonDetailHandler, GetMissingPersonDetailWebHandler
-
+from Handlers.Web import IndexPageHandler, DetailPageHandler
 define("port", default=9000, help="run on the given port", type=int)
 define("host", default="139.196.207.155", help="community database host")
 define("mysql_database", default="cloudeye",
@@ -53,7 +53,7 @@ class Application(tornado.web.Application):
         FACE_API_SECRET = config.get("app","FACE_API_SECRET")
         ALIYUN_KEY = config.get("app","ALIYUN_KEY")
         ALIYUN_SECRET = config.get("app","ALIYUN_SECRET")
-        template_path = os.path.join(AP + "template")
+        template_path = os.path.join(AP + "templates")
         static_path = os.path.join(AP + "static")
         logging.info("start server.")
         settings = dict(
@@ -78,7 +78,9 @@ class Application(tornado.web.Application):
             (r'/get/updateperson',LastestUpdatePersonHandler),
             (r'/get/updatemessage',LastestUpdateMessageHandler),
             (r'/get/persondetail',GetMissingPersonDetailHandler),
-            (r'/get/persondetail/web',GetMissingPersonDetailWebHandler)
+            (r'/get/persondetail/web',GetMissingPersonDetailWebHandler),
+            (r'/web/index',IndexPageHandler),
+            (r'/web/details',DetailPageHandler)
             
         ]
 

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>TITLE</title>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <meta name="description" content="Scrollbar Visibility with jScrollPane and jQuery - Hide and show the scrollbar on demand" />
+        <meta name="keywords" content="scrollbar, hide, hover, show, visibility, jscrollpane, jquery, facebook" />
+		<meta name="author" content="Codrops" />
+		
+
+        <link rel="stylesheet" type="text/css" href="{{ static_url('css/details.css') }}" />
+		<link rel="stylesheet" type="text/css" href="{{ static_url('css/details_style.css') }}" />
+		<link rel="stylesheet" type="text/css" href="{{ static_url('css/jquery.jscrollpane.codrops1.css') }}" />
+		<script type="text/javascript" src="{{ static_url('js/jquery-3.1.1.min.js') }}"></script>
+		<!-- the mousewheel plugin -->
+		<script type="text/javascript" src="{{ static_url('js/jquery.mousewheel.js') }}"></script>
+		<!-- the jScrollPane script -->
+		<script type="text/javascript" src="{{ static_url('js/jquery.jscrollpane.min.js') }}"></script>
+		<script type="text/javascript" src="{{ static_url('js/scroll-startstop.events.jquery.js') }}"></script>
+		
+		<script type="text/javascript" src="http://api.map.baidu.com/api?type=quick&ak=百度密钥&v=1.0"></script>
+
+
+	</head>
+	<body>
+		<div class="container">
+			<div class="header">
+				<a href="http://tympanus.net/Development/MultiLevelPhotoMap/"><span>&laquo; Previous Page: </span>news</a>
+				<span class="right_ab">
+					
+				</span>
+			</div>
+
+			<h1 id="title" person="{{person_id}}">详细档案进展情况<span> </span></h1>
+            <div class="wrapper">
+				<div class="content information">
+				<img id="i_image" src="{{ static_url('images/thumbs/2.jpg') }}">
+					<p><strong></strong>
+					<p>姓名：<font id="i_name"></font></p>
+					<p>性别 : <font id="i_sex">sex</font><p>
+					<p>年龄 : <font id="i_age">4</font></p>
+					<p >家属姓名 : <font id="i_parent_name">parent name</font></p>
+					<p >家属联系方式 ：<font id="i_tel">15022112211</font></p>
+					<p >走失时间 ：<font id="i_missing_time">missing time</font></p>
+					<p >走失地点<font id="i_missing_spot">missing spot</font></p>
+					<p >走失情况描述：<font id="i_description">description</font></p>
+					<p >最近更新时间：<font id="i_update_time">latest update time</font></p>
+					<p >最近更新地点：<font id="i_update_spot">latest update spot</font></p>
+					
+				</div>
+
+				<!--user tracke-->
+				
+					<p class="subheader"><strong>网名拍摄上传比对记录</strong></p>
+				
+
+				<div id="jp-container" class="jp-container usertrack_list">
+					
+					
+	
+			
+					<a class="usertrack_item" target="_blank" href="http://tympanus.net/codrops/2011/08/04/fullscreen-grid-portfolio/">
+						<img class="upload_pic" src="{{ static_url('images/thumbs/9.jpg') }}"/>
+						<div class="description">
+							<h3 class="match">匹配度:90%</h3>
+							<p class="description">附加描述<p>
+							<p class="upload_time">2016/10/11</p>
+							<p class="spot">spot</p>
+						</div>
+					</a>
+					<a class="usertrack_item" target="_blank" href="http://tympanus.net/codrops/2011/08/04/fullscreen-grid-portfolio/">
+					
+						<img class="upload_pic" src="{{ static_url('images/thumbs/9.jpg') }}"/>
+						<div class="description">
+							<h3 class="match">匹配度:90%</h3>
+							<p class="description">附加描述<p>
+							<p class="upload_time">2016/10/11</p>
+							<p class="spot">spot</p>
+						</div>
+					</a>
+						<a class="usertrack_item" target="_blank" href="http://tympanus.net/codrops/2011/08/04/fullscreen-grid-portfolio/">
+						<img class="upload_pic" src="{{ static_url('images/thumbs/9.jpg') }}"/>
+						<div class="description">
+							<h3 class="match">匹配度:90%</h3>
+							<p class="description">附加描述<p>
+							<p class="upload_time">2016/10/11</p>
+							<p class="spot">spot</p>
+						</div>
+					</a>
+						<a class="usertrack_item" target="_blank" href="http://tympanus.net/codrops/2011/08/04/fullscreen-grid-portfolio/">
+
+						<img class="upload_pic" src="{{ static_url('images/thumbs/9.jpg')}}"/>
+						<div class="description">
+							<h3 class="match">匹配度:90%</h3>
+							<p class="description">附加描述<p>
+							<p class="upload_time">2016/10/11</p>
+							<p class="spot">spot</p>
+						</div>
+					</a>
+						<a class="usertrack_item" target="_blank" href="http://tympanus.net/codrops/2011/08/04/fullscreen-grid-portfolio/">
+						<img class="upload_pic" src="{{ static_url('images/thumbs/9.jpg') }}"/>
+						<div class="description">
+							<h3 class="match">匹配度:90%</h3>
+							<p class="description">附加描述<p>
+							<p class="upload_time">2016/10/11</p>
+							<p class="spot">spopt</p>
+						</div>
+					</a>
+
+					
+					
+				</div>
+
+<!--vedio detect list-->
+				
+				<p  class="subheader"><strong>各站点摄像头检测比对记录</strong></p>
+				
+				<div class="jp-container vediodetect_list">
+					<a href="#" class="vedio_item">
+						<div >
+						<h3 class="match"></h3>
+							<h3 class="detect_spot">江宁万达</h3>
+							<p class="detect_time">2016/09/10</p>
+						</div>
+					</a>
+					<a href="#" class="vedio_item">
+						<div >
+						<h3 class="match"></h3>
+							<h3 class="detect_spot">江宁万达</h3>
+							<p class="detect_time">2016/09/10</p>
+						</div>
+					</a>
+					<a href="#" class="vedio_item">
+						<div >
+						<h3 class="match"></h3>
+							<h3 class="detect_spot">江宁万达</h3>
+							<p class="detect_time">2016/09/10</p>
+						</div>
+					</a>
+					<a href="#" class="vedio_item">
+						<div >
+						<h3 class="match"></h3>
+							<h3 class="detect_spot">江宁万达</h3>
+							<p class="detect_time">2016/09/10</p>
+						</div>
+					</a>
+					
+					
+				</div>
+				
+				<div class="clr"></div>
+			</div>
+			
+		</div>
+		<script type="text/javascript">
+
+		<!--timestamp translate-->
+		function getLocalTime(nS) {     
+   return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');     
+}   
+			  <!--jquery initial latest-datas-->
+		 
+<!--get json-->
+ var id= $("#title").attr("person");
+ alert(id);
+
+	 $.getJSON("/get/persondetail/web?jsoncallback=?",{"person_id":id},function(result){
+    var infor=result.data.person_info;
+     var usertrack=result.data.person_track;
+     var machinedetect=result.data.machine_track;
+    //alert(usertrack.length+usertrack[0].description);
+  
+
+      	<!--initial information-->
+      	$("#i_description").text(infor.description);
+      	$("#i_image").attr('src',infor.picture_key_list[1]);
+      	$("#i_update_time").text(getLocalTime(infor.last_update_time));
+      	$("#i_name").text(infor.name);
+      //	$("#i_sex").css("background-color","red");
+      	$("#i_sex").text(infor.sex);
+      	$("#i_age").text(infor.age);
+      	$("#i_parent_name").text(infor.relation_name);
+      	$("#i_tel").text(infor.relation_telephone);
+      	$("#i_missing_time").text(getLocalTime(infor.lost_time));
+
+      	var map = new BMap.Map("allmap");
+		var point = new BMap.Point(infor.lost_spot[0],infor.lost_spot[1]);
+		var gc = new BMap.Geocoder();
+		gc.getLocation(point, function(rs){
+		   var addComp = rs.addressComponents;
+		   $("#i_missing_spot").text(addComp.province + " " + addComp.city + " " + addComp.district + " " + addComp.street + " " + addComp.streetNumber);
+		});
+
+      	
+		point = new BMap.Point(infor.last_update_spot[0],infor.last_update_spot[1]);
+		
+		gc.getLocation(point, function(rs){
+		   var addComp = rs.addressComponents;
+		   $("#i_update_spot").text(addComp.province + " " + addComp.city + " " + addComp.district + " " + addComp.street + " " + addComp.streetNumber);
+		});
+    
+     <!--initi usertrack-->
+     	for(var i=0;i<usertrack.length;i++){
+     		if (i>10) break;
+     		var test=$(".usertrack_item")[i];
+			jQuery.data(test,"datas",usertrack[i]);
+
+			var map = new BMap.Map("allmap"+i);
+			var point = new BMap.Point(jQuery.data(test,"datas").coordinate[0],jQuery.data(test,"datas").coordinate[1]);
+			var gc = new BMap.Geocoder();
+			gc.getLocation(point, function(rs){
+			   var addComp = rs.addressComponents;
+			   
+			   $(".usertrack_item:eq("+i+") div p.spot").text(addComp.province + " " + addComp.city + " " + addComp.district + " " + addComp.street + " " + addComp.streetNumber);
+			});
+			
+			$(".usertrack_item:eq("+i+")").css("display","block");
+			$(".usertrack_item:eq("+i+") div h3").text("匹配率: "+jQuery.data(test,"datas").confidence+"%");
+			$(".usertrack_item:eq("+i+") div p.description").text(jQuery.data(test,"datas").description);
+			$(".usertrack_item:eq("+i+") div p.upload_time").text(getLocalTime(jQuery.data(test,"datas").date));
+			$(".usertrack_item:eq("+i+") img").attr('src',jQuery.data(test,"datas").pic_key);	
+			$(".usertrack_item:eq("+i+") div p.spot").text(jQuery.data(test,"datas").coordinate);
+    		
+
+			
+     	}
+     	
+     	<!--initial vedio detect-->
+		for(var i=0;i<machinedetect.length;i++){
+			if (i>10) break;
+			var test=$(".vedio_item")[i];
+			
+			jQuery.data(test,"datas",machinedetect[i]);
+			$(".vedio_item:eq("+i+")").css("display","block");
+			$(".vedio_item:eq("+i+") div .match").text("匹配率: "+jQuery.data(test,"datas").confidence+"%");
+			$(".vedio_item:eq("+i+") div .detect_spot").text(jQuery.data(test,"datas").coordinate);
+			$(".vedio_item:eq("+i+") div .detect_time").text(getLocalTime(jQuery.data(test,"datas").date));
+
+			var map = new BMap.Map("allmap"+i);
+			var point = new BMap.Point(jQuery.data(test,"datas").coordinate[0],jQuery.data(test,"datas").coordinate[1]);
+			var gc = new BMap.Geocoder();
+			gc.getLocation(point, function(rs){
+			   var addComp = rs.addressComponents;
+			   
+			   $(".vedio_item:eq("+i+") div .detect_spot").text(addComp.province + " " + addComp.city + " " + addComp.district + " " + addComp.street + " " + addComp.streetNumber);
+			});
+
+		}
+		
+		
+		
+		<!--EOF-->
+      });
+   
+
+		</script>
+	</body>
+</html>	

@@ -77,14 +77,14 @@ def upload():
     print the_page
 # [todo]: if jpg ok?
 def callhelp():
-    with open('./test_img/zxc2.jpg', 'rb') as f:
+    with open('./test_img/lj3.jpg', 'rb') as f:
         content1 = f.read()
-    with open('./test_img/zxc3.jpg', 'rb') as f:
+    with open('./test_img/lj.jpeg', 'rb') as f:
         content2 = f.read()
     data = {
         'picture_list':[base64.b64encode(content1), base64.b64encode(content2)],
         'pic_key':'jpg',
-        'name':'如果有期限，一万年',
+        'name':'小米电饭煲',
         'sex':0,
         'age':20,
         'relation_telephone':'15195861108',
@@ -150,9 +150,9 @@ def getUpdatePersonList():
 def getUpdateMessageList():
     data = {
         'spot':[22.9,22.9],
-        'max_distance':3,
+        'max_distance':10,
         'page':0,
-        'size':10
+        'size':6
     }
     req = set_resquest("/get/updatemessage",data,"GET")
     response = urllib2.urlopen(req)
@@ -196,7 +196,7 @@ def get_personlist_info():
 # for web 
 # getUpdatePersonList()
 getUpdateMessageList()
-getPersonDetailforweb()
+# getPersonDetailforweb()
 #get_personlist_info()
 # def setMessage(message,num,content):
 #    message[num] = "No.%s "%num + content + "\r\n"
