@@ -111,7 +111,7 @@ def compare():
     with open('./test_img/zxc2.jpg', 'rb') as f:
         content = f.read()
     data = {
-        'person_id':'5867b81b16b2d6121d8d8c3d',
+        'person_id':'586cba2faf8add7e65ec11eb',
         'picture':base64.b64encode(content),
         'pic_type':'jpg',
         'coordinate':[22.9,22.9],
@@ -185,17 +185,17 @@ def get_personlist_info():
     print the_page
 
 # register()
-# login()
+login()
 # updatestatus()
 # confirm()
-# compare()
+compare()
 # callhelp()
 # upload()
 # logout()
 # getPersonDetail()
 # for web 
 # getUpdatePersonList()
-getUpdateMessageList()
+# getUpdateMessageList()
 # getPersonDetailforweb()
 #get_personlist_info()
 # def setMessage(message,num,content):
@@ -230,3 +230,4 @@ getUpdateMessageList()
 #     }
 #     message[num] = "leave circle : \n"    
 #     do_request(api,info_json,message,"POST",otherPara) 
+

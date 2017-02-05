@@ -8,11 +8,11 @@ class LocationCoreModel(BaseCoreModel):
     def __init__(self, *argc, **argkw):
         super(LocationCoreModel, self).__init__(*argc, **argkw)
 
-    def find_user_in_range(self, coordinate, distance):
+    def find_user_in_range(self, coordinate,latitude, longitude):
         cursor = self.mongodb.user.online.find({
                 'coordinate':{
                     '$geoWithin':{
-                        '$center':[coordinate,distance]
+                        '$box':[[coordinate[0]+latitude,coordinate[1]+longitude],[coordinate[0]-latitude,coordinate[1]-longitude]]
                     }
                 }
             })
