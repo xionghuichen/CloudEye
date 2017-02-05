@@ -1,0 +1,40 @@
+1. 文件打开命令 open('path')
+2. 文件模式，最多有是3个位可以选：
+    - 第一位：w,r： 只读，或者只写，当模式为w的时候，文件不存在的时候会自动创建
+    - 第二位：+[optional]: 标记可以同时读写
+    - 第三位：b[optional]: 标记是否以二进制形式打开，
+
+3. 文件删除
+import os
+os.remove('file name string')
+----
+Image库的使用
+1. Image.open(fp,mode='r')
+    fp – A filename (string), pathlib.Path object or a file object. The file object must implement read(), seek(), and tell() methods, and be opened in binary mode.
+    fp有三种取值：
+     - string 文件的字符串
+     - pathlib.Path object
+     - file object, file object 必须满足以下条件
+        - 二进制模式
+        - 可以使用 read(). seek(), tell() 三个方法
+        - 所以：
+            - 需要使用+b模式才能打开
+            - 经过尝试，当使用w+b新建一个本来不存在的文件的时候，会报： raise IOError("cannot identify image file")
+
+
+2. 绘图操作
+- import ImageDraw 
+- im = Image.open('demo.jpeg')
+- draw = ImageDraw.Draw(im)
+- 你可以在这里找到具体的绘制方法：http://effbot.org/imagingbook/imagedraw.htm#color-names
+- eg. 画矩形：
+    draw.rectangle(box, options)
+    Draws a rectangle.
+    The box can be any sequence object containing either 2-tuples [ (x, y), (x, y) ] or numeric values [ x, y, x, y ]. It should contain two coordinates.
+    Note that the second coordinate pair defines a point just outside the rectangle, also when the rectangle is not filled.
+    The outline option gives the colour to use for the rectangle outline. The fill option gives the colour to use for the rectangle interior.
+    
+    code：
+        box((1,1),(9,9))
+        fill = (255,0,0,0) # 填充整个正方形
+        outline = (0,255,0,0) # 只写边线

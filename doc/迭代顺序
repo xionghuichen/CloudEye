@@ -1,0 +1,48 @@
+ User.py
+
+    1. Register [ok]
+    2. Login--- [ok]
+    4. Logout---[todo]
+
+Upload.py
+
+    13. user upload image:[ok]
+    14. call for help.[ok]
+    7. upload opencv:[ok]
+
+
+Location.py 
+
+    4. SetLocation.[merge to 5]
+    3. UpdateLocation[merge to 5]
+Update.py
+
+    5. CheckUpdateStatus[ok]
+    9. has receive push msg, set hasUpdate to false.[todo]
+    15.Has find my child:[todo]
+    17.update missing person infomation[todo 2.0]
+    confirmMessage[ok]
+
+GetInfo.py
+
+    6.  Get [post list][todo]
+    7.  get [missing person detail and track_list[todo]  
+
+PushToClient.py
+
+    10. push msg to user list.[merge to 5]
+    11. push message to police.[web]
+    8. push msg to missing person's parents.[merge to 5]
+
+Index.py
+
+    16. getStaticPages[todo]
+
+
+获得报案人员最新进展列表[timeline]
+获得未报案人员最新进展列表[timeline]
+最新动态获得用户的失踪人员列表
+获得一个失踪人员的详情信息
+获得一个失踪人员的进展轨迹信息
+[暂不实现，修改并非重点功能]修改失踪人员信息
+结案

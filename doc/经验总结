@@ -1,0 +1,77 @@
+经验总结
+1. 如何保证一个接口在调用多次数据的时候，其中一个数据出错时其他数据的错误能够回滚
+    - 对每个原子性操作的exception进行捕捉，一旦出现问题，则撤销上一步数据操作，并且重新抛出错误
+    - 使用bulk一类的操作，让多次对数据库的写操作在确认所有操作都正常执行后才提交，否则则撤销提交请求
+
+2. 对于新知识的学习，不要企图学习一整套体系再开始用，我认为比较合适的方案是学习满足自己需求，然后开始实践，这对于入门一个生疏的新知识特别重要，当对于一个知识有了感性的实践体会的时候，然后再返工进一步学习理论，这样的效果是最好的，效率也是最高的！
+
+3. 接口设计的原则：
+    输入：输入不要有多余数据，输入的数据就是筛选好的，保证了其合法性，问题：输入是否需要检验合法性
+    输出：输出是整体输出，不用做筛选，可以把整体都输出，这样可以提高这个接口的通用性。
+
+3. 关于函数注释:
+    - 每个函数调通之后将返回结果的示例打出来写在注释里，方便之后开发的时候能够看到，特别对于一些返回的是复杂的字典类型数据的时候我觉得特别好用
+    - POST请求也可以写注释，输入就是客户端请求的参数，输出就是返回结果
+
+4. 关于迭代顺序：
+    - 生成数据类型的接口开发，
+    - 客户端获取数据类的接口开发
+    - 删除，更新数据类接口开发
+
+5. 提前定义好数据字典，避免相同含义用了不同变量进行表示
+
+----
+
+1. mongodb 的使用
+    - 查询：
+        - 如何进行分页查询：
+            limit(). 显示条数
+            skip(). 跳过条数
+            db.getCollection('person.info').find({formal:0}).sort({'last_update_time':-1}).limit(3).skip(2)
+        - 如何获取最新一条记录：
+            - 如果最近记录指的是插入顺序
+                可以sort('_id':-1).limit(1)实现，
+            - 如果最新记录有额外的更新日期的字段，也就是最新的记录指的不一定是最新插入顺序，那么可以对日期的时间戳建立索引
+                db.getCollection('person.info').find({formal:0}).sort({'last_update_time':-1}
+    - sort 在pymongo 出现问题：
+        使用pymongo对某一字段进行sort时，报错 
+
+        TypeError: if no direction is specified, key_or_list must be an instance of list
+
+        问题代码：
+
+        items = db.symptomAssociation.find({ 'result.pre.0':{'$regex':input_text}}).sort({'result.0.confidence':-1})
+
+        更正后：
+
+        items = db.symptomAssociation.find({ 'result.pre.0':{'$regex':input_text}}).sort([('result.0.confidence',-1)])
+
+        db.test.find({"number": {"$gt": 1}}).sort([("number", 1), ("date", -1)])
+    - 引用式关系
+
+        引用式关系是设计数据库时经常用到的方法，这种方法把用户数据文档和用户地址数据文档分开，通过引用文档的 id 字段来建立关系。
+
+        {
+           "_id":ObjectId("52ffc33cd85242f436000001"),
+           "contact": "987654321",
+           "dob": "01-01-1991",
+           "name": "Tom Benzamin",
+           "address_ids": [
+              ObjectId("52ffc4a5d85242602e000000"),
+              ObjectId("52ffc4a5d85242602e000001")
+           ]
+        }
+
+        以上实例中，用户文档的 address_ids 字段包含用户地址的对象id（ObjectId）数组。
+
+        我们可以读取这些用户地址的对象id（ObjectId）来获取用户的详细地址信息。
+
+        这种方法需要两次查询，第一次查询用户地址的对象id（ObjectId），第二次通过查询的id获取用户的详细地址信息。
+
+        >var result = db.users.findOne({"name":"Tom Benzamin"},{"address_ids":1})
+        >var addresses = db.address.find({"_id":{"$in":result["address_ids"]}})
+
+---
+异常处理
+
+1. 用户输入的数据可能不合法，你用它来查询数据库的时候可能出现查不到结果的情况，但是按照正常的业务逻辑，不可能查不到结果，这个时候需要抛出异常

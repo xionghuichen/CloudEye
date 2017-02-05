@@ -1,0 +1,98 @@
+ mysql:
+	user_table:
+		user_id:
+		telephone:
+		real_name:
+		nick_name:
+		password:
+		id_number:
+		has_update:[acid]: 
+	plice
+		
+mongodb: 
+	online_user_collection[user.online]:
+		user_id:[index]
+		location:[x,y][index]
+		channel_id:
+	user_collection[user.personlist]:
+		user_id:[index]
+		missing_person_list:[array of missing_person_objectId]
+	missing_person_collection[pserson.missing]:
+		person_id:[person,index for 5,7]
+		name:String
+		sex:boolean
+		age:int
+		relation_telephone:[index]
+		relation_name:
+		relation_id:[can be empty if upload this data offline.]
+		lost_time:String
+		lost_spot:String
+		picture_key_list:key list
+		description:String
+		formal:boolean
+		track_list:[array of track_objectId]
+		last_update_time:[Date]
+		last_update_spot:[string]
+		[new add] isFinｆished：
+	track_collection:[person.track]
+		type:[camera or person]
+		snap_time:
+		snap_spot:[x,y]
+		snap_shoot_key.
+		confidence.
+		[if person] shoot_user_id.
+
+	face.info:
+		picture_key[index]
+		face_token:
+		face_rectangle:{'height','left','top','width'}
+	
+	message:
+		type:
+		person_id:
+		description:
+		name:
+		std_pic_key:
+		spot:
+		date:
+
+redis
+	usermessage:id [document]
+		item:{
+			type:
+			person_id:
+			date:
+			...
+		}
+
+8. push msg to missing person's parents.
+request:
+need not requset:
+response:
+	name
+	standdard_photo
+	snap_spot
+	lastTrack_date
+
+9. has receive push msg, set hasUpdate to false.
+request:
+	user_id
+response:
+	code,message.
+
+
+10. push msg to user list.
+request:
+need not requset:
+response:
+	push_time:String;
+	losenTime:String;?
+	losenSpot:String;?
+	standdard_photo:?type
+	person_id
+	lastTrack_date:[Date]
+
+11. push message to police.
+[mark? the same to api:10?]
+redis:
+	user_id:[message_list[objectId]]

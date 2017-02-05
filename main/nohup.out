@@ -1,0 +1,692 @@
+INFO:root:start server.
+2017-01-03 22:19:50,865 INFO sqlalchemy.engine.base.Engine SHOW VARIABLES LIKE 'sql_mode'
+INFO:sqlalchemy.engine.base.Engine:SHOW VARIABLES LIKE 'sql_mode'
+2017-01-03 22:19:50,865 INFO sqlalchemy.engine.base.Engine ()
+INFO:sqlalchemy.engine.base.Engine:()
+2017-01-03 22:19:50,887 INFO sqlalchemy.engine.base.Engine SELECT DATABASE()
+INFO:sqlalchemy.engine.base.Engine:SELECT DATABASE()
+2017-01-03 22:19:50,887 INFO sqlalchemy.engine.base.Engine ()
+INFO:sqlalchemy.engine.base.Engine:()
+2017-01-03 22:19:50,928 INFO sqlalchemy.engine.base.Engine show collation where `Charset` = 'utf8' and `Collation` = 'utf8_bin'
+INFO:sqlalchemy.engine.base.Engine:show collation where `Charset` = 'utf8' and `Collation` = 'utf8_bin'
+2017-01-03 22:19:50,929 INFO sqlalchemy.engine.base.Engine ()
+INFO:sqlalchemy.engine.base.Engine:()
+2017-01-03 22:19:50,950 INFO sqlalchemy.engine.base.Engine SELECT CAST('test plain returns' AS CHAR(60)) AS anon_1
+INFO:sqlalchemy.engine.base.Engine:SELECT CAST('test plain returns' AS CHAR(60)) AS anon_1
+2017-01-03 22:19:50,950 INFO sqlalchemy.engine.base.Engine ()
+INFO:sqlalchemy.engine.base.Engine:()
+2017-01-03 22:19:50,971 INFO sqlalchemy.engine.base.Engine SELECT CAST('test unicode returns' AS CHAR(60)) AS anon_1
+INFO:sqlalchemy.engine.base.Engine:SELECT CAST('test unicode returns' AS CHAR(60)) AS anon_1
+2017-01-03 22:19:50,971 INFO sqlalchemy.engine.base.Engine ()
+INFO:sqlalchemy.engine.base.Engine:()
+2017-01-03 22:19:50,993 INFO sqlalchemy.engine.base.Engine SELECT CAST('test collated returns' AS CHAR CHARACTER SET utf8) COLLATE utf8_bin AS anon_1
+INFO:sqlalchemy.engine.base.Engine:SELECT CAST('test collated returns' AS CHAR CHARACTER SET utf8) COLLATE utf8_bin AS anon_1
+2017-01-03 22:19:50,993 INFO sqlalchemy.engine.base.Engine ()
+INFO:sqlalchemy.engine.base.Engine:()
+INFO:tornado.access:304 GET /web/index (127.0.0.1) 13.42ms
+INFO:tornado.access:304 GET /static/css/demo.css?v=66adf3b5fcd4baadc0784b5dde9c5813 (127.0.0.1) 3.60ms
+INFO:tornado.access:304 GET /static/css/stapel.css?v=473889e1447f1be7999776d489242880 (127.0.0.1) 0.65ms
+INFO:tornado.access:304 GET /static/css/custom.css?v=566a1f18e84f9df60dcde8d953d89eca (127.0.0.1) 0.61ms
+INFO:tornado.access:304 GET /static/js/modernizr.custom.63321.js?v=3ad7bc528408307bbba6f4c01a1ca04d (127.0.0.1) 0.60ms
+INFO:tornado.access:304 GET /static/js/jquery.paginate.js?v=86baf47df3e43759edb958a9997e4658 (127.0.0.1) 0.64ms
+INFO:tornado.access:304 GET /static/js/jquery.stapel.js?v=bb0d0881bfd21155fc8f856330992875 (127.0.0.1) 0.61ms
+INFO:tornado.access:304 GET /static/images/white_texture.png (127.0.0.1) 0.65ms
+INFO:tornado.access:304 GET /static/images/4/3.jpg?v=b5a5bb74173b8be48c5ed27f84e7f55c (127.0.0.1) 0.60ms
+INFO:tornado.access:304 GET /static/images/1/1.jpg?v=332a3db1d518fbc81d03050164d9bf19 (127.0.0.1) 0.79ms
+INFO:tornado.access:304 GET /static/images/1/2.jpg?v=06d49e636ae86201f7e4855b9630bff7 (127.0.0.1) 0.83ms
+INFO:root:message timeline query is {'spot': {'$geoWithin': {'$center': [[20, 20], 100.33]}}}
+INFO:root:item in lastest message is {u'confidence': 96.46, u'pic_key': u'user48::1483451716.04.jpg', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483192346.8.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': u'5867b81b16b2d6121d8d8c3d', u'date': 1483451712.0, u'_id': ObjectId('586bad4416b2d60dd3aa85ce'), u'type': 2, u'formal': 1}
+INFO:root:item in lastest message is {u'pic_key': u'empty', u'name': u'\u5c0f\u7c73\u7535\u996d\u7172', u'std_pic_key': u'reporter:48::1483451617.73.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': ObjectId('586bace116b2d60dd3aa85ca'), u'date': 1483451616.0, u'_id': ObjectId('586bace316b2d60dd3aa85cb'), u'type': 0, u'formal': 0}
+INFO:root:item in lastest message is {u'pic_key': u'empty', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483451444.26.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': ObjectId('586bac3416b2d60dd3aa85c6'), u'date': 1483451441.0, u'_id': ObjectId('586bac3816b2d60dd3aa85c7'), u'type': 0, u'formal': 0}
+INFO:root:item in lastest message is {u'pic_key': u'empty', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483451210.84.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': ObjectId('586bab4b16b2d60dd3aa85c2'), u'date': 1483451208.0, u'_id': ObjectId('586bab4e16b2d60dd3aa85c3'), u'type': 0, u'formal': 0}
+INFO:root:item in lastest message is {u'confidence': 96.46, u'pic_key': u'user48::1483192692.9.jpg', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483192346.8.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': u'5867b81b16b2d6121d8d8c3d', u'date': 1483192690.0, u'_id': ObjectId('5867b97516b2d6121d8d8c53'), u'type': 2, u'formal': 1}
+INFO:root:get url key is :user48::1483451716.04.jpg
+INFO:root:get url key is :reporter:48::1483192346.8.jpg
+INFO:root:get url key is :reporter:48::1483451617.73.jpg
+INFO:root:get url key is :reporter:48::1483451444.26.jpg
+INFO:root:get url key is :reporter:48::1483451210.84.jpg
+INFO:root:get url key is :user48::1483192692.9.jpg
+INFO:root:get url key is :reporter:48::1483192346.8.jpg
+INFO:root:print return struct, tag = after change....
+INFO:root:max_code:1
+INFO:root:code: 0
+INFO:root:message_mapping: ['default message']
+INFO:root:data: {'message_list': [{'pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/user48%3A%3A1483451716.04.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453257&Signature=G38K7%2FjI%2B9mVfwqZfvtErguME6Q%3D', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192346.8.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453257&Signature=8varFV%2FqU3EZkJENtwxGopb7ouA%3D', 'spot': [22.9, 22.9], 'date': 1483451712.0, 'person_id': '5867b81b16b2d6121d8d8c3d', 'type': 2}, {'pic_key': u'empty', 'name': u'\u5c0f\u7c73\u7535\u996d\u7172', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451617.73.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453257&Signature=6%2B2Ta3i4Zx%2FKRcbs1ZXv%2F73XpEs%3D', 'spot': [22.9, 22.9], 'date': 1483451616.0, 'person_id': '586bace116b2d60dd3aa85ca', 'type': 0}, {'pic_key': u'empty', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451444.26.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453257&Signature=PtFQDhXAT8fzWbX5aJnrP61YBdY%3D', 'spot': [22.9, 22.9], 'date': 1483451441.0, 'person_id': '586bac3416b2d60dd3aa85c6', 'type': 0}, {'pic_key': u'empty', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451210.84.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453257&Signature=DseLAlM7H3oc7QJOawZufmRZhjw%3D', 'spot': [22.9, 22.9], 'date': 1483451208.0, 'person_id': '586bab4b16b2d60dd3aa85c2', 'type': 0}, {'pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/user48%3A%3A1483192692.9.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453257&Signature=mzia71v%2FwYsE9ipRXE2czSKBYdA%3D', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192346.8.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453257&Signature=8varFV%2FqU3EZkJENtwxGopb7ouA%3D', 'spot': [22.9, 22.9], 'date': 1483192690.0, 'person_id': '5867b81b16b2d6121d8d8c3d', 'type': 2}], 'page': 0, 'size': 5}
+INFO:tornado.access:200 GET /get/updatemessage?jsoncallback=jQuery17207325671811561185_1483453196995&spot=%5B20%2C20%5D&max_distance=100.33&page=0&size=5&_=1483453197027 (127.0.0.1) 26.09ms
+INFO:root: filter dictory result is {'last_update_spot': {'$geoWithin': {'$center': [[20, 20], 100.33]}}, 'formal': 1}
+INFO:root:get url key is :reporter:48::1483192346.8.jpg
+INFO:root:get url key is :reporter:48::1483192333.42.jpg
+INFO:root:get url key is :reporter:48::1483192300.91.jpg
+INFO:root:get url key is :reporter:48::1483192219.96.jpg
+INFO:root:get url key is :reporter:48::1483192126.28.jpg
+INFO:root:print return struct, tag = after change....
+INFO:root:max_code:1
+INFO:root:code: 0
+INFO:root:message_mapping: ['default message']
+INFO:root:data: {'formal': 1, 'size': 5, 'person_list': [{'person_id': '5867b81b16b2d6121d8d8c3d', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192346.8.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453257&Signature=8varFV%2FqU3EZkJENtwxGopb7ouA%3D', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74'}, {'person_id': '5867b80d16b2d6121d8d8c39', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192333.42.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453257&Signature=eQEl5eetCvX4XyIgca%2FsFLRjd9o%3D', 'name': u'\u5927\u8bdd\u897f\u6e38\u5468\u661f\u9a70'}, {'person_id': '5867b7ed16b2d6121d8d8c31', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192300.91.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453257&Signature=3nlkk8HRD7CEsNknjJuBwxV62L8%3D', 'name': u'\u5468\u661f\u9a70\u62cd\u7535\u5f71'}, {'person_id': '5867b79c16b2d6121d8d8c21', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192219.96.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453257&Signature=DEAxznnb8Gr50COUXPNuMrfU2GM%3D', 'name': u'\u96f7\u519b\u519b'}, {'person_id': '5867b73e16b2d6121d8d8c15', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192126.28.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453257&Signature=Cj2IsBnOxDUUGcsLU%2Fu59HwDA8I%3D', 'name': u'leijun'}], 'page': 0}
+INFO:tornado.access:200 GET /get/updateperson?jsoncallback=jQuery17207325671811561185_1483453196996&formal=1&spot=%5B20%2C20%5D&max_distance=100.33&page=0&size=5&_=1483453197065 (127.0.0.1) 20.53ms
+INFO:root: filter dictory result is {'last_update_spot': {'$geoWithin': {'$center': [[20, 20], 100.33]}}, 'formal': 0}
+INFO:root:get url key is :reporter:48::1483451617.73.jpg
+INFO:root:get url key is :reporter:48::1483451444.26.jpg
+INFO:root:get url key is :reporter:48::1483451210.84.jpg
+INFO:root:get url key is :reporter:48::1483192310.94.jpg
+INFO:root:get url key is :reporter:48::1483192269.13.jpg
+INFO:root:get url key is :reporter:48::1483192255.72.jpg
+INFO:root:print return struct, tag = after change....
+INFO:root:max_code:1
+INFO:root:code: 0
+INFO:root:message_mapping: ['default message']
+INFO:root:data: {'formal': 0, 'size': 6, 'person_list': [{'person_id': '586bace116b2d60dd3aa85ca', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451617.73.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453257&Signature=6%2B2Ta3i4Zx%2FKRcbs1ZXv%2F73XpEs%3D', 'name': u'\u5c0f\u7c73\u7535\u996d\u7172'}, {'person_id': '586bac3416b2d60dd3aa85c6', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451444.26.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453257&Signature=PtFQDhXAT8fzWbX5aJnrP61YBdY%3D', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74'}, {'person_id': '586bab4b16b2d60dd3aa85c2', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451210.84.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453257&Signature=DseLAlM7H3oc7QJOawZufmRZhjw%3D', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74'}, {'person_id': '5867b7f716b2d6121d8d8c35', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192310.94.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453257&Signature=XgH9yrK0o43Trs0%2FiQMLNtRP9IM%3D', 'name': u'\u5468\u661f\u9a70\u4e0d\u62cd\u7535\u5f71'}, {'person_id': '5867b7cd16b2d6121d8d8c2d', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192269.13.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453257&Signature=3ZNORlpWdJcmEaKAoT07kGfm2OE%3D', 'name': u'\u5468\u9e3f\u794e\u4e0d\u5728360'}, {'person_id': '5867b7bf16b2d6121d8d8c29', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192255.72.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453257&Signature=u5bnl7BiL8nDDq%2FUYtz3fZ5da%2F4%3D', 'name': u'\u5468\u9e3f\u794e\uff12\uff13\uff13'}], 'page': 0}
+INFO:tornado.access:200 GET /get/updateperson?jsoncallback=jQuery17207325671811561185_1483453196997&formal=0&spot=%5B20%2C20%5D&max_distance=100.33&page=0&size=6&_=1483453197074 (127.0.0.1) 18.89ms
+WARNING:tornado.access:404 GET /web/empty (127.0.0.1) 0.36ms
+INFO:tornado.access:200 GET / (127.0.0.1) 1.07ms
+INFO:root:message timeline query is {'spot': {'$geoWithin': {'$center': [[22.9, 22.9], 10.0]}}}
+INFO:root:item in lastest message is {u'confidence': 96.46, u'pic_key': u'user48::1483451716.04.jpg', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483192346.8.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': u'5867b81b16b2d6121d8d8c3d', u'date': 1483451712.0, u'_id': ObjectId('586bad4416b2d60dd3aa85ce'), u'type': 2, u'formal': 1}
+INFO:root:item in lastest message is {u'pic_key': u'empty', u'name': u'\u5c0f\u7c73\u7535\u996d\u7172', u'std_pic_key': u'reporter:48::1483451617.73.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': ObjectId('586bace116b2d60dd3aa85ca'), u'date': 1483451616.0, u'_id': ObjectId('586bace316b2d60dd3aa85cb'), u'type': 0, u'formal': 0}
+INFO:root:item in lastest message is {u'pic_key': u'empty', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483451444.26.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': ObjectId('586bac3416b2d60dd3aa85c6'), u'date': 1483451441.0, u'_id': ObjectId('586bac3816b2d60dd3aa85c7'), u'type': 0, u'formal': 0}
+INFO:root:item in lastest message is {u'pic_key': u'empty', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483451210.84.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': ObjectId('586bab4b16b2d60dd3aa85c2'), u'date': 1483451208.0, u'_id': ObjectId('586bab4e16b2d60dd3aa85c3'), u'type': 0, u'formal': 0}
+INFO:root:item in lastest message is {u'confidence': 96.46, u'pic_key': u'user48::1483192692.9.jpg', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483192346.8.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': u'5867b81b16b2d6121d8d8c3d', u'date': 1483192690.0, u'_id': ObjectId('5867b97516b2d6121d8d8c53'), u'type': 2, u'formal': 1}
+INFO:root:item in lastest message is {u'confidence': 96.46, u'pic_key': u'user48::1483192686.9.jpg', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483192346.8.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': u'5867b81b16b2d6121d8d8c3d', u'date': 1483192683.0, u'_id': ObjectId('5867b96f16b2d6121d8d8c50'), u'type': 2, u'formal': 1}
+INFO:root:get url key is :user48::1483451716.04.jpg
+INFO:root:get url key is :reporter:48::1483192346.8.jpg
+INFO:root:get url key is :reporter:48::1483451617.73.jpg
+INFO:root:get url key is :reporter:48::1483451444.26.jpg
+INFO:root:get url key is :reporter:48::1483451210.84.jpg
+INFO:root:get url key is :user48::1483192692.9.jpg
+INFO:root:get url key is :reporter:48::1483192346.8.jpg
+INFO:root:get url key is :user48::1483192686.9.jpg
+INFO:root:get url key is :reporter:48::1483192346.8.jpg
+INFO:root:print return struct, tag = after change....
+INFO:root:max_code:1
+INFO:root:code: 0
+INFO:root:message_mapping: ['default message']
+INFO:root:data: {'message_list': [{'pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/user48%3A%3A1483451716.04.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453323&Signature=AOWuYqxE7SfU8BvC9xtvDlbzlfc%3D', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192346.8.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453323&Signature=W1fES%2BHpvbJ78kEvwQfaM1YN9JU%3D', 'spot': [22.9, 22.9], 'date': 1483451712.0, 'person_id': '5867b81b16b2d6121d8d8c3d', 'type': 2}, {'pic_key': u'empty', 'name': u'\u5c0f\u7c73\u7535\u996d\u7172', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451617.73.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453323&Signature=cX%2FHPi1yX%2Bwez3EFkTfqYCpo61c%3D', 'spot': [22.9, 22.9], 'date': 1483451616.0, 'person_id': '586bace116b2d60dd3aa85ca', 'type': 0}, {'pic_key': u'empty', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451444.26.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453323&Signature=uCsoLmlgN4OYny38OkGX08eqlvM%3D', 'spot': [22.9, 22.9], 'date': 1483451441.0, 'person_id': '586bac3416b2d60dd3aa85c6', 'type': 0}, {'pic_key': u'empty', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451210.84.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453323&Signature=NMnd%2BUBWsdGLvudIv1TWrFOuPz4%3D', 'spot': [22.9, 22.9], 'date': 1483451208.0, 'person_id': '586bab4b16b2d60dd3aa85c2', 'type': 0}, {'pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/user48%3A%3A1483192692.9.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453323&Signature=WG1XSGCsos4q8B87aBMoDpT%2Fn6A%3D', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192346.8.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453323&Signature=W1fES%2BHpvbJ78kEvwQfaM1YN9JU%3D', 'spot': [22.9, 22.9], 'date': 1483192690.0, 'person_id': '5867b81b16b2d6121d8d8c3d', 'type': 2}, {'pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/user48%3A%3A1483192686.9.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453323&Signature=exkdklrZNhwpFApOObHIJzQdrC0%3D', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192346.8.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453323&Signature=W1fES%2BHpvbJ78kEvwQfaM1YN9JU%3D', 'spot': [22.9, 22.9], 'date': 1483192683.0, 'person_id': '5867b81b16b2d6121d8d8c3d', 'type': 2}], 'page': 0, 'size': 6}
+INFO:tornado.access:200 GET /get/updatemessage?max_distance=10&spot=%5B22.9%2C+22.9%5D&page=0&size=6 (127.0.0.1) 16.32ms
+INFO:root:message timeline query is {'spot': {'$geoWithin': {'$center': [[20, 20], 100.33]}}}
+INFO:root:item in lastest message is {u'confidence': 96.46, u'pic_key': u'user48::1483451716.04.jpg', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483192346.8.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': u'5867b81b16b2d6121d8d8c3d', u'date': 1483451712.0, u'_id': ObjectId('586bad4416b2d60dd3aa85ce'), u'type': 2, u'formal': 1}
+INFO:root:item in lastest message is {u'pic_key': u'empty', u'name': u'\u5c0f\u7c73\u7535\u996d\u7172', u'std_pic_key': u'reporter:48::1483451617.73.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': ObjectId('586bace116b2d60dd3aa85ca'), u'date': 1483451616.0, u'_id': ObjectId('586bace316b2d60dd3aa85cb'), u'type': 0, u'formal': 0}
+INFO:root:item in lastest message is {u'pic_key': u'empty', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483451444.26.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': ObjectId('586bac3416b2d60dd3aa85c6'), u'date': 1483451441.0, u'_id': ObjectId('586bac3816b2d60dd3aa85c7'), u'type': 0, u'formal': 0}
+INFO:root:item in lastest message is {u'pic_key': u'empty', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483451210.84.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': ObjectId('586bab4b16b2d60dd3aa85c2'), u'date': 1483451208.0, u'_id': ObjectId('586bab4e16b2d60dd3aa85c3'), u'type': 0, u'formal': 0}
+INFO:root:item in lastest message is {u'confidence': 96.46, u'pic_key': u'user48::1483192692.9.jpg', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483192346.8.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': u'5867b81b16b2d6121d8d8c3d', u'date': 1483192690.0, u'_id': ObjectId('5867b97516b2d6121d8d8c53'), u'type': 2, u'formal': 1}
+INFO:root:item in lastest message is {u'confidence': 96.46, u'pic_key': u'user48::1483192686.9.jpg', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483192346.8.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': u'5867b81b16b2d6121d8d8c3d', u'date': 1483192683.0, u'_id': ObjectId('5867b96f16b2d6121d8d8c50'), u'type': 2, u'formal': 1}
+INFO:root:get url key is :user48::1483451716.04.jpg
+INFO:root:get url key is :reporter:48::1483192346.8.jpg
+INFO:root:get url key is :reporter:48::1483451617.73.jpg
+INFO:root:get url key is :reporter:48::1483451444.26.jpg
+INFO:root:get url key is :reporter:48::1483451210.84.jpg
+INFO:root:get url key is :user48::1483192692.9.jpg
+INFO:root:get url key is :reporter:48::1483192346.8.jpg
+INFO:root:get url key is :user48::1483192686.9.jpg
+INFO:root:get url key is :reporter:48::1483192346.8.jpg
+INFO:root:print return struct, tag = after change....
+INFO:root:max_code:1
+INFO:root:code: 0
+INFO:root:message_mapping: ['default message']
+INFO:root:data: {'message_list': [{'pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/user48%3A%3A1483451716.04.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453357&Signature=qtzgyyLhdXo80lwe0sBRTYYTq4I%3D', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192346.8.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453357&Signature=SK0hIdWBXFVch3DEuHD9A1uYX7A%3D', 'spot': [22.9, 22.9], 'date': 1483451712.0, 'person_id': '5867b81b16b2d6121d8d8c3d', 'type': 2}, {'pic_key': u'empty', 'name': u'\u5c0f\u7c73\u7535\u996d\u7172', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451617.73.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453357&Signature=c49Eb5QLmPrgDQ8RJyNZV15cKdY%3D', 'spot': [22.9, 22.9], 'date': 1483451616.0, 'person_id': '586bace116b2d60dd3aa85ca', 'type': 0}, {'pic_key': u'empty', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451444.26.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453357&Signature=mTNM16b3Zfwne9iAvrHK%2Bgmd3hs%3D', 'spot': [22.9, 22.9], 'date': 1483451441.0, 'person_id': '586bac3416b2d60dd3aa85c6', 'type': 0}, {'pic_key': u'empty', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451210.84.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453357&Signature=aDEmw9gVGDy1S53h9TUMerfGCg4%3D', 'spot': [22.9, 22.9], 'date': 1483451208.0, 'person_id': '586bab4b16b2d60dd3aa85c2', 'type': 0}, {'pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/user48%3A%3A1483192692.9.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453357&Signature=QeUhuXPJQMo0ziPT%2Fgj1IhoEDeY%3D', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192346.8.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453357&Signature=SK0hIdWBXFVch3DEuHD9A1uYX7A%3D', 'spot': [22.9, 22.9], 'date': 1483192690.0, 'person_id': '5867b81b16b2d6121d8d8c3d', 'type': 2}, {'pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/user48%3A%3A1483192686.9.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453357&Signature=9Vsos6mRnBwywzP19Coq94rBaUk%3D', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192346.8.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453357&Signature=SK0hIdWBXFVch3DEuHD9A1uYX7A%3D', 'spot': [22.9, 22.9], 'date': 1483192683.0, 'person_id': '5867b81b16b2d6121d8d8c3d', 'type': 2}], 'page': 0, 'size': 6}
+INFO:tornado.access:200 GET /get/updatemessage?jsoncallback=jQuery17207325671811561185_1483453196998&spot=%5B20%2C20%5D&max_distance=100.33&page=0&size=6&_=1483453297018 (127.0.0.1) 22.72ms
+WARNING:tornado.access:404 GET /web/empty (127.0.0.1) 0.35ms
+INFO:root:message timeline query is {'spot': {'$geoWithin': {'$center': [[20, 20], 100.33]}}}
+INFO:root:item in lastest message is {u'confidence': 96.46, u'pic_key': u'user48::1483451716.04.jpg', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483192346.8.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': u'5867b81b16b2d6121d8d8c3d', u'date': 1483451712.0, u'_id': ObjectId('586bad4416b2d60dd3aa85ce'), u'type': 2, u'formal': 1}
+INFO:root:item in lastest message is {u'pic_key': u'empty', u'name': u'\u5c0f\u7c73\u7535\u996d\u7172', u'std_pic_key': u'reporter:48::1483451617.73.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': ObjectId('586bace116b2d60dd3aa85ca'), u'date': 1483451616.0, u'_id': ObjectId('586bace316b2d60dd3aa85cb'), u'type': 0, u'formal': 0}
+INFO:root:item in lastest message is {u'pic_key': u'empty', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483451444.26.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': ObjectId('586bac3416b2d60dd3aa85c6'), u'date': 1483451441.0, u'_id': ObjectId('586bac3816b2d60dd3aa85c7'), u'type': 0, u'formal': 0}
+INFO:root:item in lastest message is {u'pic_key': u'empty', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483451210.84.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': ObjectId('586bab4b16b2d60dd3aa85c2'), u'date': 1483451208.0, u'_id': ObjectId('586bab4e16b2d60dd3aa85c3'), u'type': 0, u'formal': 0}
+INFO:root:item in lastest message is {u'confidence': 96.46, u'pic_key': u'user48::1483192692.9.jpg', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483192346.8.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': u'5867b81b16b2d6121d8d8c3d', u'date': 1483192690.0, u'_id': ObjectId('5867b97516b2d6121d8d8c53'), u'type': 2, u'formal': 1}
+INFO:root:item in lastest message is {u'confidence': 96.46, u'pic_key': u'user48::1483192686.9.jpg', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483192346.8.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': u'5867b81b16b2d6121d8d8c3d', u'date': 1483192683.0, u'_id': ObjectId('5867b96f16b2d6121d8d8c50'), u'type': 2, u'formal': 1}
+INFO:root:get url key is :user48::1483451716.04.jpg
+INFO:root:get url key is :reporter:48::1483192346.8.jpg
+INFO:root:get url key is :reporter:48::1483451617.73.jpg
+INFO:root:get url key is :reporter:48::1483451444.26.jpg
+INFO:root:get url key is :reporter:48::1483451210.84.jpg
+INFO:root:get url key is :user48::1483192692.9.jpg
+INFO:root:get url key is :reporter:48::1483192346.8.jpg
+INFO:root:get url key is :user48::1483192686.9.jpg
+INFO:root:get url key is :reporter:48::1483192346.8.jpg
+INFO:root:print return struct, tag = after change....
+INFO:root:max_code:1
+INFO:root:code: 0
+INFO:root:message_mapping: ['default message']
+INFO:root:data: {'message_list': [{'pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/user48%3A%3A1483451716.04.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453457&Signature=nCZZ9mMtaC%2FRAqXyWGMBzaHpcLY%3D', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192346.8.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453457&Signature=G9Sj0cRrbj9aVfn%2Fu1mcnDNx2jQ%3D', 'spot': [22.9, 22.9], 'date': 1483451712.0, 'person_id': '5867b81b16b2d6121d8d8c3d', 'type': 2}, {'pic_key': u'empty', 'name': u'\u5c0f\u7c73\u7535\u996d\u7172', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451617.73.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453457&Signature=KJkdeGwOt95T2k4I2ILC%2FkHGLCo%3D', 'spot': [22.9, 22.9], 'date': 1483451616.0, 'person_id': '586bace116b2d60dd3aa85ca', 'type': 0}, {'pic_key': u'empty', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451444.26.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453457&Signature=VoAYwf8MTFvvLx10lwDl3QW8i2I%3D', 'spot': [22.9, 22.9], 'date': 1483451441.0, 'person_id': '586bac3416b2d60dd3aa85c6', 'type': 0}, {'pic_key': u'empty', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451210.84.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453457&Signature=s2NvlFwp8fQXTqdIG03XRlvqouc%3D', 'spot': [22.9, 22.9], 'date': 1483451208.0, 'person_id': '586bab4b16b2d60dd3aa85c2', 'type': 0}, {'pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/user48%3A%3A1483192692.9.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453457&Signature=CEuLakAIs3hroyGNT93j8KsGck4%3D', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192346.8.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453457&Signature=G9Sj0cRrbj9aVfn%2Fu1mcnDNx2jQ%3D', 'spot': [22.9, 22.9], 'date': 1483192690.0, 'person_id': '5867b81b16b2d6121d8d8c3d', 'type': 2}, {'pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/user48%3A%3A1483192686.9.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453457&Signature=mtRrM%2FojrCSQElxeQ%2FiLooqSLws%3D', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192346.8.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453457&Signature=G9Sj0cRrbj9aVfn%2Fu1mcnDNx2jQ%3D', 'spot': [22.9, 22.9], 'date': 1483192683.0, 'person_id': '5867b81b16b2d6121d8d8c3d', 'type': 2}], 'page': 0, 'size': 6}
+INFO:tornado.access:200 GET /get/updatemessage?jsoncallback=jQuery17207325671811561185_1483453196999&spot=%5B20%2C20%5D&max_distance=100.33&page=0&size=6&_=1483453397010 (127.0.0.1) 22.75ms
+WARNING:tornado.access:404 GET /web/empty (127.0.0.1) 0.45ms
+INFO:root:message timeline query is {'spot': {'$geoWithin': {'$center': [[20, 20], 100.33]}}}
+INFO:root:item in lastest message is {u'confidence': 96.46, u'pic_key': u'user48::1483451716.04.jpg', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483192346.8.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': u'5867b81b16b2d6121d8d8c3d', u'date': 1483451712.0, u'_id': ObjectId('586bad4416b2d60dd3aa85ce'), u'type': 2, u'formal': 1}
+INFO:root:item in lastest message is {u'pic_key': u'empty', u'name': u'\u5c0f\u7c73\u7535\u996d\u7172', u'std_pic_key': u'reporter:48::1483451617.73.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': ObjectId('586bace116b2d60dd3aa85ca'), u'date': 1483451616.0, u'_id': ObjectId('586bace316b2d60dd3aa85cb'), u'type': 0, u'formal': 0}
+INFO:root:item in lastest message is {u'pic_key': u'empty', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483451444.26.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': ObjectId('586bac3416b2d60dd3aa85c6'), u'date': 1483451441.0, u'_id': ObjectId('586bac3816b2d60dd3aa85c7'), u'type': 0, u'formal': 0}
+INFO:root:item in lastest message is {u'pic_key': u'empty', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483451210.84.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': ObjectId('586bab4b16b2d60dd3aa85c2'), u'date': 1483451208.0, u'_id': ObjectId('586bab4e16b2d60dd3aa85c3'), u'type': 0, u'formal': 0}
+INFO:root:item in lastest message is {u'confidence': 96.46, u'pic_key': u'user48::1483192692.9.jpg', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483192346.8.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': u'5867b81b16b2d6121d8d8c3d', u'date': 1483192690.0, u'_id': ObjectId('5867b97516b2d6121d8d8c53'), u'type': 2, u'formal': 1}
+INFO:root:item in lastest message is {u'confidence': 96.46, u'pic_key': u'user48::1483192686.9.jpg', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483192346.8.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': u'5867b81b16b2d6121d8d8c3d', u'date': 1483192683.0, u'_id': ObjectId('5867b96f16b2d6121d8d8c50'), u'type': 2, u'formal': 1}
+INFO:root:get url key is :user48::1483451716.04.jpg
+INFO:root:get url key is :reporter:48::1483192346.8.jpg
+INFO:root:get url key is :reporter:48::1483451617.73.jpg
+INFO:root:get url key is :reporter:48::1483451444.26.jpg
+INFO:root:get url key is :reporter:48::1483451210.84.jpg
+INFO:root:get url key is :user48::1483192692.9.jpg
+INFO:root:get url key is :reporter:48::1483192346.8.jpg
+INFO:root:get url key is :user48::1483192686.9.jpg
+INFO:root:get url key is :reporter:48::1483192346.8.jpg
+INFO:root:print return struct, tag = after change....
+INFO:root:max_code:1
+INFO:root:code: 0
+INFO:root:message_mapping: ['default message']
+INFO:root:data: {'message_list': [{'pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/user48%3A%3A1483451716.04.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453557&Signature=F1io9tqqkDQzYytvLYpmsa1reqY%3D', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192346.8.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453557&Signature=RtFnxfeeVvzS3%2BOcmB1uOlbaFY0%3D', 'spot': [22.9, 22.9], 'date': 1483451712.0, 'person_id': '5867b81b16b2d6121d8d8c3d', 'type': 2}, {'pic_key': u'empty', 'name': u'\u5c0f\u7c73\u7535\u996d\u7172', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451617.73.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453557&Signature=1uLU7S8Qv6lpeg3H%2F0iFAhrMuvw%3D', 'spot': [22.9, 22.9], 'date': 1483451616.0, 'person_id': '586bace116b2d60dd3aa85ca', 'type': 0}, {'pic_key': u'empty', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451444.26.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453557&Signature=6jMQfN6KXz7phO9dILpb1HxBo9U%3D', 'spot': [22.9, 22.9], 'date': 1483451441.0, 'person_id': '586bac3416b2d60dd3aa85c6', 'type': 0}, {'pic_key': u'empty', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451210.84.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453557&Signature=AVz3qjBs0%2FvYuH39b1jDgdLFhqM%3D', 'spot': [22.9, 22.9], 'date': 1483451208.0, 'person_id': '586bab4b16b2d60dd3aa85c2', 'type': 0}, {'pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/user48%3A%3A1483192692.9.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453557&Signature=B0vbb383%2F8l6HE44H8txW%2F1vruc%3D', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192346.8.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453557&Signature=RtFnxfeeVvzS3%2BOcmB1uOlbaFY0%3D', 'spot': [22.9, 22.9], 'date': 1483192690.0, 'person_id': '5867b81b16b2d6121d8d8c3d', 'type': 2}, {'pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/user48%3A%3A1483192686.9.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453557&Signature=rInIlBPr4ir1%2B4x32STsvSe8Bo8%3D', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192346.8.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453557&Signature=RtFnxfeeVvzS3%2BOcmB1uOlbaFY0%3D', 'spot': [22.9, 22.9], 'date': 1483192683.0, 'person_id': '5867b81b16b2d6121d8d8c3d', 'type': 2}], 'page': 0, 'size': 6}
+INFO:tornado.access:200 GET /get/updatemessage?jsoncallback=jQuery17207325671811561185_1483453197000&spot=%5B20%2C20%5D&max_distance=100.33&page=0&size=6&_=1483453497010 (127.0.0.1) 25.95ms
+WARNING:tornado.access:404 GET /web/empty (127.0.0.1) 0.34ms
+INFO:root:message timeline query is {'spot': {'$geoWithin': {'$center': [[20, 20], 100.33]}}}
+INFO:root:item in lastest message is {u'confidence': 96.46, u'pic_key': u'user48::1483451716.04.jpg', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483192346.8.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': u'5867b81b16b2d6121d8d8c3d', u'date': 1483451712.0, u'_id': ObjectId('586bad4416b2d60dd3aa85ce'), u'type': 2, u'formal': 1}
+INFO:root:item in lastest message is {u'pic_key': u'empty', u'name': u'\u5c0f\u7c73\u7535\u996d\u7172', u'std_pic_key': u'reporter:48::1483451617.73.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': ObjectId('586bace116b2d60dd3aa85ca'), u'date': 1483451616.0, u'_id': ObjectId('586bace316b2d60dd3aa85cb'), u'type': 0, u'formal': 0}
+INFO:root:item in lastest message is {u'pic_key': u'empty', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483451444.26.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': ObjectId('586bac3416b2d60dd3aa85c6'), u'date': 1483451441.0, u'_id': ObjectId('586bac3816b2d60dd3aa85c7'), u'type': 0, u'formal': 0}
+INFO:root:item in lastest message is {u'pic_key': u'empty', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483451210.84.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': ObjectId('586bab4b16b2d60dd3aa85c2'), u'date': 1483451208.0, u'_id': ObjectId('586bab4e16b2d60dd3aa85c3'), u'type': 0, u'formal': 0}
+INFO:root:item in lastest message is {u'confidence': 96.46, u'pic_key': u'user48::1483192692.9.jpg', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483192346.8.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': u'5867b81b16b2d6121d8d8c3d', u'date': 1483192690.0, u'_id': ObjectId('5867b97516b2d6121d8d8c53'), u'type': 2, u'formal': 1}
+INFO:root:item in lastest message is {u'confidence': 96.46, u'pic_key': u'user48::1483192686.9.jpg', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483192346.8.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': u'5867b81b16b2d6121d8d8c3d', u'date': 1483192683.0, u'_id': ObjectId('5867b96f16b2d6121d8d8c50'), u'type': 2, u'formal': 1}
+INFO:root:get url key is :user48::1483451716.04.jpg
+INFO:root:get url key is :reporter:48::1483192346.8.jpg
+INFO:root:get url key is :reporter:48::1483451617.73.jpg
+INFO:root:get url key is :reporter:48::1483451444.26.jpg
+INFO:root:get url key is :reporter:48::1483451210.84.jpg
+INFO:root:get url key is :user48::1483192692.9.jpg
+INFO:root:get url key is :reporter:48::1483192346.8.jpg
+INFO:root:get url key is :user48::1483192686.9.jpg
+INFO:root:get url key is :reporter:48::1483192346.8.jpg
+INFO:root:print return struct, tag = after change....
+INFO:root:max_code:1
+INFO:root:code: 0
+INFO:root:message_mapping: ['default message']
+INFO:root:data: {'message_list': [{'pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/user48%3A%3A1483451716.04.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453657&Signature=XL4B0aEUPXzgScWHrvbIk730if0%3D', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192346.8.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453657&Signature=WKkxEnrZHNo3fqRkAVu213XsmRo%3D', 'spot': [22.9, 22.9], 'date': 1483451712.0, 'person_id': '5867b81b16b2d6121d8d8c3d', 'type': 2}, {'pic_key': u'empty', 'name': u'\u5c0f\u7c73\u7535\u996d\u7172', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451617.73.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453657&Signature=xd6w3He6v%2FqKAHzx2%2Fm3cxrfGrA%3D', 'spot': [22.9, 22.9], 'date': 1483451616.0, 'person_id': '586bace116b2d60dd3aa85ca', 'type': 0}, {'pic_key': u'empty', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451444.26.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453657&Signature=JVbryyYXAWovgFzEuCZDJVJv0Go%3D', 'spot': [22.9, 22.9], 'date': 1483451441.0, 'person_id': '586bac3416b2d60dd3aa85c6', 'type': 0}, {'pic_key': u'empty', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451210.84.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453657&Signature=aTj0vBkvS975BvFNkdzfgb1tTVE%3D', 'spot': [22.9, 22.9], 'date': 1483451208.0, 'person_id': '586bab4b16b2d60dd3aa85c2', 'type': 0}, {'pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/user48%3A%3A1483192692.9.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453657&Signature=kE%2FAhvahy7qrBdKjlJTsop6LrVo%3D', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192346.8.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453657&Signature=WKkxEnrZHNo3fqRkAVu213XsmRo%3D', 'spot': [22.9, 22.9], 'date': 1483192690.0, 'person_id': '5867b81b16b2d6121d8d8c3d', 'type': 2}, {'pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/user48%3A%3A1483192686.9.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453657&Signature=xfpLwo1KfQqGXBGxWjj6elzqrII%3D', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192346.8.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453657&Signature=WKkxEnrZHNo3fqRkAVu213XsmRo%3D', 'spot': [22.9, 22.9], 'date': 1483192683.0, 'person_id': '5867b81b16b2d6121d8d8c3d', 'type': 2}], 'page': 0, 'size': 6}
+INFO:tornado.access:200 GET /get/updatemessage?jsoncallback=jQuery17207325671811561185_1483453197001&spot=%5B20%2C20%5D&max_distance=100.33&page=0&size=6&_=1483453597008 (127.0.0.1) 23.07ms
+WARNING:tornado.access:404 GET /web/empty (127.0.0.1) 0.51ms
+INFO:root:message timeline query is {'spot': {'$geoWithin': {'$center': [[20, 20], 100.33]}}}
+INFO:root:item in lastest message is {u'confidence': 96.46, u'pic_key': u'user48::1483451716.04.jpg', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483192346.8.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': u'5867b81b16b2d6121d8d8c3d', u'date': 1483451712.0, u'_id': ObjectId('586bad4416b2d60dd3aa85ce'), u'type': 2, u'formal': 1}
+INFO:root:item in lastest message is {u'pic_key': u'empty', u'name': u'\u5c0f\u7c73\u7535\u996d\u7172', u'std_pic_key': u'reporter:48::1483451617.73.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': ObjectId('586bace116b2d60dd3aa85ca'), u'date': 1483451616.0, u'_id': ObjectId('586bace316b2d60dd3aa85cb'), u'type': 0, u'formal': 0}
+INFO:root:item in lastest message is {u'pic_key': u'empty', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483451444.26.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': ObjectId('586bac3416b2d60dd3aa85c6'), u'date': 1483451441.0, u'_id': ObjectId('586bac3816b2d60dd3aa85c7'), u'type': 0, u'formal': 0}
+INFO:root:item in lastest message is {u'pic_key': u'empty', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483451210.84.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': ObjectId('586bab4b16b2d60dd3aa85c2'), u'date': 1483451208.0, u'_id': ObjectId('586bab4e16b2d60dd3aa85c3'), u'type': 0, u'formal': 0}
+INFO:root:item in lastest message is {u'confidence': 96.46, u'pic_key': u'user48::1483192692.9.jpg', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483192346.8.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': u'5867b81b16b2d6121d8d8c3d', u'date': 1483192690.0, u'_id': ObjectId('5867b97516b2d6121d8d8c53'), u'type': 2, u'formal': 1}
+INFO:root:item in lastest message is {u'confidence': 96.46, u'pic_key': u'user48::1483192686.9.jpg', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483192346.8.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': u'5867b81b16b2d6121d8d8c3d', u'date': 1483192683.0, u'_id': ObjectId('5867b96f16b2d6121d8d8c50'), u'type': 2, u'formal': 1}
+INFO:root:get url key is :user48::1483451716.04.jpg
+INFO:root:get url key is :reporter:48::1483192346.8.jpg
+INFO:root:get url key is :reporter:48::1483451617.73.jpg
+INFO:root:get url key is :reporter:48::1483451444.26.jpg
+INFO:root:get url key is :reporter:48::1483451210.84.jpg
+INFO:root:get url key is :user48::1483192692.9.jpg
+INFO:root:get url key is :reporter:48::1483192346.8.jpg
+INFO:root:get url key is :user48::1483192686.9.jpg
+INFO:root:get url key is :reporter:48::1483192346.8.jpg
+INFO:root:print return struct, tag = after change....
+INFO:root:max_code:1
+INFO:root:code: 0
+INFO:root:message_mapping: ['default message']
+INFO:root:data: {'message_list': [{'pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/user48%3A%3A1483451716.04.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453757&Signature=J4TqFel3JVXppUhovTjb7h3%2ByQQ%3D', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192346.8.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453757&Signature=sp%2BlhDmpvq9z3G%2BXSXbf35OeDRs%3D', 'spot': [22.9, 22.9], 'date': 1483451712.0, 'person_id': '5867b81b16b2d6121d8d8c3d', 'type': 2}, {'pic_key': u'empty', 'name': u'\u5c0f\u7c73\u7535\u996d\u7172', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451617.73.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453757&Signature=O%2Bd6wHS%2FpzbM%2BO1%2BVil8nLHE4WE%3D', 'spot': [22.9, 22.9], 'date': 1483451616.0, 'person_id': '586bace116b2d60dd3aa85ca', 'type': 0}, {'pic_key': u'empty', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451444.26.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453757&Signature=EwvR54jmDZUWoAy9tOjzN1geebI%3D', 'spot': [22.9, 22.9], 'date': 1483451441.0, 'person_id': '586bac3416b2d60dd3aa85c6', 'type': 0}, {'pic_key': u'empty', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451210.84.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453757&Signature=JuPC0EOMzgI%2B3Z9HC8dorjCnoe4%3D', 'spot': [22.9, 22.9], 'date': 1483451208.0, 'person_id': '586bab4b16b2d60dd3aa85c2', 'type': 0}, {'pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/user48%3A%3A1483192692.9.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453757&Signature=1YzYEIbo9g%2BSjg3eK9jk%2BdDMTRs%3D', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192346.8.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453757&Signature=sp%2BlhDmpvq9z3G%2BXSXbf35OeDRs%3D', 'spot': [22.9, 22.9], 'date': 1483192690.0, 'person_id': '5867b81b16b2d6121d8d8c3d', 'type': 2}, {'pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/user48%3A%3A1483192686.9.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453757&Signature=dl9feD9G0fYN0h4P2V50k1PQdY0%3D', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192346.8.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453757&Signature=sp%2BlhDmpvq9z3G%2BXSXbf35OeDRs%3D', 'spot': [22.9, 22.9], 'date': 1483192683.0, 'person_id': '5867b81b16b2d6121d8d8c3d', 'type': 2}], 'page': 0, 'size': 6}
+INFO:tornado.access:200 GET /get/updatemessage?jsoncallback=jQuery17207325671811561185_1483453197002&spot=%5B20%2C20%5D&max_distance=100.33&page=0&size=6&_=1483453697007 (127.0.0.1) 17.29ms
+WARNING:tornado.access:404 GET /web/empty (127.0.0.1) 0.45ms
+INFO:root:message timeline query is {'spot': {'$geoWithin': {'$center': [[20, 20], 100.33]}}}
+INFO:root:item in lastest message is {u'confidence': 96.46, u'pic_key': u'user48::1483451716.04.jpg', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483192346.8.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': u'5867b81b16b2d6121d8d8c3d', u'date': 1483451712.0, u'_id': ObjectId('586bad4416b2d60dd3aa85ce'), u'type': 2, u'formal': 1}
+INFO:root:item in lastest message is {u'pic_key': u'empty', u'name': u'\u5c0f\u7c73\u7535\u996d\u7172', u'std_pic_key': u'reporter:48::1483451617.73.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': ObjectId('586bace116b2d60dd3aa85ca'), u'date': 1483451616.0, u'_id': ObjectId('586bace316b2d60dd3aa85cb'), u'type': 0, u'formal': 0}
+INFO:root:item in lastest message is {u'pic_key': u'empty', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483451444.26.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': ObjectId('586bac3416b2d60dd3aa85c6'), u'date': 1483451441.0, u'_id': ObjectId('586bac3816b2d60dd3aa85c7'), u'type': 0, u'formal': 0}
+INFO:root:item in lastest message is {u'pic_key': u'empty', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483451210.84.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': ObjectId('586bab4b16b2d60dd3aa85c2'), u'date': 1483451208.0, u'_id': ObjectId('586bab4e16b2d60dd3aa85c3'), u'type': 0, u'formal': 0}
+INFO:root:item in lastest message is {u'confidence': 96.46, u'pic_key': u'user48::1483192692.9.jpg', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483192346.8.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': u'5867b81b16b2d6121d8d8c3d', u'date': 1483192690.0, u'_id': ObjectId('5867b97516b2d6121d8d8c53'), u'type': 2, u'formal': 1}
+INFO:root:item in lastest message is {u'confidence': 96.46, u'pic_key': u'user48::1483192686.9.jpg', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483192346.8.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': u'5867b81b16b2d6121d8d8c3d', u'date': 1483192683.0, u'_id': ObjectId('5867b96f16b2d6121d8d8c50'), u'type': 2, u'formal': 1}
+INFO:root:get url key is :user48::1483451716.04.jpg
+INFO:root:get url key is :reporter:48::1483192346.8.jpg
+INFO:root:get url key is :reporter:48::1483451617.73.jpg
+INFO:root:get url key is :reporter:48::1483451444.26.jpg
+INFO:root:get url key is :reporter:48::1483451210.84.jpg
+INFO:root:get url key is :user48::1483192692.9.jpg
+INFO:root:get url key is :reporter:48::1483192346.8.jpg
+INFO:root:get url key is :user48::1483192686.9.jpg
+INFO:root:get url key is :reporter:48::1483192346.8.jpg
+INFO:root:print return struct, tag = after change....
+INFO:root:max_code:1
+INFO:root:code: 0
+INFO:root:message_mapping: ['default message']
+INFO:root:data: {'message_list': [{'pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/user48%3A%3A1483451716.04.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453857&Signature=W%2B77uXK6irwZ5WOn49KGWhHZFjs%3D', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192346.8.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453857&Signature=AxWPJyHOvnzaAUXatWEBdYmWF0s%3D', 'spot': [22.9, 22.9], 'date': 1483451712.0, 'person_id': '5867b81b16b2d6121d8d8c3d', 'type': 2}, {'pic_key': u'empty', 'name': u'\u5c0f\u7c73\u7535\u996d\u7172', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451617.73.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453857&Signature=gIcM4epWp5FpfcIdXUnzcu2Hcas%3D', 'spot': [22.9, 22.9], 'date': 1483451616.0, 'person_id': '586bace116b2d60dd3aa85ca', 'type': 0}, {'pic_key': u'empty', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451444.26.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453857&Signature=N8RuSsFNLxrVZ3%2FyEVjcifu2rBY%3D', 'spot': [22.9, 22.9], 'date': 1483451441.0, 'person_id': '586bac3416b2d60dd3aa85c6', 'type': 0}, {'pic_key': u'empty', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451210.84.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453857&Signature=VGmdJueQf47yNXnp41ya75X0dGI%3D', 'spot': [22.9, 22.9], 'date': 1483451208.0, 'person_id': '586bab4b16b2d60dd3aa85c2', 'type': 0}, {'pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/user48%3A%3A1483192692.9.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453857&Signature=6b1a7T5Fc39qsiDJflxD0L4y8yI%3D', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192346.8.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453857&Signature=AxWPJyHOvnzaAUXatWEBdYmWF0s%3D', 'spot': [22.9, 22.9], 'date': 1483192690.0, 'person_id': '5867b81b16b2d6121d8d8c3d', 'type': 2}, {'pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/user48%3A%3A1483192686.9.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453857&Signature=j61ox2NJn%2F3eEuzo%2BxvWvpDB05U%3D', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192346.8.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453857&Signature=AxWPJyHOvnzaAUXatWEBdYmWF0s%3D', 'spot': [22.9, 22.9], 'date': 1483192683.0, 'person_id': '5867b81b16b2d6121d8d8c3d', 'type': 2}], 'page': 0, 'size': 6}
+INFO:tornado.access:200 GET /get/updatemessage?jsoncallback=jQuery17207325671811561185_1483453197003&spot=%5B20%2C20%5D&max_distance=100.33&page=0&size=6&_=1483453797010 (127.0.0.1) 16.54ms
+WARNING:tornado.access:404 GET /web/empty (127.0.0.1) 0.38ms
+Traceback (most recent call last):
+  File "app.py", line 120, in <module>
+    main()
+  File "app.py", line 117, in main
+    tornado.ioloop.IOLoop.instance().start()
+  File "/usr/local/lib/python2.7/dist-packages/tornado/ioloop.py", line 646, in start
+    event_pairs = self._impl.poll(poll_timeout)
+KeyboardInterrupt
+Error in atexit._run_exitfuncs:
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/atexit.py", line 24, in _run_exitfuncs
+    func(*targs, **kargs)
+  File "/usr/local/lib/python2.7/dist-packages/pymongo/periodic_executor.py", line 167, in _shutdown_executors
+    executor.join(1)
+  File "/usr/local/lib/python2.7/dist-packages/pymongo/periodic_executor.py", line 96, in join
+    self._thread.join(timeout)
+  File "/usr/lib/python2.7/threading.py", line 960, in join
+    self.__block.wait(delay)
+  File "/usr/lib/python2.7/threading.py", line 358, in wait
+    _sleep(delay)
+KeyboardInterrupt
+Error in sys.exitfunc:
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/atexit.py", line 24, in _run_exitfuncs
+    func(*targs, **kargs)
+  File "/usr/local/lib/python2.7/dist-packages/pymongo/periodic_executor.py", line 167, in _shutdown_executors
+    executor.join(1)
+  File "/usr/local/lib/python2.7/dist-packages/pymongo/periodic_executor.py", line 96, in join
+    self._thread.join(timeout)
+  File "/usr/lib/python2.7/threading.py", line 960, in join
+    self.__block.wait(delay)
+  File "/usr/lib/python2.7/threading.py", line 358, in wait
+    _sleep(delay)
+KeyboardInterrupt
+INFO:root:start server.
+2017-01-03 22:31:43,903 INFO sqlalchemy.engine.base.Engine SHOW VARIABLES LIKE 'sql_mode'
+INFO:sqlalchemy.engine.base.Engine:SHOW VARIABLES LIKE 'sql_mode'
+2017-01-03 22:31:43,903 INFO sqlalchemy.engine.base.Engine ()
+INFO:sqlalchemy.engine.base.Engine:()
+2017-01-03 22:31:43,924 INFO sqlalchemy.engine.base.Engine SELECT DATABASE()
+INFO:sqlalchemy.engine.base.Engine:SELECT DATABASE()
+2017-01-03 22:31:43,925 INFO sqlalchemy.engine.base.Engine ()
+INFO:sqlalchemy.engine.base.Engine:()
+2017-01-03 22:31:43,966 INFO sqlalchemy.engine.base.Engine show collation where `Charset` = 'utf8' and `Collation` = 'utf8_bin'
+INFO:sqlalchemy.engine.base.Engine:show collation where `Charset` = 'utf8' and `Collation` = 'utf8_bin'
+2017-01-03 22:31:43,967 INFO sqlalchemy.engine.base.Engine ()
+INFO:sqlalchemy.engine.base.Engine:()
+2017-01-03 22:31:44,009 INFO sqlalchemy.engine.base.Engine SELECT CAST('test plain returns' AS CHAR(60)) AS anon_1
+INFO:sqlalchemy.engine.base.Engine:SELECT CAST('test plain returns' AS CHAR(60)) AS anon_1
+2017-01-03 22:31:44,009 INFO sqlalchemy.engine.base.Engine ()
+INFO:sqlalchemy.engine.base.Engine:()
+2017-01-03 22:31:44,030 INFO sqlalchemy.engine.base.Engine SELECT CAST('test unicode returns' AS CHAR(60)) AS anon_1
+INFO:sqlalchemy.engine.base.Engine:SELECT CAST('test unicode returns' AS CHAR(60)) AS anon_1
+2017-01-03 22:31:44,030 INFO sqlalchemy.engine.base.Engine ()
+INFO:sqlalchemy.engine.base.Engine:()
+2017-01-03 22:31:44,051 INFO sqlalchemy.engine.base.Engine SELECT CAST('test collated returns' AS CHAR CHARACTER SET utf8) COLLATE utf8_bin AS anon_1
+INFO:sqlalchemy.engine.base.Engine:SELECT CAST('test collated returns' AS CHAR CHARACTER SET utf8) COLLATE utf8_bin AS anon_1
+2017-01-03 22:31:44,051 INFO sqlalchemy.engine.base.Engine ()
+INFO:sqlalchemy.engine.base.Engine:()
+INFO:tornado.access:200 GET /web/index (127.0.0.1) 12.70ms
+INFO:tornado.access:304 GET /static/css/demo.css?v=66adf3b5fcd4baadc0784b5dde9c5813 (127.0.0.1) 3.25ms
+INFO:tornado.access:304 GET /static/css/stapel.css?v=473889e1447f1be7999776d489242880 (127.0.0.1) 0.58ms
+INFO:tornado.access:304 GET /static/css/custom.css?v=566a1f18e84f9df60dcde8d953d89eca (127.0.0.1) 0.74ms
+INFO:tornado.access:304 GET /static/js/modernizr.custom.63321.js?v=3ad7bc528408307bbba6f4c01a1ca04d (127.0.0.1) 0.60ms
+INFO:tornado.access:304 GET /static/js/jquery.paginate.js?v=86baf47df3e43759edb958a9997e4658 (127.0.0.1) 0.58ms
+INFO:tornado.access:304 GET /static/js/jquery.stapel.js?v=bb0d0881bfd21155fc8f856330992875 (127.0.0.1) 0.61ms
+INFO:tornado.access:304 GET /static/images/white_texture.png (127.0.0.1) 0.66ms
+INFO:tornado.access:304 GET /static/images/4/3.jpg?v=b5a5bb74173b8be48c5ed27f84e7f55c (127.0.0.1) 0.55ms
+INFO:tornado.access:304 GET /static/images/1/1.jpg?v=332a3db1d518fbc81d03050164d9bf19 (127.0.0.1) 0.80ms
+INFO:tornado.access:304 GET /static/images/1/2.jpg?v=06d49e636ae86201f7e4855b9630bff7 (127.0.0.1) 0.85ms
+INFO:root:message timeline query is {'spot': {'$geoWithin': {'$center': [[20, 20], 100.33]}}}
+INFO:root:item in lastest message is {u'confidence': 96.46, u'pic_key': u'user48::1483451716.04.jpg', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483192346.8.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': u'5867b81b16b2d6121d8d8c3d', u'date': 1483451712.0, u'_id': ObjectId('586bad4416b2d60dd3aa85ce'), u'type': 2, u'formal': 1}
+INFO:root:item in lastest message is {u'pic_key': u'empty', u'name': u'\u5c0f\u7c73\u7535\u996d\u7172', u'std_pic_key': u'reporter:48::1483451617.73.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': ObjectId('586bace116b2d60dd3aa85ca'), u'date': 1483451616.0, u'_id': ObjectId('586bace316b2d60dd3aa85cb'), u'type': 0, u'formal': 0}
+INFO:root:item in lastest message is {u'pic_key': u'empty', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483451444.26.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': ObjectId('586bac3416b2d60dd3aa85c6'), u'date': 1483451441.0, u'_id': ObjectId('586bac3816b2d60dd3aa85c7'), u'type': 0, u'formal': 0}
+INFO:root:item in lastest message is {u'pic_key': u'empty', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483451210.84.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': ObjectId('586bab4b16b2d60dd3aa85c2'), u'date': 1483451208.0, u'_id': ObjectId('586bab4e16b2d60dd3aa85c3'), u'type': 0, u'formal': 0}
+INFO:root:item in lastest message is {u'confidence': 96.46, u'pic_key': u'user48::1483192692.9.jpg', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483192346.8.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': u'5867b81b16b2d6121d8d8c3d', u'date': 1483192690.0, u'_id': ObjectId('5867b97516b2d6121d8d8c53'), u'type': 2, u'formal': 1}
+INFO:root:get url key is :user48::1483451716.04.jpg
+INFO:root:get url key is :reporter:48::1483192346.8.jpg
+INFO:root:get url key is :reporter:48::1483451617.73.jpg
+INFO:root:get url key is :reporter:48::1483451444.26.jpg
+INFO:root:get url key is :reporter:48::1483451210.84.jpg
+INFO:root:get url key is :user48::1483192692.9.jpg
+INFO:root:get url key is :reporter:48::1483192346.8.jpg
+INFO:root:print return struct, tag = after change....
+INFO:root:max_code:1
+INFO:root:code: 0
+INFO:root:message_mapping: ['default message']
+INFO:root:data: {'message_list': [{'pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/user48%3A%3A1483451716.04.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453970&Signature=IPwojqS0Rf4Ft46l2JhVLaGeIi8%3D', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192346.8.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453970&Signature=DN21BUlwLEV9JjfZvfUja0ECr8U%3D', 'spot': [22.9, 22.9], 'date': 1483451712.0, 'person_id': '5867b81b16b2d6121d8d8c3d', 'type': 2}, {'pic_key': u'empty', 'name': u'\u5c0f\u7c73\u7535\u996d\u7172', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451617.73.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453970&Signature=bzYsBKDcVrfC%2FnlOf6k84%2Ftl%2Fd8%3D', 'spot': [22.9, 22.9], 'date': 1483451616.0, 'person_id': '586bace116b2d60dd3aa85ca', 'type': 0}, {'pic_key': u'empty', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451444.26.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453970&Signature=n5JdBnSuHr5nxyoeOzIIunFYp%2Fo%3D', 'spot': [22.9, 22.9], 'date': 1483451441.0, 'person_id': '586bac3416b2d60dd3aa85c6', 'type': 0}, {'pic_key': u'empty', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451210.84.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453970&Signature=lNQxzKY2fQP2IMsIi3GpIl%2B0X5U%3D', 'spot': [22.9, 22.9], 'date': 1483451208.0, 'person_id': '586bab4b16b2d60dd3aa85c2', 'type': 0}, {'pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/user48%3A%3A1483192692.9.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453970&Signature=fx6v%2B2NbJTwIlXabwEy70MTswNY%3D', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192346.8.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453970&Signature=DN21BUlwLEV9JjfZvfUja0ECr8U%3D', 'spot': [22.9, 22.9], 'date': 1483192690.0, 'person_id': '5867b81b16b2d6121d8d8c3d', 'type': 2}], 'page': 0, 'size': 5}
+INFO:tornado.access:200 GET /get/updatemessage?jsoncallback=jQuery17200992965498184919_1483453910554&spot=%5B20%2C20%5D&max_distance=100.33&page=0&size=5&_=1483453910588 (127.0.0.1) 17.33ms
+INFO:root: filter dictory result is {'last_update_spot': {'$geoWithin': {'$center': [[20, 20], 100.33]}}, 'formal': 1}
+INFO:root:get url key is :reporter:48::1483192346.8.jpg
+INFO:root:get url key is :reporter:48::1483192333.42.jpg
+INFO:root:get url key is :reporter:48::1483192300.91.jpg
+INFO:root:get url key is :reporter:48::1483192219.96.jpg
+INFO:root:get url key is :reporter:48::1483192126.28.jpg
+INFO:root:print return struct, tag = after change....
+INFO:root:max_code:1
+INFO:root:code: 0
+INFO:root:message_mapping: ['default message']
+INFO:root:data: {'formal': 1, 'size': 5, 'person_list': [{'person_id': '5867b81b16b2d6121d8d8c3d', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192346.8.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453970&Signature=DN21BUlwLEV9JjfZvfUja0ECr8U%3D', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74'}, {'person_id': '5867b80d16b2d6121d8d8c39', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192333.42.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453970&Signature=hKXPHuYVoAIsw7wMpFTK8qY2krA%3D', 'name': u'\u5927\u8bdd\u897f\u6e38\u5468\u661f\u9a70'}, {'person_id': '5867b7ed16b2d6121d8d8c31', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192300.91.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453970&Signature=2fCsaTfDzoCI7T2ij3%2BvS7Wgksg%3D', 'name': u'\u5468\u661f\u9a70\u62cd\u7535\u5f71'}, {'person_id': '5867b79c16b2d6121d8d8c21', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192219.96.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453970&Signature=xRTBmhEeFd1JW7C%2FoFhaEoQR%2Bp8%3D', 'name': u'\u96f7\u519b\u519b'}, {'person_id': '5867b73e16b2d6121d8d8c15', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192126.28.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453970&Signature=89o%2BAvzp69AdHpQXFcGKOiIWU%2F8%3D', 'name': u'leijun'}], 'page': 0}
+INFO:tornado.access:200 GET /get/updateperson?jsoncallback=jQuery17200992965498184919_1483453910555&formal=1&spot=%5B20%2C20%5D&max_distance=100.33&page=0&size=5&_=1483453910596 (127.0.0.1) 19.56ms
+INFO:root: filter dictory result is {'last_update_spot': {'$geoWithin': {'$center': [[20, 20], 100.33]}}, 'formal': 0}
+INFO:root:get url key is :reporter:48::1483451617.73.jpg
+INFO:root:get url key is :reporter:48::1483451444.26.jpg
+INFO:root:get url key is :reporter:48::1483451210.84.jpg
+INFO:root:get url key is :reporter:48::1483192310.94.jpg
+INFO:root:get url key is :reporter:48::1483192269.13.jpg
+INFO:root:get url key is :reporter:48::1483192255.72.jpg
+INFO:root:print return struct, tag = after change....
+INFO:root:max_code:1
+INFO:root:code: 0
+INFO:root:message_mapping: ['default message']
+INFO:root:data: {'formal': 0, 'size': 6, 'person_list': [{'person_id': '586bace116b2d60dd3aa85ca', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451617.73.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453970&Signature=bzYsBKDcVrfC%2FnlOf6k84%2Ftl%2Fd8%3D', 'name': u'\u5c0f\u7c73\u7535\u996d\u7172'}, {'person_id': '586bac3416b2d60dd3aa85c6', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451444.26.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453970&Signature=n5JdBnSuHr5nxyoeOzIIunFYp%2Fo%3D', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74'}, {'person_id': '586bab4b16b2d60dd3aa85c2', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451210.84.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453970&Signature=lNQxzKY2fQP2IMsIi3GpIl%2B0X5U%3D', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74'}, {'person_id': '5867b7f716b2d6121d8d8c35', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192310.94.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453970&Signature=aXTL5%2BiOOXi9NHFIljpz3YnH32k%3D', 'name': u'\u5468\u661f\u9a70\u4e0d\u62cd\u7535\u5f71'}, {'person_id': '5867b7cd16b2d6121d8d8c2d', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192269.13.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453970&Signature=lMoCYyLdzKz1c55CxA1sfUU%2BvzM%3D', 'name': u'\u5468\u9e3f\u794e\u4e0d\u5728360'}, {'person_id': '5867b7bf16b2d6121d8d8c29', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192255.72.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453970&Signature=o%2BVktLkJg7IOkDd31MASJObbZTg%3D', 'name': u'\u5468\u9e3f\u794e\uff12\uff13\uff13'}], 'page': 0}
+INFO:tornado.access:200 GET /get/updateperson?jsoncallback=jQuery17200992965498184919_1483453910556&formal=0&spot=%5B20%2C20%5D&max_distance=100.33&page=0&size=6&_=1483453910604 (127.0.0.1) 21.20ms
+INFO:tornado.access:304 GET /web/index (127.0.0.1) 0.89ms
+INFO:tornado.access:304 GET /static/css/demo.css?v=66adf3b5fcd4baadc0784b5dde9c5813 (127.0.0.1) 0.61ms
+INFO:tornado.access:304 GET /static/css/stapel.css?v=473889e1447f1be7999776d489242880 (127.0.0.1) 0.63ms
+INFO:tornado.access:304 GET /static/css/custom.css?v=566a1f18e84f9df60dcde8d953d89eca (127.0.0.1) 0.64ms
+INFO:tornado.access:304 GET /static/js/modernizr.custom.63321.js?v=3ad7bc528408307bbba6f4c01a1ca04d (127.0.0.1) 0.57ms
+INFO:tornado.access:304 GET /static/js/jquery.paginate.js?v=86baf47df3e43759edb958a9997e4658 (127.0.0.1) 0.69ms
+INFO:tornado.access:304 GET /static/js/jquery.stapel.js?v=bb0d0881bfd21155fc8f856330992875 (127.0.0.1) 0.61ms
+INFO:tornado.access:304 GET /static/images/white_texture.png (127.0.0.1) 0.99ms
+INFO:tornado.access:304 GET /static/images/4/3.jpg?v=b5a5bb74173b8be48c5ed27f84e7f55c (127.0.0.1) 1.06ms
+INFO:tornado.access:304 GET /static/images/1/1.jpg?v=332a3db1d518fbc81d03050164d9bf19 (127.0.0.1) 0.95ms
+INFO:tornado.access:304 GET /static/images/1/2.jpg?v=06d49e636ae86201f7e4855b9630bff7 (127.0.0.1) 1.05ms
+INFO:root:message timeline query is {'spot': {'$geoWithin': {'$center': [[20, 20], 100.33]}}}
+INFO:root:item in lastest message is {u'confidence': 96.46, u'pic_key': u'user48::1483451716.04.jpg', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483192346.8.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': u'5867b81b16b2d6121d8d8c3d', u'date': 1483451712.0, u'_id': ObjectId('586bad4416b2d60dd3aa85ce'), u'type': 2, u'formal': 1}
+INFO:root:item in lastest message is {u'pic_key': u'empty', u'name': u'\u5c0f\u7c73\u7535\u996d\u7172', u'std_pic_key': u'reporter:48::1483451617.73.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': ObjectId('586bace116b2d60dd3aa85ca'), u'date': 1483451616.0, u'_id': ObjectId('586bace316b2d60dd3aa85cb'), u'type': 0, u'formal': 0}
+INFO:root:item in lastest message is {u'pic_key': u'empty', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483451444.26.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': ObjectId('586bac3416b2d60dd3aa85c6'), u'date': 1483451441.0, u'_id': ObjectId('586bac3816b2d60dd3aa85c7'), u'type': 0, u'formal': 0}
+INFO:root:item in lastest message is {u'pic_key': u'empty', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483451210.84.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': ObjectId('586bab4b16b2d60dd3aa85c2'), u'date': 1483451208.0, u'_id': ObjectId('586bab4e16b2d60dd3aa85c3'), u'type': 0, u'formal': 0}
+INFO:root:item in lastest message is {u'confidence': 96.46, u'pic_key': u'user48::1483192692.9.jpg', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483192346.8.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': u'5867b81b16b2d6121d8d8c3d', u'date': 1483192690.0, u'_id': ObjectId('5867b97516b2d6121d8d8c53'), u'type': 2, u'formal': 1}
+INFO:root:get url key is :user48::1483451716.04.jpg
+INFO:root:get url key is :reporter:48::1483192346.8.jpg
+INFO:root:get url key is :reporter:48::1483451617.73.jpg
+INFO:root:get url key is :reporter:48::1483451444.26.jpg
+INFO:root:get url key is :reporter:48::1483451210.84.jpg
+INFO:root:get url key is :user48::1483192692.9.jpg
+INFO:root:get url key is :reporter:48::1483192346.8.jpg
+INFO:root:print return struct, tag = after change....
+INFO:root:max_code:1
+INFO:root:code: 0
+INFO:root:message_mapping: ['default message']
+INFO:root:data: {'message_list': [{'pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/user48%3A%3A1483451716.04.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453990&Signature=1Q4yZxDRr6Edm7B38yk9xyyoJT8%3D', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192346.8.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453990&Signature=zNUHOYPQn0AXNHAnUF8VdVaSIqk%3D', 'spot': [22.9, 22.9], 'date': 1483451712.0, 'person_id': '5867b81b16b2d6121d8d8c3d', 'type': 2}, {'pic_key': u'empty', 'name': u'\u5c0f\u7c73\u7535\u996d\u7172', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451617.73.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453990&Signature=0YGuQGfwdKp%2BhBFR9CdAIXtf%2FTs%3D', 'spot': [22.9, 22.9], 'date': 1483451616.0, 'person_id': '586bace116b2d60dd3aa85ca', 'type': 0}, {'pic_key': u'empty', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451444.26.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453990&Signature=JyxkObP6X9OAewLmw2UKsR3ixTY%3D', 'spot': [22.9, 22.9], 'date': 1483451441.0, 'person_id': '586bac3416b2d60dd3aa85c6', 'type': 0}, {'pic_key': u'empty', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451210.84.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453990&Signature=KZsQVYsECXuxWk9gdlJ78LCzOwE%3D', 'spot': [22.9, 22.9], 'date': 1483451208.0, 'person_id': '586bab4b16b2d60dd3aa85c2', 'type': 0}, {'pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/user48%3A%3A1483192692.9.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453990&Signature=JujKbgy0zNPaCPnTCca8ComkW9U%3D', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192346.8.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453990&Signature=zNUHOYPQn0AXNHAnUF8VdVaSIqk%3D', 'spot': [22.9, 22.9], 'date': 1483192690.0, 'person_id': '5867b81b16b2d6121d8d8c3d', 'type': 2}], 'page': 0, 'size': 5}
+INFO:tornado.access:200 GET /get/updatemessage?jsoncallback=jQuery17205941665497214718_1483453930606&spot=%5B20%2C20%5D&max_distance=100.33&page=0&size=5&_=1483453930685 (127.0.0.1) 27.87ms
+INFO:root: filter dictory result is {'last_update_spot': {'$geoWithin': {'$center': [[20, 20], 100.33]}}, 'formal': 0}
+INFO:root:get url key is :reporter:48::1483451617.73.jpg
+INFO:root:get url key is :reporter:48::1483451444.26.jpg
+INFO:root:get url key is :reporter:48::1483451210.84.jpg
+INFO:root:get url key is :reporter:48::1483192310.94.jpg
+INFO:root:get url key is :reporter:48::1483192269.13.jpg
+INFO:root:get url key is :reporter:48::1483192255.72.jpg
+INFO:root:print return struct, tag = after change....
+INFO:root:max_code:1
+INFO:root:code: 0
+INFO:root:message_mapping: ['default message']
+INFO:root:data: {'formal': 0, 'size': 6, 'person_list': [{'person_id': '586bace116b2d60dd3aa85ca', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451617.73.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453990&Signature=0YGuQGfwdKp%2BhBFR9CdAIXtf%2FTs%3D', 'name': u'\u5c0f\u7c73\u7535\u996d\u7172'}, {'person_id': '586bac3416b2d60dd3aa85c6', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451444.26.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453990&Signature=JyxkObP6X9OAewLmw2UKsR3ixTY%3D', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74'}, {'person_id': '586bab4b16b2d60dd3aa85c2', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451210.84.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453990&Signature=KZsQVYsECXuxWk9gdlJ78LCzOwE%3D', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74'}, {'person_id': '5867b7f716b2d6121d8d8c35', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192310.94.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453990&Signature=pRtGdkQJqcaIpxreGHr16hW84yY%3D', 'name': u'\u5468\u661f\u9a70\u4e0d\u62cd\u7535\u5f71'}, {'person_id': '5867b7cd16b2d6121d8d8c2d', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192269.13.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453990&Signature=fYvYuNuWh%2BfVFKoS%2BslktYb8e3s%3D', 'name': u'\u5468\u9e3f\u794e\u4e0d\u5728360'}, {'person_id': '5867b7bf16b2d6121d8d8c29', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192255.72.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453990&Signature=iReCVS8eemhku40lf0%2BRab5Bw2g%3D', 'name': u'\u5468\u9e3f\u794e\uff12\uff13\uff13'}], 'page': 0}
+INFO:tornado.access:200 GET /get/updateperson?jsoncallback=jQuery17205941665497214718_1483453930608&formal=0&spot=%5B20%2C20%5D&max_distance=100.33&page=0&size=6&_=1483453930704 (127.0.0.1) 19.97ms
+INFO:root: filter dictory result is {'last_update_spot': {'$geoWithin': {'$center': [[20, 20], 100.33]}}, 'formal': 1}
+INFO:root:get url key is :reporter:48::1483192346.8.jpg
+INFO:root:get url key is :reporter:48::1483192333.42.jpg
+INFO:root:get url key is :reporter:48::1483192300.91.jpg
+INFO:root:get url key is :reporter:48::1483192219.96.jpg
+INFO:root:get url key is :reporter:48::1483192126.28.jpg
+INFO:root:print return struct, tag = after change....
+INFO:root:max_code:1
+INFO:root:code: 0
+INFO:root:message_mapping: ['default message']
+INFO:root:data: {'formal': 1, 'size': 5, 'person_list': [{'person_id': '5867b81b16b2d6121d8d8c3d', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192346.8.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453990&Signature=zNUHOYPQn0AXNHAnUF8VdVaSIqk%3D', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74'}, {'person_id': '5867b80d16b2d6121d8d8c39', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192333.42.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453990&Signature=Lgrl9xOeRyejwN4hqTKvbBTa4v8%3D', 'name': u'\u5927\u8bdd\u897f\u6e38\u5468\u661f\u9a70'}, {'person_id': '5867b7ed16b2d6121d8d8c31', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192300.91.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453990&Signature=c5M7whuPmDLWzkYeQMYju48kd4U%3D', 'name': u'\u5468\u661f\u9a70\u62cd\u7535\u5f71'}, {'person_id': '5867b79c16b2d6121d8d8c21', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192219.96.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453990&Signature=2w7OLHmsoB6a5VnHrhFKMlH7zKc%3D', 'name': u'\u96f7\u519b\u519b'}, {'person_id': '5867b73e16b2d6121d8d8c15', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192126.28.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483453990&Signature=Op9WWYu12swNM28jreS9HSKp1i0%3D', 'name': u'leijun'}], 'page': 0}
+INFO:tornado.access:200 GET /get/updateperson?jsoncallback=jQuery17205941665497214718_1483453930607&formal=1&spot=%5B20%2C20%5D&max_distance=100.33&page=0&size=5&_=1483453930698 (127.0.0.1) 31.52ms
+WARNING:tornado.access:404 GET /web/empty (127.0.0.1) 0.46ms
+WARNING:tornado.access:404 GET /web/empty (127.0.0.1) 0.38ms
+Traceback (most recent call last):
+  File "app.py", line 120, in <module>
+    main()
+  File "app.py", line 117, in main
+    tornado.ioloop.IOLoop.instance().start()
+  File "/usr/local/lib/python2.7/dist-packages/tornado/ioloop.py", line 646, in start
+    event_pairs = self._impl.poll(poll_timeout)
+KeyboardInterrupt
+Error in atexit._run_exitfuncs:
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/atexit.py", line 24, in _run_exitfuncs
+    func(*targs, **kargs)
+  File "/usr/local/lib/python2.7/dist-packages/pymongo/periodic_executor.py", line 167, in _shutdown_executors
+    executor.join(1)
+  File "/usr/local/lib/python2.7/dist-packages/pymongo/periodic_executor.py", line 96, in join
+    self._thread.join(timeout)
+  File "/usr/lib/python2.7/threading.py", line 960, in join
+    self.__block.wait(delay)
+  File "/usr/lib/python2.7/threading.py", line 358, in wait
+    _sleep(delay)
+KeyboardInterrupt
+Error in sys.exitfunc:
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/atexit.py", line 24, in _run_exitfuncs
+    func(*targs, **kargs)
+  File "/usr/local/lib/python2.7/dist-packages/pymongo/periodic_executor.py", line 167, in _shutdown_executors
+    executor.join(1)
+  File "/usr/local/lib/python2.7/dist-packages/pymongo/periodic_executor.py", line 96, in join
+    self._thread.join(timeout)
+  File "/usr/lib/python2.7/threading.py", line 960, in join
+    self.__block.wait(delay)
+  File "/usr/lib/python2.7/threading.py", line 358, in wait
+    _sleep(delay)
+KeyboardInterrupt
+INFO:root:start server.
+2017-01-03 22:33:17,528 INFO sqlalchemy.engine.base.Engine SHOW VARIABLES LIKE 'sql_mode'
+INFO:sqlalchemy.engine.base.Engine:SHOW VARIABLES LIKE 'sql_mode'
+2017-01-03 22:33:17,528 INFO sqlalchemy.engine.base.Engine ()
+INFO:sqlalchemy.engine.base.Engine:()
+2017-01-03 22:33:17,549 INFO sqlalchemy.engine.base.Engine SELECT DATABASE()
+INFO:sqlalchemy.engine.base.Engine:SELECT DATABASE()
+2017-01-03 22:33:17,549 INFO sqlalchemy.engine.base.Engine ()
+INFO:sqlalchemy.engine.base.Engine:()
+2017-01-03 22:33:17,591 INFO sqlalchemy.engine.base.Engine show collation where `Charset` = 'utf8' and `Collation` = 'utf8_bin'
+INFO:sqlalchemy.engine.base.Engine:show collation where `Charset` = 'utf8' and `Collation` = 'utf8_bin'
+2017-01-03 22:33:17,592 INFO sqlalchemy.engine.base.Engine ()
+INFO:sqlalchemy.engine.base.Engine:()
+2017-01-03 22:33:17,612 INFO sqlalchemy.engine.base.Engine SELECT CAST('test plain returns' AS CHAR(60)) AS anon_1
+INFO:sqlalchemy.engine.base.Engine:SELECT CAST('test plain returns' AS CHAR(60)) AS anon_1
+2017-01-03 22:33:17,613 INFO sqlalchemy.engine.base.Engine ()
+INFO:sqlalchemy.engine.base.Engine:()
+2017-01-03 22:33:17,633 INFO sqlalchemy.engine.base.Engine SELECT CAST('test unicode returns' AS CHAR(60)) AS anon_1
+INFO:sqlalchemy.engine.base.Engine:SELECT CAST('test unicode returns' AS CHAR(60)) AS anon_1
+2017-01-03 22:33:17,634 INFO sqlalchemy.engine.base.Engine ()
+INFO:sqlalchemy.engine.base.Engine:()
+2017-01-03 22:33:17,655 INFO sqlalchemy.engine.base.Engine SELECT CAST('test collated returns' AS CHAR CHARACTER SET utf8) COLLATE utf8_bin AS anon_1
+INFO:sqlalchemy.engine.base.Engine:SELECT CAST('test collated returns' AS CHAR CHARACTER SET utf8) COLLATE utf8_bin AS anon_1
+2017-01-03 22:33:17,655 INFO sqlalchemy.engine.base.Engine ()
+INFO:sqlalchemy.engine.base.Engine:()
+INFO:tornado.access:200 GET /web/index (127.0.0.1) 14.39ms
+INFO:tornado.access:304 GET /static/css/demo.css?v=66adf3b5fcd4baadc0784b5dde9c5813 (127.0.0.1) 5.63ms
+INFO:tornado.access:304 GET /static/css/stapel.css?v=473889e1447f1be7999776d489242880 (127.0.0.1) 0.90ms
+INFO:tornado.access:304 GET /static/css/custom.css?v=566a1f18e84f9df60dcde8d953d89eca (127.0.0.1) 0.88ms
+INFO:tornado.access:304 GET /static/js/modernizr.custom.63321.js?v=3ad7bc528408307bbba6f4c01a1ca04d (127.0.0.1) 0.87ms
+INFO:tornado.access:304 GET /static/js/jquery.paginate.js?v=86baf47df3e43759edb958a9997e4658 (127.0.0.1) 0.89ms
+INFO:tornado.access:304 GET /static/js/jquery.stapel.js?v=bb0d0881bfd21155fc8f856330992875 (127.0.0.1) 0.84ms
+INFO:tornado.access:304 GET /static/images/white_texture.png (127.0.0.1) 1.00ms
+INFO:tornado.access:304 GET /static/images/4/3.jpg?v=b5a5bb74173b8be48c5ed27f84e7f55c (127.0.0.1) 0.97ms
+INFO:tornado.access:304 GET /static/images/1/1.jpg?v=332a3db1d518fbc81d03050164d9bf19 (127.0.0.1) 0.92ms
+INFO:tornado.access:304 GET /static/images/1/2.jpg?v=06d49e636ae86201f7e4855b9630bff7 (127.0.0.1) 0.89ms
+INFO:root:message timeline query is {'spot': {'$geoWithin': {'$center': [[20, 20], 100.33]}}}
+INFO:root:item in lastest message is {u'confidence': 96.46, u'pic_key': u'user48::1483451716.04.jpg', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483192346.8.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': u'5867b81b16b2d6121d8d8c3d', u'date': 1483451712.0, u'_id': ObjectId('586bad4416b2d60dd3aa85ce'), u'type': 2, u'formal': 1}
+INFO:root:item in lastest message is {u'pic_key': u'empty', u'name': u'\u5c0f\u7c73\u7535\u996d\u7172', u'std_pic_key': u'reporter:48::1483451617.73.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': ObjectId('586bace116b2d60dd3aa85ca'), u'date': 1483451616.0, u'_id': ObjectId('586bace316b2d60dd3aa85cb'), u'type': 0, u'formal': 0}
+INFO:root:item in lastest message is {u'pic_key': u'empty', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483451444.26.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': ObjectId('586bac3416b2d60dd3aa85c6'), u'date': 1483451441.0, u'_id': ObjectId('586bac3816b2d60dd3aa85c7'), u'type': 0, u'formal': 0}
+INFO:root:item in lastest message is {u'pic_key': u'empty', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483451210.84.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': ObjectId('586bab4b16b2d60dd3aa85c2'), u'date': 1483451208.0, u'_id': ObjectId('586bab4e16b2d60dd3aa85c3'), u'type': 0, u'formal': 0}
+INFO:root:item in lastest message is {u'confidence': 96.46, u'pic_key': u'user48::1483192692.9.jpg', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483192346.8.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': u'5867b81b16b2d6121d8d8c3d', u'date': 1483192690.0, u'_id': ObjectId('5867b97516b2d6121d8d8c53'), u'type': 2, u'formal': 1}
+INFO:root:get url key is :user48::1483451716.04.jpg
+INFO:root:get url key is :reporter:48::1483192346.8.jpg
+INFO:root:get url key is :reporter:48::1483451617.73.jpg
+INFO:root:get url key is :reporter:48::1483451444.26.jpg
+INFO:root:get url key is :reporter:48::1483451210.84.jpg
+INFO:root:get url key is :user48::1483192692.9.jpg
+INFO:root:get url key is :reporter:48::1483192346.8.jpg
+INFO:root:print return struct, tag = after change....
+INFO:root:max_code:1
+INFO:root:code: 0
+INFO:root:message_mapping: ['default message']
+INFO:root:data: {'message_list': [{'pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/user48%3A%3A1483451716.04.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454060&Signature=QGKtp2g3Jwna0bQds4Mi%2FnpnSAs%3D', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192346.8.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454060&Signature=M3Wr72kUHw%2BuR3A4Jzg8sXOZ%2Bv0%3D', 'spot': [22.9, 22.9], 'date': 1483451712.0, 'person_id': '5867b81b16b2d6121d8d8c3d', 'type': 2}, {'pic_key': u'empty', 'name': u'\u5c0f\u7c73\u7535\u996d\u7172', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451617.73.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454060&Signature=TGDCXbFlliU4KR245rh1i6yq%2BfE%3D', 'spot': [22.9, 22.9], 'date': 1483451616.0, 'person_id': '586bace116b2d60dd3aa85ca', 'type': 0}, {'pic_key': u'empty', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451444.26.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454060&Signature=Q%2FmK1wE6jqPMJm%2B0gaYFlmIZcTA%3D', 'spot': [22.9, 22.9], 'date': 1483451441.0, 'person_id': '586bac3416b2d60dd3aa85c6', 'type': 0}, {'pic_key': u'empty', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451210.84.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454060&Signature=A5s2FHQcZLOHO7eNMy6ZaPgm2i8%3D', 'spot': [22.9, 22.9], 'date': 1483451208.0, 'person_id': '586bab4b16b2d60dd3aa85c2', 'type': 0}, {'pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/user48%3A%3A1483192692.9.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454060&Signature=7MKdLpIIPUWqpWu0TRVxxwuYRzg%3D', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192346.8.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454060&Signature=M3Wr72kUHw%2BuR3A4Jzg8sXOZ%2Bv0%3D', 'spot': [22.9, 22.9], 'date': 1483192690.0, 'person_id': '5867b81b16b2d6121d8d8c3d', 'type': 2}], 'page': 0, 'size': 5}
+INFO:tornado.access:200 GET /get/updatemessage?jsoncallback=jQuery17205427064220404343_1483454000422&spot=%5B20%2C20%5D&max_distance=100.33&page=0&size=5&_=1483454000549 (127.0.0.1) 17.97ms
+INFO:root: filter dictory result is {'last_update_spot': {'$geoWithin': {'$center': [[20, 20], 100.33]}}, 'formal': 1}
+INFO:root:get url key is :reporter:48::1483192346.8.jpg
+INFO:root:get url key is :reporter:48::1483192333.42.jpg
+INFO:root:get url key is :reporter:48::1483192300.91.jpg
+INFO:root:get url key is :reporter:48::1483192219.96.jpg
+INFO:root:get url key is :reporter:48::1483192126.28.jpg
+INFO:root:print return struct, tag = after change....
+INFO:root:max_code:1
+INFO:root:code: 0
+INFO:root:message_mapping: ['default message']
+INFO:root:data: {'formal': 1, 'size': 5, 'person_list': [{'person_id': '5867b81b16b2d6121d8d8c3d', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192346.8.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454060&Signature=M3Wr72kUHw%2BuR3A4Jzg8sXOZ%2Bv0%3D', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74'}, {'person_id': '5867b80d16b2d6121d8d8c39', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192333.42.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454060&Signature=pesbMMCXPoAUloDDGfuo8T6qD%2Bk%3D', 'name': u'\u5927\u8bdd\u897f\u6e38\u5468\u661f\u9a70'}, {'person_id': '5867b7ed16b2d6121d8d8c31', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192300.91.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454060&Signature=Le5R%2FSq%2Becd6289UXlJ6OJFvxOs%3D', 'name': u'\u5468\u661f\u9a70\u62cd\u7535\u5f71'}, {'person_id': '5867b79c16b2d6121d8d8c21', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192219.96.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454060&Signature=LHautYvqUJ9TBiwyhTCk0VlHtyo%3D', 'name': u'\u96f7\u519b\u519b'}, {'person_id': '5867b73e16b2d6121d8d8c15', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192126.28.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454060&Signature=zQ9iup%2FpPiw%2BNS0oyYQpmyWUudQ%3D', 'name': u'leijun'}], 'page': 0}
+INFO:tornado.access:200 GET /get/updateperson?jsoncallback=jQuery17205427064220404343_1483454000423&formal=1&spot=%5B20%2C20%5D&max_distance=100.33&page=0&size=5&_=1483454000563 (127.0.0.1) 19.15ms
+INFO:root: filter dictory result is {'last_update_spot': {'$geoWithin': {'$center': [[20, 20], 100.33]}}, 'formal': 0}
+INFO:root:get url key is :reporter:48::1483451617.73.jpg
+INFO:root:get url key is :reporter:48::1483451444.26.jpg
+INFO:root:get url key is :reporter:48::1483451210.84.jpg
+INFO:root:get url key is :reporter:48::1483192310.94.jpg
+INFO:root:get url key is :reporter:48::1483192269.13.jpg
+INFO:root:get url key is :reporter:48::1483192255.72.jpg
+INFO:root:print return struct, tag = after change....
+INFO:root:max_code:1
+INFO:root:code: 0
+INFO:root:message_mapping: ['default message']
+INFO:root:data: {'formal': 0, 'size': 6, 'person_list': [{'person_id': '586bace116b2d60dd3aa85ca', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451617.73.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454060&Signature=TGDCXbFlliU4KR245rh1i6yq%2BfE%3D', 'name': u'\u5c0f\u7c73\u7535\u996d\u7172'}, {'person_id': '586bac3416b2d60dd3aa85c6', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451444.26.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454060&Signature=Q%2FmK1wE6jqPMJm%2B0gaYFlmIZcTA%3D', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74'}, {'person_id': '586bab4b16b2d60dd3aa85c2', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451210.84.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454060&Signature=A5s2FHQcZLOHO7eNMy6ZaPgm2i8%3D', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74'}, {'person_id': '5867b7f716b2d6121d8d8c35', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192310.94.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454060&Signature=B8XzodF%2BUCXmCG%2BwWzqYnFzOZXw%3D', 'name': u'\u5468\u661f\u9a70\u4e0d\u62cd\u7535\u5f71'}, {'person_id': '5867b7cd16b2d6121d8d8c2d', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192269.13.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454060&Signature=iiyH22s7e%2FPoprMymPwTkkxIRjw%3D', 'name': u'\u5468\u9e3f\u794e\u4e0d\u5728360'}, {'person_id': '5867b7bf16b2d6121d8d8c29', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192255.72.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454060&Signature=xnCF4cHiaCoX3iL2VmpibFgAfhU%3D', 'name': u'\u5468\u9e3f\u794e\uff12\uff13\uff13'}], 'page': 0}
+INFO:tornado.access:200 GET /get/updateperson?jsoncallback=jQuery17205427064220404343_1483454000424&formal=0&spot=%5B20%2C20%5D&max_distance=100.33&page=0&size=6&_=1483454000570 (127.0.0.1) 20.87ms
+WARNING:tornado.access:404 GET /web/empty (127.0.0.1) 0.56ms
+INFO:tornado.access:304 GET /web/index (127.0.0.1) 1.33ms
+INFO:tornado.access:304 GET /static/css/demo.css?v=66adf3b5fcd4baadc0784b5dde9c5813 (127.0.0.1) 0.89ms
+INFO:tornado.access:304 GET /static/css/stapel.css?v=473889e1447f1be7999776d489242880 (127.0.0.1) 0.64ms
+INFO:tornado.access:304 GET /static/css/custom.css?v=566a1f18e84f9df60dcde8d953d89eca (127.0.0.1) 0.66ms
+INFO:tornado.access:304 GET /static/js/modernizr.custom.63321.js?v=3ad7bc528408307bbba6f4c01a1ca04d (127.0.0.1) 0.70ms
+INFO:tornado.access:304 GET /static/js/jquery.paginate.js?v=86baf47df3e43759edb958a9997e4658 (127.0.0.1) 0.63ms
+INFO:tornado.access:304 GET /static/js/jquery.stapel.js?v=bb0d0881bfd21155fc8f856330992875 (127.0.0.1) 0.61ms
+INFO:tornado.access:304 GET /static/images/white_texture.png (127.0.0.1) 0.62ms
+INFO:tornado.access:304 GET /static/images/4/3.jpg?v=b5a5bb74173b8be48c5ed27f84e7f55c (127.0.0.1) 0.64ms
+INFO:tornado.access:304 GET /static/images/1/1.jpg?v=332a3db1d518fbc81d03050164d9bf19 (127.0.0.1) 0.93ms
+INFO:tornado.access:304 GET /static/images/1/2.jpg?v=06d49e636ae86201f7e4855b9630bff7 (127.0.0.1) 0.93ms
+INFO:root:message timeline query is {'spot': {'$geoWithin': {'$center': [[20, 20], 100.33]}}}
+INFO:root:item in lastest message is {u'confidence': 96.46, u'pic_key': u'user48::1483451716.04.jpg', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483192346.8.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': u'5867b81b16b2d6121d8d8c3d', u'date': 1483451712.0, u'_id': ObjectId('586bad4416b2d60dd3aa85ce'), u'type': 2, u'formal': 1}
+INFO:root:item in lastest message is {u'pic_key': u'empty', u'name': u'\u5c0f\u7c73\u7535\u996d\u7172', u'std_pic_key': u'reporter:48::1483451617.73.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': ObjectId('586bace116b2d60dd3aa85ca'), u'date': 1483451616.0, u'_id': ObjectId('586bace316b2d60dd3aa85cb'), u'type': 0, u'formal': 0}
+INFO:root:item in lastest message is {u'pic_key': u'empty', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483451444.26.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': ObjectId('586bac3416b2d60dd3aa85c6'), u'date': 1483451441.0, u'_id': ObjectId('586bac3816b2d60dd3aa85c7'), u'type': 0, u'formal': 0}
+INFO:root:item in lastest message is {u'pic_key': u'empty', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483451210.84.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': ObjectId('586bab4b16b2d60dd3aa85c2'), u'date': 1483451208.0, u'_id': ObjectId('586bab4e16b2d60dd3aa85c3'), u'type': 0, u'formal': 0}
+INFO:root:item in lastest message is {u'confidence': 96.46, u'pic_key': u'user48::1483192692.9.jpg', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483192346.8.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': u'5867b81b16b2d6121d8d8c3d', u'date': 1483192690.0, u'_id': ObjectId('5867b97516b2d6121d8d8c53'), u'type': 2, u'formal': 1}
+INFO:root:get url key is :user48::1483451716.04.jpg
+INFO:root:get url key is :reporter:48::1483192346.8.jpg
+INFO:root:get url key is :reporter:48::1483451617.73.jpg
+INFO:root:get url key is :reporter:48::1483451444.26.jpg
+INFO:root:get url key is :reporter:48::1483451210.84.jpg
+INFO:root:get url key is :user48::1483192692.9.jpg
+INFO:root:get url key is :reporter:48::1483192346.8.jpg
+INFO:root:print return struct, tag = after change....
+INFO:root:max_code:1
+INFO:root:code: 0
+INFO:root:message_mapping: ['default message']
+INFO:root:data: {'message_list': [{'pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/user48%3A%3A1483451716.04.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454157&Signature=e1aOA13ySLcYiwcHpWkFep1X4BY%3D', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192346.8.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454157&Signature=UlCUr8If%2BxdC33F3rPboo%2Fn%2FetA%3D', 'spot': [22.9, 22.9], 'date': 1483451712.0, 'person_id': '5867b81b16b2d6121d8d8c3d', 'type': 2}, {'pic_key': u'empty', 'name': u'\u5c0f\u7c73\u7535\u996d\u7172', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451617.73.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454157&Signature=7hylV4FuYD3H4kJRrFVCigC1Dac%3D', 'spot': [22.9, 22.9], 'date': 1483451616.0, 'person_id': '586bace116b2d60dd3aa85ca', 'type': 0}, {'pic_key': u'empty', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451444.26.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454157&Signature=Kc3%2BkoduZn9%2BWd9YNd4IbrHMKgg%3D', 'spot': [22.9, 22.9], 'date': 1483451441.0, 'person_id': '586bac3416b2d60dd3aa85c6', 'type': 0}, {'pic_key': u'empty', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451210.84.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454157&Signature=hD6nlDiJd6e9ubO2q5C0wR6Vx%2F0%3D', 'spot': [22.9, 22.9], 'date': 1483451208.0, 'person_id': '586bab4b16b2d60dd3aa85c2', 'type': 0}, {'pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/user48%3A%3A1483192692.9.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454157&Signature=S4Ot8otHpbAp5eCFk3PKWYfOzRY%3D', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192346.8.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454157&Signature=UlCUr8If%2BxdC33F3rPboo%2Fn%2FetA%3D', 'spot': [22.9, 22.9], 'date': 1483192690.0, 'person_id': '5867b81b16b2d6121d8d8c3d', 'type': 2}], 'page': 0, 'size': 5}
+INFO:tornado.access:200 GET /get/updatemessage?jsoncallback=jQuery172072812888414597_1483454097228&spot=%5B20%2C20%5D&max_distance=100.33&page=0&size=5&_=1483454097297 (127.0.0.1) 26.68ms
+INFO:root: filter dictory result is {'last_update_spot': {'$geoWithin': {'$center': [[20, 20], 100.33]}}, 'formal': 0}
+INFO:root:get url key is :reporter:48::1483451617.73.jpg
+INFO:root:get url key is :reporter:48::1483451444.26.jpg
+INFO:root:get url key is :reporter:48::1483451210.84.jpg
+INFO:root:get url key is :reporter:48::1483192310.94.jpg
+INFO:root:get url key is :reporter:48::1483192269.13.jpg
+INFO:root:get url key is :reporter:48::1483192255.72.jpg
+INFO:root:print return struct, tag = after change....
+INFO:root:max_code:1
+INFO:root:code: 0
+INFO:root:message_mapping: ['default message']
+INFO:root:data: {'formal': 0, 'size': 6, 'person_list': [{'person_id': '586bace116b2d60dd3aa85ca', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451617.73.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454157&Signature=7hylV4FuYD3H4kJRrFVCigC1Dac%3D', 'name': u'\u5c0f\u7c73\u7535\u996d\u7172'}, {'person_id': '586bac3416b2d60dd3aa85c6', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451444.26.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454157&Signature=Kc3%2BkoduZn9%2BWd9YNd4IbrHMKgg%3D', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74'}, {'person_id': '586bab4b16b2d60dd3aa85c2', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451210.84.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454157&Signature=hD6nlDiJd6e9ubO2q5C0wR6Vx%2F0%3D', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74'}, {'person_id': '5867b7f716b2d6121d8d8c35', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192310.94.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454157&Signature=LlxokzmMOZjKGhMi%2BswCe1cADk0%3D', 'name': u'\u5468\u661f\u9a70\u4e0d\u62cd\u7535\u5f71'}, {'person_id': '5867b7cd16b2d6121d8d8c2d', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192269.13.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454157&Signature=yl7oK6FQSY0JrxlLmcGe15vu%2FIA%3D', 'name': u'\u5468\u9e3f\u794e\u4e0d\u5728360'}, {'person_id': '5867b7bf16b2d6121d8d8c29', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192255.72.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454157&Signature=qZKUPlO8REy4H1lFpZScrh2Mye4%3D', 'name': u'\u5468\u9e3f\u794e\uff12\uff13\uff13'}], 'page': 0}
+INFO:tornado.access:200 GET /get/updateperson?jsoncallback=jQuery172072812888414597_1483454097230&formal=0&spot=%5B20%2C20%5D&max_distance=100.33&page=0&size=6&_=1483454097345 (127.0.0.1) 19.66ms
+INFO:root: filter dictory result is {'last_update_spot': {'$geoWithin': {'$center': [[20, 20], 100.33]}}, 'formal': 1}
+INFO:root:get url key is :reporter:48::1483192346.8.jpg
+INFO:root:get url key is :reporter:48::1483192333.42.jpg
+INFO:root:get url key is :reporter:48::1483192300.91.jpg
+INFO:root:get url key is :reporter:48::1483192219.96.jpg
+INFO:root:get url key is :reporter:48::1483192126.28.jpg
+INFO:root:print return struct, tag = after change....
+INFO:root:max_code:1
+INFO:root:code: 0
+INFO:root:message_mapping: ['default message']
+INFO:root:data: {'formal': 1, 'size': 5, 'person_list': [{'person_id': '5867b81b16b2d6121d8d8c3d', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192346.8.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454157&Signature=UlCUr8If%2BxdC33F3rPboo%2Fn%2FetA%3D', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74'}, {'person_id': '5867b80d16b2d6121d8d8c39', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192333.42.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454157&Signature=bs%2BZVG7rveVKXQeWcHpCPTxbGoI%3D', 'name': u'\u5927\u8bdd\u897f\u6e38\u5468\u661f\u9a70'}, {'person_id': '5867b7ed16b2d6121d8d8c31', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192300.91.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454157&Signature=qO6hMvyOjpG3IAy%2FsS0jDzsOm8s%3D', 'name': u'\u5468\u661f\u9a70\u62cd\u7535\u5f71'}, {'person_id': '5867b79c16b2d6121d8d8c21', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192219.96.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454157&Signature=4shdldtjJugkGVjj9GyT1kroSGM%3D', 'name': u'\u96f7\u519b\u519b'}, {'person_id': '5867b73e16b2d6121d8d8c15', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192126.28.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454157&Signature=%2BTNlBiE3%2FWmxhlI7%2FNr0p%2Bjozmg%3D', 'name': u'leijun'}], 'page': 0}
+INFO:tornado.access:200 GET /get/updateperson?jsoncallback=jQuery172072812888414597_1483454097229&formal=1&spot=%5B20%2C20%5D&max_distance=100.33&page=0&size=5&_=1483454097337 (127.0.0.1) 31.72ms
+WARNING:tornado.access:404 GET /web/empty (127.0.0.1) 0.96ms
+INFO:tornado.access:304 GET /web/index (127.0.0.1) 0.82ms
+INFO:tornado.access:304 GET /static/css/demo.css?v=66adf3b5fcd4baadc0784b5dde9c5813 (127.0.0.1) 0.59ms
+INFO:tornado.access:304 GET /static/css/stapel.css?v=473889e1447f1be7999776d489242880 (127.0.0.1) 0.86ms
+INFO:tornado.access:304 GET /static/css/custom.css?v=566a1f18e84f9df60dcde8d953d89eca (127.0.0.1) 1.51ms
+INFO:tornado.access:304 GET /static/js/modernizr.custom.63321.js?v=3ad7bc528408307bbba6f4c01a1ca04d (127.0.0.1) 0.85ms
+INFO:tornado.access:304 GET /static/js/jquery.paginate.js?v=86baf47df3e43759edb958a9997e4658 (127.0.0.1) 0.85ms
+INFO:tornado.access:304 GET /static/js/jquery.stapel.js?v=bb0d0881bfd21155fc8f856330992875 (127.0.0.1) 0.82ms
+INFO:tornado.access:304 GET /static/images/white_texture.png (127.0.0.1) 0.78ms
+INFO:tornado.access:304 GET /static/images/4/3.jpg?v=b5a5bb74173b8be48c5ed27f84e7f55c (127.0.0.1) 0.91ms
+INFO:tornado.access:304 GET /static/images/1/1.jpg?v=332a3db1d518fbc81d03050164d9bf19 (127.0.0.1) 0.93ms
+INFO:tornado.access:304 GET /static/images/1/2.jpg?v=06d49e636ae86201f7e4855b9630bff7 (127.0.0.1) 0.89ms
+INFO:root:message timeline query is {'spot': {'$geoWithin': {'$center': [[20, 20], 100.33]}}}
+INFO:root:item in lastest message is {u'confidence': 96.46, u'pic_key': u'user48::1483451716.04.jpg', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483192346.8.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': u'5867b81b16b2d6121d8d8c3d', u'date': 1483451712.0, u'_id': ObjectId('586bad4416b2d60dd3aa85ce'), u'type': 2, u'formal': 1}
+INFO:root:item in lastest message is {u'pic_key': u'empty', u'name': u'\u5c0f\u7c73\u7535\u996d\u7172', u'std_pic_key': u'reporter:48::1483451617.73.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': ObjectId('586bace116b2d60dd3aa85ca'), u'date': 1483451616.0, u'_id': ObjectId('586bace316b2d60dd3aa85cb'), u'type': 0, u'formal': 0}
+INFO:root:item in lastest message is {u'pic_key': u'empty', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483451444.26.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': ObjectId('586bac3416b2d60dd3aa85c6'), u'date': 1483451441.0, u'_id': ObjectId('586bac3816b2d60dd3aa85c7'), u'type': 0, u'formal': 0}
+INFO:root:item in lastest message is {u'pic_key': u'empty', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483451210.84.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': ObjectId('586bab4b16b2d60dd3aa85c2'), u'date': 1483451208.0, u'_id': ObjectId('586bab4e16b2d60dd3aa85c3'), u'type': 0, u'formal': 0}
+INFO:root:item in lastest message is {u'confidence': 96.46, u'pic_key': u'user48::1483192692.9.jpg', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483192346.8.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': u'5867b81b16b2d6121d8d8c3d', u'date': 1483192690.0, u'_id': ObjectId('5867b97516b2d6121d8d8c53'), u'type': 2, u'formal': 1}
+INFO:root:get url key is :user48::1483451716.04.jpg
+INFO:root:get url key is :reporter:48::1483192346.8.jpg
+INFO:root:get url key is :reporter:48::1483451617.73.jpg
+INFO:root:get url key is :reporter:48::1483451444.26.jpg
+INFO:root:get url key is :reporter:48::1483451210.84.jpg
+INFO:root:get url key is :user48::1483192692.9.jpg
+INFO:root:get url key is :reporter:48::1483192346.8.jpg
+INFO:root:print return struct, tag = after change....
+INFO:root:max_code:1
+INFO:root:code: 0
+INFO:root:message_mapping: ['default message']
+INFO:root:data: {'message_list': [{'pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/user48%3A%3A1483451716.04.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454165&Signature=E%2BIbwiGFYrQtXoSiXAMAUWhtRvY%3D', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192346.8.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454165&Signature=XRO7azDPJLMqmbINXZZAWVWi7Z4%3D', 'spot': [22.9, 22.9], 'date': 1483451712.0, 'person_id': '5867b81b16b2d6121d8d8c3d', 'type': 2}, {'pic_key': u'empty', 'name': u'\u5c0f\u7c73\u7535\u996d\u7172', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451617.73.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454165&Signature=R%2FngCayeg%2FYy9tYMq8qjAM7ED7M%3D', 'spot': [22.9, 22.9], 'date': 1483451616.0, 'person_id': '586bace116b2d60dd3aa85ca', 'type': 0}, {'pic_key': u'empty', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451444.26.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454165&Signature=4KAqVoW7Smns4RosRSNWCxzJNak%3D', 'spot': [22.9, 22.9], 'date': 1483451441.0, 'person_id': '586bac3416b2d60dd3aa85c6', 'type': 0}, {'pic_key': u'empty', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451210.84.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454165&Signature=G0E1qCqI5HZoQH%2BasKXnzwOjLf0%3D', 'spot': [22.9, 22.9], 'date': 1483451208.0, 'person_id': '586bab4b16b2d60dd3aa85c2', 'type': 0}, {'pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/user48%3A%3A1483192692.9.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454165&Signature=8HLMZYUsF1uhwDvr1m4D8leRAvM%3D', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192346.8.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454165&Signature=XRO7azDPJLMqmbINXZZAWVWi7Z4%3D', 'spot': [22.9, 22.9], 'date': 1483192690.0, 'person_id': '5867b81b16b2d6121d8d8c3d', 'type': 2}], 'page': 0, 'size': 5}
+INFO:tornado.access:200 GET /get/updatemessage?jsoncallback=jQuery17206161593241117206_1483454104985&spot=%5B20%2C20%5D&max_distance=100.33&page=0&size=5&_=1483454105056 (127.0.0.1) 20.04ms
+INFO:root: filter dictory result is {'last_update_spot': {'$geoWithin': {'$center': [[20, 20], 100.33]}}, 'formal': 0}
+INFO:root:get url key is :reporter:48::1483451617.73.jpg
+INFO:root:get url key is :reporter:48::1483451444.26.jpg
+INFO:root:get url key is :reporter:48::1483451210.84.jpg
+INFO:root:get url key is :reporter:48::1483192310.94.jpg
+INFO:root:get url key is :reporter:48::1483192269.13.jpg
+INFO:root:get url key is :reporter:48::1483192255.72.jpg
+INFO:root:print return struct, tag = after change....
+INFO:root:max_code:1
+INFO:root:code: 0
+INFO:root:message_mapping: ['default message']
+INFO:root:data: {'formal': 0, 'size': 6, 'person_list': [{'person_id': '586bace116b2d60dd3aa85ca', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451617.73.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454165&Signature=R%2FngCayeg%2FYy9tYMq8qjAM7ED7M%3D', 'name': u'\u5c0f\u7c73\u7535\u996d\u7172'}, {'person_id': '586bac3416b2d60dd3aa85c6', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451444.26.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454165&Signature=4KAqVoW7Smns4RosRSNWCxzJNak%3D', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74'}, {'person_id': '586bab4b16b2d60dd3aa85c2', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451210.84.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454165&Signature=G0E1qCqI5HZoQH%2BasKXnzwOjLf0%3D', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74'}, {'person_id': '5867b7f716b2d6121d8d8c35', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192310.94.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454165&Signature=vAFAZOMyr0lNE85wdZhxPZX6aZw%3D', 'name': u'\u5468\u661f\u9a70\u4e0d\u62cd\u7535\u5f71'}, {'person_id': '5867b7cd16b2d6121d8d8c2d', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192269.13.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454165&Signature=9ku%2FbSAzHEycTllaGVrFS2T6fHs%3D', 'name': u'\u5468\u9e3f\u794e\u4e0d\u5728360'}, {'person_id': '5867b7bf16b2d6121d8d8c29', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192255.72.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454165&Signature=ZFAs%2FWkjX5f1xsjw9E5PnGMMOjA%3D', 'name': u'\u5468\u9e3f\u794e\uff12\uff13\uff13'}], 'page': 0}
+INFO:tornado.access:200 GET /get/updateperson?jsoncallback=jQuery17206161593241117206_1483454104987&formal=0&spot=%5B20%2C20%5D&max_distance=100.33&page=0&size=6&_=1483454105070 (127.0.0.1) 41.47ms
+INFO:root: filter dictory result is {'last_update_spot': {'$geoWithin': {'$center': [[20, 20], 100.33]}}, 'formal': 1}
+INFO:root:get url key is :reporter:48::1483192346.8.jpg
+INFO:root:get url key is :reporter:48::1483192333.42.jpg
+INFO:root:get url key is :reporter:48::1483192300.91.jpg
+INFO:root:get url key is :reporter:48::1483192219.96.jpg
+INFO:root:get url key is :reporter:48::1483192126.28.jpg
+INFO:root:print return struct, tag = after change....
+INFO:root:max_code:1
+INFO:root:code: 0
+INFO:root:message_mapping: ['default message']
+INFO:root:data: {'formal': 1, 'size': 5, 'person_list': [{'person_id': '5867b81b16b2d6121d8d8c3d', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192346.8.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454165&Signature=XRO7azDPJLMqmbINXZZAWVWi7Z4%3D', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74'}, {'person_id': '5867b80d16b2d6121d8d8c39', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192333.42.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454165&Signature=%2BsgepCj28%2BukBdJGkRNvqjRQpr8%3D', 'name': u'\u5927\u8bdd\u897f\u6e38\u5468\u661f\u9a70'}, {'person_id': '5867b7ed16b2d6121d8d8c31', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192300.91.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454165&Signature=lBZRFdaVGGO6ko12tSbsvg9Sd4c%3D', 'name': u'\u5468\u661f\u9a70\u62cd\u7535\u5f71'}, {'person_id': '5867b79c16b2d6121d8d8c21', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192219.96.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454165&Signature=3E8x1GXJmS1oZc0uVVYelVO3Btk%3D', 'name': u'\u96f7\u519b\u519b'}, {'person_id': '5867b73e16b2d6121d8d8c15', 'picture_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192126.28.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454165&Signature=LZxyxFFqnO1oPq7x%2FEWesqBcGLE%3D', 'name': u'leijun'}], 'page': 0}
+INFO:tornado.access:200 GET /get/updateperson?jsoncallback=jQuery17206161593241117206_1483454104986&formal=1&spot=%5B20%2C20%5D&max_distance=100.33&page=0&size=5&_=1483454105064 (127.0.0.1) 19.49ms
+WARNING:tornado.access:404 GET /web/empty (127.0.0.1) 0.79ms
+INFO:root:message timeline query is {'spot': {'$geoWithin': {'$center': [[20, 20], 100.33]}}}
+INFO:root:item in lastest message is {u'confidence': 96.46, u'pic_key': u'user48::1483451716.04.jpg', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483192346.8.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': u'5867b81b16b2d6121d8d8c3d', u'date': 1483451712.0, u'_id': ObjectId('586bad4416b2d60dd3aa85ce'), u'type': 2, u'formal': 1}
+INFO:root:item in lastest message is {u'pic_key': u'empty', u'name': u'\u5c0f\u7c73\u7535\u996d\u7172', u'std_pic_key': u'reporter:48::1483451617.73.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': ObjectId('586bace116b2d60dd3aa85ca'), u'date': 1483451616.0, u'_id': ObjectId('586bace316b2d60dd3aa85cb'), u'type': 0, u'formal': 0}
+INFO:root:item in lastest message is {u'pic_key': u'empty', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483451444.26.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': ObjectId('586bac3416b2d60dd3aa85c6'), u'date': 1483451441.0, u'_id': ObjectId('586bac3816b2d60dd3aa85c7'), u'type': 0, u'formal': 0}
+INFO:root:item in lastest message is {u'pic_key': u'empty', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483451210.84.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': ObjectId('586bab4b16b2d60dd3aa85c2'), u'date': 1483451208.0, u'_id': ObjectId('586bab4e16b2d60dd3aa85c3'), u'type': 0, u'formal': 0}
+INFO:root:item in lastest message is {u'confidence': 96.46, u'pic_key': u'user48::1483192692.9.jpg', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483192346.8.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': u'5867b81b16b2d6121d8d8c3d', u'date': 1483192690.0, u'_id': ObjectId('5867b97516b2d6121d8d8c53'), u'type': 2, u'formal': 1}
+INFO:root:item in lastest message is {u'confidence': 96.46, u'pic_key': u'user48::1483192686.9.jpg', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483192346.8.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': u'5867b81b16b2d6121d8d8c3d', u'date': 1483192683.0, u'_id': ObjectId('5867b96f16b2d6121d8d8c50'), u'type': 2, u'formal': 1}
+INFO:root:get url key is :user48::1483451716.04.jpg
+INFO:root:get url key is :reporter:48::1483192346.8.jpg
+INFO:root:get url key is :reporter:48::1483451617.73.jpg
+INFO:root:get url key is :reporter:48::1483451444.26.jpg
+INFO:root:get url key is :reporter:48::1483451210.84.jpg
+INFO:root:get url key is :user48::1483192692.9.jpg
+INFO:root:get url key is :reporter:48::1483192346.8.jpg
+INFO:root:get url key is :user48::1483192686.9.jpg
+INFO:root:get url key is :reporter:48::1483192346.8.jpg
+INFO:root:print return struct, tag = after change....
+INFO:root:max_code:1
+INFO:root:code: 0
+INFO:root:message_mapping: ['default message']
+INFO:root:data: {'message_list': [{'pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/user48%3A%3A1483451716.04.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454265&Signature=Q5MxtP5mesrxYaR%2FLYb92CYtxTU%3D', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192346.8.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454265&Signature=YgdrV3jMyUBKlOePHyq%2B%2FWl3P3Y%3D', 'spot': [22.9, 22.9], 'date': 1483451712.0, 'person_id': '5867b81b16b2d6121d8d8c3d', 'type': 2}, {'pic_key': u'empty', 'name': u'\u5c0f\u7c73\u7535\u996d\u7172', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451617.73.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454265&Signature=8c5LhFjhUuuNs4wghW3klvA8pQo%3D', 'spot': [22.9, 22.9], 'date': 1483451616.0, 'person_id': '586bace116b2d60dd3aa85ca', 'type': 0}, {'pic_key': u'empty', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451444.26.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454265&Signature=nyES73QZ3cIEYItil3oIq7kLakQ%3D', 'spot': [22.9, 22.9], 'date': 1483451441.0, 'person_id': '586bac3416b2d60dd3aa85c6', 'type': 0}, {'pic_key': u'empty', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451210.84.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454265&Signature=dpnNoDFHWCqUSxOWGjnYe%2FZnT8E%3D', 'spot': [22.9, 22.9], 'date': 1483451208.0, 'person_id': '586bab4b16b2d60dd3aa85c2', 'type': 0}, {'pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/user48%3A%3A1483192692.9.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454265&Signature=qnlrbbyWRB8n3Zwy%2FzrvraF%2BQBc%3D', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192346.8.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454265&Signature=YgdrV3jMyUBKlOePHyq%2B%2FWl3P3Y%3D', 'spot': [22.9, 22.9], 'date': 1483192690.0, 'person_id': '5867b81b16b2d6121d8d8c3d', 'type': 2}, {'pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/user48%3A%3A1483192686.9.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454265&Signature=M6w9rGk8n8jOQ9KxSkqzjB9Lv%2B4%3D', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192346.8.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483454265&Signature=YgdrV3jMyUBKlOePHyq%2B%2FWl3P3Y%3D', 'spot': [22.9, 22.9], 'date': 1483192683.0, 'person_id': '5867b81b16b2d6121d8d8c3d', 'type': 2}], 'page': 0, 'size': 6}
+INFO:tornado.access:200 GET /get/updatemessage?jsoncallback=jQuery17206161593241117206_1483454104988&spot=%5B20%2C20%5D&max_distance=100.33&page=0&size=6&_=1483454205013 (127.0.0.1) 67.78ms
+INFO:root:message timeline query is {'spot': {'$geoWithin': {'$center': [[20, 20], 100.33]}}}
+INFO:root:item in lastest message is {u'confidence': 96.46, u'pic_key': u'user48::1483451716.04.jpg', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483192346.8.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': u'5867b81b16b2d6121d8d8c3d', u'date': 1483451712.0, u'_id': ObjectId('586bad4416b2d60dd3aa85ce'), u'type': 2, u'formal': 1}
+INFO:root:item in lastest message is {u'pic_key': u'empty', u'name': u'\u5c0f\u7c73\u7535\u996d\u7172', u'std_pic_key': u'reporter:48::1483451617.73.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': ObjectId('586bace116b2d60dd3aa85ca'), u'date': 1483451616.0, u'_id': ObjectId('586bace316b2d60dd3aa85cb'), u'type': 0, u'formal': 0}
+INFO:root:item in lastest message is {u'pic_key': u'empty', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483451444.26.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': ObjectId('586bac3416b2d60dd3aa85c6'), u'date': 1483451441.0, u'_id': ObjectId('586bac3816b2d60dd3aa85c7'), u'type': 0, u'formal': 0}
+INFO:root:item in lastest message is {u'pic_key': u'empty', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483451210.84.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': ObjectId('586bab4b16b2d60dd3aa85c2'), u'date': 1483451208.0, u'_id': ObjectId('586bab4e16b2d60dd3aa85c3'), u'type': 0, u'formal': 0}
+INFO:root:item in lastest message is {u'confidence': 96.46, u'pic_key': u'user48::1483192692.9.jpg', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483192346.8.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': u'5867b81b16b2d6121d8d8c3d', u'date': 1483192690.0, u'_id': ObjectId('5867b97516b2d6121d8d8c53'), u'type': 2, u'formal': 1}
+INFO:root:item in lastest message is {u'confidence': 96.46, u'pic_key': u'user48::1483192686.9.jpg', u'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', u'std_pic_key': u'reporter:48::1483192346.8.jpg', u'age': 20, u'spot': [22.9, 22.9], u'sex': 0, u'person_id': u'5867b81b16b2d6121d8d8c3d', u'date': 1483192683.0, u'_id': ObjectId('5867b96f16b2d6121d8d8c50'), u'type': 2, u'formal': 1}
+INFO:root:get url key is :user48::1483451716.04.jpg
+INFO:root:get url key is :reporter:48::1483192346.8.jpg
+INFO:root:get url key is :reporter:48::1483451617.73.jpg
+INFO:root:get url key is :reporter:48::1483451444.26.jpg
+INFO:root:get url key is :reporter:48::1483451210.84.jpg
+INFO:root:get url key is :user48::1483192692.9.jpg
+INFO:root:get url key is :reporter:48::1483192346.8.jpg
+INFO:root:get url key is :user48::1483192686.9.jpg
+INFO:root:get url key is :reporter:48::1483192346.8.jpg
+INFO:root:print return struct, tag = after change....
+INFO:root:max_code:1
+INFO:root:code: 0
+INFO:root:message_mapping: ['default message']
+INFO:root:data: {'message_list': [{'pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/user48%3A%3A1483451716.04.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483457936&Signature=DlCPNnwc07CqUP30PO52XEpCiFo%3D', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192346.8.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483457936&Signature=%2FqdkXuP%2F21CDBBKemBIae7EbYPY%3D', 'spot': [22.9, 22.9], 'date': 1483451712.0, 'person_id': '5867b81b16b2d6121d8d8c3d', 'type': 2}, {'pic_key': u'empty', 'name': u'\u5c0f\u7c73\u7535\u996d\u7172', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451617.73.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483457936&Signature=dIAO5zjQkyXfiHe%2FMWYmhG55XdM%3D', 'spot': [22.9, 22.9], 'date': 1483451616.0, 'person_id': '586bace116b2d60dd3aa85ca', 'type': 0}, {'pic_key': u'empty', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451444.26.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483457936&Signature=s5lKajVCOszuqd%2FkJDFmFL6K5FQ%3D', 'spot': [22.9, 22.9], 'date': 1483451441.0, 'person_id': '586bac3416b2d60dd3aa85c6', 'type': 0}, {'pic_key': u'empty', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483451210.84.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483457936&Signature=ECih1snGxU90ZcaTe5oZnlkSwro%3D', 'spot': [22.9, 22.9], 'date': 1483451208.0, 'person_id': '586bab4b16b2d60dd3aa85c2', 'type': 0}, {'pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/user48%3A%3A1483192692.9.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483457936&Signature=sZ9P7Lm1ZD43xNHAEUMrOVAvfaE%3D', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192346.8.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483457936&Signature=%2FqdkXuP%2F21CDBBKemBIae7EbYPY%3D', 'spot': [22.9, 22.9], 'date': 1483192690.0, 'person_id': '5867b81b16b2d6121d8d8c3d', 'type': 2}, {'pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/user48%3A%3A1483192686.9.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483457936&Signature=PScr0VB4wZGm%2B54GWpQbPyA7RVs%3D', 'name': u'\u5982\u679c\u6709\u671f\u9650\uff0c\u4e00\u4e07\u5e74', 'std_pic_key': 'http://cloudeye.oss-cn-shanghai.aliyuncs.com/reporter%3A48%3A%3A1483192346.8.jpg?OSSAccessKeyId=LTAIkY3jD1E5hu8z&Expires=1483457936&Signature=%2FqdkXuP%2F21CDBBKemBIae7EbYPY%3D', 'spot': [22.9, 22.9], 'date': 1483192683.0, 'person_id': '5867b81b16b2d6121d8d8c3d', 'type': 2}], 'page': 0, 'size': 6}
+INFO:tornado.access:200 GET /get/updatemessage?jsoncallback=jQuery17206161593241117206_1483454104989&spot=%5B20%2C20%5D&max_distance=100.33&page=0&size=6&_=1483457876631 (127.0.0.1) 286.72ms
+Traceback (most recent call last):
+  File "app.py", line 120, in <module>
+    main()
+  File "app.py", line 117, in main
+    tornado.ioloop.IOLoop.instance().start()
+  File "/usr/local/lib/python2.7/dist-packages/tornado/ioloop.py", line 646, in start
+    event_pairs = self._impl.poll(poll_timeout)
+KeyboardInterrupt
