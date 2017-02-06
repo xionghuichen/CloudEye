@@ -39,24 +39,24 @@ def set_resquest(api,data,method):
     request.get_method = lambda: method # or 'DELETE' 
     return request
 
-def register():
-    data = {
-        "telephone":"15195861111",
-        "password":"zp19950310",
-        "real_name":"chenxionghui",
-        "nick_name":"burningbear",
-        "id_number":"350623199503100053"
-    }
+def register(data):
+    # data = {
+    #     "telephone":"15195861111",
+    #     "password":"zp19950310",
+    #     "real_name":"chenxionghui",
+    #     "nick_name":"burningbear",
+    #     "id_number":"350623199503100053"
+    # }
     req = set_resquest("/user/register",data,"POST")
     response = urllib2.urlopen(req)
     the_page = response.read()
     print the_page
 # db.tracklist.find().sort({_id:-1}).limit(1)
-def login():
-    data = {
-        "telephone":"15195861108",
-        "password":"zp19950310"
-    }
+def login(data):
+    # data = {
+    #     "telephone":"15195861108",
+    #     "password":"zp19950310"
+    # }
     req = set_resquest("/user/login",data,"POST")
     response = urllib2.urlopen(req)
     the_page = response.read()
@@ -76,32 +76,54 @@ def upload():
     the_page = response.read()
     print the_page
 # [todo]: if jpg ok?
-def callhelp():
-    with open('./test_img/lj3.jpg', 'rb') as f:
-        content1 = f.read()
-    with open('./test_img/lj.jpeg', 'rb') as f:
-        content2 = f.read()
-    data = {
-        'picture_list':[base64.b64encode(content1), base64.b64encode(content2)],
-        'pic_key':'jpg',
-        'name':'小米电饭煲',
-        'sex':0,
-        'age':20,
-        'relation_telephone':'15195861108',
-        'relation_name':'chenxionghui',
-        'lost_time':time.mktime(datetime.datetime.now().timetuple()),
-        'lost_spot':[22.9,22.9],
-        'description':'please help me dear!!!!'
-        }
+def callhelp(data):
+    # with open('./test_img/lj3.jpg', 'rb') as f:
+    #     content1 = f.read()
+    # with open('./test_img/lj.jpeg', 'rb') as f:
+    #     content2 = f.read()
+    # data = {
+    #     'picture_list':[base64.b64encode(content1), base64.b64encode(content2)],
+    #     'pic_key':'jpg',
+    #     'name':'小米电饭煲',
+    #     'sex':0,
+    #     'age':20,
+    #     'relation_telephone':'15195861108',
+    #     'relation_name':'chenxionghui',
+    #     'lost_time':time.mktime(datetime.datetime.now().timetuple()),
+    #     'lost_spot':[22.9,22.9],
+    #     'description':'please help me dear!!!!'
+    #     }
     req = set_resquest("/find/callhelp",data,"POST")
     response = urllib2.urlopen(req)
     the_page = response.read()
     print the_page
+def importperson(data):
+    # with open('./test_img/lj3.jpg', 'rb') as f:
+    #     content1 = f.read()
+    # with open('./test_img/lj.jpeg', 'rb') as f:
+    #     content2 = f.read()
+    # data = {
+    #     'picture_list':[base64.b64encode(content1), base64.b64encode(content2)],
+    #     'pic_key':'jpg',
+    #     'name':'小米电饭煲',
+    #     'sex':0,
+    #     'age':20,
+    #     'relation_telephone':'15195861108',
+    #     'relation_name':'chenxionghui',
+    #     'lost_time':time.mktime(datetime.datetime.now().timetuple()),
+    #     'lost_spot':[22.9,22.9],
+    #     'description':'please help me dear!!!!'
+    #     }
+    req = set_resquest("/admin/import",data,"POST")
+    response = urllib2.urlopen(req)
+    the_page = response.read()
+    print the_page
 
-def updatestatus():
-    data = {
-        'coordinates':[23.9,23.9]# update
-    }
+
+def updatestatus(data):
+    # data = {
+    #     'coordinates':[23.9,23.9]# update
+    # }
     req = set_resquest("/user/updatestatus",data,"POST")
     response = urllib2.urlopen(req)
     the_page = response.read()
@@ -185,10 +207,10 @@ def get_personlist_info():
     print the_page
 
 # register()
-login()
+# login()
 # updatestatus()
 # confirm()
-compare()
+# compare()
 # callhelp()
 # upload()
 # logout()

@@ -12,7 +12,7 @@ import tornado.gen
 
 from _exceptions.http_error import MyMissingArgumentError, ArgumentTypeError, InnerError
 from Base import BaseHandler
-from config.globalVal import ReturnStruct
+from config.globalVal import ReturnStruct, PLICEMAN_ID
 
 class SearchPersonHandler(BaseHandler):
     def __init__(self, *argc, **argkw):
@@ -195,6 +195,72 @@ class CallHelpHandler(BaseHandler):
         self.return_to_client(result)
         self.finish()
 
+
+class ImportPersonHandler(BaseHandler):
+    def __init__(self, *argc, **argkw):
+        super(ImportPersonHandler, self).__init__(*argc, **argkw)
+
+    @tornado.gen.coroutine
+    def post(self):
+        """ Upload person information which is missing recently. 
+        Syetem will push message to police and person around this person.
+
+        Args:
+
+        Returns:
+
+        [todo]:
+        this api can only called by ploiceman
+
+        """
+        message_mapping = [
+        'empty image'
+        ]
+        user_id = PLICEMAN_ID
+        result =ReturnStruct(message_mapping)
+        try:
+            picture_list = eval(self.get_argument('picture_list'))
+            pic_type = self.get_argument('pic_key')
+            info_data={
+                'name':self.get_argument('name'),
+                'sex':int(self.get_argument('sex')),
+                'age':int(self.get_argument('age')),
+                'relation_id':user_id,
+                'relation_telephone':self.get_argument('relation_telephone'),
+                'relation_name':self.get_argument('relation_name'),
+                'lost_time':float(self.get_argument('lost_time')),
+                'lost_spot':eval(self.get_argument('lost_spot')),
+                'description':self.get_argument('description')
+            }
+        except tornado.web.MissingArgumentError, e:
+            raise MyMissingArgumentError(e.arg_name)     
+        binary_picture_list = []
+        if picture_list == []:
+            result.code = 0
+        else:
+            # has image
+            for image_str in picture_list:
+                # decode base64 to binary file
+                try:
+                    binary_picture_list.append(base64.b64decode(image_str))
+                except TypeError as e:
+                    raise ArgumentTypeError('picture_list')
+
+            # get face_token _list
+            result_detect = yield tornado.gen.Task(self.face_model.detect_img_list, binary_picture_list, True)
+            result.merge_info(result_detect)
+            if result_detect.code == 0:
+                # upload pictures.
+                detect_result_list = result_detect.data['detect_result_list']
+                result_pic_key = yield tornado.gen.Task(
+                    self.picture_model.store_pictures,binary_picture_list, "reporter:"+str(user_id), pic_type, detect_result_list)
+                # todo, error handler
+                # store information.[track and person]
+                person_id = self.person_model.store_new_person(result_pic_key, detect_result_list, info_data, user_id)
+                result.data = {}
+            # send message
+        self.return_to_client(result)
+        self.finish()
 
 class ComparePersonHandler(BaseHandler):
     def __init__(self, *argc, **argkw):

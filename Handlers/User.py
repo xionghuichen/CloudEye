@@ -39,7 +39,7 @@ class RegisterHandler(BaseHandler):
                 self.user_model.import_missing_person(telephone)
             except Exception as e:
                 self.user_model.remove_user(telephone)
-                raise DBError('服务器内部出现错误了...')
+                raise DBError('服务器内部出现错误了，具体原因：%s'%e)
             #[todo] import missing person list to user_collection.
         self.return_to_client(result)
         self.finish()

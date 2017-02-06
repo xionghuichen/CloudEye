@@ -23,6 +23,36 @@ class PersonCoreModel(BaseCoreModel):
 
         return self.mongodb.person.info.insert_one(info_data).inserted_id
 
+    def update_persons_relation_id(self,person_list,relation_id):
+        """Update missing person's relation uid filter by person_list:
+
+        Args:
+            person_list: missing person id list
+            relation_id
+        """
+        id_list = [{'_id':x} for x in person_list]
+        data = {'relation_id':relation_id}
+        # db.getCollection('person.info').update({$or:[{relation_id:51},{relation_id:50}]},{age:21})
+        # db.getCollection('person.info').update({$or:[{relation_id:51},{relation_id:49}]},{$set:{age:21}})
+        # db.getCollection('person.info').update({$or:[{relation_id:51},{relation_id:49}]},{$set:{age:21}},{multi:true})
+        self.mongodb.person.info.update({'$or':id_list},{'$set':data},multi=True)
+    
+    def find_persons_by_tele(self,telephone):
+        """query from person.info by telephone.
+
+        Args && example:
+            "telephone":"15195861110",
+            
+        Returns:
+            person_list: missing person list identify by '_id'
+        """
+        cursor = self.mongodb.person.info.find({'relation_telephone':telephone})
+        person_list = []
+        if cursor != None:
+            for item in cursor:
+                person_list.append(item['_id'])
+        return person_list
+
     def get_person_info_by_date(self, filter_info,offset,is_formal):
         """filter person info by last update time.
 

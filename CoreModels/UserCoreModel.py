@@ -72,20 +72,6 @@ class UserCoreModel(BaseCoreModel):
         }
         return result
 
-    def get_missing_person_list(self,user_id):
-        """get missing person list from mongodb by user_id.
-
-        Args:
-            user_id
-
-        Returns:
-
-        """
-        result = self.mongodb.user.personlist.find_one({'user_id':user_id})
-        if result is None:
-            raise DBQueryError('error when get missing_person_list by user_id') 
-        return result['missing_person_list']
-
     def identify_check(self, telephone, password):
         """check the telephone and password in mysql databases.
 
@@ -101,21 +87,21 @@ class UserCoreModel(BaseCoreModel):
         scalar() 
         return result
 
-    def find_persons_by_tele(self,telephone):
-        """query from person.info by telephone.
+    def get_missing_person_list(self,user_id):
+        """get missing person list from mongodb by user_id.
 
-        Args && example:
-            "telephone":"15195861110",
-            
+        Args:
+            user_id
+
         Returns:
-            person_list: missing person list identify by '_id'
+
         """
-        cursor = self.mongodb.person.info.find({'relation_telephone':telephone})
-        person_list = []
-        if cursor != None:
-            for item in cursor:
-                person_list.append(item['_id'])
-        return person_list
+        result = self.mongodb.user.personlist.find_one({'user_id':user_id})
+        if result is None:
+            raise DBQueryError('error when get missing_person_list by user_id') 
+        return result['missing_person_list']
+        
+
 
 
     def insert_missing_person_by_uid(self, user_id,person_list):

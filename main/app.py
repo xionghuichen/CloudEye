@@ -27,7 +27,7 @@ from facepp_sdk.facepp import API, File
 from config.globalVal import AP
 from Handlers.Index import IndexHandler
 from Handlers.User import RegisterHandler, LoginHandler, UpdateStatusHandler, ConfirmHandler, LogoutHandler, MyPersonListHandler
-from Handlers.FindPerson import SearchPersonHandler, CallHelpHandler, ComparePersonHandler
+from Handlers.FindPerson import SearchPersonHandler, CallHelpHandler, ComparePersonHandler, ImportPersonHandler
 from Handlers.MissPerson import LastestUpdatePersonHandler, LastestUpdateMessageHandler, GetMissingPersonDetailHandler, GetMissingPersonDetailWebHandler
 from Handlers.Web import IndexPageHandler, DetailPageHandler
 define("port", default=9000, help="run on the given port", type=int)
@@ -80,13 +80,14 @@ class Application(tornado.web.Application):
             (r'/get/persondetail',GetMissingPersonDetailHandler),
             (r'/get/persondetail/web',GetMissingPersonDetailWebHandler),
             (r'/web/index',IndexPageHandler),
-            (r'/web/details',DetailPageHandler)
+            (r'/web/details',DetailPageHandler),
+            (r'/admin/import',ImportPersonHandler)
             
         ]
 
         tornado.web.Application.__init__(self, handlers, **settings)
         # use SQLachemy to connection to mysql.
-        DB_CONNECT_STRING = 'mysql+mysqldb://%s:%s@%s/%s'%(options.mysql_user, options.mysql_password, options.host, options.mysql_database)
+        DB_CONNECT_STRING = 'mysql+mysqldb://%s:%s@%s/%s?charset=utf8'%(options.mysql_user, options.mysql_password, options.host, options.mysql_database)
         engine = create_engine(DB_CONNECT_STRING, echo=True)
         self.sqldb = sessionmaker(
                 bind=engine,
