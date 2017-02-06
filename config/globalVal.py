@@ -27,3 +27,4 @@ class ReturnStruct(object):
         logging.info("code: %s"%self.code)
         logging.info("message_mapping: %s"%self.message_mapping)
         logging.info("data: %s"%self.data)
+PLICEMAN_ID = 0

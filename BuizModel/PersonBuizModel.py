@@ -29,7 +29,7 @@ class PersonBuizModel(BaseBuizModel):
                 'lost_spot':self.get_argument('lost_spot'),
                 'description':self.get_argument('description')
             user_id:
-            
+                if user_id == 0, means that this missing person's parents has not register our system yet.
         Returns:
             person_id
         """
@@ -42,7 +42,8 @@ class PersonBuizModel(BaseBuizModel):
             face_token_list.append(item['face_token'])
         self.face_model.add_faces_to_faceset(face_token_list)
         # add missing_person_id into person.missing collection
-        self.user_model.insert_missing_person_by_uid(user_id,[person_id])
+        if user_id != 0:
+            self.user_model.insert_missing_person_by_uid(user_id,[person_id])
         return person_id
 
     def update_person_status(self,shoot_type, event_info, shooter_info = None):
