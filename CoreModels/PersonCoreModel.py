@@ -35,7 +35,8 @@ class PersonCoreModel(BaseCoreModel):
         # db.getCollection('person.info').update({$or:[{relation_id:51},{relation_id:50}]},{age:21})
         # db.getCollection('person.info').update({$or:[{relation_id:51},{relation_id:49}]},{$set:{age:21}})
         # db.getCollection('person.info').update({$or:[{relation_id:51},{relation_id:49}]},{$set:{age:21}},{multi:true})
-        self.mongodb.person.info.update({'$or':id_list},{'$set':data},multi=True)
+        if id_list != []:
+            self.mongodb.person.info.update({'$or':id_list},{'$set':data},multi=True)
     
     def find_persons_by_tele(self,telephone):
         """query from person.info by telephone.

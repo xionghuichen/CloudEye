@@ -51,6 +51,7 @@ class BaseHandler(tornado.web.RequestHandler):
         self._picture_model = PictureBuizModel(**para)
         self._person_model = PersonBuizModel(**para)
         self._message_model = MessageBuizModel(**para)
+        self.confirm_level = self.face_model.VERY_HIGH_CONFIDENCE
 
     @property
     def message_model(self):

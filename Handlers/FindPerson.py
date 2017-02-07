@@ -37,8 +37,8 @@ class SearchPersonHandler(BaseHandler):
                 'search failed'
         """
         message_mapping = [
-            'search success and confidence higher than level: %s'%self.face_model.HIGH_CONFIDENCE,
-            'search success but confidence does not higher than level:%s'%self.face_model.HIGH_CONFIDENCE,
+            'search success and confidence higher than level: %s'%self.confirm_level,
+            'search success but confidence does not higher than level:%s'%self.confirm_level,
             'search failed'
         ]
         result = ReturnStruct(message_mapping)
@@ -68,11 +68,13 @@ class SearchPersonHandler(BaseHandler):
                 searchResult = yield tornado.gen.Task(self.face_model.search_person, face_token)
                 if searchResult != None:
                     # has search result.
-                    if searchResult['level'] >= self.face_model.HIGH_CONFIDENCE:
+                    if searchResult['level'] >= self.confirm_level:
                         # has high confidence
                         result.code = 0
                         # 3. get missing person_detail.
                         person_id = searchResult['info']['user_id']
+                        result.data['person_id']=person_id
+                        result.data['confidence']=searchResult['confidence']
                         # upload picture
                         detect_result = item
                         # [todo] delete unreadable '[]'
@@ -85,6 +87,7 @@ class SearchPersonHandler(BaseHandler):
                             'person_id':person_id,
                             'date':event_happen_date
                         }
+
                         try:
                             track_id = self.person_model.update_person_status(self.person_model.CAMERA, event_info)
                         except Exception as e:
@@ -314,7 +317,7 @@ class ComparePersonHandler(BaseHandler):
             confidence = yield tornado.gen.Task(self.face_model.compare_face, std_face_token, detect_result[0]['face_token'])
             result.data = confidence
             # logging.info("result of compare, the confidence is %s"%confidence)
-            if confidence['level'] >= self.face_model.HIGH_CONFIDENCE:    
+            if confidence['level'] >= self.confirm_level:    
                 # 4. update info
                 result.code = 0
                 pic_key_list = yield tornado.gen.Task(self.picture_model.store_pictures,[binary_picture], "user"+str(user_id), pic_type, detect_result)

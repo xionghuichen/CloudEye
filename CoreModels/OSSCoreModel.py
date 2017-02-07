@@ -7,7 +7,7 @@ import time
 class OSSCoreModel(BaseCoreModel):
     def __init__(self, *argc, **argkw):
         super(OSSCoreModel, self).__init__(*argc, **argkw)  
-        self._sign_time = 60
+        self._sign_time = 3600
     
     def upload_picture(self,key,binary_picture):
         """Upload single picture to OSS databases.

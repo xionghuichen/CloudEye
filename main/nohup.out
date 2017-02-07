@@ -1742,3 +1742,45 @@ FROM user_info_table
 WHERE user_info_table.telephone = %s AND user_info_table.password = %s
 2017-02-06 22:56:31,686 INFO sqlalchemy.engine.base.Engine (u'15195861001', u'zp123456')
 INFO:sqlalchemy.engine.base.Engine:(u'15195861001', u'zp123456')
+Traceback (most recent call last):
+  File "app.py", line 28, in <module>
+    from Handlers.Index import IndexHandler
+  File "/home/burningbear/Projects/web/CloudEye/Handlers/Index.py", line 5, in <module>
+    from Handlers.Base import BaseHandler
+  File "/home/burningbear/Projects/web/CloudEye/Handlers/Base.py", line 54
+    self.confirm_level = self..face_model.VERY_HIGH_CONFIDENCE
+                              ^
+SyntaxError: invalid syntax
+INFO:root:start server.
+2017-02-07 14:14:43,781 INFO sqlalchemy.engine.base.Engine SHOW VARIABLES LIKE 'sql_mode'
+INFO:sqlalchemy.engine.base.Engine:SHOW VARIABLES LIKE 'sql_mode'
+2017-02-07 14:14:43,781 INFO sqlalchemy.engine.base.Engine ()
+INFO:sqlalchemy.engine.base.Engine:()
+2017-02-07 14:14:43,817 INFO sqlalchemy.engine.base.Engine SELECT DATABASE()
+INFO:sqlalchemy.engine.base.Engine:SELECT DATABASE()
+2017-02-07 14:14:43,817 INFO sqlalchemy.engine.base.Engine ()
+INFO:sqlalchemy.engine.base.Engine:()
+2017-02-07 14:14:43,882 INFO sqlalchemy.engine.base.Engine show collation where `Charset` = 'utf8' and `Collation` = 'utf8_bin'
+INFO:sqlalchemy.engine.base.Engine:show collation where `Charset` = 'utf8' and `Collation` = 'utf8_bin'
+2017-02-07 14:14:43,882 INFO sqlalchemy.engine.base.Engine ()
+INFO:sqlalchemy.engine.base.Engine:()
+2017-02-07 14:14:43,919 INFO sqlalchemy.engine.base.Engine SELECT CAST('test plain returns' AS CHAR(60)) AS anon_1
+INFO:sqlalchemy.engine.base.Engine:SELECT CAST('test plain returns' AS CHAR(60)) AS anon_1
+2017-02-07 14:14:43,919 INFO sqlalchemy.engine.base.Engine ()
+INFO:sqlalchemy.engine.base.Engine:()
+2017-02-07 14:14:43,953 INFO sqlalchemy.engine.base.Engine SELECT CAST('test unicode returns' AS CHAR(60)) AS anon_1
+INFO:sqlalchemy.engine.base.Engine:SELECT CAST('test unicode returns' AS CHAR(60)) AS anon_1
+2017-02-07 14:14:43,953 INFO sqlalchemy.engine.base.Engine ()
+INFO:sqlalchemy.engine.base.Engine:()
+2017-02-07 14:14:43,986 INFO sqlalchemy.engine.base.Engine SELECT CAST('test collated returns' AS CHAR CHARACTER SET utf8) COLLATE utf8_bin AS anon_1
+INFO:sqlalchemy.engine.base.Engine:SELECT CAST('test collated returns' AS CHAR CHARACTER SET utf8) COLLATE utf8_bin AS anon_1
+2017-02-07 14:14:43,986 INFO sqlalchemy.engine.base.Engine ()
+INFO:sqlalchemy.engine.base.Engine:()
+Traceback (most recent call last):
+  File "app.py", line 122, in <module>
+    main()
+  File "app.py", line 119, in main
+    tornado.ioloop.IOLoop.instance().start()
+  File "/usr/local/lib/python2.7/dist-packages/tornado/ioloop.py", line 646, in start
+    event_pairs = self._impl.poll(poll_timeout)
+KeyboardInterrupt

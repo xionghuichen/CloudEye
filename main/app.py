@@ -111,6 +111,7 @@ class Application(tornado.web.Application):
         self.ali_bucket = oss2.Bucket(auth, endpoint, bucket_name)
         # bind redis service
         self.redis = redis.Redis(host='localhost',port=6379)
+        self.redis.flushall()
 def main():
     tornado.options.parse_command_line()
     http_server = tornado.httpserver.HTTPServer(Application())

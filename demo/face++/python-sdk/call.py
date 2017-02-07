@@ -44,46 +44,46 @@ api = API(API_KEY, API_SECRET)
 
 # 创建一个Faceset用来存储FaceToken
 # create a Faceset to save FaceToken
-# ret = api.faceset.create(outer_id='test1')
-# print_result("faceset create", ret)
-time.sleep(1)
-# 对图片进行检测
-# detect image
-
-Face = {}
-# res = api.detect(image_url=face_one)
-# print_result("person_one", res)
-# Face['person_one'] = res["faces"][0]["face_token"]
-# time.sleep(2)
-# res = api.detect(image_file=File(face_two))
-# print_result("person_two", res)
-# Face['person_two'] = res["faces"][0]["face_token"]
+ret = api.faceset.removeface(outer_id='formal_cloudeye',face_tokens='RemoveAllFaceTokens')
+print_result("faceset create", ret)
 # time.sleep(1)
-# 将得到的FaceToken存进Faceset里面
-# save FaceToken in Faceset
-# api.faceset.addface(outer_id='test1', face_tokens=Face.itervalues())
-# time.sleep(5)
-# 对待比对的图片进行检测，再搜索相似脸
-# detect image and search same face
-ret = api.detect(image_file=File(face_search))
-print_result("detect", ret)
+# # 对图片进行检测
+# # detect image
 
-time.sleep(10)
-search_result = api.search(face_token=ret["faces"][0]["face_token"], outer_id='test1')
+# Face = {}
+# # res = api.detect(image_url=face_one)
+# # print_result("person_one", res)
+# # Face['person_one'] = res["faces"][0]["face_token"]
+# # time.sleep(2)
+# # res = api.detect(image_file=File(face_two))
+# # print_result("person_two", res)
+# # Face['person_two'] = res["faces"][0]["face_token"]
+# # time.sleep(1)
+# # 将得到的FaceToken存进Faceset里面
+# # save FaceToken in Faceset
+# # api.faceset.addface(outer_id='test1', face_tokens=Face.itervalues())
+# # time.sleep(5)
+# # 对待比对的图片进行检测，再搜索相似脸
+# # detect image and search same face
+# ret = api.detect(image_file=File(face_search))
+# print_result("detect", ret)
 
-# 输出结果
-# print result
-print_result('search', search_result)
-print '=' * 60
-for k, v in Face.iteritems():
-    if v == search_result['results'][0]['face_token']:
-        print 'The person with highest confidence:', k
-        break
+# time.sleep(10)
+# search_result = api.search(face_token=ret["faces"][0]["face_token"], outer_id='test1')
+
+# # 输出结果
+# # print result
+# print_result('search', search_result)
+# print '=' * 60
+# for k, v in Face.iteritems():
+#     if v == search_result['results'][0]['face_token']:
+#         print 'The person with highest confidence:', k
+#         break
 
 
-# 删除无用的人脸库
-# delect faceset because it is no longer needed
-api.faceset.delete(outer_id='test', check_empty=0)
+# # 删除无用的人脸库
+# # delect faceset because it is no longer needed
+# api.faceset.delete(outer_id='test', check_empty=0)
 
 # 恭喜！您已经完成了本教程，可以继续阅读我们的API文档并利用Face++ API开始写您自
 # 己的App了！

@@ -182,14 +182,14 @@ def getUpdateMessageList():
     the_page = response.read()
     print the_page
 
-def getPersonDetail():
-    data = {
-        'person_id':"5867b81b16b2d6121d8d8c3d"
-    }
+def getPersonDetail(data):
+    # data = {
+    #     'person_id':"5867b81b16b2d6121d8d8c3d"
+    # }
     req = set_resquest("/get/persondetail",data,"POST")
     response = urllib2.urlopen(req)
     the_page = response.read()
-    print the_page
+    return the_page
 
 
 def getPersonDetailforweb():
