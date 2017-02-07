@@ -109,7 +109,7 @@ class BaseHandler(tornado.web.RequestHandler):
         return_struct.print_info("after change")
         temp_json = json.dumps({'code':return_struct.code,
             'message':return_struct.message_mapping[return_struct.code],
-            'data':return_struct.data})
+            'data':return_struct.data},ensure_ascii=False)
         temp_json.replace("null", "\'empty\'")
         if JQuery != '':
             temp_json = JQuery+'('+temp_json+')'

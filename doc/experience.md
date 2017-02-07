@@ -36,4 +36,8 @@ for index,item in enumerate(c_longtitude):
     db是connection连接，dbc是数据库游标
 
     对于 sqlachemy： 把connstr修改为connstr = 'mysql://uid:pwd@localhost/mydb?charset=utf8'
-4. 文件格式批量转化
+4. 图片格式批量转化：
+mogrify -format jpg *.jpeg
+将该目录中所有jpeg的文件转化成jpg文件
+5. json输出中文
+print json.dumps(missing_list,indent=2,ensure_ascii=False)

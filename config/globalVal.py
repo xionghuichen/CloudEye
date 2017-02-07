@@ -27,4 +27,6 @@ class ReturnStruct(object):
         logging.info("code: %s"%self.code)
         logging.info("message_mapping: %s"%self.message_mapping)
         logging.info("data: %s"%self.data)
+
 PLICEMAN_ID = 0
+FACESET_TOKEN='9621152487583047095b9c38bbeb96e3'

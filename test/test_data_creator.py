@@ -10,6 +10,8 @@
 # test_data_creator.py
 from testClient import *
 from user_map import u_latitude,u_longtitude,c_latitude,c_longtitude
+import random
+import json
 user_info_list=[
 {
     "telephone":"15195861001",
@@ -67,43 +69,160 @@ user_info_list=[
     "id_number":"350623199503100009"
 }
 ]
+def child_creator(upload_number,abbreviated,name,parent_id,user_id=0):
+    picture_list = []
+    for index in range(1,upload_number+1):
+        with open('./missing_person/%s/%s.jpg'%(abbreviated,upload_number), 'rb') as f:
+            picture_list.append(base64.b64encode(f.read()))
+
+    # random_spot = random.randint(0,len(c_longtitude))
+    data = {
+        'picture_list':picture_list,
+        'pic_key':'jpg',
+        'name':name,
+        'sex':random.randint(0,1),
+        'age':random.randint(0,15),
+        'relation_telephone':user_info_list[parent_id]['telephone'],
+        'relation_name':user_info_list[parent_id]['real_name'],
+        'lost_time':time.mktime(datetime.datetime.now().timetuple()),
+        'lost_spot':[u_latitude[parent_id],u_longtitude[parent_id]],
+        'description':'please help me, dear!!!!',
+        'relation_id':user_id
+        }
+    return data
+
+
+# register
 # for item in user_info_list:
-#     register(item)
+#     print register(item)
+
+# login
 # 在不同的地理位置登录这几个用户
 # for index,item in enumerate(user_info_list):
 #     login(item)
 #     data = {
 #         'coordinates':[u_latitude[index],u_longtitude[index]]
 #     }
-#     updatestatus(data)
-with open('./missing_person/aqe/1.jpg', 'rb') as f:
-    content1 = f.read()
-with open('./missing_person/aqe/2.jpg', 'rb') as f:
-    content2 = f.read()
-data = {
-    'picture_list':[base64.b64encode(content1), base64.b64encode(content2)],
-    'pic_key':'jpg',
-    'name':'小米电饭煲',
-    'sex':0,
-    'age':20,
-    'relation_telephone':'15195861108',
-    'relation_name':'chenxionghui',
-    'lost_time':time.mktime(datetime.datetime.now().timetuple()),
-    'lost_spot':[22.9,22.9],
-    'description':'please help me dear!!!!'
-    }
-# importperson(data)
+#     print updatestatus(data)
+
+
+
+
+# import missing person data.
 # import os
 # dir="./missing_person"
+# missing_list = {}
 # for root,dirs,files in os.walk(dir):
-#     for file in files:
-#         print os.path.join(root,file)
+#     name = root[len(dir)+1:]
+#     random_parent = random.randint(0,(len(user_info_list)-1)/2)
+#     if name != '':
+#         print random_parent
+#         data = child_creator(3,name,name,random_parent)
+#         if missing_list.has_key(user_info_list[random_parent]['real_name']):
+#             missing_list[user_info_list[random_parent]['real_name']].append(name)
+#         else:
+#             missing_list[user_info_list[random_parent]['real_name']]=[name]
+#         print "new import :%s,parent is %s"%(name,user_info_list[random_parent]['real_name'])
+#         result = eval(importperson(data))
+#         print result
+#         if result['code'] !=1:
+#             raise Exception("error import ! %s"%result)
 
-data = {
-    "telephone":"15195891108",
-    "password":"zp123456",
-    "real_name":"10学小好",
-    "nick_name":"10可爱的XXH",
-    "id_number":"350623199503100009"
-}
-register(data)
+# camera search person
+# import os
+# dir="./missing_person"
+# missing_list = {}
+# for root,dirs,files in os.walk(dir):
+#     name = root[len(dir)+1:]
+#     random_camera = random.randint(1,len(c_latitude))
+#     if name != '':
+#         upload_number = random.randint(4,6)
+#         print "use camera :%s, search %s of picture %s"%(random_camera,name,upload_number)
+#         with open('./missing_person/%s/%s.jpg'%(name,upload_number), 'rb') as f:
+#             content = base64.b64encode(f.read())
+#             data = {
+#                 'search_picture':content,
+#                 'pic_type':'jpg',
+#                 'coordinate':[c_latitude[random_camera-1],c_longtitude[random_camera-1]],
+#                 'camera_id':random_camera
+#             }
+#             try:
+#                 result = eval(upload(data))
+#                 print result
+#             except Exception as e:
+#                 print "error:%s"%(str(e))
+
+    # with open('./test_img/lj3.jpg', 'rb') as f:
+    #     content1 = f.read()
+    # with open('./test_img/lj.jpeg', 'rb') as f:
+    #     content2 = f.read()
+    # data = {
+    #     'picture_list':[base64.b64encode(content1), base64.b64encode(content2)],
+    #     'pic_key':'jpg',
+    #     'name':'小米电饭煲',
+    #     'sex':0,
+    #     'age':20,
+    #     'relation_telephone':'15195861108',
+    #     'relation_name':'chenxionghui',
+    #     'lost_time':time.mktime(datetime.datetime.now().timetuple()),
+    #     'lost_spot':[22.9,22.9],
+    #     'description':'please help me dear!!!!'
+    #     }
+
+import os
+dir="./missing_person"
+missing_list = {}
+for root,dirs,files in os.walk(dir):
+    name = root[len(dir)+1:]
+    random_parent = random.randint((len(user_info_list)-1)/2 + 1,len(user_info_list)-1)
+    if name != '':
+        print random_parent
+        user_id = eval(login(user_info_list[random_parent]))['data']['user_id']
+        data = child_creator(3,name,name,random_parent,user_id)
+        if missing_list.has_key(user_info_list[random_parent]['real_name']):
+            missing_list[user_info_list[random_parent]['real_name']].append(name)
+        else:
+            missing_list[user_info_list[random_parent]['real_name']]=[name]
+        print "new import :%s,parent is %s"%(name,user_info_list[random_parent]['real_name'])
+        result = eval(callhelp(data))
+        print result
+        if result['code'] !=1:
+            raise Exception("error import ! %s"%result)
+
+
+# 用户跟踪拍摄
+# for index,item in enumerate(user_info_list):
+#     login(item)
+#     data = {
+#         'coordinates':[u_latitude[index],u_longtitude[index]]
+#     }
+#     update_result = eval(updatestatus(data))
+#     message_queue = update_result['data']['message_queue']
+#     if message_queue == []:
+#         continue
+#     message = message_queue[random.randint(0,len(message_queue)-1)]
+#     # print message
+#     name = message['name'].decode('utf-8')
+#     spot = message['spot']
+#     pic = message['pic_key']
+#     std_pic = message['std_pic_key']
+#     person_id = message['person_id']
+#     # get random picture to detect.
+#     print "now user %s, find sombody like %s"%(str(user_info_list[index]['real_name']),str(name.encode('utf-8')))
+#     print "std picture is :%s"%std_pic
+#     print "found picture is : %s"%pic
+#     upload_number = random.randint(4,6)
+#     with open('./missing_person/%s/%s.jpg'%(name,upload_number), 'rb') as f:
+#         content = base64.b64encode(f.read())
+#     data = {
+#         'person_id':person_id,
+#         'picture':content,
+#         'pic_type':'jpg',
+#         'coordinate':[u_latitude[index],u_longtitude[index]],
+#         'description':'maybe I find this missing child!'
+#     }
+#     try:
+#         result = eval(compare(data))
+#         print result
+#     except Exception as e:
+#         print "error:%s"%(str(e))

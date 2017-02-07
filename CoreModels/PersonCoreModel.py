@@ -16,7 +16,7 @@ class PersonCoreModel(BaseCoreModel):
 
     def insert_person_info(self,pic_key, info_data):
         info_data['picture_key_list'] = pic_key
-        info_data['formal'] = 0
+        info_data['formal'] = info_data['formal']
         info_data['track_list'] = []
         info_data['last_update_time'] = info_data['lost_time']
         info_data['last_update_spot'] = info_data['lost_spot']
@@ -97,7 +97,7 @@ class PersonCoreModel(BaseCoreModel):
                 person_id = ObjectId(person_id)
             result = self.mongodb.person.info.find_one({'_id':person_id})
         if result == []or result == None:
-            raise DBQueryError('error when get person detail infomation by person_id')   
+            raise DBQueryError('error when get person detail infomation by person_id: %s'%person_id)   
         logging.info("get person_detail result is :%s"%result)
         # result['picture_key_list'] =  eval(result['picture_key_list'])      
         return result

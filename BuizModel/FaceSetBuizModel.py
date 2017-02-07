@@ -41,12 +41,13 @@ class FaceSetBuizModel(BaseBuizModel):
                 level = self.HIGH_CONFIDENCE
             elif confidence >= level1:
                 level = self.MIDDLE_CONFIDENCE
-            logging.info("result of search, the confidence is %s"%confidence)
             to_return = {
                 'level':level, 
                 'confidence':confidence,
                 'info':result['results'][0]
             }
+            
+            logging.info("result of search, %s"%to_return)
             callback(to_return)
         else:
             # do not search an possible face
@@ -103,7 +104,7 @@ class FaceSetBuizModel(BaseBuizModel):
             if detect_result == []:
                 # the quality of pictures is too to detect any faces
                 to_return.code = 1
-                to_return.data = {'count':count}
+                to_return.data = {'failed_detect_count':count}
                 break
             else:
                 if only:

@@ -92,7 +92,6 @@ class SearchPersonHandler(BaseHandler):
                             key = "camera"+str(camera_id)
                             self.picture_model.delete_pictures("camera"+str(camera_id), pic_type)
                             raise InnerError("正在search请求中更新用户信息时")
-
                         # 5. send message
                         message_data = {
                             'person_id':person_id,
@@ -107,13 +106,12 @@ class SearchPersonHandler(BaseHandler):
                             logging.info("infomation of exception %s"%str(e))
                             key = "camera"+str(camera_id)
                             self.picture_model.delete_pictures("camera"+str(camera_id), pic_type)
-                            raise InnerError("正在search请求中发送消息时")
+                            raise InnerError("正在search请求中发送消息时，%s"%str(e))
                         break
                     else:
                         result.code = 1
                 else:
                     result.code = 2
-        result.data = {}
         self.return_to_client(result)
         self.finish()
 
@@ -146,6 +144,7 @@ class CallHelpHandler(BaseHandler):
                 'relation_telephone':self.get_argument('relation_telephone'),
                 'relation_name':self.get_argument('relation_name'),
                 'relation_id': user_id,
+                'formal':0,
                 'lost_time':float(self.get_argument('lost_time')),
                 'lost_spot':eval(self.get_argument('lost_spot')),
                 'description':self.get_argument('description'),
@@ -226,6 +225,7 @@ class ImportPersonHandler(BaseHandler):
                 'sex':int(self.get_argument('sex')),
                 'age':int(self.get_argument('age')),
                 'relation_id':user_id,
+                'formal':1,
                 'relation_telephone':self.get_argument('relation_telephone'),
                 'relation_name':self.get_argument('relation_name'),
                 'lost_time':float(self.get_argument('lost_time')),
