@@ -205,3 +205,4 @@ class UserBuizModel(BaseBuizModel):
             None.
         """
         self.location_model.clear_user_location(user_id)
+        self.message_model.clear_message_queue(user_id)

@@ -192,40 +192,49 @@ def child_creator(upload_number,abbreviated,name,parent_id,user_id=0):
 # print json.dumps(missing_list,indent=2,ensure_ascii=False)
 
 # 用户跟踪拍摄
-for index,item in enumerate(user_info_list):
-    login(item)
-    data = {
-        'coordinates':[u_latitude[index],u_longtitude[index]]
-    }
-    update_result = eval(updatestatus(data))
-    message_queue = update_result['data']['message_queue']
-    if message_queue == []:
-        continue
-    print message_queue
-    message = message_queue[random.randint(0,len(message_queue)-1)]
-    # print message
-    name = message['name'].decode('utf-8')
-    spot = message['spot']
-    # pic = message['pic_key']
-    std_pic = message['std_pic_key']
-    person_id = message['person_id']
-    # get random picture to detect.
-    print "now user %s, find sombody like %s"%(str(user_info_list[index]['real_name']),str(name.encode('utf-8')))
-    print "std picture is :%s"%std_pic
-    print "is formal %s"%message['formal']
-    # print "found picture is : %s"%pic
-    upload_number = random.randint(4,6)
-    with open('./missing_person/%s/%s.jpg'%(name,upload_number), 'rb') as f:
-        content = base64.b64encode(f.read())
-    data = {
-        'person_id':person_id,
-        'picture':content,
-        'pic_type':'jpg',
-        'coordinate':[u_latitude[index],u_longtitude[index]],
-        'description':'maybe I find this missing child!'
-    }
-    try:
-        result = eval(compare(data))
-        print result
-    except Exception as e:
-        print "error:%s"%(str(e))
+# for index,item in enumerate(user_info_list):
+#     login(item)
+#     data = {
+#         'coordinates':[u_latitude[index],u_longtitude[index]]
+#     }
+#     update_result = eval(updatestatus(data))
+#     message_queue = update_result['data']['message_queue']
+#     if message_queue == []:
+#         continue
+#     print message_queue
+#     message = message_queue[random.randint(0,len(message_queue)-1)]
+#     # print message
+#     name = message['name'].decode('utf-8')
+#     spot = message['spot']
+#     # pic = message['pic_key']
+#     std_pic = message['std_pic_key']
+#     person_id = message['person_id']
+#     # get random picture to detect.
+#     print "now user %s, find sombody like %s"%(str(user_info_list[index]['real_name']),str(name.encode('utf-8')))
+#     print "std picture is :%s"%std_pic
+#     print "is formal %s"%message['formal']
+#     # print "found picture is : %s"%pic
+#     upload_number = random.randint(4,6)
+#     with open('./missing_person/%s/%s.jpg'%(name,upload_number), 'rb') as f:
+#         content = base64.b64encode(f.read())
+#     data = {
+#         'person_id':person_id,
+#         'picture':content,
+#         'pic_type':'jpg',
+#         'coordinate':[u_latitude[index],u_longtitude[index]],
+#         'description':'maybe I find this missing child!'
+#     }
+#     try:
+#         result = eval(compare(data))
+#         print "compare result is %s"%json.dumps(result,indent=2,ensure_ascii=False)
+#     except Exception as e:
+#         print "error:%s"%(str(e))
+
+# test confirm
+# 在不同的地理位置登录这几个用户
+login(user_info_list[2])
+data = {
+    'coordinates':[u_latitude[2],u_longtitude[2]]
+}
+print updatestatus(data)
+# confirm()

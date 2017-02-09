@@ -172,7 +172,7 @@ def getUpdatePersonList():
 
 def getUpdateMessageList():
     data = {
-        'spot':[22.9,22.9],
+        'spot':[31.9,118.9],
         'max_distance':10,
         'page':0,
         'size':6
@@ -187,7 +187,7 @@ def getPersonDetail(data):
     #     'person_id':"5867b81b16b2d6121d8d8c3d"
     # }
     req = set_resquest("/get/persondetail",data,"POST")
-    response = urllib2.urlopen(req)
+    response = urllib2.urlencodepen(req)
     the_page = response.read()
     return the_page
 
@@ -212,6 +212,7 @@ def get_personlist_info():
 # updatestatus()
 # confirm()
 # compare()
+
 # callhelp()
 # upload()
 # logout()
