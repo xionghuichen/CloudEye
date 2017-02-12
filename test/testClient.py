@@ -187,7 +187,7 @@ def getPersonDetail(data):
     #     'person_id':"5867b81b16b2d6121d8d8c3d"
     # }
     req = set_resquest("/get/persondetail",data,"POST")
-    response = urllib2.urlencodepen(req)
+    response = urllib2.urlopen(req)
     the_page = response.read()
     return the_page
 
@@ -216,7 +216,7 @@ def get_personlist_info():
 # callhelp()
 # upload()
 # logout()
-# getPersonDetail()
+
 # for web 
 # getUpdatePersonList()
 # getUpdateMessageList()

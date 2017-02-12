@@ -183,8 +183,10 @@ class PersonBuizModel(BaseBuizModel):
         del person_info['track_list']
         result = {
             'person_info':person_info,
+            'machine_length':len(machine_track),
+            'person_length':len(person_track),
             'machine_track':machine_track,
-            'person_track':person_track
+            'person_track':person_track,
         }
         return result
     

@@ -232,9 +232,14 @@ def child_creator(upload_number,abbreviated,name,parent_id,user_id=0):
 
 # test confirm
 # 在不同的地理位置登录这几个用户
-login(user_info_list[2])
-data = {
-    'coordinates':[u_latitude[2],u_longtitude[2]]
-}
-print updatestatus(data)
+# login(user_info_list[3])
+# data = {
+#     'coordinates':[u_latitude[3],u_longtitude[3]]
+# }
+# print updatestatus(data)
 # confirm()
+
+data = {
+    'person_id':'589966e6af8add4f9beefdee'
+}
+print getPersonDetail(data)

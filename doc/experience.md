@@ -53,3 +53,7 @@ print json.dumps(missing_list,indent=2,ensure_ascii=False)
             - 百度 ip地址
             - wget http://members.3322.org/dyndns/getip
             - wget http://ifconfig.me/ip 
+
+### 放弃本地修改，同步远程更新
+1. git reset -hard origin/对应分支
+2. git pull origin/对应分支
