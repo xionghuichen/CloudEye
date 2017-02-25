@@ -29,13 +29,13 @@ from Handlers.Index import IndexHandler
 from Handlers.User import RegisterHandler, LoginHandler, UpdateStatusHandler, ConfirmHandler, LogoutHandler, MyPersonListHandler
 from Handlers.FindPerson import SearchPersonHandler, CallHelpHandler, ComparePersonHandler, ImportPersonHandler
 from Handlers.MissPerson import LastestUpdatePersonHandler, LastestUpdateMessageHandler, GetMissingPersonDetailHandler, GetMissingPersonDetailWebHandler
-from Handlers.Web import IndexPageHandler, DetailPageHandler
+from Handlers.Web import IndexPageHandler, DetailPageHandler, DownloadHandler
 define("port", default=9000, help="run on the given port", type=int)
 define("host", default="139.196.207.155", help="community database host")
 define("mysql_database", default="cloudeye",
        help="community database name")
 define("mysql_user", default="root", help="community mysql user")
-define("mysql_password", default="zp19950310",
+define("mysql_password", default="",
        help="community database password")
 define("mongo_user",default="burningbear", help="community mongodb  user")
 define("mongo_password",default='zp19950310',help="commuity mongodb password")
@@ -81,6 +81,7 @@ class Application(tornado.web.Application):
             (r'/get/persondetail/web',GetMissingPersonDetailWebHandler),
             (r'/web/index',IndexPageHandler),
             (r'/web/details',DetailPageHandler),
+            (r'/download',DownloadHandler),
             (r'/admin/import',ImportPersonHandler)
             
         ]
@@ -112,6 +113,7 @@ class Application(tornado.web.Application):
         # bind redis service
         self.redis = redis.Redis(host='localhost',port=6379)
         # self.redis.flushall()
+        logging.info("start completed..")
 def main():
     tornado.options.parse_command_line()
     http_server = tornado.httpserver.HTTPServer(Application())

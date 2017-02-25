@@ -127,12 +127,12 @@ def child_creator(upload_number,abbreviated,name,parent_id,user_id=0):
 
 # login
 # 在不同的地理位置登录这几个用户
-# for index,item in enumerate(user_info_list):
-#     login(item)
-#     data = {
-#         'coordinates':[u_latitude[index],u_longtitude[index]]
-#     }
-#     print updatestatus(data)
+for index,item in enumerate(user_info_list):
+    login(item)
+    data = {
+        'coordinates':[u_latitude[index],u_longtitude[index]]
+    }
+    print updatestatus(data)
 
 
 # camera search person
@@ -239,7 +239,9 @@ def child_creator(upload_number,abbreviated,name,parent_id,user_id=0):
 # print updatestatus(data)
 # confirm()
 
-data = {
-    'person_id':'589966e6af8add4f9beefdee'
-}
-print getPersonDetail(data)
+# data = {
+#     'person_id':'589966e6af8add4f9beefdee'
+# }
+# print getPersonDetail(data)
+
+
