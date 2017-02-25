@@ -149,9 +149,9 @@
     function getLocalTime(nS) {     
        return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');     
     }   
-     var id=window.location.search.slice(window.location.search.lastIndexOf("?")+1);
+     var id=window.location.search.slice(window.location.search.lastIndexOf("?")+11);
      //alert(id);
-     //此处有动态赋值
+     //此处有动态赋值 person_id=
        $.getJSON("/get/persondetail/web?jsoncallback=?",{"person_id":id},function(result){
      var infor=result.data.person_info;
      var usertrack=result.data.person_track;

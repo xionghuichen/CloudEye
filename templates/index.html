@@ -257,7 +257,7 @@
 					
 
 					//$(".case_item:eq("+i+")").show();
-					$(".case-item:eq("+i+") figcaption a").attr('href',$(".case-item:eq("+i+") figcaption a").attr('href')+"?"+jQuery.data(test,"datas").person_id);
+					$(".case-item:eq("+i+") figcaption a").attr('href',$(".case-item:eq("+i+") figcaption a").attr('href')+"?person_id="+jQuery.data(test,"datas").person_id);
 					
 					$(".case-item:eq("+i+") figcaption div h3 span").text(jQuery.data(test,"datas").name);
 					$(".case-item:eq("+i+") img").attr('src',jQuery.data(test,"datas").picture_key);
@@ -284,7 +284,7 @@
 					
 
 					//$(".case_item:eq("+i+")").show();
-					$(".case-item:eq("+i+") figcaption a").attr('href',$(".case-item:eq("+i+") figcaption a").attr('href')+"?"+jQuery.data(test,"datas").person_id);
+					$(".case-item:eq("+i+") figcaption a").attr('href',$(".case-item:eq("+i+") figcaption a").attr('href')+"?person_id="+jQuery.data(test,"datas").person_id);
 					
 					$(".case-item:eq("+i+") figcaption div h2 span").text(jQuery.data(test,"datas").name);
 					$(".case-item:eq("+i+") img").attr('src',jQuery.data(test,"datas").picture_key);
@@ -384,7 +384,7 @@
 					$(".nav__item span.update-name").text(update[index].name);
 				
 					//standard profile
-					$(".update-case:eq("+0+") figcaption a").attr('href',$(".update-case:eq("+0+") figcaption a").attr('href')+"?"+update[index].person_id);
+					$(".update-case:eq("+0+") figcaption a").attr('href',$(".update-case:eq("+0+") figcaption a").attr('href')+"?person_id="+update[index].person_id);
 					
 					//alert(jQuery.data(test,"datas").person_id+","+$(".update-case:eq("+0+") figcaption a").attr('href'));
 					
@@ -393,7 +393,7 @@
 					//$(".update-case:eq("+0+") figcaption h2 i").text(update[index].name);
 
 					//user track
-					$(".update-case:eq("+1+") figcaption a").attr('href',$(".update-case:eq("+0+") figcaption a").attr('href')+"?"+update[index].person_id);
+					$(".update-case:eq("+1+") figcaption a").attr('href',$(".update-case:eq("+0+") figcaption a").attr('href')+"?person_id="+update[index].person_id);
 					
 					$(".update-case:eq("+1+") img").attr('src',update[index].pic_key);
 					
