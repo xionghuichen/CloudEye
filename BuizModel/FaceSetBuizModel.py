@@ -13,6 +13,34 @@ class FaceSetBuizModel(BaseBuizModel):
         self.MIDDLE_CONFIDENCE = 1
         self.HIGH_CONFIDENCE = 2
         self.VERY_HIGH_CONFIDENCE = 3
+        self.SUPER_HIGH_CONFIDENCE = 4
+
+    def _calculate_level(self,levels,confidence):
+        """Calculate confidence level
+
+        Args:
+            levels: should has following keys (actually, this parameter come from face++):
+                le-3:low confidence
+                le-4:middle confidence
+                le-5: high confidence
+            confidence: a float stand for confidence value.
+        Returns:
+            level: confidence level.
+        """
+        level1 = float(levels['1e-3'])
+        level2 = float(levels['1e-4'])
+        level3 = float(levels['1e-5'])
+        level4 = level3 + (level3 - level2)/2
+        level = self.LOW_CONFIDENCE
+        if confidence >= level4:
+            level = self.SUPER_HIGH_CONFIDENCE
+        elif confidence >= level3:
+            level =  self.VERY_HIGH_CONFIDENCE
+        elif confidence >= level2:
+            level = self.HIGH_CONFIDENCE
+        elif confidence >= level1:
+            level = self.MIDDLE_CONFIDENCE
+        return level
 
     def search_person(self,face_token, callback):
         """ Use face++ to search a person by url.
@@ -30,23 +58,15 @@ class FaceSetBuizModel(BaseBuizModel):
         """
         result = self.face_model.search_face(face_token)
         if result.has_key('results'):
-            level1 = float(result['thresholds']['1e-3'])
-            level2 = float(result['thresholds']['1e-4'])
-            level3 = float(result['thresholds']['1e-5'])
-            confidence = float(result['results'][0]['confidence'])
-            level = self.LOW_CONFIDENCE
-            if confidence >= level3:
-                level =  self.VERY_HIGH_CONFIDENCE
-            elif confidence >= level2:
-                level = self.HIGH_CONFIDENCE
-            elif confidence >= level1:
-                level = self.MIDDLE_CONFIDENCE
-            logging.info("result of search, the confidence is %s"%confidence)
+            confidence = result['results'][0]['confidence']
+            level = self._calculate_level(result['thresholds'],confidence)
             to_return = {
                 'level':level, 
                 'confidence':confidence,
                 'info':result['results'][0]
             }
+            
+            logging.info("result of search, %s"%to_return)
             callback(to_return)
         else:
             # do not search an possible face
@@ -103,7 +123,7 @@ class FaceSetBuizModel(BaseBuizModel):
             if detect_result == []:
                 # the quality of pictures is too to detect any faces
                 to_return.code = 1
-                to_return.data = {'count':count}
+                to_return.data = {'failed_detect_count':count}
                 break
             else:
                 if only:
@@ -146,17 +166,7 @@ class FaceSetBuizModel(BaseBuizModel):
                 confidence: float
         """
         result = self.face_model.compare_face(std_face_token, detect_face_token)
-        
-        level1 = float(result['thresholds']['1e-3'])
-        level2 = float(result['thresholds']['1e-4'])
-        level3 = float(result['thresholds']['1e-5'])
-        confidence = float(result['confidence'])
-        level = self.LOW_CONFIDENCE
-        if confidence >= level3:
-            level =  self.VERY_HIGH_CONFIDENCE
-        elif confidence >= level2:
-            level = self.HIGH_CONFIDENCE
-        elif confidence >= level1:
-            level = self.MIDDLE_CONFIDENCE
+        confidence = result['confidence']
+        level = self._calculate_level(result['thresholds'],confidence)
         logging.info("result of compare, the confidence is %s"%confidence)
         callback({'level':level,'confidence':confidence})

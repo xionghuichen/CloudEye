@@ -51,6 +51,7 @@ class BaseHandler(tornado.web.RequestHandler):
         self._picture_model = PictureBuizModel(**para)
         self._person_model = PersonBuizModel(**para)
         self._message_model = MessageBuizModel(**para)
+        self.confirm_level = self.face_model.VERY_HIGH_CONFIDENCE
 
     @property
     def message_model(self):
@@ -90,7 +91,7 @@ class BaseHandler(tornado.web.RequestHandler):
                 elif key == 'missing_person_list':
                     for index,item in enumerate(dic[key]):
                         dic[key][index]= str(item)
-                elif key == 'std_pic_key' or key == 'picture_key' or key == 'pic_key' or key =='picture_key_list':
+                elif key == 'std_pic_key' or key == 'std_photo_key' or key == 'picture_key' or key == 'pic_key' or key =='picture_key_list':
                     if dic[key] =='empty':
                         continue
                     if type(dic[key]) == list:
@@ -109,7 +110,7 @@ class BaseHandler(tornado.web.RequestHandler):
         return_struct.print_info("after change")
         temp_json = json.dumps({'code':return_struct.code,
             'message':return_struct.message_mapping[return_struct.code],
-            'data':return_struct.data})
+            'data':return_struct.data},ensure_ascii=False)
         temp_json.replace("null", "\'empty\'")
         if JQuery != '':
             temp_json = JQuery+'('+temp_json+')'

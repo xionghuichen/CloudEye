@@ -16,12 +16,43 @@ class PersonCoreModel(BaseCoreModel):
 
     def insert_person_info(self,pic_key, info_data):
         info_data['picture_key_list'] = pic_key
-        info_data['formal'] = 0
+        info_data['formal'] = info_data['formal']
         info_data['track_list'] = []
         info_data['last_update_time'] = info_data['lost_time']
         info_data['last_update_spot'] = info_data['lost_spot']
 
         return self.mongodb.person.info.insert_one(info_data).inserted_id
+
+    def update_persons_relation_id(self,person_list,relation_id):
+        """Update missing person's relation uid filter by person_list:
+
+        Args:
+            person_list: missing person id list
+            relation_id
+        """
+        id_list = [{'_id':x} for x in person_list]
+        data = {'relation_id':relation_id}
+        # db.getCollection('person.info').update({$or:[{relation_id:51},{relation_id:50}]},{age:21})
+        # db.getCollection('person.info').update({$or:[{relation_id:51},{relation_id:49}]},{$set:{age:21}})
+        # db.getCollection('person.info').update({$or:[{relation_id:51},{relation_id:49}]},{$set:{age:21}},{multi:true})
+        if id_list != []:
+            self.mongodb.person.info.update({'$or':id_list},{'$set':data},multi=True)
+    
+    def find_persons_by_tele(self,telephone):
+        """query from person.info by telephone.
+
+        Args && example:
+            "telephone":"15195861110",
+            
+        Returns:
+            person_list: missing person list identify by '_id'
+        """
+        cursor = self.mongodb.person.info.find({'relation_telephone':telephone})
+        person_list = []
+        if cursor != None:
+            for item in cursor:
+                person_list.append(item['_id'])
+        return person_list
 
     def get_person_info_by_date(self, filter_info,offset,is_formal):
         """filter person info by last update time.
@@ -67,7 +98,7 @@ class PersonCoreModel(BaseCoreModel):
                 person_id = ObjectId(person_id)
             result = self.mongodb.person.info.find_one({'_id':person_id})
         if result == []or result == None:
-            raise DBQueryError('error when get person detail infomation by person_id')   
+            raise DBQueryError('error when get person detail infomation by person_id: %s'%person_id)   
         logging.info("get person_detail result is :%s"%result)
         # result['picture_key_list'] =  eval(result['picture_key_list'])      
         return result

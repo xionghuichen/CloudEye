@@ -1,0 +1,31 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<style type="text/css">
+		body, html{width: 100%;height: 100%;margin:0;font-family:"微软雅黑";font-size:14px;}
+		#allmap {width:100%;height:500px;}
+	</style>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=tYISNwwks0jsEY3566N990sbTTO9LXC2"></script>
+	<title>逆地址解析</title>
+</head>
+<body>
+	<div id="allmap"><p>点击地图展示详细地址</p></div>
+	
+</body>
+</html>
+<script type="text/javascript">
+	// 百度地图API功能
+	var map = new BMap.Map();
+	var point = new BMap.Point(118.94,31.88);
+	//map.centerAndZoom(point,12);
+	var geoc = new BMap.Geocoder();    
+
+       
+		
+		geoc.getLocation(point, function(rs){
+			var addComp = rs.addressComponents;
+			alert(addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber);
+		});        
+
+</script>

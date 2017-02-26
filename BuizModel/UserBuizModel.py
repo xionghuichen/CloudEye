@@ -84,8 +84,9 @@ class UserBuizModel(BaseBuizModel):
 
         Returns:
         """
-        person_list = self.user_model.find_persons_by_tele(telephone)
+        person_list = self.person_model.find_persons_by_tele(telephone)
         uid = self.user_model.get_uid_by_telephone(telephone)
+        self.person_model.update_persons_relation_id(person_list,uid)
         self.user_model.insert_missing_person_by_uid(uid,person_list)
 
     def remove_user(self, telephone):
@@ -204,3 +205,4 @@ class UserBuizModel(BaseBuizModel):
             None.
         """
         self.location_model.clear_user_location(user_id)
+        self.message_model.clear_message_queue(user_id)

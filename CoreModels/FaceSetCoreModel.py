@@ -6,6 +6,7 @@ import logging
 from BaseCoreModel import BaseCoreModel
 from _exceptions.http_error import DBError
 from facepp_sdk.facepp import APIError, File
+from config.globalVal import FACESET_TOKEN
 import time
 def repeat_send(method):
     """this decorator for face++ request. 
@@ -35,7 +36,7 @@ def repeat_send(method):
 class FaceSetCoreModel(BaseCoreModel):
     def __init__(self, *argc, **argkw):
         super(FaceSetCoreModel, self).__init__(*argc, **argkw)  
-        self.temp_faceset_token='9621152487583047095b9c38bbeb96e3'
+        self.temp_faceset_token=FACESET_TOKEN
         self.fade_file_path = './demo.jpeg'
 
     @repeat_send
