@@ -6,7 +6,7 @@ import base64
 import logging
 import time
 import datetime
-
+from bson import ObjectId
 import tornado.web
 import tornado.gen
 
@@ -98,10 +98,23 @@ class SearchPersonHandler(FindPersonHandler):
                         person_id = searchResult['info']['user_id']
                         result.data['person_id']=person_id
                         result.data['confidence']=searchResult['confidence']
+                        del result.data['detect_result_list']
+                        brief_info_list = self.person_model.get_person_brief_info([ObjectId(person_id)])[0]
+                        result.data['std_photo_key'] = brief_info_list['std_photo_key']
+                        result.data['name']=brief_info_list['name']
+                        result.data['description']=brief_info_list['description']
+                        result.data['sex']=brief_info_list['sex']
+                        result.data['lost_time']=brief_info_list['lost_time']
+                        result.data['age']=brief_info_list['age']
                         # upload picture
                         detect_result = item
                         # [todo] delete unreadable '[]'
-                        pic_key_list = yield tornado.gen.Task(self.picture_model.store_pictures,[binary_picture], self.type_map[search_type]+str(searcher_id), pic_type, [detect_result])
+                        pic_key_list = yield tornado.gen.Task(
+                            self.picture_model.store_pictures,
+                            [binary_picture], 
+                            self.type_map[search_type]+str(searcher_id), 
+                            pic_type, 
+                            [detect_result])
                         # 4. update track　and person information
                         event_info = {
                             'coordinate':coordinate,
@@ -136,8 +149,10 @@ class SearchPersonHandler(FindPersonHandler):
                         break
                     else:
                         result.code = 1
+                        result.data = {}
                 else:
                     result.code = 2
+                    result.data = {}
         self.return_to_client(result)
         self.finish()
 

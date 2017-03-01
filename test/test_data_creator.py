@@ -12,6 +12,7 @@ from testClient import *
 from user_map import u_latitude,u_longtitude,c_latitude,c_longtitude
 import random
 import json
+import logging
 user_info_list=[
 {
     "telephone":"15195861001",
