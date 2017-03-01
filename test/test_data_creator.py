@@ -127,12 +127,12 @@ def child_creator(upload_number,abbreviated,name,parent_id,user_id=0):
 
 # login
 # 在不同的地理位置登录这几个用户
-for index,item in enumerate(user_info_list):
-    login(item)
-    data = {
-        'coordinates':[u_latitude[index],u_longtitude[index]]
-    }
-    print updatestatus(data)
+# for index,item in enumerate(user_info_list):
+#     login(item)
+#     data = {
+#         'coordinates':[u_latitude[index],u_longtitude[index]]
+#     }
+#     print updatestatus(data)
 
 
 # camera search person
@@ -151,10 +151,11 @@ for index,item in enumerate(user_info_list):
 #                 'search_picture':content,
 #                 'pic_type':'jpg',
 #                 'coordinate':[c_latitude[random_camera-1],c_longtitude[random_camera-1]],
-#                 'camera_id':random_camera
+#                 'id':random_camera,
+#                 'type':'camera'
 #             }
 #             try:
-#                 result = eval(upload(data))
+#                 result = eval(search(data))
 #                 print result
                 
 #                 person_id = result['data']['person_id']
@@ -163,6 +164,49 @@ for index,item in enumerate(user_info_list):
 #                 print "origin name is %s, search name is %s, confidence is %s"%(name,search_name,result['data']['confidence'])
 #             except Exception as e:
 #                 print "error:%s"%(str(e))
+
+# person search person
+import os
+dir="./missing_person"
+# missing_list = []
+# for index,item in enumerate(user_info_list):
+#     login(item)
+#     data = {
+#         'coordinates':[u_latitude[index],u_longtitude[index]]
+#     }
+#     print updatestatus(data)
+for root,dirs,files in os.walk(dir):
+    name = root[len(dir)+1:]
+    # select a random person to login
+    random_person = random.randint(1,len(u_latitude)-1)
+    login(user_info_list[random_person])
+    data = {
+        'coordinates':[u_latitude[random_person],u_longtitude[random_person]]
+    }
+    # print updatestatus(data)
+
+    if name != '':
+        upload_number = random.randint(4,6)
+        print "use user search :%s, search %s of picture %s"%(random_person,name,upload_number)
+        with open('./missing_person/%s/%s.jpg'%(name,upload_number), 'rb') as f:
+            content = base64.b64encode(f.read())
+            data = {
+                'search_picture':content,
+                'pic_type':'jpg',
+                'coordinate':[u_latitude[random_person-1],u_longtitude[random_person-1]],
+                'type':'reporter',
+                'id':1 # arbitrary number
+            }
+            try:
+                result = eval(search(data))
+                print result
+                person_id = result['data']['person_id']
+                data = {'person_id':person_id}
+                search_name = eval(getPersonDetail(data))['data']['person_info']['name']
+                print "origin name is %s, search name is %s, confidence is %s"%(name,search_name,result['data']['confidence'])
+            except Exception as e:
+                print "error:%s"%(str(e))
+
 
 # call help.
 # import os

@@ -99,10 +99,12 @@ class Application(tornado.web.Application):
         # create all of model inherit from BaseModel 
         base_model.metadata.create_all(engine) 
         # use pymongo to connectino to mongodb
+        logging.info("connect mongodb ..")
         client = pymongo.MongoClient(options.host,27017)
         client.cloudeye.authenticate(options.mongo_user,options.mongo_password)
         self.mongodb = client.cloudeye
         # bind face++ cloud service
+        logging.info("connect mongodb successfully..")
         self.facepp = API(FACE_API_KEY, FACE_API_SECRET)
         # bind ali cloud service
         auth = oss2.Auth(ALIYUN_KEY,ALIYUN_SECRET)
@@ -111,7 +113,9 @@ class Application(tornado.web.Application):
         self.ali_service = oss2.Service(auth, endpoint)
         self.ali_bucket = oss2.Bucket(auth, endpoint, bucket_name)
         # bind redis service
+        logging.info("connect redis..")
         self.redis = redis.Redis(host='localhost',port=6379)
+        logging.info("connect redis successfully..")
         # self.redis.flushall()
         logging.info("start completed..")
 def main():

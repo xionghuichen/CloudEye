@@ -9,8 +9,8 @@ import hashlib
 import base64
 import time
 import datetime
-prefix ="http://139.196.207.155:9000"
-# prefix = "http://127.0.0.1:9000"
+# prefix ="http://139.196.207.155:9000"
+prefix = "http://127.0.0.1:9000"
 cj = cookielib.CookieJar()
 opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cj))
 urllib2.install_opener(opener)
@@ -62,7 +62,7 @@ def login(data):
     the_page = response.read()
     return the_page
 
-def upload(data):
+def search(data):
     # with open('./test_img/ymh3.jpg', 'rb') as f:
     #     content = f.read()
     # data = {
@@ -214,7 +214,7 @@ def get_personlist_info():
 # compare()
 
 # callhelp()
-# upload()
+# search()
 # logout()
 
 # for web 

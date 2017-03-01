@@ -11,6 +11,7 @@ class MessageBuizModel(BaseBuizModel):
         self.CALL_HELP = 0
         self.SEARCH = 1
         self.COMPARE = 2
+        self.PERSON_SEARCH = 3
         self._inform_latitude = 0.02
         self._inform_longtitude = 0.05
 
@@ -23,8 +24,9 @@ class MessageBuizModel(BaseBuizModel):
         """
         factory = [
             self._send_call_help_message,# CALL_HELP
-            self._send_search_message,#SEARCH
-            self._send_compare_message#COMPARE
+            self._send_camera_search_message,# SEARCH
+            self._send_compare_message,# COMPARE
+            self._send_person_search_message # PERSON SEARCH
         ]
         result = factory[message_type](info)
 
@@ -56,7 +58,6 @@ class MessageBuizModel(BaseBuizModel):
         """
         person_detail_info = self.person_model.get_person_detail(info['person_id'])
         message_info = {
-            'formal':0,
             'date':info['date'],
             'spot':info['spot'],
             'name':person_detail_info['name'],
@@ -68,7 +69,6 @@ class MessageBuizModel(BaseBuizModel):
             'pic_key':info['pic_key'],
             'confidence':info['confidence'],
             'type':self.COMPARE
-
         }
         message_id = self.message_model.insert_message_detail( message_info)
         reporter_user_id = person_detail_info['relation_id']
@@ -88,8 +88,13 @@ class MessageBuizModel(BaseBuizModel):
         }
         self.message_model.add_to_users(user_id_list, message_queue_info)
 
+    def _send_camera_search_message(self,info):
+        self._send_search_message(info,self.SEARCH)
 
-    def _send_search_message(self, info):
+    def _send_person_search_message(self,info):
+        self._send_search_message(info,self.PERSON_SEARCH)
+
+    def _send_search_message(self, info, search_type):
         """send message to nearby person and reporter.
         
         Args:
@@ -102,7 +107,6 @@ class MessageBuizModel(BaseBuizModel):
         """
         person_detail_info = self.person_model.get_person_detail(info['person_id'])
         message_info = {
-            'formal':0,
             'date':info['date'],
             'spot':info['spot'],
             'name':person_detail_info['name'],
@@ -113,7 +117,7 @@ class MessageBuizModel(BaseBuizModel):
             'std_pic_key':person_detail_info['picture_key_list'][0],
             'pic_key':info['pic_key'],
             'confidence':info['confidence'],
-            'type':self.SEARCH
+            'type':search_type
 
         }
         message_id = self.message_model.insert_message_detail(message_info)
@@ -139,7 +143,6 @@ class MessageBuizModel(BaseBuizModel):
         }
         self.message_model.add_to_users(user_id_list, message_queue_info)
 
-
     def _send_call_help_message(self, info):
         """send message to nearby person and police. 
         
@@ -160,7 +163,6 @@ class MessageBuizModel(BaseBuizModel):
         # add to message.info collection
         # find the users in range.
         message_info = {
-            'formal':0,
             'date':info['date'],
             'spot':info['spot'],
             'name':info['name'],

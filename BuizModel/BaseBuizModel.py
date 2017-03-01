@@ -20,3 +20,4 @@ class BaseBuizModel(object):
         self.location_model = LocationCoreModel(*argc, **argkw)
         self.CAMERA = self.person_model.CAMERA
         self.PERSON = self.person_model.PERSON
+        self.PERSON_SEARCH = self.person_model.PERSON_SEARCH

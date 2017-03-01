@@ -13,6 +13,7 @@ class PersonCoreModel(BaseCoreModel):
         self.CAMERA = 0
         self.PERSON = 1
         self.POLICE = 2
+        self.PERSON_SEARCH = 3
 
     def insert_person_info(self,pic_key, info_data):
         info_data['picture_key_list'] = pic_key
@@ -136,6 +137,23 @@ class PersonCoreModel(BaseCoreModel):
                 'description':shooter_info['description'],
                 'person_id':info_data['person_id']
             }
+        elif shoot_type == self.PERSON_SEARCH:
+            track_info = {
+                # 'name':info_data['name'],
+                # 'sex':info_data['sex'],
+                # 'age':info_data['age'],
+                # 'person_'
+                # 'shoot_user_id':person_id_obj,
+                'pic_key':info_data['pic_key'],
+                'type':self.PERSON_SEARCH,
+                'confidence':info_data['confidence'],
+                'coordinate':info_data['coordinate'],
+                'date':info_data['date'],
+                'user_id':shooter_info['user_id'],
+                'user_nick_name':shooter_info['user_nick_name'],
+                'person_id':info_data['person_id']
+            }
+
         return track_info
 
 
