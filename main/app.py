@@ -28,7 +28,7 @@ from config.globalVal import AP
 from Handlers.Index import IndexHandler
 from Handlers.User import RegisterHandler, LoginHandler, UpdateStatusHandler, ConfirmHandler, LogoutHandler, MyPersonListHandler
 from Handlers.FindPerson import SearchPersonHandler, CallHelpHandler, ComparePersonHandler, ImportPersonHandler
-from Handlers.MissPerson import LastestUpdatePersonHandler, LastestUpdateMessageHandler, GetMissingPersonDetailHandler, GetMissingPersonDetailWebHandler,GetPersonTracksHandler
+from Handlers.MissPerson import GetAllTracksHandler,LastestUpdatePersonHandler, LastestUpdateMessageHandler, GetMissingPersonDetailHandler, GetMissingPersonDetailWebHandler,GetPersonTracksHandler
 from Handlers.Web import IndexPageHandler, DetailPageHandler, DownloadHandler
 define("port", default=9000, help="run on the given port", type=int)
 define("host", default="139.196.207.155", help="community database host")
@@ -80,6 +80,7 @@ class Application(tornado.web.Application):
             (r'/get/persondetail',GetMissingPersonDetailHandler),
             (r'/get/persondetail/web',GetMissingPersonDetailWebHandler),
             (r'/get/trackinfo/web',GetPersonTracksHandler),
+            (r'/get/alltrack/web',GetAllTracksHandler),
             (r'/web/index',IndexPageHandler),
             (r'/web/details',DetailPageHandler),
             (r'/download',DownloadHandler),
@@ -119,6 +120,7 @@ class Application(tornado.web.Application):
         logging.info("connect redis successfully..")
         # self.redis.flushall()
         logging.info("start completed..")
+        
 def main():
     tornado.options.parse_command_line()
     http_server = tornado.httpserver.HTTPServer(Application())

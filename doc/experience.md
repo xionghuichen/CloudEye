@@ -11,8 +11,8 @@ eg. def find_user_in_range(self, coordinate, distance),这个接口，用来获�
 不要盲目的增加一个方法的灵活性，因为这样的代价就是损失他的封装性，逻辑设计的变动可能导致一系列的改动，也就是耦合性也会提高；但是适当的考虑方法的通用性是必要的，它能够提高代码重用率。我的方法论是，考虑一个方法所可能的灵活程度是怎么样的，在满足灵活度需求的基础上最大限度提高其封装性
 
 ### matplotlib 使用注释
-for index,item in enumerate(c_longtitude):
-    plt.annotate('c:%s[%s,%s]'%(index+1,str(c_longtitude[index]),str(c_latitude[index])),xy=(c_longtitude[index],c_latitude[index]),xytext=(c_longtitude[index],c_latitude[index]))
+for index,item in enumerate(c_longitude):
+    plt.annotate('c:%s[%s,%s]'%(index+1,str(c_longitude[index]),str(c_latitude[index])),xy=(c_longitude[index],c_latitude[index]),xytext=(c_longitude[index],c_latitude[index]))
 - 第一个参数是注释内容
 - xy 参数是注释所在坐标
 - xytext是注释文本所在位置

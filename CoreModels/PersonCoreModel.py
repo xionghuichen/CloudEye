@@ -193,3 +193,21 @@ class PersonCoreModel(BaseCoreModel):
         if result == [] or result == None:
             raise DBQueryError('error when get track detail infomation by track_id(track_id_list)')            
         return result
+
+    def get_track_info_by_range(self,spot, longitude, latitude):
+        """get track information by range.
+
+        Args:
+            spot: the center spot, eg. [111.11,22.2]
+            range_longitude: search longitude
+            range_latitude: search latitude
+
+        """
+        track_info = self.mongodb.tracklist.find({
+                'coordinate':{
+                    '$geoWithin':{
+                        '$box':[[spot[0]+latitude,spot[1]+longitude],[spot[0]-latitude,spot[1]-longitude]]
+                    }
+                }
+            })
+        return track_info

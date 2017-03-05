@@ -9,7 +9,7 @@
 
 # test_data_creator.py
 from testClient import *
-from user_map import u_latitude,u_longtitude,c_latitude,c_longtitude
+from user_map import u_latitude,u_longitude,c_latitude,c_longitude
 import random
 import json
 import logging
@@ -76,7 +76,7 @@ def child_creator(upload_number,abbreviated,name,parent_id,user_id=0):
         with open('./missing_person/%s/%s.jpg'%(abbreviated,upload_number), 'rb') as f:
             picture_list.append(base64.b64encode(f.read()))
 
-    # random_spot = random.randint(0,len(c_longtitude))
+    # random_spot = random.randint(0,len(c_longitude))
     data = {
         'picture_list':picture_list,
         'pic_key':'jpg',
@@ -86,7 +86,7 @@ def child_creator(upload_number,abbreviated,name,parent_id,user_id=0):
         'relation_telephone':user_info_list[parent_id]['telephone'],
         'relation_name':user_info_list[parent_id]['real_name'],
         'lost_time':time.mktime(datetime.datetime.now().timetuple()),
-        'lost_spot':[u_latitude[parent_id],u_longtitude[parent_id]],
+        'lost_spot':[u_latitude[parent_id],u_longitude[parent_id]],
         'description':'please help me, dear!!!!',
         'relation_id':user_id
         }
@@ -131,7 +131,7 @@ def child_creator(upload_number,abbreviated,name,parent_id,user_id=0):
 # for index,item in enumerate(user_info_list):
 #     login(item)
 #     data = {
-#         'coordinates':[u_latitude[index],u_longtitude[index]]
+#         'coordinates':[u_latitude[index],u_longitude[index]]
 #     }
 #     print updatestatus(data)
 
@@ -151,7 +151,7 @@ def child_creator(upload_number,abbreviated,name,parent_id,user_id=0):
 #             data = {
 #                 'search_picture':content,
 #                 'pic_type':'jpg',
-#                 'coordinate':[c_latitude[random_camera-1],c_longtitude[random_camera-1]],
+#                 'coordinate':[c_latitude[random_camera-1],c_longitude[random_camera-1]],
 #                 'id':random_camera,
 #                 'type':'camera'
 #             }
@@ -173,7 +173,7 @@ def child_creator(upload_number,abbreviated,name,parent_id,user_id=0):
 # for index,item in enumerate(user_info_list):
 #     login(item)
 #     data = {
-#         'coordinates':[u_latitude[index],u_longtitude[index]]
+#         'coordinates':[u_latitude[index],u_longitude[index]]
 #     }
 #     # print updatestatus(data)
 # for root,dirs,files in os.walk(dir):
@@ -182,7 +182,7 @@ def child_creator(upload_number,abbreviated,name,parent_id,user_id=0):
 #     random_person = random.randint(1,len(u_latitude)-1)
 #     login(user_info_list[random_person])
 #     data = {
-#         'coordinates':[u_latitude[random_person],u_longtitude[random_person]]
+#         'coordinates':[u_latitude[random_person],u_longitude[random_person]]
 #     }
 #     # print updatestatus(data)
 
@@ -194,7 +194,7 @@ def child_creator(upload_number,abbreviated,name,parent_id,user_id=0):
 #             data = {
 #                 'search_picture':content,
 #                 'pic_type':'jpg',
-#                 'coordinate':[u_latitude[random_person-1],u_longtitude[random_person-1]],
+#                 'coordinate':[u_latitude[random_person-1],u_longitude[random_person-1]],
 #                 'type':'reporter',
 #                 'id':1 # arbitrary number
 #             }
@@ -240,7 +240,7 @@ def child_creator(upload_number,abbreviated,name,parent_id,user_id=0):
 # for index,item in enumerate(user_info_list):
 #     login(item)
 #     data = {
-#         'coordinates':[u_latitude[index],u_longtitude[index]]
+#         'coordinates':[u_latitude[index],u_longitude[index]]
 #     }
 #     update_result = eval(updatestatus(data))
 #     message_queue = update_result['data']['message_queue']
@@ -266,7 +266,7 @@ def child_creator(upload_number,abbreviated,name,parent_id,user_id=0):
 #         'person_id':person_id,
 #         'picture':content,
 #         'pic_type':'jpg',
-#         'coordinate':[u_latitude[index],u_longtitude[index]],
+#         'coordinate':[u_latitude[index],u_longitude[index]],
 #         'description':'maybe I find this missing child!'
 #     }
 #     try:
@@ -293,7 +293,7 @@ def child_creator(upload_number,abbreviated,name,parent_id,user_id=0):
 # random_person = 3# random.randint(1,len(u_latitude)-1)
 # login(user_info_list[random_person])
 # data = {
-#     'coordinates':[u_latitude[random_person],u_longtitude[random_person]]
+#     'coordinates':[u_latitude[random_person],u_longitude[random_person]]
 # }
 # # print updatestatus(data)
 
@@ -305,7 +305,7 @@ def child_creator(upload_number,abbreviated,name,parent_id,user_id=0):
 #         data = {
 #             'search_picture':content,
 #             'pic_type':'jpg',
-#             'coordinate':[u_latitude[random_person-1],u_longtitude[random_person-1]],
+#             'coordinate':[u_latitude[random_person-1],u_longitude[random_person-1]],
 #             'type':'reporter',
 #             'id':1 # arbitrary number
 #         }
@@ -323,12 +323,20 @@ def child_creator(upload_number,abbreviated,name,parent_id,user_id=0):
 # login_id = 1
 # login(user_info_list[login_id])
 # data = {
-#     'coordinates':[u_latitude[login_id],u_longtitude[login_id]]
+#     'coordinates':[u_latitude[login_id],u_longitude[login_id]]
 # }
 # print updatestatus(data)
 # confirm()
 
+# data = {
+#     'person_id':"58994618af8add4a2da15c86"
+# }
+# print getTrackDetailforweb(data)
+
 data = {
-    'person_id':"58994618af8add4a2da15c86"
+    'spot':[59,118.5],
+    'range_longitude':30,
+    'range_latitude':30
+
 }
-print getTrackDetailforweb(data)
+print get_all_track(data)

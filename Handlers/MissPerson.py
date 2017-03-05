@@ -57,6 +57,7 @@ class LastestUpdatePersonHandler(BaseHandler):
         """
         result = ReturnStruct()
         spot = eval(self.get_argument("spot"))
+        # [todo] change to longitude and latitude
         max_distance = float(self.get_argument("max_distance"))
         formal = int(self.get_argument("formal"))
         page = int(self.get_argument('page'))
@@ -341,5 +342,51 @@ class GetPersonTracksHandler(BaseHandler):
             pass
         track_info = self.person_model.get_track_list(person_id)
         result.data = track_info
+        self.return_to_client(result, jquery)
+        self.finish()
+
+class GetAllTracksHandler(BaseHandler):
+    def __init__(self, *argc, **argkw):
+        super(GetAllTracksHandler, self).__init__(*argc, **argkw)
+    
+    @throw_base_exception   
+    def get(self):
+        """
+        {
+    "info": [
+        {
+            "lat": 118.88,
+            "count": 34,
+            "lng": 31.875
+        },
+        {
+            "lat": 118.8,
+            "count": 35,
+            "lng": 31.895
+        },
+        {
+            "lat": 118.82,
+            "count": 49,
+            "lng": 31.89
+        }
+    ],
+    "amount": 10
+}
+        """
+        result = ReturnStruct()
+        range_longitude = float(self.get_argument("range_longitude"))
+        range_latitude = float(self.get_argument("range_latitude"))
+        spot = eval(self.get_argument("spot"))
+        jquery = ''
+        try:
+            jquery = str(self.get_argument('jsoncallback'))
+        except Exception as e:
+            pass
+        track_map = self.person_model.get_track_count_by_range(spot,range_longitude,range_latitude)
+        track_info = []
+        for longitude,value in track_map.items():
+            for latitude,count in value.items():
+                track_info.append({'lng':longitude,'lat':latitude,'count':count})
+        result.data = {'info':track_info,'amount':len(track_info)}
         self.return_to_client(result, jquery)
         self.finish()

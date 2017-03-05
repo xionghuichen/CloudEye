@@ -209,7 +209,12 @@ def getTrackDetailforweb(data):
     response = urllib2.urlopen(req)
     the_page = response.read()
     return the_page
-
+    
+def get_all_track(data):
+    req = set_resquest("/get/alltrack/web",data,"GET")
+    response = urllib2.urlopen(req)
+    the_page = response.read()
+    return the_page
 def get_personlist_info():
     req = set_resquest("/user/peronlistinfo",{},"POST")
     response = urllib2.urlopen(req)

@@ -13,7 +13,7 @@ class MessageBuizModel(BaseBuizModel):
         self.COMPARE = 2
         self.PERSON_SEARCH = 3
         self._inform_latitude = 0.02
-        self._inform_longtitude = 0.05
+        self._inform_longitude = 0.05
 
     def send_message_factory(self, message_type, info):
         """factory function to create several message information and send it.
@@ -78,7 +78,7 @@ class MessageBuizModel(BaseBuizModel):
         else:
             self.user_model.update_reporter_status(reporter_user_id, True)
         # find the users in range.
-        user_id_list = self.location_model.find_user_in_range(info['spot'], self._inform_latitude, self._inform_longtitude)
+        user_id_list = self.location_model.find_user_in_range(info['spot'], self._inform_latitude, self._inform_longitude)
         user_id_list = self._filter_user(user_id_list, reporter_user_id)
         user_id_list = self._filter_user(user_id_list, info['upload_user_id'])
         message_queue_info = {
@@ -135,7 +135,7 @@ class MessageBuizModel(BaseBuizModel):
             # }
             # self.message_model.add_to_single_user(reporter_user_id, message_queue_info)
         # find the users in range.
-        user_id_list = self.location_model.find_user_in_range(info['spot'], self._inform_latitude, self._inform_longtitude)
+        user_id_list = self.location_model.find_user_in_range(info['spot'], self._inform_latitude, self._inform_longitude)
         user_id_list = self._filter_user(user_id_list, reporter_user_id)
         message_queue_info = {
             "message_id":message_id,
@@ -176,7 +176,7 @@ class MessageBuizModel(BaseBuizModel):
             'type':self.CALL_HELP
         }
         message_id = self.message_model.insert_message_detail(message_info)
-        user_id_list = self.location_model.find_user_in_range(info['spot'], self._inform_latitude, self._inform_longtitude)
+        user_id_list = self.location_model.find_user_in_range(info['spot'], self._inform_latitude, self._inform_longitude)
         reporter_user_id = info['reporter_user_id']
         # take apart report user by user_id
         user_id_list = self._filter_user(user_id_list, reporter_user_id)

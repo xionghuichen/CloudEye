@@ -205,18 +205,18 @@ class PersonBuizModel(BaseBuizModel):
         Returns:
             [
             {
-                "lat": 118.9,
-                "lng": 31.89,
+                "lat": 31.89,
+                "lng": 118.9,
                 "time": 1486440602.0
             },
             {
-                "lat": 118.815,
-                "lng": 31.88,
+                "lat": 31.88,
+                "lng": 118.815,
                 "time": 1486440637.0
             },
             {
-                "lat": 118.815,
-                "lng": 31.88,
+                "lat": 31.88,
+                "lng": 118.815,
                 "time": 1486440638.0
             }
         }   ]
@@ -227,10 +227,47 @@ class PersonBuizModel(BaseBuizModel):
         track_list = []
         for item in track_detail:
             track_item = {
-                'lng':item['coordinate'][0],
-                'lat':item['coordinate'][1],
+                'lng':item['coordinate'][1],
+                'lat':item['coordinate'][0],
                 'time':item['date']
 
             }
             track_list.append(track_item)
         return track_list
+
+
+    def get_track_count_by_range(self, spot, range_longitude, range_latitude):
+        """get track info count for every special coordinate.
+
+        Args:
+            spot: the center spot, eg. [111.11,22.2]
+            range_longitude: search longitude
+            range_latitude: search latitude
+
+        Returns:
+            track_map,eg:
+                [
+                {
+                    115.33:{ # longitude
+                        22.3:1, # latitude and count
+                        22.54:2
+                    }
+                },
+                {
+                ......
+                }
+        """
+        track_info = self.person_model.get_track_info_by_range(spot,range_longitude,range_latitude)
+        logging.info("track info is %s"%track_info)
+        track_map = {}
+        for item in track_info:
+            coordinate = item['coordinate']
+            if track_map.has_key(coordinate[0]):
+                    if track_map[coordinate[0]].has_key(coordinate[1]):
+                        track_map[coordinate[0]][coordinate[1]] = track_map[coordinate[0]][coordinate[1]] + 1
+                    else:
+                        track_map[coordinate[0]][coordinate[1]] = 1
+            else:
+                track_map[coordinate[0]] = {coordinate[1]:1}
+
+        return track_map
