@@ -9,8 +9,8 @@ import hashlib
 import base64
 import time
 import datetime
-prefix ="http://139.196.207.155:9000"
-# prefix = "http://127.0.0.1:9000"
+# prefix ="http://139.196.207.155:9000"
+prefix = "http://127.0.0.1:9000"
 cj = cookielib.CookieJar()
 opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cj))
 urllib2.install_opener(opener)
@@ -192,14 +192,23 @@ def getPersonDetail(data):
     return the_page
 
 
-def getPersonDetailforweb():
-    data = {
-        'person_id':"5867b81b16b2d6121d8d8c3d"
-    }
+def getPersonDetailforweb(data):
+    # data = {
+    #     'person_id':"58994618af8add4a2da15c86"
+    # }
     req = set_resquest("/get/persondetail/web",data,"GET")
     response = urllib2.urlopen(req)
     the_page = response.read()
-    print the_page
+    return the_page
+
+def getTrackDetailforweb(data):
+    # data = {
+    #     'person_id':"5867b81b16b2d6121d8d8c3d"
+    # }
+    req = set_resquest("/get/trackinfo/web",data,"GET")
+    response = urllib2.urlopen(req)
+    the_page = response.read()
+    return the_page
 
 def get_personlist_info():
     req = set_resquest("/user/peronlistinfo",{},"POST")

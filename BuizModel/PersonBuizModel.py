@@ -196,3 +196,41 @@ class PersonBuizModel(BaseBuizModel):
         }
         return result
     
+    def get_track_list(self, person_id):
+        """ get all of track list of a person, including machine and user tracks
+
+        Args:
+            person_id
+
+        Returns:
+            [
+            {
+                "lat": 118.9,
+                "lng": 31.89,
+                "time": 1486440602.0
+            },
+            {
+                "lat": 118.815,
+                "lng": 31.88,
+                "time": 1486440637.0
+            },
+            {
+                "lat": 118.815,
+                "lng": 31.88,
+                "time": 1486440638.0
+            }
+        }   ]
+        """
+        person_info = self.person_model.get_person_detail(person_id)
+        track_id_list = person_info['track_list']
+        track_detail = self.person_model.get_tracks_detail(track_id_list)
+        track_list = []
+        for item in track_detail:
+            track_item = {
+                'lng':item['coordinate'][0],
+                'lat':item['coordinate'][1],
+                'time':item['date']
+
+            }
+            track_list.append(track_item)
+        return track_list

@@ -234,7 +234,6 @@ class GetMissingPersonDetailHandler(BaseHandler):
         self.finish()
 
 
-
 class GetMissingPersonDetailWebHandler(BaseHandler):
     def __init__(self, *argc, **argkw):
         super(GetMissingPersonDetailWebHandler, self).__init__(*argc, **argkw)
@@ -324,5 +323,23 @@ class GetMissingPersonDetailWebHandler(BaseHandler):
             pass
         person_info = self.person_model.get_person_detail(person_id)
         result.data = person_info
+        self.return_to_client(result, jquery)
+        self.finish()
+
+class GetPersonTracksHandler(BaseHandler):
+    def __init__(self, *argc, **argkw):
+        super(GetPersonTracksHandler, self).__init__(*argc, **argkw)
+
+    @throw_base_exception   
+    def get(self):
+        result = ReturnStruct()
+        person_id = self.get_argument("person_id")
+        jquery = ''
+        try:
+            jquery = str(self.get_argument('jsoncallback'))
+        except Exception as e:
+            pass
+        track_info = self.person_model.get_track_list(person_id)
+        result.data = track_info
         self.return_to_client(result, jquery)
         self.finish()
