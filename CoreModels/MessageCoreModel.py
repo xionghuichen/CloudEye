@@ -59,11 +59,12 @@ class MessageCoreModel(BaseCoreModel):
                 # logging.info("info : %s"%str(info))
                 self.redis.lpush(key_gen(user_id), info)
 
-    def get_user_message_queue(self,user_id):
+    def get_user_message_queue(self,user_id,order=0):
         """Get user's location push message by user id.
 
         Args:
             user_id:
+            order: 0 for increasement 1 for decreasement.
         Returns:
              [
                 {
@@ -89,6 +90,8 @@ class MessageCoreModel(BaseCoreModel):
             for index, item in enumerate(result):
                 item = eval(item)
                 result[index] = self.get_message_detail(item['message_id'])
+        if order == 1:
+            result.reverse()
         return result
  
     def clear_message_queue(self, user_id):

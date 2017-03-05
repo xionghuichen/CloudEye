@@ -169,13 +169,13 @@ def child_creator(upload_number,abbreviated,name,parent_id,user_id=0):
 # person search person
 import os
 dir="./missing_person"
-# missing_list = []
-# for index,item in enumerate(user_info_list):
-#     login(item)
-#     data = {
-#         'coordinates':[u_latitude[index],u_longtitude[index]]
-#     }
-#     print updatestatus(data)
+missing_list = []
+for index,item in enumerate(user_info_list):
+    login(item)
+    data = {
+        'coordinates':[u_latitude[index],u_longtitude[index]]
+    }
+    # print updatestatus(data)
 for root,dirs,files in os.walk(dir):
     name = root[len(dir)+1:]
     # select a random person to login
@@ -277,11 +277,7 @@ for root,dirs,files in os.walk(dir):
 
 # test confirm
 # 在不同的地理位置登录这几个用户
-# login(user_info_list[3])
-# data = {
-#     'coordinates':[u_latitude[3],u_longtitude[3]]
-# }
-# print updatestatus(data)
+
 # confirm()
 
 # data = {
@@ -290,3 +286,44 @@ for root,dirs,files in os.walk(dir):
 # print getPersonDetail(data)
 
 
+# compare for a specifical person
+
+# name = '王海萍'
+# # select a random person to login
+# random_person = 3# random.randint(1,len(u_latitude)-1)
+# login(user_info_list[random_person])
+# data = {
+#     'coordinates':[u_latitude[random_person],u_longtitude[random_person]]
+# }
+# # print updatestatus(data)
+
+# if name != '':
+#     upload_number = random.randint(4,6)
+#     print "use user search :%s, search %s of picture %s"%(random_person,name,upload_number)
+#     with open(unicode('./missing_person/%s/%s.jpeg'%(name,upload_number),'utf8'), 'rb') as f:
+#         content = base64.b64encode(f.read())
+#         data = {
+#             'search_picture':content,
+#             'pic_type':'jpg',
+#             'coordinate':[u_latitude[random_person-1],u_longtitude[random_person-1]],
+#             'type':'reporter',
+#             'id':1 # arbitrary number
+#         }
+#         try:
+#             result = eval(search(data))
+#             print result
+#             person_id = result['data']['person_id']
+#             data = {'person_id':person_id}
+#             search_name = eval(getPersonDetail(data))['data']['person_info']['name']
+#             print "origin name is %s, search name is %s, confidence is %s"%(name,search_name,result['data']['confidence'])
+#         except Exception as e:
+#             print "error:%s"%(str(e))
+
+
+# login_id = 0
+# login(user_info_list[login_id])
+# data = {
+#     'coordinates':[u_latitude[login_id],u_longtitude[login_id]]
+# }
+# print updatestatus(data)
+# confirm()

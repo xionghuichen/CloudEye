@@ -9,8 +9,8 @@ import hashlib
 import base64
 import time
 import datetime
-# prefix ="http://139.196.207.155:9000"
-prefix = "http://127.0.0.1:9000"
+prefix ="http://139.196.207.155:9000"
+# prefix = "http://127.0.0.1:9000"
 cj = cookielib.CookieJar()
 opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cj))
 urllib2.install_opener(opener)
@@ -25,7 +25,7 @@ print "_xsrf:",_xsrf
 def set_resquest(api,data,method):
     # data is dictory.
     # method can be get put delete post ?
-    # get _xsrff
+    # get _xsrf
     for item in cj:
         if item.name == '_xsrf':
             _xsrf = item.value

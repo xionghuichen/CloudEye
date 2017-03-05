@@ -105,6 +105,7 @@ class MessageBuizModel(BaseBuizModel):
         
         Returns:
         """
+        
         person_detail_info = self.person_model.get_person_detail(info['person_id'])
         message_info = {
             'date':info['date'],
