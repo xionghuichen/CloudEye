@@ -180,6 +180,7 @@ class MyPersonListHandler(BaseHandler):
         result = ReturnStruct()
         user_id = int(self.get_secure_cookie('user_id'))
         person_id_list = self.user_model.get_missing_person_list(user_id)
-        result.data['peron_brief_info'] = self.person_model.get_person_brief_info(person_id_list)
+        result.data['peron_brief_info']  = self.person_model.get_person_brief_info(person_id_list) 
+        result.data['peron_brief_info'].reverse()
         self.return_to_client(result)
         self.finish()

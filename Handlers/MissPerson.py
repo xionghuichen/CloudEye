@@ -384,8 +384,8 @@ class GetAllTracksHandler(BaseHandler):
             pass
         track_map = self.person_model.get_track_count_by_range(spot,range_longitude,range_latitude)
         track_info = []
-        for longitude,value in track_map.items():
-            for latitude,count in value.items():
+        for latitude,value in track_map.items():
+            for longitude,count in value.items():
                 track_info.append({'lng':longitude,'lat':latitude,'count':count})
         result.data = {'info':track_info,'amount':len(track_info)}
         self.return_to_client(result, jquery)

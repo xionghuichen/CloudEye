@@ -91,7 +91,7 @@ class Application(tornado.web.Application):
         tornado.web.Application.__init__(self, handlers, **settings)
         # use SQLachemy to connection to mysql.
         DB_CONNECT_STRING = 'mysql+mysqldb://%s:%s@%s/%s?charset=utf8'%(options.mysql_user, options.mysql_password, options.host, options.mysql_database)
-        engine = create_engine(DB_CONNECT_STRING, echo=True)
+        engine = create_engine(DB_CONNECT_STRING, echo=False,pool_size=1000)
         self.sqldb = sessionmaker(
                 bind=engine,
                 autocommit=False, 

@@ -29,4 +29,4 @@ class ReturnStruct(object):
         logging.info("data: %s"%self.data)
 
 PLICEMAN_ID = 0
-FACESET_TOKEN='f524168cdcdeec57b2298ac6026e95ac'
+FACESET_TOKEN='e197a259b530b129f88c0e07ea70ac42'

@@ -52,7 +52,9 @@ class BaseHandler(tornado.web.RequestHandler):
         self._person_model = PersonBuizModel(**para)
         self._message_model = MessageBuizModel(**para)
         self.confirm_level = self.face_model.VERY_HIGH_CONFIDENCE
-
+        # logging.info("------request is ----------: %s \n \n" % self.request)
+        args = self.request.arguments
+        # logging.info("-----request arguments-------: %s \n \n" % json.dumps(args,indent=2))
     @property
     def message_model(self):
         return self._message_model

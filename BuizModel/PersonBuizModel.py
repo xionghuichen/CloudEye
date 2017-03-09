@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#/usr/bin/env python
 # coding=utf-8
 # PersonBuizModel.py
 import time
@@ -226,13 +226,19 @@ class PersonBuizModel(BaseBuizModel):
         track_detail = self.person_model.get_tracks_detail(track_id_list)
         track_list = []
         for item in track_detail:
+            logging.info("[item['coordinate'] ]%s , [item type['coordiante']] %s"%(item,type(item)))
+ 	    if type(item['coordinate']) != list: 
+                if type(item['coordinate']) == str:
+                    item = eval(item)
+                else:
+                    continue
             track_item = {
                 'lng':item['coordinate'][1],
                 'lat':item['coordinate'][0],
                 'time':item['date']
-
             }
             track_list.append(track_item)
+        
         return track_list
 
 

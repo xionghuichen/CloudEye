@@ -1,6 +1,4 @@
 #urllibtest.py
-# coding=utf-8
-import urllib2
 import urllib
 import cookielib
 import json
