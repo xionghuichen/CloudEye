@@ -38,7 +38,7 @@ define("mysql_user", default="root", help="community mysql user")
 define("mysql_password", default="",
        help="community database password")
 define("mongo_user",default="burningbear", help="community mongodb  user")
-define("mongo_password",default='zp19950310',help="commuity mongodb password")
+define("mongo_password",default='',help="commuity mongodb password")
 logging.basicConfig(level=logging.INFO)
                     #filename='log.log',
                     #filemode='w')

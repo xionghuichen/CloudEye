@@ -184,7 +184,18 @@ class PersonBuizModel(BaseBuizModel):
                     'user_nick_name':item['user_nick_name'],
                     'description':item['description']
                 }
-                person_track.append(person_track_info)                
+                person_track.append(person_track_info)   
+            elif item['type'] == self.person_model.PERSON_SEARCH:
+                person_track_info = {
+                    'date':item['date'],
+                    'pic_key':item['pic_key'],
+                    'confidence':item['confidence'],
+                    'coordinate':item['coordinate'],
+                    'user_id':item['user_id'],
+                    'user_nick_name':item['user_nick_name'],
+                    'description':'我通过主动搜索功能发现了这个孩子很可能是被拐儿童！！'
+                }
+                person_track.append(person_track_info)       
         # delete useless key in person_info
         del person_info['track_list']
         result = {

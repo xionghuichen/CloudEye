@@ -139,6 +139,8 @@ class SearchPersonHandler(FindPersonHandler):
                             'confidence':searchResult['confidence'],
                             'pic_key':pic_key_list[0]
                         }
+                        if message_mode == self.person_model.PERSON_SEARCH:
+                            message_data['upload_user_id'] = searcher_id
                         try:
                             self.message_model.send_message_factory(message_mode, message_data)
                         except Exception as e:

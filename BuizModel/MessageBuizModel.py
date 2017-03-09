@@ -45,6 +45,12 @@ class MessageBuizModel(BaseBuizModel):
                 return list_unit
         return filter(list_filter,users)
 
+    def _send_camera_search_message(self,info):
+        self._send_search_message(info,self.SEARCH)
+
+    def _send_person_search_message(self,info):
+        self._send_search_message(info,self.PERSON_SEARCH)
+
     def _send_compare_message(self,info):
         """send message to nearby person and reporter, except the upload user.
 
@@ -88,14 +94,8 @@ class MessageBuizModel(BaseBuizModel):
         }
         self.message_model.add_to_users(user_id_list, message_queue_info)
 
-    def _send_camera_search_message(self,info):
-        self._send_search_message(info,self.SEARCH)
-
-    def _send_person_search_message(self,info):
-        self._send_search_message(info,self.PERSON_SEARCH)
-
     def _send_search_message(self, info, search_type):
-        """send message to nearby person and reporter.
+        """send search　message to nearby person and reporter.
         
         Args:
             info:
@@ -137,6 +137,8 @@ class MessageBuizModel(BaseBuizModel):
         # find the users in range.
         user_id_list = self.location_model.find_user_in_range(info['spot'], self._inform_latitude, self._inform_longitude)
         user_id_list = self._filter_user(user_id_list, reporter_user_id)
+        if search_type == self.PERSON_SEARCH:
+            user_id_list = self._filter_user(user_id_list, info['upload_user_id'])
         message_queue_info = {
             "message_id":message_id,
             "date":message_info['date'],

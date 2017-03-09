@@ -15,8 +15,24 @@
 	<link rel="stylesheet" type="text/css" href="{{ static_url('css/default-gallery.css') }}">
 	<link href="{{ static_url('css/main-gallery.css') }}" rel="stylesheet" type='text/css' />
 	<link href="{{ static_url('css/demo-gallery.css') }}" rel="stylesheet" type='text/css' />
+	<!--update0304-->
+	 <script type="text/javascript" src="http://api.map.baidu.com/api?v=1.4"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/library/Heatmap/2.0/src/Heatmap_min.js"></script>
   
 <style>
+#map{
+	height: 700px;
+	width: 80%;margin: auto;
+	padding:20px;
+	 -webkit-box-shadow: 5px 5px 5px;  
+  -moz-box-shadow: 3px 3px 3px;  
+  box-shadow: 3px 3px 3px; 
+  border-radius:5px;
+}
+#heatmaptitle h2{
+	margin:20px 20px 20px 10px;
+}
+
 .outer-img{
     width:100%;
    
@@ -96,7 +112,7 @@
 				<div class="grid margintopmiddle" id="case">
 					<figure class="tile-15 case-item">
 						<!--此处有动态赋值-->
-						<img src="{{ static_url('img/child2.jpg') }}" class="photo" />
+						<img src="{{ static_url('css/demo-gallery.css') }}" class="photo" />
 						<figcaption>
 							<div>
 								<!--此处有动态赋值-->
@@ -172,7 +188,7 @@
 					<figure class="tile-1 update-case">
 						<!--此处有动态赋值-->
 						 <div class="outer-img">
-					        <img src="img1.jpg"  />
+					        <img src="{{ static_url('img/img2.jpg') }}"  />
 					    </div>
 						<figcaption>
 							<!--此处有动态赋值 name-->
@@ -184,7 +200,7 @@
 						
 						<div class="outer-img photo">
 							<!--此处有动态赋值-->
-					        <img src="img1.jpg"  />
+					        <img src="{{ static_url('img/img1.jpg') }}"  />
 					    </div>
 						<figcaption>
 							<!--此处有动态赋值 时间-->
@@ -198,7 +214,10 @@
 			</div>
 			
 		</section>
-	
+		<div id="heatmaptitle">
+			<h2>管辖区案件统计热力图</h2>
+		</div>
+	<div id="map"></div>
 		
 	</main>
 	
@@ -207,7 +226,7 @@
 
 	
 	<script>window.jQuery || document.write('<script src="{{ static_url('js/jquery-2.1.1.min.js') }}"><\/script>')</script>
-	<script src="{{ static_url('js/captionHover.dev.js') }} "></script>
+	<script src="{{ static_url('js/captionHover.dev.js') }}"></script>
 	<script>
 		$(function() {
 			$('.tile-1').captionHover({
@@ -227,13 +246,7 @@
 			});
 		});
 	</script>
-	 <!--字体 设置-->
-	<script type="text/javascript">
-    $youziku.load("body", "2e8de98ad2c241aca7d97cfcdc313d61", "JetLinkMediumOldStamp");
-    /*$youziku.load("#id1,.class1,h1", "2e8de98ad2c241aca7d97cfcdc313d61", "JetLinkMediumOldStamp");*/
-    /*．．．*/
-    $youziku.draw();
-	</script>
+	
 <!--BIND DATA-->
 <script type="text/javascript">
 			binary_formal=1;
@@ -429,10 +442,17 @@ window.setInterval(function(){
 	 var test=$(".update-case")[0];
 	// alert(update[0].date);
 	 //alert(update[0].date+","+jQuery.data(test,"datas").date);
-	 if(update.date>jQuery.data(test,"datas").date)
+	 console.log(update[0].date);
+	 console.log(jQuery.data(test,"datas").date);
+	 //version2
+	 if(update[0].date>jQuery.data(test,"datas").date)
+	 {
+
 	 	//flush data
 	 	alert("有"+update[0].name+"最新的上传记录");
 	 	load_update(0);
+	 }
+	 	
 
 	 });
 				//$(".update").removeClass("nav__item--current");
@@ -441,5 +461,89 @@ window.setInterval(function(){
 	
 },3000);
 		</script>
+
+		<!--update0304-->
+
+<script type="text/javascript">
+//version2
+ $.getJSON("/get/alltrack/web?jsoncallback=?",{"spot":"[31.8,118.8]","range_longitude":10,"range_latitude":10},function(result2){
+ 	var data2=result2.data.info;
+ 
+
+var points = [
+{ "lng": 118.826293, "lat": 31.893676, "count": 1 },//西安
+{ "lng": 118.829275, "lat": 31.896037, "count": 1 },//宝鸡
+{ "lng": 118.826293, "lat": 31.893699, "count": 1 },//安康
+{ "lng": 118.826293, "lat": 31.893675, "count": 1},//汉中 
+{ "lng": 118.826293, "lat": 31.893688, "count": 1 },//商洛 
+{ "lng": 118.826293, "lat": 31.893679, "count": 1 },//延安 
+{ "lng": 118.826293, "lat": 31.893679, "count": 1 },//铜川 
+{ "lng": 118.826293, "lat": 31.893673, "count": 1 },//渭南 
+{ "lng": 118.826293, "lat": 31.893671, "count": 1},//咸阳 
+{ "lng": 118.826293, "lat": 31.893666, "count": 1000 },// 榆林 
+];
+var points2 = [
+{ "lat": 31.875,"lng": 118.88,  "count": 100 },//西安
+{ "lat": 31.89, "lng": 118.8, "count": 100 },//宝鸡
+{"lat": 31.89,  "lng": 118.8, "count": 100 },//安康
+{  "lat": 31.895, "lng": 118.8,"count": 100},//汉中 
+
+];
+
+console.log(data2[1].lat);
+console.log(data2[1].lng);
+console.log(data2[1].count);
+
+var map = new BMap.Map("map"); // 创建地图实例
+var point = new BMap.Point(118.826293,31.893676);
+map.centerAndZoom(point, 14); // 初始化地图，设置中心点坐标和地图级别
+map.enableScrollWheelZoom(); // 允许滚轮缩放
+
+if (!isSupportCanvas()) {
+alert('热力图目前只支持有canvas支持的浏览器,您所使用的浏览器不能使用热力图功能~')
+}
+//详细的参数,可以查看heatmap.js的文档 https://github.com/pa7/heatmap.js/blob/master/README.md
+//参数说明如下:
+/* visible 热力图是否显示,默认为true
+* opacity 热力的透明度,1-100
+* radius 势力图的每个点的半径大小 
+* gradient {JSON} 热力图的渐变区间 . gradient如下所示
+* {
+.2:'rgb(0, 255, 255)',
+.5:'rgb(0, 110, 255)',
+.8:'rgb(100, 0, 255)'
+}
+其中 key 表示插值的位置, 0~1. 
+value 为颜色值. 
+*/
+heatmapOverlay = new BMapLib.HeatmapOverlay({ "radius": 20 });
+map.addOverlay(heatmapOverlay);
+heatmapOverlay.setDataSet({ data: data2, max: 100 });
+//是否显示热力图
+function openHeatmap() {
+heatmapOverlay.show();
+}
+function closeHeatmap() {
+//heatmapOverlay.hide();
+}
+closeHeatmap();
+function setGradient() {
+var gradient = {};
+var colors = document.querySelectorAll("input[type='color']");
+colors = [].slice.call(colors, 0);
+colors.forEach(function (ele) {
+gradient[ele.getAttribute("data-key")] = ele.value;
+});
+heatmapOverlay.setOptions({ "gradient": gradient });
+}
+//判断浏览区是否支持canvas
+function isSupportCanvas() {
+var elem = document.createElement('canvas');
+return !!(elem.getContext && elem.getContext('2d'));
+}
+
+});
+
+</script>
 </body>
 </html>
