@@ -1,4 +1,14 @@
-#urllibtest.py
+#!/usr/bin/env python
+# coding=utf-8
+
+# Author      :   Xionghui Chen
+# Created     :   2017.3.10
+# Modified    :   2017.3.10
+# Version     :   1.0
+
+
+# urllibtest.py
+import urllib2
 import urllib
 import cookielib
 import json
@@ -7,8 +17,8 @@ import hashlib
 import base64
 import time
 import datetime
-# prefix ="http://139.196.207.155:9000"
-prefix = "http://127.0.0.1:9000"
+prefix ="http://139.196.207.155:9000"
+# prefix = "http://127.0.0.1:9000"
 cj = cookielib.CookieJar()
 opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cj))
 urllib2.install_opener(opener)

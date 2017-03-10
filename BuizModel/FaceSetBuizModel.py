@@ -145,7 +145,7 @@ class FaceSetBuizModel(BaseBuizModel):
 
         if to_return.code != 1:
             to_return.data = {'detect_result_list':detect_result_list}        
-        logging.info("detect result lis in detect img list function : %s"%detect_result_list)
+        logging.info("[detect result list] detect img list function : %s"%detect_result_list)
         callback(to_return)
 
     def compare_face(self, std_face_token, detect_face_token, callback):

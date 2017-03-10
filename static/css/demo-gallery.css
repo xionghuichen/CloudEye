@@ -13,7 +13,7 @@ body {
 header {
   margin-top: 20px;
   padding: 0 20px 20px 20px;
-  border-bottom: 1px solid #74777B;
+  border-bottom: 0px solid #74777B;
 }
 header a {
   margin: 0 auto;
@@ -104,7 +104,7 @@ header a {
   color: #74777B;
   font-weight: 800;
   font-size: 1.5em;
-  border-bottom: 1px solid #74777B;
+  border: 0px solid #74777B;
 }
 .content > h2:first-child {
   padding-top: 0em;
@@ -124,8 +124,8 @@ header a {
 }
 figure {
   float: left;
-  width: 49%;
-  height: 250px;
+  width:48%;
+  height: 230px;
   margin: 0 2% 0 0;
   background: #3085a3;
 }

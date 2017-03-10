@@ -28,7 +28,7 @@ def repeat_send(method):
                 logging.info("error happen:%s"%str(e.body))
                 again = True
                 if count > 10:
-                    raise DBError("face plus plus databases error!")
+                    raise DBError("face plus plus database error!")
                 else:
                     time.sleep(1)
     return wrapper
@@ -80,6 +80,7 @@ class FaceSetCoreModel(BaseCoreModel):
             for item in result:
                 facequality = item['attributes']['facequality']
                 if facequality['threshold'] > facequality['value']:
+                    logging.info("low quality, threshold is %s, value is %s"%(threshold,value))
                     del result[count]
                 else:
                     result[count]['attributes']['facequality'] = facequality['value'] - facequality['threshold']

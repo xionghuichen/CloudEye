@@ -44,6 +44,7 @@ api = API(API_KEY, API_SECRET)
 
 # 创建一个Faceset用来存储FaceToken
 # create a Faceset to save FaceToken
+# f524168cdcdeec57b2298ac6026e95ac
 ret = api.faceset.removeface(outer_id='formal_cloudeye',face_tokens='RemoveAllFaceTokens')
 print_result("faceset create", ret)
 # time.sleep(1)

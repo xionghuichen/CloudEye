@@ -74,7 +74,7 @@ class SearchPersonHandler(FindPersonHandler):
             message_mode = self.message_model.SEARCH
             shooter_info = None
         elif search_type == 'reporter':
-            searcher_id = self.get_secure_cookie('user_id')
+            searcher_id = int(self.get_secure_cookie('user_id'))
             search_mode = self.person_model.PERSON_SEARCH
             shooter_info = {
                 'user_id':searcher_id,

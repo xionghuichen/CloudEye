@@ -299,7 +299,7 @@
 					//$(".case_item:eq("+i+")").show();
 					$(".case-item:eq("+i+") figcaption a").attr('href',$(".case-item:eq("+i+") figcaption a").attr('href')+"?person_id="+jQuery.data(test,"datas").person_id);
 					
-					$(".case-item:eq("+i+") figcaption div h2 span").text(jQuery.data(test,"datas").name);
+					$(".case-item:eq("+i+") figcaption div h3 span").text(jQuery.data(test,"datas").name);
 					$(".case-item:eq("+i+") img").attr('src',jQuery.data(test,"datas").picture_key);
 					
 					}
@@ -383,7 +383,6 @@
 				//此处有动态赋值
 				$.getJSON("/get/updatemessage?jsoncallback=?",{"spot":"[31.8,118.8]","max_distance":100.33,"page":0,"size":5},function(result){
 			 	
-			 	
 				 	if (result.code==0) {
 
 
@@ -407,10 +406,22 @@
 
 					//user track
 					$(".update-case:eq("+1+") figcaption a").attr('href',$(".update-case:eq("+0+") figcaption a").attr('href')+"?person_id="+update[index].person_id);
+					if(update[index].pic_key!="empty")
+					{
+						$(".update-case:eq("+1+") img").attr('src',update[index].pic_key);
+						$("#hasUpload").text("最新用户上传");
+						$("#stdInfor").text("报案发布照片");
+						$(".update-case:eq("+1+") figcaption h2 i").text(getLocalTime(update[index].date));
+						$(".update-case:eq("+0+") figcaption h2 i").text("");
+					}else{
+						$(".update-case:eq("+1+") img").attr('src',"img/pdefault.jpg");
+						$("#hasUpload").text("暂无上传");
+							$(".update-case:eq("+1+") figcaption h2 i").text("");
+							$(".update-case:eq("+0+") figcaption h2 i").text(getLocalTime(update[index].date));
+					}
 					
-					$(".update-case:eq("+1+") img").attr('src',update[index].pic_key);
+					console.log(update[index].pic_key);
 					
-					$(".update-case:eq("+1+") figcaption h2 i").text(getLocalTime(update[index].date));
 
 
 				}
@@ -468,31 +479,10 @@ window.setInterval(function(){
 //version2
  $.getJSON("/get/alltrack/web?jsoncallback=?",{"spot":"[31.8,118.8]","range_longitude":10,"range_latitude":10},function(result2){
  	var data2=result2.data.info;
- 
+  for (var i = data2.length - 1; i >= 0; i--) {
+ 	data2[i].count=data2[i].count*100;
+ }
 
-var points = [
-{ "lng": 118.826293, "lat": 31.893676, "count": 1 },//西安
-{ "lng": 118.829275, "lat": 31.896037, "count": 1 },//宝鸡
-{ "lng": 118.826293, "lat": 31.893699, "count": 1 },//安康
-{ "lng": 118.826293, "lat": 31.893675, "count": 1},//汉中 
-{ "lng": 118.826293, "lat": 31.893688, "count": 1 },//商洛 
-{ "lng": 118.826293, "lat": 31.893679, "count": 1 },//延安 
-{ "lng": 118.826293, "lat": 31.893679, "count": 1 },//铜川 
-{ "lng": 118.826293, "lat": 31.893673, "count": 1 },//渭南 
-{ "lng": 118.826293, "lat": 31.893671, "count": 1},//咸阳 
-{ "lng": 118.826293, "lat": 31.893666, "count": 1000 },// 榆林 
-];
-var points2 = [
-{ "lat": 31.875,"lng": 118.88,  "count": 100 },//西安
-{ "lat": 31.89, "lng": 118.8, "count": 100 },//宝鸡
-{"lat": 31.89,  "lng": 118.8, "count": 100 },//安康
-{  "lat": 31.895, "lng": 118.8,"count": 100},//汉中 
-
-];
-
-console.log(data2[1].lat);
-console.log(data2[1].lng);
-console.log(data2[1].count);
 
 var map = new BMap.Map("map"); // 创建地图实例
 var point = new BMap.Point(118.826293,31.893676);

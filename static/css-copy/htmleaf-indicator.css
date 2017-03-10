@@ -1,4 +1,4 @@
-﻿@font-face {
+@font-face {
 	font-family: 'icomoon';
 	
 	font-weight: normal;
@@ -31,7 +31,7 @@ body {
 
 a {
 	text-decoration: none;
-	color: #00000000;
+	color: #8bc34a;
 	outline: none;
 }
 
@@ -105,11 +105,32 @@ a:focus {
 	padding: 1em;
 }
 .link-copy2 {
-	content: 'Click to copy direct link';
+	content: '走失者档案列表';
 	font-family: 'Roboto Condensed', sans-serif;
 	text-transform: uppercase;
 	letter-spacing: 3px;
-	font-size: 0.75em;
+	font-size: 1.25em;
+	line-height: 1.75;
+	font-weight: bold;
+	color: currentColor;
+
+	position: absolute;
+	top: 2em;
+	right: 2em;
+	width: 50px;
+	height: 50px;
+	z-index: 100;
+	cursor: pointer;
+	background: url(../img/search.svg) no-repeat center center;
+	background-size: cover;
+}
+
+.link-copy2::after {
+	content: '走失者档案列表';
+	font-family: 'Roboto Condensed', sans-serif;
+	text-transform: uppercase;
+	letter-spacing: 3px;
+	font-size: 1.25em;
 	line-height: 1.75;
 	font-weight: bold;
 	position: absolute;
@@ -125,24 +146,56 @@ a:focus {
 	transition: transform 0.3s, opacity 0.3s;
 }
 
+.link-copy2:hover::after {
+	opacity: 1;
+	-webkit-transform: translate3d(0, 0, 0);
+	transform: translate3d(0, 0, 0);
+}
+
+.link-copy2::before {
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 50px;
+	height: 50px;
+	margin: -25px 0 0 -25px;
+	opacity: 0;
+	border-radius: 50%;
+	background: currentColor;
+}
+
+.link-copy2--animate::before {
+	-webkit-animation: pulse 0.3s;
+	animation: pulse 0.3s;
+}
 .link-copy {
+	content: '最新上传';
+	font-family: 'Roboto Condensed', sans-serif;
+	text-transform: uppercase;
+	letter-spacing: 3px;
+	font-size: 1.25em;
+	line-height: 1.75;
+	font-weight: bold;
+	color: currentColor;
+
 	position: absolute;
 	top: 2em;
 	right: 2em;
-	width: 20px;
-	height: 20px;
+	width: 50px;
+	height: 50px;
 	z-index: 100;
 	cursor: pointer;
-	background: url(../img/link.svg) no-repeat center center;
+	background: url(../img/new.svg) no-repeat center center;
 	background-size: cover;
 }
 
 .link-copy::after {
-	content: 'Click to copy direct link';
+	content: '最新上传';
 	font-family: 'Roboto Condensed', sans-serif;
 	text-transform: uppercase;
 	letter-spacing: 3px;
-	font-size: 0.75em;
+	font-size: 1.25em;
 	line-height: 1.75;
 	font-weight: bold;
 	position: absolute;
@@ -150,7 +203,7 @@ a:focus {
 	margin: 0 1em 0 0;
 	white-space: nowrap;
 	pointer-events: none;
-	opacity: 0;
+	opacity: 1;
 	color: currentColor;
 	-webkit-transform: translate3d(10px, 0, 0);
 	transform: translate3d(10px, 0, 0);
@@ -239,7 +292,7 @@ a:focus {
 	position: relative;
 	display: block;
 	max-width: 100%;
-	margin: 150px 0;
+	margin: 0px 0;
 	box-shadow: 0 10px 20px -4px rgba(0,0,0,0.6);
 }
 
@@ -265,127 +318,31 @@ a:focus {
 }
 /* Individual section colors */
 
-/* Xusni */
+/* Xusni indicator颜色*/
 .section#Xusni {
-	 background: #3f51b5;
-	 color: #212956;
-}
-
-/* Magool */
-.section#Magool {
-	 background: #b5bf4b;
-	 color: #fff;
-}
-
-.section#Magool .mockup-slider__subtitle {
-	background: #f44336;
-}
-
-.section#Magool .mockup-slider__subtitle a {
-	color: #ddd;
-	font-weight: bold;
+	 background: #86473F;
+	 color: #86473F;
 }
 
 
 
-/* Zahi */
-.section#Zahi {
-	 background: #f44336;
-	 color: #fff;
-}
-
-/* Timiro */
-.section#Timiro {
-	 background: #eae096;
-	 color: #ff5722;
-}
-
-/* Shamso */
-.section#Shamso {
-	 background: #93b1c5;
-	 color: #ff98bb;
-}
-
-/* Maxamed */
-.section#Maxamed {
-	 background: #78b395;
-	 color: #fff;
-}
-
-/* Beca */
-.section#Beca {
-	 background: #a7a7a7;
-	 color: #ffeb3b;
-	 min-height: 510px;
-}
-
-.section#Beca .mockup-slider {
-	margin: 0 0 0 0em;
-	min-height: 510px;
-}
-
-/* Etefu */
-.section#Etefu {
-	 background: #62ea80;
-	 color: #fff;
-}
-
-/* Meklit */
+/* Meklit #86473F*/
 .section#Meklit {
-	background: #27272b;
-	color: #ff4d3b;
+	background: #FCFAF2;
+	color: #86473F;
 	min-height: 510px;
 }
 
 .section#Meklit .mockup-slider {
-	margin: 0 0 0 0em;
+	margin: 20 30 20 20em;
 	min-height: 510px;
 }
 
-/* Mariame */
-
-.section#Mariame {
-	background: #a9a9d4;
-	color: #5050b9;
-}
-
-/* Desta */
-.section#Desta {
-	background: #1e1b2c;
-	color: #f39468;
-}
-
-.section#Desta .mockup-slider__title:first-letter {
-	color: #fff;
-}
-
-/* Hagos */
-.section#Hagos {
-	background: #92d9c7;
-	color: #fff;
-}
-
-/* Berta */
-.section#Berta {
-	background: #ff6666;
-	color: #ffe7db;
-	min-height: 510px;
-}
-
-.section#Berta .mockup-slider {
-	min-height: 510px;
-}
-
-/* Aman */
-.section#Aman {
-	background: #f7f5ed;
-	color: #d6856d;
-}
 
 /* Kafa */
 .section#Kafa {
-	background: #d2f1ca;
-	color: #e54f4f;
+	background: #D7B98E;
+	color: #86473F;
 }
 
 /* Kafa */

@@ -31,7 +31,7 @@ width: 100%;
      <nav>
       <div class="nav-wrapper grey darken-3">
         <div class="col s8">
-          <a href="／web/index" class="breadcrumb">详细信息</a>
+          <a href="/web/index" class="breadcrumb">详细信息</a>
           <!--此处有动态赋值-->
           <a href="#!" class="breadcrumb" id="bread2">Second</a>
          
@@ -103,8 +103,8 @@ width: 100%;
 
         <div class="card-tabs">
       <ul class="tabs tabs-fixed-width">
-        <li class="tab"><a href="#test4">走失信息</a></li>
-        <li class="tab"><a class="active" href="#test5">家属信息</a></li>
+        <li class="tab"><a class="active" href="#test4">走失信息</a></li>
+        <li class="tab"><a  href="#test5">家属信息</a></li>
         <li class="tab"><a href="#test6">最近更新</a></li>
 
       </ul>
@@ -123,9 +123,13 @@ width: 100%;
         </div>
         <div class="row">
         <!--此处有动态赋值 p-->
-          <div class="col s6"><p id="i_missing_time">走失时间:</p></div>
+          <div class="col s12">
+          <p id="i_missing_time">走失时间:　</p>
+          <p>　　</p>
+          <p id="i_missing_spot">走失地点:　</p>
+          </div>
           <!--此处有动态赋值 p-->
-          <div class="col s6"><p id="i_missing_spot">走失地点:</p></div>
+          
         </div>  
         </div>
       </div>
@@ -141,9 +145,12 @@ width: 100%;
       <div id="test6">
          <div class="row">
          <!--此处有动态赋值 p-->
-          <div class="col s6"><p id="i_update_time">最近更新时间:</p></div>
+        
           <!--此处有动态赋值 p-->
-          <div class="col s6"><p id="i_update_spot">最近更新地点:</p></div>
+          <div class="col s12">
+          <p id="i_update_time">最近更新时间:　</p>
+          <p>  　　</p>
+          <p id="i_update_spot">最近更新地点:　</p></div>
         </div>
       </div>
 
@@ -178,7 +185,7 @@ width: 100%;
      var usertrack=result.data.person_track;
      var machinedetect=result.data.machine_track;
      var textuser='<li><div class="collapsible-header"> <span class="new badge blue" data-badge-caption="">94%</span><img margin="50px" width="120px" src="{{static_url('img/sample.jpg')}}" alt="" class="circle responsive-img materialboxed"><p></p></div><div class="collapsible-body"><span>上传描述</span></div></li>';
-     var textvedio='<li><div class="collapsible-header"> <span class="new badge red" data-badge-caption="">94%</span><i class="material-icons">filter_drama</i><p></p></div><div class="collapsible-body"><span><img margin="50px" width="120px" src="{{static_url('img/sample.jpg')}}" class="circle responsive-img materialboxed">检测地点: </span></div></li>';
+     var textvedio='<li><div class="collapsible-header"> <span class="new badge red" data-badge-caption="">94%</span><i class="material-icons">filter_drama</i><p></p></div><div class="collapsible-body"><span><img margin="50px" width="120px" src="{{static_url('img/sample.jpg')}}" class="circle responsive-img materialboxed"></span></div></li>';
      var location=0;
     ////alert(usertrack.length+usertrack[0].description);
     //此处有动态赋值（js动态加载HTML元素）
@@ -196,13 +203,18 @@ width: 100%;
     //alert(machinedetect.length);
         <!--initial information-->
         $("#i_description").append(infor.description);
-        $("#i_image").attr('src',infor.picture_key_list[1]);
+        $("#i_image").attr('src',infor.picture_key_list[0]);
 
         $("#i_update_time").append(getLocalTime(infor.last_update_time));
         $("#i_name").append(infor.name);
         $("#bread2").text(infor.name);
       //  $("#i_sex").css("background-color","red");
-        $("#i_sex").append(infor.sex);
+      if(infor.sex==1){
+        $("#i_sex").append("男");
+      }else{
+        $("#i_sex").append("女");
+      }
+        //$("#i_sex").append(infor.sex);
         $("#i_age").append(infor.age);
         $("#i_parent_name").append(infor.relation_name);
         $("#i_tel").append(infor.relation_telephone);
@@ -240,7 +252,7 @@ width: 100%;
         $("#user_track li:eq("+i+") div p" ).append(getLocalTime(jQuery.data(test,"datas").date));
         $("#user_track li:eq("+i+") div.collapsible-header span").text("匹配率: "+jQuery.data(test,"datas").confidence+"%");
         $("#user_track li:eq("+i+") div img").attr('src',jQuery.data(test,"datas").pic_key); 
-         $("#user_track li:eq("+i+") div p" ).append("地点: "+location);
+         //$("#user_track li:eq("+i+") div p" ).append("地点: "+location);
         $("#user_track li:eq("+i+") div.collapsible-body span").text(jQuery.data(test,"datas").description);    
       }
       
@@ -277,21 +289,21 @@ width: 100%;
   var mapdata=resultMap.data;
 
 var map = new BMap.Map("containermap"); // 创建地图实例
-var point = new BMap.Point(118.826293,31.893676);
+var point = new BMap.Point(mapdata[0].lng,mapdata[0].lat);
 map.centerAndZoom(point, 16); // 初始化地图，设置中心点坐标和地图级别
 map.enableScrollWheelZoom(); 
 var mappointx=[118.826293,118.826393,118.824293];
 var mappointy=[31.897636,31.897633,31.897644];
 
-console.log(id2);
-console.log(mapdata[1].lat);
-var points = [
-{ "lng": 118.826293, "lat": 31.893676, "time": 100 },//西安
-{ "lng": 118.829275, "lat": 31.896037, "time": 100 },//宝鸡
-{ "lng": 118.826293, "lat": 31.893699, "time": 100 },//安康
-];
+
+
+var pointSet=[];
+
 
 for (var i = 0; i < mapdata.length; i++) {
+//创建点集合
+pointSet.push(new BMap.Point(mapdata[i].lng,mapdata[i].lat));
+
 var marker1 = new BMap.Marker(new BMap.Point(mapdata[i].lng,mapdata[i].lat)); // 创建标注
 map.addOverlay(marker1); 
      var opts = {
@@ -307,17 +319,22 @@ map.addOverlay(marker1);
              lineHeight : "20px",
              fontFamily:"微软雅黑"
          });
-    map.addOverlay(label);   
+    map.addOverlay(label);  
+
+
 }
+ var polyline = new BMap.Polyline(pointSet, {strokeColor:"blue", strokeWeight:3, strokeOpacity:0.5});
+map.addOverlay(polyline);
+
 });
  
    <!--EOF-->
 
     //$("#user_track").append(text);
-    $youziku.load("body", "2e8de98ad2c241aca7d97cfcdc313d61", "JetLinkMediumOldStamp");
+  //  $youziku.load("body", "2e8de98ad2c241aca7d97cfcdc313d61", "JetLinkMediumOldStamp");
     /*$youziku.load("#id1,.class1,h1", "2e8de98ad2c241aca7d97cfcdc313d61", "JetLinkMediumOldStamp");*/
     /*．．．*/
-    $youziku.draw();
+    //$youziku.draw();
 
      $('.fixed-action-btn').openFAB();
   $('.fixed-action-btn').closeFAB();
