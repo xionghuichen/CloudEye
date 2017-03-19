@@ -182,35 +182,31 @@
 					<div class="container">
 			<div class="content">
 				
-				
-			
-				<div class="grid">
 					<figure class="tile-1 update-case">
 						<!--此处有动态赋值-->
 						 <div class="outer-img">
-					        <img src="{{ static_url('img/img2.jpg') }}"  />
+					         <img src="{{ static_url('img/pdefault.jpg') }}"  />
 					    </div>
 						<figcaption>
 							<!--此处有动态赋值 name-->
-							<h2><span>标准照片</span> <i class="name"></i></h2>
-							<a href="/web/details">View more</a>
+							<h2><span id="stdInfor">标准照片</span> <i class="name"></i></h2>
+							<a href="details.html">View more</a>
 						</figcaption>			
 					</figure>
 					<figure class="tile-1 last update-case">
 						
 						<div class="outer-img photo">
 							<!--此处有动态赋值-->
-					        <img src="{{ static_url('img/img1.jpg') }}"  />
+					        <img src="{{ static_url('img/pdefault.jpg') }}"  />
 					    </div>
 						<figcaption>
 							<!--此处有动态赋值 时间-->
-							<h2><span>最新上传</span> <i class="match-value">时间</i></h2>
-							<a href="/web/details">View more</a>
+							<h2><span id="hasUpload">最近更新</span> <i class="match-value"></i></h2>
+							<a href="details.html">View more</a>
 						</figcaption>			
 					</figure>
 					
-					
-				</div>
+			
 			</div>
 			
 		</section>
@@ -414,7 +410,7 @@
 						$(".update-case:eq("+1+") figcaption h2 i").text(getLocalTime(update[index].date));
 						$(".update-case:eq("+0+") figcaption h2 i").text("");
 					}else{
-						$(".update-case:eq("+1+") img").attr('src',"img/pdefault.jpg");
+						$(".update-case:eq("+1+") img").attr('src',"{{ static_url('img/pdefault.jpg') }}");
 						$("#hasUpload").text("暂无上传");
 							$(".update-case:eq("+1+") figcaption h2 i").text("");
 							$(".update-case:eq("+0+") figcaption h2 i").text(getLocalTime(update[index].date));

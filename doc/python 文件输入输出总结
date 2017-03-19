@@ -38,3 +38,24 @@ Image库的使用
         box((1,1),(9,9))
         fill = (255,0,0,0) # 填充整个正方形
         outline = (0,255,0,0) # 只写边线
+
+        
+ [app]
+ COOKIE_SECRET = bZJc2sWbQLKos6GkHn/VB9oXwQt8S0R0kRvJ5/xJ89E=
+-FACE_API_KEY = MIpcX7FM-NDchXzXyt21oUpMI8lJW8w-
+-FACE_API_SECRET = bEjiP8MX9lmpHLA0Ed2eOZYrC5-TNIkV
++FACE_API_KEY = qZAdC0nEQDEDgC4tdvLiHjwnZWlw08Bm
++FACE_API_SECRET = fd0uEymgpqkdrhZCc-h5QLBYavDD0g0j
+ ALIYUN_KEY = LTAIkY3jD1E5hu8z
+ ALIYUN_SECRET = 9zgLrLOjr9ebRFoI3OV5qDE7BKqIhU
+diff --git a/config/globalVal.py b/config/globalVal.py
+index d21da4c..4b4ab7c 100644
+--- a/config/globalVal.py
++++ b/config/globalVal.py
+@@ -29,4 +29,4 @@ class ReturnStruct(object):
+         logging.info("data: %s"%self.data)
+ 
+ PLICEMAN_ID = 0
+-FACESET_TOKEN='e197a259b530b129f88c0e07ea70ac42'
++FACESET_TOKEN='f524168cdcdeec57b2298ac6026e95ac'
+diff --git a/config/globalVal.pyc b/config/globalVal.pyc

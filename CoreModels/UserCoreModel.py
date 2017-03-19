@@ -100,9 +100,6 @@ class UserCoreModel(BaseCoreModel):
         if result is None:
             raise DBQueryError('error when get missing_person_list by user_id') 
         return result['missing_person_list']
-        
-
-
 
     def insert_missing_person_by_uid(self, user_id,person_list):
         """ Insert messing person list by uid into mongodb.
