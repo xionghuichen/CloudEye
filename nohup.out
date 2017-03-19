@@ -6,3 +6,6 @@ remote: error: File main/.nohup.out.swp is 192.36 MB; this exceeds GitHub's file
 To git@github.com:Bunrning-Bear/CloudEye.git
  ! [remote rejected] develop -> develop (pre-receive hook declined)
 error: failed to push some refs to 'git@github.com:Bunrning-Bear/CloudEye.git'
+From github.com:Bunrning-Bear/CloudEye
+ * branch            develop    -> FETCH_HEAD
+   e614938..373f2d4  develop    -> origin/develop

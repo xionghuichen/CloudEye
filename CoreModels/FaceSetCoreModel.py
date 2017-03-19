@@ -74,16 +74,18 @@ class FaceSetCoreModel(BaseCoreModel):
         """
         result = self.facepp.detect(image_file=File(path=self.fade_file_path, content=binary_picture), return_attributes='facequality')
         result = result['faces']
+        sub_val = 60
         if result != []:
             count = 0
             # filter all of face which is low quality.
             for item in result:
                 facequality = item['attributes']['facequality']
-                if facequality['threshold'] > facequality['value']:
-                    logging.info("low quality, threshold is %s, value is %s"%(threshold,value))
+                logging.info("[detect face] threshold is %s, value is %s"%(facequality['threshold'], facequality['value']))
+                if facequality['threshold'] - sub_val > facequality['value']:
+                    # logging.info("low quality, threshold is %s, value is %s"%(threshold - sub_val, value))
                     del result[count]
                 else:
-                    result[count]['attributes']['facequality'] = facequality['value'] - facequality['threshold']
+                    result[count]['attributes']['facequality'] = facequality['value'] - facequality['threshold'] + sub_val
                     count += 1
         return result
 
