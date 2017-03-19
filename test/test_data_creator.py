@@ -9,7 +9,7 @@
 
 # test_data_creator.py
 from testClient import *
-from user_map import u_latitude,u_longitude,c_latitude,c_longitude
+from user_map import Location 
 import random
 import json
 import logging
@@ -133,7 +133,7 @@ def child_creator(upload_number,abbreviated,name,parent_id,user_id=0):
         with open('./missing_person/%s/%s.jpg'%(abbreviated,index), 'rb') as f:
             picture_list.append(base64.b64encode(f.read()))
 
-    # random_spot = random.randint(0,len(c_longitude))
+    # random_spot = random.randint(0,len(location.c_longitude))
     data = {
         'picture_list':picture_list,
         'pic_key':'jpg',
@@ -144,12 +144,14 @@ def child_creator(upload_number,abbreviated,name,parent_id,user_id=0):
         'relation_name':user_info_list[parent_id]['real_name'],
         'lost_time':time.mktime(datetime.datetime.now().timetuple()),
         # random
-        'lost_spot':[u_latitude[parent_id],u_longitude[parent_id]],
+        'lost_spot':[location.u_latitude[parent_id],location.u_longitude[parent_id]],
         'description':'please help me, dear!!!!',
         'relation_id':user_id
         }
     return data
 
+# initial location
+location = Location()
 
 
 if __name__ == '__main__':
@@ -188,7 +190,7 @@ if __name__ == '__main__':
     # for index,item in enumerate(user_info_list):
     #     login(item)
     #     data = {
-    #         'coordinates':[u_latitude[index],u_longitude[index]]
+    #         'coordinates':[location.u_latitude[index],location.u_longitude[index]]
     #     }
     #     print updatestatus(data)
 
@@ -220,37 +222,37 @@ if __name__ == '__main__':
     # print json.dumps(missing_list,indent=2,ensure_ascii=False)
 
     # camera search person
-    camera_count = 0
-    import os
-    while camera_count < 10:
-        dir="./missing_person"
-        missing_list = []
-        for root,dirs,files in os.walk(dir):
-            name = root[len(dir)+1:]
-            random_camera = random.randint(1,len(c_latitude))
-            if name != '':
-                upload_number = random.randint(4,6)
-                print "use camera :%s, search %s of picture %s"%(random_camera,name,upload_number)
-                with open('./missing_person/%s/%s.jpg'%(name,upload_number), 'rb') as f:
-                    content = base64.b64encode(f.read())
-                    data = {
-                        'search_picture':content,
-                        'pic_type':'jpg',
-                        'coordinate':[c_latitude[random_camera-1],c_longitude[random_camera-1]],
-                        'id':random_camera,
-                        'type':'camera'
-                    }
-                    try:
-                        result = eval(search(data))
-                        print result
+    # camera_count = 0
+    # import os
+    # while camera_count < 10:
+    #     dir="./missing_person"
+    #     missing_list = []
+    #     for root,dirs,files in os.walk(dir):
+    #         name = root[len(dir)+1:]
+    #         random_camera = random.randint(1,len(location.c_latitude))
+    #         if name != '':
+    #             upload_number = random.randint(4,6)
+    #             print "use camera :%s, search %s of picture %s"%(random_camera,name,upload_number)
+    #             with open('./missing_person/%s/%s.jpg'%(name,upload_number), 'rb') as f:
+    #                 content = base64.b64encode(f.read())
+    #                 data = {
+    #                     'search_picture':content,
+    #                     'pic_type':'jpg',
+    #                     'coordinate':[location.c_latitude[random_camera-1],location.c_longitude[random_camera-1]],
+    #                     'id':random_camera,
+    #                     'type':'camera'
+    #                 }
+    #                 try:
+    #                     result = eval(search(data))
+    #                     print result
                         
-                        person_id = result['data']['person_id']
-                        data = {'person_id':person_id}
-                        search_name = eval(getPersonDetail(data))['data']['person_info']['name']
-                        print "origin name is %s, search name is %s, confidence is %s"%(name,search_name,result['data']['confidence'])
-                    except Exception as e:
-                        print "error:%s"%(str(e))
-        camera_count = camera_count + 1
+    #                     person_id = result['data']['person_id']
+    #                     data = {'person_id':person_id}
+    #                     search_name = eval(getPersonDetail(data))['data']['person_info']['name']
+    #                     print "origin name is %s, search name is %s, confidence is %s"%(name,search_name,result['data']['confidence'])
+    #                 except Exception as e:
+    #                     print "error:%s"%(str(e))
+    #     camera_count = camera_count + 1
 
     # person search person
     import os
@@ -261,16 +263,16 @@ if __name__ == '__main__':
         for index,item in enumerate(user_info_list):
             login(item)
             data = {
-                'coordinates':[u_latitude[index],u_longitude[index]]
+                'coordinates':[location.u_latitude[index],location.u_longitude[index]]
             }
             # print updatestatus(data)
         for root,dirs,files in os.walk(dir):
             name = root[len(dir)+1:]
             # select a random person to login
-            random_person = random.randint(1,len(u_latitude)-1)
+            random_person = random.randint(1,len(location.u_latitude)-1)
             login(user_info_list[random_person])
             data = {
-                'coordinates':[u_latitude[random_person],u_longitude[random_person]]
+                'coordinates':[location.u_latitude[random_person],location.u_longitude[random_person]]
             }
             # print updatestatus(data)
 
@@ -282,7 +284,7 @@ if __name__ == '__main__':
                     data = {
                         'search_picture':content,
                         'pic_type':'jpg',
-                        'coordinate':[u_latitude[random_person-1],u_longitude[random_person-1]],
+                        'coordinate':[location.u_latitude[random_person-1],location.u_longitude[random_person-1]],
                         'type':'reporter',
                         'id':1 # arbitrary number
                     }
@@ -302,7 +304,7 @@ if __name__ == '__main__':
     # for index,item in enumerate(user_info_list):
     #     login(item)
     #     data = {
-    #         'coordinates':[u_latitude[index],u_longitude[index]]
+    #         'coordinates':[location.u_latitude[index],location.u_longitude[index]]
     #     }
     #     update_result = eval(updatestatus(data))
     #     message_queue = update_result['data']['message_queue']
@@ -328,7 +330,7 @@ if __name__ == '__main__':
     #         'person_id':person_id,
     #         'picture':content,
     #         'pic_type':'jpg',
-    #         'coordinate':[u_latitude[index],u_longitude[index]],
+    #         'coordinate':[location.u_latitude[index],location.u_longitude[index]],
     #         'description':'maybe I find this missing child!'
     #     }
     #     try:
@@ -352,10 +354,10 @@ if __name__ == '__main__':
 
     # name = '王海萍'
     # # select a random person to login
-    # random_person = 3# random.randint(1,len(u_latitude)-1)
+    # random_person = 3# random.randint(1,len(location.u_latitude)-1)
     # login(user_info_list[random_person])
     # data = {
-    #     'coordinates':[u_latitude[random_person],u_longitude[random_person]]
+    #     'coordinates':[location.u_latitude[random_person],location.u_longitude[random_person]]
     # }
     # # print updatestatus(data)
 
@@ -367,7 +369,7 @@ if __name__ == '__main__':
     #         data = {
     #             'search_picture':content,
     #             'pic_type':'jpg',
-    #             'coordinate':[u_latitude[random_person-1],u_longitude[random_person-1]],
+    #             'coordinate':[location.u_latitude[random_person-1],location.u_longitude[random_person-1]],
     #             'type':'reporter',
     #             'id':1 # arbitrary number
     #         }
@@ -385,7 +387,7 @@ if __name__ == '__main__':
     # login_id = 1
     # login(user_info_list[login_id])
     # data = {
-    #     'coordinates':[u_latitude[login_id],u_longitude[login_id]]
+    #     'coordinates':[location.u_latitude[login_id],location.u_longitude[login_id]]
     # }
     # print updatestatus(data)
     # confirm()

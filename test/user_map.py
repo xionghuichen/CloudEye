@@ -20,14 +20,32 @@ def random_coordiante(origin):
             plus = -1
         origin[index] = round(item + (plus*random.randint(0,30)/1000.0),4)
     return origin
-u_latitude = random_coordiante(o_u_latitude)
-u_longitude = random_coordiante(o_u_longitude)
 
 o_c_latitude = [31.88,31.89]
 o_c_longitude = [118.815,118.90]
-c_latitude = random_coordiante(o_c_latitude)
-c_longitude = random_coordiante(o_c_longitude)
-# if __name__ == "__main__":
+class Location(object):
+    @property
+    def c_latitude(self):
+        return random_coordiante(o_c_latitude)
+
+    @property
+    def c_longitude(self):
+        return random_coordiante(o_c_longitude)
+    
+    @property
+    def u_latitude(self):
+        return random_coordiante(o_u_latitude)
+
+    @property
+    def u_longitude(self):
+        return random_coordiante(o_u_longitude)
+    
+if __name__ == "__main__":
+    a = Location()
+    print a.u_longitude
+    print a.u_longitude
+    print a.u_longitude
+
 #     plt.plot(u_longitude,u_latitude,'bo')
 #     plt.plot(c_longitude,c_latitude,'go')
 #     for index,item in enumerate(c_longitude):
