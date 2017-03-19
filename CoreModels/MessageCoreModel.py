@@ -94,6 +94,18 @@ class MessageCoreModel(BaseCoreModel):
             result.reverse()
         return result
  
+    def get_message_by_person_id(self,person_id):
+        """get a limit message filter by person_id [by timeline also]
+
+        Args:
+            person_id: person_id
+            limit: limit message number
+        """
+        result = self.mongodb.message.info.find_one({"_id":person_id})
+        if result == []or result == None:
+            raise DBQueryError('error when get message detail infomation by person_id')  
+        return result
+        
     def clear_message_queue(self, user_id):
         key = key_gen(user_id)
         self.redis.delete(key)

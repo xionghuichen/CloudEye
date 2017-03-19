@@ -61,7 +61,7 @@ class PersonCoreModel(BaseCoreModel):
         Args:
             filter_info
             offset
-            is_formal
+            is_formal: 0 stand for not formal; 1 stand for formal; 2 stand for all include formal and not formal.
 
         Returns:
         """
@@ -72,9 +72,10 @@ class PersonCoreModel(BaseCoreModel):
                 '$geoWithin':{
                     '$center':[filter_info['spot'],filter_info['max_distance']]
                 }
-            },
-            'formal':is_formal
+            }
         }
+        if is_formal != 2:
+            find_info['formal'] = is_formal
         logging.info(" filter dictory result is %s"%find_info)
         result = self.mongodb.person.info.find(find_info).\
         sort([('last_update_time',-1)]).limit(size).skip(skip)

@@ -229,6 +229,8 @@ def get_personlist_info():
     the_page = response.read()
     print the_page
 
+if __name__ == '__main__':
+    getUpdateMessageList()
 # register()
 # login()
 # updatestatus()
