@@ -96,12 +96,12 @@ class PersonCoreModel(BaseCoreModel):
             result =  self.mongodb.person.info.find({"_id":{"$in":person_id}}) 
         else:
             if type(person_id) != ObjectId:
-                logging.info("in filter")
+                # logging.info("in filter")
                 person_id = ObjectId(person_id)
             result = self.mongodb.person.info.find_one({'_id':person_id})
         if result == []or result == None:
             raise DBQueryError('error when get person detail infomation by person_id: %s'%person_id)   
-        logging.info("get person_detail result is :%s"%result)
+        # logging.info("get person_detail result is :%s"%result)
         # result['picture_key_list'] =  eval(result['picture_key_list'])      
         return result
 

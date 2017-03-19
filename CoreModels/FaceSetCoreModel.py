@@ -80,7 +80,7 @@ class FaceSetCoreModel(BaseCoreModel):
             # filter all of face which is low quality.
             for item in result:
                 facequality = item['attributes']['facequality']
-                logging.info("[detect face] threshold is %s, value is %s"%(facequality['threshold'], facequality['value']))
+                # logging.info("[detect face] threshold is %s, value is %s"%(facequality['threshold'], facequality['value']))
                 if facequality['threshold'] - sub_val > facequality['value']:
                     # logging.info("low quality, threshold is %s, value is %s"%(threshold - sub_val, value))
                     del result[count]
@@ -109,9 +109,9 @@ class FaceSetCoreModel(BaseCoreModel):
         for index, item in enumerate(detect_result):
             detect_result[index]['picture_key'] = pic_key[index]
             detect_result[index]['pic_type'] = pic_type
-        logging.info("detect_result is %s"%detect_result)
+        # logging.info("detect_result is %s"%detect_result)
         result = self.mongodb.face.info.insert_many(detect_result)
-        logging.info("insert faces info result is %s "%result.inserted_ids)
+        # logging.info("insert faces info result is %s "%result.inserted_ids)
         return result.inserted_ids
 
     def delete_faces_info_by_key(self, key):

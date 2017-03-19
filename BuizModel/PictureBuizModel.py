@@ -76,12 +76,12 @@ class PictureBuizModel(BaseBuizModel):
                 else:
                     key_list.append(key)
         self.face_model.insert_faces_info(key_list, pic_type, detect_result)
-        logging.info("result in store_pictures function is %s"%key_list)
+        # logging.info("result in store_pictures function is %s"%key_list)
         callback(key_list)
             # [todo] error handler.
 
     def get_url(self, key):
-        logging.info("get url key is :%s"%key)
+        # logging.info("get url key is :%s"%key)
         return self.pic_model.get_url(key)
 
     def delete_pictures(self, key, pic_type):

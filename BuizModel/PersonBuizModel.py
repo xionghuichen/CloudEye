@@ -120,7 +120,7 @@ class PersonBuizModel(BaseBuizModel):
                     'lost_time':item['lost_time']
                 }
                 brief_info.append(item_info)
-        logging.info("print brief info : %s"%brief_info)
+        # logging.info("print brief info : %s"%brief_info)
         return brief_info
 
     def get_lastest_person(self, spot, max_distance, formal, page, size):

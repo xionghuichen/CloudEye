@@ -4,7 +4,7 @@
 import logging
 from bson import ObjectId
 from BaseCoreModel import BaseCoreModel
-from _exceptions.http_error import DBError
+from _exceptions.http_error import DBError, DBQueryError
 def key_gen(prefix_key):
     return "user:message:"+str(prefix_key)
 
@@ -101,9 +101,14 @@ class MessageCoreModel(BaseCoreModel):
             person_id: person_id
             limit: limit message number
         """
-        result = self.mongodb.message.info.find_one({"_id":person_id})
+        if type(person_id) == ObjectId:
+            logging.info("object id")
+            person_id = str(person_id)
+        logging.info("person id %s"%person_id)
+        result = self.mongodb.message.info.find({"person_id":person_id}).limit(1)[0]
         if result == []or result == None:
             raise DBQueryError('error when get message detail infomation by person_id')  
+        logging.info("success %s"%result)
         return result
         
     def clear_message_queue(self, user_id):

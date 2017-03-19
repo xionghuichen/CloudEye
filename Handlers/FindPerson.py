@@ -13,7 +13,7 @@ import tornado.gen
 from _exceptions.http_error import MyMissingArgumentError, ArgumentTypeError, InnerError
 from Base import BaseHandler
 from config.globalVal import ReturnStruct, PLICEMAN_ID
-
+from Tools.Timer import Timer
 
 class FindPersonHandler(BaseHandler):
     def __init__(self, *argc, **argkw):
@@ -52,6 +52,7 @@ class SearchPersonHandler(FindPersonHandler):
         ]
         result = ReturnStruct(message_mapping)
         # 1. upload
+        timer = Timer("search person")
         try:
             search_picture = self.get_argument("search_picture")
             coordinate = eval(self.get_argument("coordinate"))
@@ -65,7 +66,7 @@ class SearchPersonHandler(FindPersonHandler):
             binary_picture = base64.b64decode(search_picture)
         except TypeError as e:
             raise ArgumentTypeError('search_picture')
-        
+        timer.mark("base64")
         event_happen_date = float(time.mktime(datetime.datetime.now().timetuple()))
         
         # configure type parameters
@@ -82,13 +83,17 @@ class SearchPersonHandler(FindPersonHandler):
             message_mode = self.message_model.PERSON_SEARCH
             
         # 2. search_person
+        # log1
         result_detect_struct = yield tornado.gen.Task(self.face_model.detect_img_list, [binary_picture], False)
         result.merge_info(result_detect_struct)
+        timer.mark("after detect")
         if result_detect_struct.code == 0:
             # has high quality picture:
             for item in result_detect_struct.data['detect_result_list']:
                 face_token = item['face_token']
+                # log2
                 searchResult = yield tornado.gen.Task(self.face_model.search_person, face_token)
+                timer.mark("after search")
                 if searchResult != None:
                     # has search result.
                     if searchResult['level'] >= self.confirm_level:
@@ -99,7 +104,9 @@ class SearchPersonHandler(FindPersonHandler):
                         result.data['person_id']=person_id
                         result.data['confidence']=searchResult['confidence']
                         del result.data['detect_result_list']
+                        # log3
                         brief_info_list = self.person_model.get_person_brief_info([ObjectId(person_id)])[0]
+                        timer.mark("after get person info")
                         result.data['std_photo_key'] = brief_info_list['std_photo_key']
                         result.data['name']=brief_info_list['name']
                         result.data['description']=brief_info_list['description']
@@ -109,12 +116,14 @@ class SearchPersonHandler(FindPersonHandler):
                         # upload picture
                         detect_result = item
                         # [todo] delete unreadable '[]'
+                        # log4
                         pic_key_list = yield tornado.gen.Task(
                             self.picture_model.store_pictures,
                             [binary_picture], 
                             self.type_map[search_type]+str(searcher_id), 
                             pic_type, 
                             [detect_result])
+                        timer.mark("after store picture")
                         # 4. update track　and person information
                         event_info = {
                             'coordinate':coordinate,
@@ -124,13 +133,14 @@ class SearchPersonHandler(FindPersonHandler):
                             'date':event_happen_date
                         }
                         try:
+                            # log 5
                             track_id = self.person_model.update_person_status(search_mode, event_info,shooter_info)
                         except Exception as e:
                             logging.info("infomation of exception %s"%str(e))
                             key = "camera"+str(searcher_id)
                             self.picture_model.delete_pictures("camera"+str(searcher_id), pic_type)
                             raise InnerError("正在search请求中更新用户信息时")
-
+                        timer.mark("after update person status")
                         # 5. send message
                         message_data = {
                             'person_id':person_id,
@@ -148,6 +158,7 @@ class SearchPersonHandler(FindPersonHandler):
                             key = "camera"+str(searcher_id)
                             self.picture_model.delete_pictures("camera"+str(searcher_id), pic_type)
                             raise InnerError("正在search请求中发送消息时，%s"%str(e))
+                        timer.mark("after send message")
                         break
                     else:
                         result.code = 1
@@ -156,6 +167,7 @@ class SearchPersonHandler(FindPersonHandler):
                     result.code = 2
                     result.data = {}
         self.return_to_client(result)
+        timer.end("after return.")
         self.finish()
 
 
