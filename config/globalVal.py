@@ -30,3 +30,4 @@ class ReturnStruct(object):
 
 PLICEMAN_ID = 0
 FACESET_TOKEN='3448ba215c7d3933ed78f418aa85bb35'
+MAX_WORKERS = 1000

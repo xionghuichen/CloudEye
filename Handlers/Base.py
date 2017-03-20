@@ -11,14 +11,16 @@ import urllib
 import tornado.web
 import tornado.gen
 import tornado.httpclient
+from tornado.concurrent import run_on_executor
+from concurrent.futures import ThreadPoolExecutor
 import json
 from bson import ObjectId
+from config.globalVal import MAX_WORKERS
 from BuizModel.UserBuizModel import UserBuizModel 
 from BuizModel.FaceSetBuizModel import FaceSetBuizModel
 from BuizModel.PictureBuizModel import PictureBuizModel
 from BuizModel.PersonBuizModel import PersonBuizModel
 from BuizModel.MessageBuizModel import MessageBuizModel
-
 from _exceptions.http_error import MyMissingArgumentError
 
 def throw_base_exception(method):
@@ -36,6 +38,8 @@ def throw_base_exception(method):
     
 
 class BaseHandler(tornado.web.RequestHandler):
+    executor = ThreadPoolExecutor(max_workers=MAX_WORKERS)
+
     def __init__(self, *argc, **argkw):
         super(BaseHandler, self).__init__(*argc, **argkw)
         para = {} 
@@ -78,6 +82,9 @@ class BaseHandler(tornado.web.RequestHandler):
     def __del__(self):
         self.session.close()
 
+    @run_on_executor
+    def background_task(self,function,*argc):
+        return function(*argc)
 
     def change_custom_string_to_json(self, dic):
         # logging.info("in change custom string to json")

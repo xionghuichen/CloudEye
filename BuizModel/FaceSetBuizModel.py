@@ -42,7 +42,7 @@ class FaceSetBuizModel(BaseBuizModel):
             level = self.MIDDLE_CONFIDENCE
         return level
 
-    def search_person(self,face_token, callback):
+    def search_person(self,face_token):
         """ Use face++ to search a person by url.
         Args:
             face_token: image's url!
@@ -67,17 +67,17 @@ class FaceSetBuizModel(BaseBuizModel):
             }
             
             # logging.info("result of search, %s"%to_return)
-            callback(to_return)
+            return to_return
         else:
             # do not search an possible face
-            callback(None)
+            return None
     
-    def detect_img_list(self, binary_picture_list, only, callback):
+    def detect_img_list(self, binary_picture_list, only):
         """detect face of a image list through face++, get face_token list as a result.
 
         Args:
             binary_picture_list
-
+            only: if only, detect the higest quality picture.
         Returns:
             ReturnStruct.
                 if code == 1: detect error, return low quality picture number in data['count']
@@ -146,9 +146,9 @@ class FaceSetBuizModel(BaseBuizModel):
         if to_return.code != 1:
             to_return.data = {'detect_result_list':detect_result_list}        
         # logging.info("[detect result list] detect img list function : %s"%detect_result_list)
-        callback(to_return)
+        return to_return
 
-    def compare_face(self, std_face_token, detect_face_token, callback):
+    def compare_face(self, std_face_token, detect_face_token):
         """Compare two face token.
 
         Args:
@@ -169,4 +169,4 @@ class FaceSetBuizModel(BaseBuizModel):
         confidence = result['confidence']
         level = self._calculate_level(result['thresholds'],confidence)
         logging.info("result of compare, the confidence is %s"%confidence)
-        callback({'level':level,'confidence':confidence})
+        return {'level':level,'confidence':confidence}

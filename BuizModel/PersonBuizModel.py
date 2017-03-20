@@ -145,7 +145,8 @@ class PersonBuizModel(BaseBuizModel):
             result.append({
             'picture_key':item['picture_key_list'][0],
             'person_id':item['_id'],
-            'name':item['name']
+            'name':item['name'],
+            'lost_spot':item['spot']
             })
         return result
 

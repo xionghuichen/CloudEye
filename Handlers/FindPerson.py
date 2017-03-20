@@ -83,16 +83,14 @@ class SearchPersonHandler(FindPersonHandler):
             message_mode = self.message_model.PERSON_SEARCH
             
         # 2. search_person
-        # log1
-        result_detect_struct = yield tornado.gen.Task(self.face_model.detect_img_list, [binary_picture], False)
+        result_detect_struct = yield self.background_task(self.face_model.detect_img_list, [binary_picture], False)
         result.merge_info(result_detect_struct)
         timer.mark("after detect")
         if result_detect_struct.code == 0:
             # has high quality picture:
             for item in result_detect_struct.data['detect_result_list']:
                 face_token = item['face_token']
-                # log2
-                searchResult = yield tornado.gen.Task(self.face_model.search_person, face_token)
+                searchResult = yield self.background_task(self.face_model.search_person, face_token)
                 timer.mark("after search")
                 if searchResult != None:
                     # has search result.
@@ -117,7 +115,7 @@ class SearchPersonHandler(FindPersonHandler):
                         detect_result = item
                         # [todo] delete unreadable '[]'
                         # log4
-                        pic_key_list = yield tornado.gen.Task(
+                        pic_key_list = yield self.background_task(
                             self.picture_model.store_pictures,
                             [binary_picture], 
                             self.type_map[search_type]+str(searcher_id), 
@@ -209,6 +207,7 @@ class CallHelpHandler(FindPersonHandler):
 
         if user_id == None or user_id == '':
             raise MyMissingArgumentError("cookie: user_id [maybe did not login yet]")
+
         binary_picture_list = []
         if picture_list == []:
             result.code = 0
@@ -222,12 +221,12 @@ class CallHelpHandler(FindPersonHandler):
                     raise ArgumentTypeError('picture_list')
 
             # get face_token _list
-            result_detect = yield tornado.gen.Task(self.face_model.detect_img_list, binary_picture_list, True)
+            result_detect = yield self.background_task(self.face_model.detect_img_list, binary_picture_list, True)
             result.merge_info(result_detect)
             if result_detect.code == 0:
                 # upload pictures.
                 detect_result_list = result_detect.data['detect_result_list']
-                result_pic_key = yield tornado.gen.Task(
+                result_pic_key = yield self.background_task(
                     self.picture_model.store_pictures,binary_picture_list, self.type_map['reporter']+str(user_id), pic_type, detect_result_list)
                 # todo, error handler
                 # store information.[track and person]
@@ -302,12 +301,12 @@ class ImportPersonHandler(FindPersonHandler):
                     raise ArgumentTypeError('picture_list')
 
             # get face_token _list
-            result_detect = yield tornado.gen.Task(self.face_model.detect_img_list, binary_picture_list, True)
+            result_detect = yield self.background_task(self.face_model.detect_img_list, binary_picture_list, True)
             result.merge_info(result_detect)
             if result_detect.code == 0:
                 # upload pictures.
                 detect_result_list = result_detect.data['detect_result_list']
-                result_pic_key = yield tornado.gen.Task(
+                result_pic_key = yield self.background_task(
                     self.picture_model.store_pictures,binary_picture_list, self.type_map['reporter']+str(user_id), pic_type, detect_result_list)
                 # todo, error handler
                 # store information.[track and person]
@@ -360,19 +359,19 @@ class ComparePersonHandler(FindPersonHandler):
         # 1. get person's std picture. personid--> -->face_token
         std_face_token = self.person_model.get_person_std_pic(person_id)
         # 2. detect picture --> face_token2
-        result_detect_struct = yield tornado.gen.Task(self.face_model.detect_img_list, [binary_picture], True)
+        result_detect_struct = yield self.background_task(self.face_model.detect_img_list, [binary_picture], True)
         result.merge_info(result_detect_struct)
         # 3. compare face_token.
         if result_detect_struct.code == 0:
             # the result just one element
             detect_result = result_detect_struct.data['detect_result_list']
-            confidence = yield tornado.gen.Task(self.face_model.compare_face, std_face_token, detect_result[0]['face_token'])
+            confidence = yield self.background_task(self.face_model.compare_face, std_face_token, detect_result[0]['face_token'])
             result.data = confidence
             # logging.info("result of compare, the confidence is %s"%confidence)
             if confidence['level'] >= self.confirm_level:    
                 # 4. update info
                 result.code = 0
-                pic_key_list = yield tornado.gen.Task(self.picture_model.store_pictures,[binary_picture], "user"+str(user_id), pic_type, detect_result)
+                pic_key_list = yield self.background_task(self.picture_model.store_pictures,[binary_picture], "user"+str(user_id), pic_type, detect_result)
                 # 4. update track　and person information
                 shooter_info = {
                     'user_id':user_id,

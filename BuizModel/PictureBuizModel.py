@@ -50,7 +50,7 @@ class PictureBuizModel(BaseBuizModel):
         os.remove(path)
         return content
 
-    def store_pictures(self,binary_picture_list, pic_key, pic_type, detect_result, callback):
+    def store_pictures(self,binary_picture_list, pic_key, pic_type, detect_result):
         """Upload pictures (pass as binary stream file) to OSS databases and mongodb[face.info]
 
         Args:
@@ -77,7 +77,7 @@ class PictureBuizModel(BaseBuizModel):
                     key_list.append(key)
         self.face_model.insert_faces_info(key_list, pic_type, detect_result)
         # logging.info("result in store_pictures function is %s"%key_list)
-        callback(key_list)
+        return key_list
             # [todo] error handler.
 
     def get_url(self, key):
