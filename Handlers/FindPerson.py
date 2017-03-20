@@ -167,9 +167,9 @@ class SearchPersonHandler(FindPersonHandler):
                     result.code = 2
                     result.data = {}
         self.return_to_client(result)
-        timer.end("after return.")
+        timer.mark("after return.")
         self.finish()
-
+	timer.end("after finish..")
 
 class CallHelpHandler(FindPersonHandler):
     def __init__(self, *argc, **argkw):

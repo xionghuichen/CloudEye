@@ -25,7 +25,7 @@ import pymongo
 from facepp_sdk.facepp import API, File
 
 from config.globalVal import AP
-from Handlers.Index import IndexHandler
+from Handlers.Index import IndexHandler,SleepHandler
 from Handlers.User import RegisterHandler, LoginHandler, UpdateStatusHandler, ConfirmHandler, LogoutHandler, MyPersonListHandler
 from Handlers.FindPerson import SearchPersonHandler, CallHelpHandler, ComparePersonHandler, ImportPersonHandler
 from Handlers.MissPerson import GetAllTracksHandler,LastestUpdatePersonHandler, LastestUpdateMessageHandler, GetMissingPersonDetailHandler, GetMissingPersonDetailWebHandler,GetPersonTracksHandler
@@ -66,6 +66,7 @@ class Application(tornado.web.Application):
         handlers = [
             # test
             (r'/', IndexHandler),
+            (r'/sleep',SleepHandler),
             (r'/user/register', RegisterHandler),
             (r'/user/login', LoginHandler),
             (r'/user/logout', LogoutHandler),
