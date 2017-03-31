@@ -24,7 +24,7 @@ class ReturnStruct(object):
     def print_info(self,tag ='default'):
         logging.info("print return struct, tag = %s...."%tag)
         logging.info("max_code:%s"%self.max_code)
-        logging.info("code: %s"%self.code)
+        logging.info("code: %s"%self.code)c
         logging.info("message_mapping: %s"%self.message_mapping)
         logging.info("data: %s"%self.data)
 
