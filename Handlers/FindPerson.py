@@ -23,6 +23,11 @@ class FindPersonHandler(BaseHandler):
             "reporter":"reporter:",
         }
 
+    def get_even_happen_data(self):
+        '''Get the server time type by unix.
+        '''
+        return float(time.mktime(datetime.datetime.now().timetuple()))
+
 class SearchPersonHandler(FindPersonHandler):
     def __init__(self, *argc, **argkw):
         super(SearchPersonHandler, self).__init__(*argc, **argkw)
@@ -67,7 +72,7 @@ class SearchPersonHandler(FindPersonHandler):
         except TypeError as e:
             raise ArgumentTypeError('search_picture')
         timer.mark("base64")
-        event_happen_date = float(time.mktime(datetime.datetime.now().timetuple()))
+        event_happen_date = self.get_even_happen_data()
         
         # configure type parameters
         if search_type == 'camera':
@@ -236,7 +241,7 @@ class CallHelpHandler(FindPersonHandler):
                     'name': info_data['name'],
                     'std_pic_key':result_pic_key[0],
                     'spot':info_data['lost_spot'],
-                    'date':info_data['lost_time'],
+                    'date':self.get_even_happen_data(),
                     'age':info_data['age'],
                     'sex':info_data['sex'],
                     'person_id':person_id,
@@ -355,7 +360,7 @@ class ComparePersonHandler(FindPersonHandler):
 
         ]
         result =ReturnStruct(message_mapping)
-        event_happen_date = float(time.mktime(datetime.datetime.now().timetuple()))
+        event_happen_date = self.get_even_happen_data()
         # 1. get person's std picture. personid--> -->face_token
         std_face_token = self.person_model.get_person_std_pic(person_id)
         # 2. detect picture --> face_token2
