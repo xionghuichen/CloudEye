@@ -5,6 +5,8 @@ import logging
 import datetime
 import time
 from BaseBuizModel import BaseBuizModel
+from _exceptions.http_error import DBError, DBQueryError
+
 class MessageBuizModel(BaseBuizModel):
     def __init__(self, *argc, **argkw):
         super(MessageBuizModel, self).__init__(*argc,**argkw)
@@ -214,7 +216,11 @@ class MessageBuizModel(BaseBuizModel):
         result = []
         for item in person_info:
             person_id = item['_id']
-            message = self.message_model.get_message_by_person_id(person_id)
+            # logging.info("person id %s"%person_id)
+            try:
+                message = self.message_model.get_message_by_person_id(person_id)
+            except DBQueryError as e:
+                continue
             append_item = {
             'std_pic_key':message['std_pic_key'],# this is just a key, not a list.
             'person_id':message['person_id'],

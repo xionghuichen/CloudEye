@@ -23,6 +23,7 @@ class OSSCoreModel(BaseCoreModel):
         if result.status != 200:
             return False
         return True
+
     @repeat_send
     def delete_picture_by_key(self,key):
         """Delete picture which key is parameter 'key'

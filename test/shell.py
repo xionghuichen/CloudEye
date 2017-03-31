@@ -53,7 +53,7 @@ api = '/find/searchperson/'
 import commands
 # (status, output) = commands.getstatusoutput("siege -c 2 -r 10 -b -H 'Content-Type:application/json' 'http://139.196.207.155:9000/user/login POST < body.json'")
 host = prefix
-(status, output) = commands.getstatusoutput("ab -n 30 -c 30 -b 2048 -p body.json -C user_id=%s -T 'application/x-www-form-urlencoded' '%s/find/searchperson'"%(user_id,host))
+(status, output) = commands.getstatusoutput("ab -n 60 -c 60 -b 2048 -p body.json -C user_id=%s -T 'application/x-www-form-urlencoded' '%s/find/searchperson'"%(user_id,host))
 api = '/sleep'
 # (status, output) = commands.getstatusoutput("ab -n 800 -c 400 -b 2048 -C user_id=%s -T 'application/x-www-form-urlencoded' 'http://139.196.207.155:9000/sleep'"%user_id)
 
@@ -385,4 +385,50 @@ Percentage of the requests served within a certain time (ms)
   98%  38156
   99%  38156
  100%  38156 (longest request)
+
+
+
+Server Software:        TornadoServer/4.4.1
+Server Hostname:        139.196.207.155
+Server Port:            9000
+
+Document Path:          /find/searchperson
+Document Length:        453 bytes
+
+Concurrency Level:      60
+Time taken for tests:   27.018 seconds
+Complete requests:      60
+Failed requests:        40
+   (Connect: 0, Receive: 0, Length: 40, Exceptions: 0)
+Total transferred:      36064 bytes
+Total body sent:        1444980
+HTML transferred:       27304 bytes
+Requests per second:    2.22 [#/sec] (mean)
+Time per request:       27018.338 [ms] (mean)
+Time per request:       450.306 [ms] (mean, across all concurrent requests)
+Transfer rate:          1.30 [Kbytes/sec] received
+                        52.23 kb/s sent
+                        53.53 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:       31 12516 7758.4  12720   25730
+Processing:  1288 13666 7721.3  13862   26129
+Waiting:      839 13230 7742.2  13439   25874
+Total:      26159 26181 126.1  26159   27017
+
+
+1. 有自带的timeit库，但是不适合我的需求，所以我手写了一个简单的写计时器，能够插入代码的各个地段，计算各个地方耗时。
+2. 整个过程耗时很短，但是最后tornado给我统计的耗时却很长--->问题不在整个过程的运算上，而是在IO，也就是数据传输上
+3. 做了照片的无损压缩。80k，变成了16k。结果果然如此，修改之后变成了-->1200
+4. 然后接着是tornado，按理说是高性能非阻塞框架，但是进一步发现一个问题，整个过程全部是阻塞的。第一个调用结束之后才能调用第二个。
+  - 当时我是自己写的call_back函数，我就想到可能这里出了问题，
+  - 然后就开始了解非阻塞机制，因为原本按照网上的回答，需要用第三方的库才能做到异步非阻塞
+  - 原本是想仿造哪些异步库的实现机制写一下的，发现难度太大
+  - 最后看tornado文档有一个run_on_executor，装饰器，可以达到这个效果，我就试着按照这个装饰器做了改装
+  - 利用协程做到了异步处理，--->800
+5. 所有的数据库我全部用的外网访问---> 改成localhost--->400.
+6. 单通道，进一步压缩。17-->8k
+9. 在买一台服务器，加上ngnix来分发请求。
+
 '''
