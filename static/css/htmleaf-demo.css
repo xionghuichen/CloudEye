@@ -1,4 +1,4 @@
-@font-face {
+﻿@font-face {
 	font-family: 'icomoon';
 	
 	font-weight: normal;
@@ -31,7 +31,7 @@ body {
 
 a {
 	text-decoration: none;
-	color: #8bc34a;
+	color: #00000000;
 	outline: none;
 }
 

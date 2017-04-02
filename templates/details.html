@@ -11,20 +11,34 @@
       <!--字体-->
       <script type="text/javascript" src="http://cdn.webfont.youziku.com/wwwroot/js/wf/youziku.api.min.js"></script>
       <!--map-->
-      <script type="text/javascript" src="http://api.map.baidu.com/api?type=quick&ak=tYISNwwks0jsEY3566N990sbTTO9LXC2&v=1.0"></script>
+      <script type="text/javascript" src="http://api.map.baidu.com/api?v=1.4"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/library/Heatmap/2.0/src/Heatmap_min.js"></script>
+     
+     <style type="text/css">
+
+#containermap{
+height: 500px;
+width: 100%;
+}
+
+#r-result {
+width: 100%;
+}
+</style>
     </head>
 
     <body>
      <nav>
       <div class="nav-wrapper grey darken-3">
         <div class="col s8">
-          <a href="/web/details" class="breadcrumb">详细信息</a>
+          <a href="/web/index" class="breadcrumb">详细信息</a>
           <!--此处有动态赋值-->
           <a href="#!" class="breadcrumb" id="bread2">Second</a>
          
         </div>
       </div>
     </nav>
+   
       <div class="container">
         <!-- Page Content goes here -->
         <div class="row">
@@ -89,8 +103,8 @@
 
         <div class="card-tabs">
       <ul class="tabs tabs-fixed-width">
-        <li class="tab"><a href="#test4">走失信息</a></li>
-        <li class="tab"><a class="active" href="#test5">家属信息</a></li>
+        <li class="tab"><a class="active" href="#test4">走失信息</a></li>
+        <li class="tab"><a  href="#test5">家属信息</a></li>
         <li class="tab"><a href="#test6">最近更新</a></li>
 
       </ul>
@@ -109,9 +123,13 @@
         </div>
         <div class="row">
         <!--此处有动态赋值 p-->
-          <div class="col s6"><p id="i_missing_time">走失时间:</p></div>
+          <div class="col s12">
+          <p id="i_missing_time">走失时间:　</p>
+          <p>　　</p>
+          <p id="i_missing_spot">走失地点:　</p>
+          </div>
           <!--此处有动态赋值 p-->
-          <div class="col s6"><p id="i_missing_spot">走失地点:</p></div>
+          
         </div>  
         </div>
       </div>
@@ -127,18 +145,25 @@
       <div id="test6">
          <div class="row">
          <!--此处有动态赋值 p-->
-          <div class="col s6"><p id="i_update_time">最近更新时间:</p></div>
+        
           <!--此处有动态赋值 p-->
-          <div class="col s6"><p id="i_update_spot">最近更新地点:</p></div>
+          <div class="col s12">
+          <p id="i_update_time">最近更新时间:　</p>
+          <p>  　　</p>
+          <p id="i_update_spot">最近更新地点:　</p></div>
         </div>
       </div>
 
     </div>
       </div>
+ <div id="containermap"></div>
           </div>
+
     </div>
+
+
       </div>
-<div id="allmap"></div>
+
       <!--Import jQuery before materialize.js-->
       <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
       <script type="text/javascript" src="{{ static_url('js/materialize.min.js') }}"></script>
@@ -150,14 +175,17 @@
        return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');     
     }   
      var id=window.location.search.slice(window.location.search.lastIndexOf("?")+11);
+     console.log(id);
      //alert(id);
-     //此处有动态赋值 person_id=
+
+     //此处有动态赋值
+     //todo ,you can delete jsoncallback
        $.getJSON("/get/persondetail/web?jsoncallback=?",{"person_id":id},function(result){
      var infor=result.data.person_info;
      var usertrack=result.data.person_track;
      var machinedetect=result.data.machine_track;
-     var textuser='<li><div class="collapsible-header"> <span class="new badge blue" data-badge-caption="">94%</span><img margin="50px" width="120px" src="img/sample.jpg" alt="" class="circle responsive-img materialboxed"><p></p></div><div class="collapsible-body"><span>上传描述</span></div></li>';
-     var textvedio='<li><div class="collapsible-header"> <span class="new badge red" data-badge-caption="">94%</span><i class="material-icons">filter_drama</i><p></p></div><div class="collapsible-body"><span><img margin="50px" width="120px" src="img/sample.jpg" class="circle responsive-img materialboxed">检测地点: </span></div></li>';
+     var textuser='<li><div class="collapsible-header"> <span class="new badge blue" data-badge-caption="">94%</span><img margin="50px" width="120px" src="{{static_url('img/sample.jpg')}}" alt="" class="circle responsive-img materialboxed"><p></p></div><div class="collapsible-body"><span>上传描述</span></div></li>';
+     var textvedio='<li><div class="collapsible-header"> <span class="new badge red" data-badge-caption="">94%</span><i class="material-icons">filter_drama</i><p></p></div><div class="collapsible-body"><span><img margin="50px" width="120px" src="{{static_url('img/sample.jpg')}}" class="circle responsive-img materialboxed"></span></div></li>';
      var location=0;
     ////alert(usertrack.length+usertrack[0].description);
     //此处有动态赋值（js动态加载HTML元素）
@@ -175,13 +203,18 @@
     //alert(machinedetect.length);
         <!--initial information-->
         $("#i_description").append(infor.description);
-        $("#i_image").attr('src',infor.picture_key_list[1]);
+        $("#i_image").attr('src',infor.picture_key_list[0]);
 
         $("#i_update_time").append(getLocalTime(infor.last_update_time));
         $("#i_name").append(infor.name);
         $("#bread2").text(infor.name);
       //  $("#i_sex").css("background-color","red");
-        $("#i_sex").append(infor.sex);
+      if(infor.sex==1){
+        $("#i_sex").append("男");
+      }else{
+        $("#i_sex").append("女");
+      }
+        //$("#i_sex").append(infor.sex);
         $("#i_age").append(infor.age);
         $("#i_parent_name").append(infor.relation_name);
         $("#i_tel").append(infor.relation_telephone);
@@ -219,7 +252,7 @@
         $("#user_track li:eq("+i+") div p" ).append(getLocalTime(jQuery.data(test,"datas").date));
         $("#user_track li:eq("+i+") div.collapsible-header span").text("匹配率: "+jQuery.data(test,"datas").confidence+"%");
         $("#user_track li:eq("+i+") div img").attr('src',jQuery.data(test,"datas").pic_key); 
-         $("#user_track li:eq("+i+") div p" ).append("地点: "+location);
+         //$("#user_track li:eq("+i+") div p" ).append("地点: "+location);
         $("#user_track li:eq("+i+") div.collapsible-body span").text(jQuery.data(test,"datas").description);    
       }
       
@@ -249,12 +282,59 @@
     
     <!--EOF-->
       });
-   
+   //load map
+    var id2=window.location.search.slice(window.location.search.lastIndexOf("?")+11);
+//todo delete jsoncallback
+ $.getJSON("/get/trackinfo/web?jsoncallback=?",{"person_id":id2},function(resultMap){
+  var mapdata=resultMap.data;
+
+var map = new BMap.Map("containermap"); // 创建地图实例
+var point = new BMap.Point(mapdata[0].lng,mapdata[0].lat);
+map.centerAndZoom(point, 16); // 初始化地图，设置中心点坐标和地图级别
+map.enableScrollWheelZoom(); 
+var mappointx=[118.826293,118.826393,118.824293];
+var mappointy=[31.897636,31.897633,31.897644];
+
+
+
+var pointSet=[];
+
+
+for (var i = 0; i < mapdata.length; i++) {
+//创建点集合
+pointSet.push(new BMap.Point(mapdata[i].lng,mapdata[i].lat));
+
+var marker1 = new BMap.Marker(new BMap.Point(mapdata[i].lng,mapdata[i].lat)); // 创建标注
+map.addOverlay(marker1); 
+     var opts = {
+      position : new BMap.Point(mapdata[i].lng,mapdata[i].lat),// 指定文本标注所在的地理位置
+      offset   : new BMap.Size(0, 0)    //设置文本偏移量
+    }
+
+    var label = new BMap.Label(getLocalTime(mapdata[i].time), opts);  // 创建文本标注对象
+        label.setStyle({
+             color : "red",
+             fontSize : "12px",
+             height : "20px",
+             lineHeight : "20px",
+             fontFamily:"微软雅黑"
+         });
+    map.addOverlay(label);  
+
+
+}
+ var polyline = new BMap.Polyline(pointSet, {strokeColor:"blue", strokeWeight:3, strokeOpacity:0.5});
+map.addOverlay(polyline);
+
+});
+ 
+   <!--EOF-->
+
     //$("#user_track").append(text);
-    $youziku.load("body", "2e8de98ad2c241aca7d97cfcdc313d61", "JetLinkMediumOldStamp");
+  //  $youziku.load("body", "2e8de98ad2c241aca7d97cfcdc313d61", "JetLinkMediumOldStamp");
     /*$youziku.load("#id1,.class1,h1", "2e8de98ad2c241aca7d97cfcdc313d61", "JetLinkMediumOldStamp");*/
     /*．．．*/
-    $youziku.draw();
+    //$youziku.draw();
 
      $('.fixed-action-btn').openFAB();
   $('.fixed-action-btn').closeFAB();
@@ -278,6 +358,12 @@
     
 </script>
 
+<script type="text/javascript">
+
+</script>
+<script type="text/javascript">
+ 
+</script>
     </body>
   </html>
         

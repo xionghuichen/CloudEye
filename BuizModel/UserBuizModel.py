@@ -184,7 +184,7 @@ class UserBuizModel(BaseBuizModel):
         if has_update:
             result.code = 1
         # 2. check location push message.
-        message_queue = self.message_model.get_user_message_queue(user_id)
+        message_queue = self.message_model.get_user_message_queue(user_id,1)
         if message_queue != []:
             # if has_update = 0, code = 2, if has_update = 1, code = 3 
             result.code = result.code + 2     

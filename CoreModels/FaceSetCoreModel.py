@@ -1,37 +1,14 @@
 #!/usr/bin/env python
 # coding=utf-8
 # FaceSetCoreModel.py
-import functools
+
 import logging
-from BaseCoreModel import BaseCoreModel
+from BaseCoreModel import BaseCoreModel,repeat_send
 from _exceptions.http_error import DBError
 from facepp_sdk.facepp import APIError, File
 from config.globalVal import FACESET_TOKEN
 import time
-def repeat_send(method):
-    """this decorator for face++ request. 
-    Beacuse face++ free appkey often send high concurrency error.
-    after add this decorator, request will send repeatly until response successfully.
-    
-    """
-    @functools.wraps(method)
-    def wrapper(self, *args, **kwargs):
-        again = True
-        count = 0
-        while again :
-            again = False
-            count +=1
-            try:
-                logging.info("trying connecting to face++")
-                return method(self, *args, **kwargs)
-            except APIError as e:
-                logging.info("error happen:%s"%str(e.body))
-                again = True
-                if count > 10:
-                    raise DBError("face plus plus databases error!")
-                else:
-                    time.sleep(1)
-    return wrapper
+
 
 class FaceSetCoreModel(BaseCoreModel):
     def __init__(self, *argc, **argkw):
@@ -74,15 +51,18 @@ class FaceSetCoreModel(BaseCoreModel):
         """
         result = self.facepp.detect(image_file=File(path=self.fade_file_path, content=binary_picture), return_attributes='facequality')
         result = result['faces']
+        sub_val = 60
         if result != []:
             count = 0
             # filter all of face which is low quality.
             for item in result:
                 facequality = item['attributes']['facequality']
-                if facequality['threshold'] > facequality['value']:
+                # logging.info("[detect face] threshold is %s, value is %s"%(facequality['threshold'], facequality['value']))
+                if facequality['threshold'] - sub_val > facequality['value']:
+                    # logging.info("low quality, threshold is %s, value is %s"%(threshold - sub_val, value))
                     del result[count]
                 else:
-                    result[count]['attributes']['facequality'] = facequality['value'] - facequality['threshold']
+                    result[count]['attributes']['facequality'] = facequality['value'] - facequality['threshold'] + sub_val
                     count += 1
         return result
 
@@ -106,9 +86,9 @@ class FaceSetCoreModel(BaseCoreModel):
         for index, item in enumerate(detect_result):
             detect_result[index]['picture_key'] = pic_key[index]
             detect_result[index]['pic_type'] = pic_type
-        logging.info("detect_result is %s"%detect_result)
+        # logging.info("detect_result is %s"%detect_result)
         result = self.mongodb.face.info.insert_many(detect_result)
-        logging.info("insert faces info result is %s "%result.inserted_ids)
+        # logging.info("insert faces info result is %s "%result.inserted_ids)
         return result.inserted_ids
 
     def delete_faces_info_by_key(self, key):

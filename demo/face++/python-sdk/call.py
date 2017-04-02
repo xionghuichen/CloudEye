@@ -3,8 +3,8 @@
 
 # 您需要先注册一个App，并将得到的API key和API secret写在这里。
 # You need to register your App first, and enter you API key/secret.
-API_KEY = "qZAdC0nEQDEDgC4tdvLiHjwnZWlw08Bm"
-API_SECRET = "fd0uEymgpqkdrhZCc-h5QLBYavDD0g0j"
+API_KEY = "MIpcX7FM-NDchXzXyt21oUpMI8lJW8w-"
+API_SECRET = "bEjiP8MX9lmpHLA0Ed2eOZYrC5-TNIkV"
 
 # 网络图片的URL地址,调用demo前请填上内容
 # The url of network picture, please fill in the contents before calling demo
@@ -44,8 +44,16 @@ api = API(API_KEY, API_SECRET)
 
 # 创建一个Faceset用来存储FaceToken
 # create a Faceset to save FaceToken
-ret = api.faceset.removeface(outer_id='formal_cloudeye',face_tokens='RemoveAllFaceTokens')
-print_result("faceset create", ret)
+# ret = api.faceset.create(outer_id='formal_cloudeye')
+# print_result("faceset create", ret)
+# f524168cdcdeec57b2298ac6026e95ac
+
+# remove begin
+# ret = api.faceset.removeface(outer_id='formal_cloudeye',face_tokens='RemoveAllFaceTokens')
+# print_result("faceset create", ret)
+# remove end
+
+
 # time.sleep(1)
 # # 对图片进行检测
 # # detect image

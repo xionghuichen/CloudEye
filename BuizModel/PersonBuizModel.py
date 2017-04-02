@@ -1,7 +1,8 @@
-#!/usr/bin/env python
+#/usr/bin/env python
 # coding=utf-8
 # PersonBuizModel.py
 import time
+import logging
 import datetime
 from bson import ObjectId
 from BaseBuizModel import BaseBuizModel
@@ -96,12 +97,12 @@ class PersonBuizModel(BaseBuizModel):
 
     def get_person_brief_info(self, person_id_list):
         """Get person's brief information by person_id_list.
-
+            If you want to get single person brief info ,just add this person id as a list, like: [OjbectId('asdfvz12cdfa')]
         Args:
-            person_id_list:
+            person_id_list: ervery item of preson_id should be changed into ObjectId type.
 
         Returns:
-
+            brief_info_list:
         """
         person_info = self.person_model.get_person_detail(person_id_list)
         brief_info = []
@@ -112,9 +113,14 @@ class PersonBuizModel(BaseBuizModel):
                     'last_update_time':item['last_update_time'],
                     'std_photo_key':item['picture_key_list'][0],
                     'last_update_spot':item['last_update_spot'],
-                    'name':item['name']
+                    'name':item['name'],
+                    'description':item['description'],
+                    'sex':item['sex'],
+                    'age':item['age'],
+                    'lost_time':item['lost_time']
                 }
                 brief_info.append(item_info)
+        # logging.info("print brief info : %s"%brief_info)
         return brief_info
 
     def get_lastest_person(self, spot, max_distance, formal, page, size):
@@ -139,7 +145,8 @@ class PersonBuizModel(BaseBuizModel):
             result.append({
             'picture_key':item['picture_key_list'][0],
             'person_id':item['_id'],
-            'name':item['name']
+            'name':item['name'],
+            'lost_spot':item['spot']
             })
         return result
 
@@ -178,7 +185,18 @@ class PersonBuizModel(BaseBuizModel):
                     'user_nick_name':item['user_nick_name'],
                     'description':item['description']
                 }
-                person_track.append(person_track_info)                
+                person_track.append(person_track_info)   
+            elif item['type'] == self.person_model.PERSON_SEARCH:
+                person_track_info = {
+                    'date':item['date'],
+                    'pic_key':item['pic_key'],
+                    'confidence':item['confidence'],
+                    'coordinate':item['coordinate'],
+                    'user_id':item['user_id'],
+                    'user_nick_name':item['user_nick_name'],
+                    'description':'我通过主动搜索功能发现了这个孩子很可能是被拐儿童！！'
+                }
+                person_track.append(person_track_info)       
         # delete useless key in person_info
         del person_info['track_list']
         result = {
@@ -190,3 +208,84 @@ class PersonBuizModel(BaseBuizModel):
         }
         return result
     
+    def get_track_list(self, person_id):
+        """ get all of track list of a person, including machine and user tracks
+
+        Args:
+            person_id
+
+        Returns:
+            [
+            {
+                "lat": 31.89,
+                "lng": 118.9,
+                "time": 1486440602.0
+            },
+            {
+                "lat": 31.88,
+                "lng": 118.815,
+                "time": 1486440637.0
+            },
+            {
+                "lat": 31.88,
+                "lng": 118.815,
+                "time": 1486440638.0
+            }
+        }   ]
+        """
+        person_info = self.person_model.get_person_detail(person_id)
+        track_id_list = person_info['track_list']
+        track_detail = self.person_model.get_tracks_detail(track_id_list)
+        track_list = []
+        for item in track_detail:
+            logging.info("[item['coordinate'] ]%s , [item type['coordiante']] %s"%(item,type(item)))
+ 	    if type(item['coordinate']) != list: 
+                if type(item['coordinate']) == str:
+                    item = eval(item)
+                else:
+                    continue
+            track_item = {
+                'lng':item['coordinate'][1],
+                'lat':item['coordinate'][0],
+                'time':item['date']
+            }
+            track_list.append(track_item)
+        
+        return track_list
+
+
+    def get_track_count_by_range(self, spot, range_longitude, range_latitude):
+        """get track info count for every special coordinate.
+
+        Args:
+            spot: the center spot, eg. [111.11,22.2]
+            range_longitude: search longitude
+            range_latitude: search latitude
+
+        Returns:
+            track_map,eg:
+                [
+                {
+                    115.33:{ # longitude
+                        22.3:1, # latitude and count
+                        22.54:2
+                    }
+                },
+                {
+                ......
+                }
+        """
+        track_info = self.person_model.get_track_info_by_range(spot,range_longitude,range_latitude)
+        logging.info("track info is %s"%track_info)
+        track_map = {}
+        for item in track_info:
+            coordinate = item['coordinate']
+            if track_map.has_key(coordinate[0]):
+                    if track_map[coordinate[0]].has_key(coordinate[1]):
+                        track_map[coordinate[0]][coordinate[1]] = track_map[coordinate[0]][coordinate[1]] + 1
+                    else:
+                        track_map[coordinate[0]][coordinate[1]] = 1
+            else:
+                track_map[coordinate[0]] = {coordinate[1]:1}
+
+        return track_map

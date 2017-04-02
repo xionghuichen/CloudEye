@@ -25,11 +25,12 @@ import pymongo
 from facepp_sdk.facepp import API, File
 
 from config.globalVal import AP
-from Handlers.Index import IndexHandler
+from Handlers.Index import IndexHandler,SleepHandler
 from Handlers.User import RegisterHandler, LoginHandler, UpdateStatusHandler, ConfirmHandler, LogoutHandler, MyPersonListHandler
 from Handlers.FindPerson import SearchPersonHandler, CallHelpHandler, ComparePersonHandler, ImportPersonHandler
-from Handlers.MissPerson import LastestUpdatePersonHandler, LastestUpdateMessageHandler, GetMissingPersonDetailHandler, GetMissingPersonDetailWebHandler
+from Handlers.MissPerson import GetAllTracksHandler,LastestUpdatePersonHandler, LastestUpdateMessageHandler, GetMissingPersonDetailHandler, GetMissingPersonDetailWebHandler,GetPersonTracksHandler
 from Handlers.Web import IndexPageHandler, DetailPageHandler, DownloadHandler
+
 define("port", default=9000, help="run on the given port", type=int)
 define("host", default="139.196.207.155", help="community database host")
 define("mysql_database", default="cloudeye",
@@ -38,7 +39,7 @@ define("mysql_user", default="root", help="community mysql user")
 define("mysql_password", default="",
        help="community database password")
 define("mongo_user",default="burningbear", help="community mongodb  user")
-define("mongo_password",default='zp19950310',help="commuity mongodb password")
+define("mongo_password",default='',help="commuity mongodb password")
 logging.basicConfig(level=logging.INFO)
                     #filename='log.log',
                     #filemode='w')
@@ -66,6 +67,7 @@ class Application(tornado.web.Application):
         handlers = [
             # test
             (r'/', IndexHandler),
+            (r'/sleep',SleepHandler),
             (r'/user/register', RegisterHandler),
             (r'/user/login', LoginHandler),
             (r'/user/logout', LogoutHandler),
@@ -79,6 +81,8 @@ class Application(tornado.web.Application):
             (r'/get/updatemessage',LastestUpdateMessageHandler),
             (r'/get/persondetail',GetMissingPersonDetailHandler),
             (r'/get/persondetail/web',GetMissingPersonDetailWebHandler),
+            (r'/get/trackinfo/web',GetPersonTracksHandler),
+            (r'/get/alltrack/web',GetAllTracksHandler),
             (r'/web/index',IndexPageHandler),
             (r'/web/details',DetailPageHandler),
             (r'/download',DownloadHandler),
@@ -89,7 +93,7 @@ class Application(tornado.web.Application):
         tornado.web.Application.__init__(self, handlers, **settings)
         # use SQLachemy to connection to mysql.
         DB_CONNECT_STRING = 'mysql+mysqldb://%s:%s@%s/%s?charset=utf8'%(options.mysql_user, options.mysql_password, options.host, options.mysql_database)
-        engine = create_engine(DB_CONNECT_STRING, echo=True)
+        engine = create_engine(DB_CONNECT_STRING, echo=False,pool_size=1000)
         self.sqldb = sessionmaker(
                 bind=engine,
                 autocommit=False, 
@@ -99,10 +103,12 @@ class Application(tornado.web.Application):
         # create all of model inherit from BaseModel 
         base_model.metadata.create_all(engine) 
         # use pymongo to connectino to mongodb
+        logging.info("connect mongodb ..")
         client = pymongo.MongoClient(options.host,27017)
         client.cloudeye.authenticate(options.mongo_user,options.mongo_password)
         self.mongodb = client.cloudeye
         # bind face++ cloud service
+        logging.info("connect mongodb successfully..")
         self.facepp = API(FACE_API_KEY, FACE_API_SECRET)
         # bind ali cloud service
         auth = oss2.Auth(ALIYUN_KEY,ALIYUN_SECRET)
@@ -111,9 +117,12 @@ class Application(tornado.web.Application):
         self.ali_service = oss2.Service(auth, endpoint)
         self.ali_bucket = oss2.Bucket(auth, endpoint, bucket_name)
         # bind redis service
+        logging.info("connect redis..")
         self.redis = redis.Redis(host='localhost',port=6379)
+        logging.info("connect redis successfully..")
         # self.redis.flushall()
         logging.info("start completed..")
+        
 def main():
     tornado.options.parse_command_line()
     http_server = tornado.httpserver.HTTPServer(Application())

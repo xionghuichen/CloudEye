@@ -1,5 +1,13 @@
-#urllibtest.py
+#!/usr/bin/env python
 # coding=utf-8
+
+# Author      :   Xionghui Chen
+# Created     :   2017.3.10
+# Modified    :   2017.3.10
+# Version     :   1.0
+
+
+# urllibtest.py
 import urllib2
 import urllib
 import cookielib
@@ -25,7 +33,7 @@ print "_xsrf:",_xsrf
 def set_resquest(api,data,method):
     # data is dictory.
     # method can be get put delete post ?
-    # get _xsrff
+    # get _xsrf
     for item in cj:
         if item.name == '_xsrf':
             _xsrf = item.value
@@ -62,7 +70,7 @@ def login(data):
     the_page = response.read()
     return the_page
 
-def upload(data):
+def search(data):
     # with open('./test_img/ymh3.jpg', 'rb') as f:
     #     content = f.read()
     # data = {
@@ -192,21 +200,37 @@ def getPersonDetail(data):
     return the_page
 
 
-def getPersonDetailforweb():
-    data = {
-        'person_id':"5867b81b16b2d6121d8d8c3d"
-    }
+def getPersonDetailforweb(data):
+    # data = {
+    #     'person_id':"58994618af8add4a2da15c86"
+    # }
     req = set_resquest("/get/persondetail/web",data,"GET")
     response = urllib2.urlopen(req)
     the_page = response.read()
-    print the_page
+    return the_page
 
+def getTrackDetailforweb(data):
+    # data = {
+    #     'person_id':"5867b81b16b2d6121d8d8c3d"
+    # }
+    req = set_resquest("/get/trackinfo/web",data,"GET")
+    response = urllib2.urlopen(req)
+    the_page = response.read()
+    return the_page
+    
+def get_all_track(data):
+    req = set_resquest("/get/alltrack/web",data,"GET")
+    response = urllib2.urlopen(req)
+    the_page = response.read()
+    return the_page
 def get_personlist_info():
     req = set_resquest("/user/peronlistinfo",{},"POST")
     response = urllib2.urlopen(req)
     the_page = response.read()
     print the_page
 
+if __name__ == '__main__':
+    getUpdateMessageList()
 # register()
 # login()
 # updatestatus()
@@ -214,7 +238,7 @@ def get_personlist_info():
 # compare()
 
 # callhelp()
-# upload()
+# search()
 # logout()
 
 # for web 

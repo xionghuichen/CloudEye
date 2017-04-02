@@ -1,4 +1,4 @@
-@font-face {
+﻿@font-face {
 	font-family: 'icomoon';
 	
 	font-weight: normal;
@@ -31,7 +31,7 @@ body {
 
 a {
 	text-decoration: none;
-	color: #8bc34a;
+	color: #00000000;
 	outline: none;
 }
 
@@ -117,11 +117,11 @@ a:focus {
 	position: absolute;
 	top: 2em;
 	right: 2em;
-	width: 20px;
-	height: 20px;
+	width: 50px;
+	height: 50px;
 	z-index: 100;
 	cursor: pointer;
-	background: url(../img/link.svg) no-repeat center center;
+	background: url(../img/search.svg) no-repeat center center;
 	background-size: cover;
 }
 
@@ -182,11 +182,11 @@ a:focus {
 	position: absolute;
 	top: 2em;
 	right: 2em;
-	width: 20px;
-	height: 20px;
+	width: 50px;
+	height: 50px;
 	z-index: 100;
 	cursor: pointer;
-	background: url(../img/link.svg) no-repeat center center;
+	background: url(../img/new.svg) no-repeat center center;
 	background-size: cover;
 }
 

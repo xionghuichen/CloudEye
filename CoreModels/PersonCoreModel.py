@@ -13,6 +13,7 @@ class PersonCoreModel(BaseCoreModel):
         self.CAMERA = 0
         self.PERSON = 1
         self.POLICE = 2
+        self.PERSON_SEARCH = 3
 
     def insert_person_info(self,pic_key, info_data):
         info_data['picture_key_list'] = pic_key
@@ -60,7 +61,7 @@ class PersonCoreModel(BaseCoreModel):
         Args:
             filter_info
             offset
-            is_formal
+            is_formal: 0 stand for not formal; 1 stand for formal; 2 stand for all include formal and not formal.
 
         Returns:
         """
@@ -71,9 +72,10 @@ class PersonCoreModel(BaseCoreModel):
                 '$geoWithin':{
                     '$center':[filter_info['spot'],filter_info['max_distance']]
                 }
-            },
-            'formal':is_formal
+            }
         }
+        if is_formal != 2:
+            find_info['formal'] = is_formal
         logging.info(" filter dictory result is %s"%find_info)
         result = self.mongodb.person.info.find(find_info).\
         sort([('last_update_time',-1)]).limit(size).skip(skip)
@@ -94,12 +96,12 @@ class PersonCoreModel(BaseCoreModel):
             result =  self.mongodb.person.info.find({"_id":{"$in":person_id}}) 
         else:
             if type(person_id) != ObjectId:
-                logging.info("in filter")
+                # logging.info("in filter")
                 person_id = ObjectId(person_id)
             result = self.mongodb.person.info.find_one({'_id':person_id})
         if result == []or result == None:
             raise DBQueryError('error when get person detail infomation by person_id: %s'%person_id)   
-        logging.info("get person_detail result is :%s"%result)
+        # logging.info("get person_detail result is :%s"%result)
         # result['picture_key_list'] =  eval(result['picture_key_list'])      
         return result
 
@@ -136,6 +138,23 @@ class PersonCoreModel(BaseCoreModel):
                 'description':shooter_info['description'],
                 'person_id':info_data['person_id']
             }
+        elif shoot_type == self.PERSON_SEARCH:
+            track_info = {
+                # 'name':info_data['name'],
+                # 'sex':info_data['sex'],
+                # 'age':info_data['age'],
+                # 'person_'
+                # 'shoot_user_id':person_id_obj,
+                'pic_key':info_data['pic_key'],
+                'type':self.PERSON_SEARCH,
+                'confidence':info_data['confidence'],
+                'coordinate':info_data['coordinate'],
+                'date':info_data['date'],
+                'user_id':shooter_info['user_id'],
+                'user_nick_name':shooter_info['user_nick_name'],
+                'person_id':info_data['person_id']
+            }
+
         return track_info
 
 
@@ -175,3 +194,21 @@ class PersonCoreModel(BaseCoreModel):
         if result == [] or result == None:
             raise DBQueryError('error when get track detail infomation by track_id(track_id_list)')            
         return result
+
+    def get_track_info_by_range(self,spot, longitude, latitude):
+        """get track information by range.
+
+        Args:
+            spot: the center spot, eg. [111.11,22.2]
+            range_longitude: search longitude
+            range_latitude: search latitude
+
+        """
+        track_info = self.mongodb.tracklist.find({
+                'coordinate':{
+                    '$geoWithin':{
+                        '$box':[[spot[0]+latitude,spot[1]+longitude],[spot[0]-latitude,spot[1]-longitude]]
+                    }
+                }
+            })
+        return track_info

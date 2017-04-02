@@ -4,7 +4,9 @@
 import logging
 from bson import ObjectId
 from BaseCoreModel import BaseCoreModel
-from _exceptions.http_error import DBError
+from _exceptions.http_error import DBError, DBQueryError
+
+
 def key_gen(prefix_key):
     return "user:message:"+str(prefix_key)
 
@@ -36,6 +38,8 @@ class MessageCoreModel(BaseCoreModel):
 
     def insert_message_detail(self, info):
         try:
+            if type(info['person_id']) == ObjectId:
+                info['person_id'] == str(info['person_id'])
             return self.mongodb.message.info.insert_one(info).inserted_id
         except Exception as e:
             raise DBError("内部错误，插入mongodb.message过程出错")
@@ -59,11 +63,12 @@ class MessageCoreModel(BaseCoreModel):
                 # logging.info("info : %s"%str(info))
                 self.redis.lpush(key_gen(user_id), info)
 
-    def get_user_message_queue(self,user_id):
+    def get_user_message_queue(self,user_id,order=0):
         """Get user's location push message by user id.
 
         Args:
             user_id:
+            order: 0 for increasement 1 for decreasement.
         Returns:
              [
                 {
@@ -89,8 +94,32 @@ class MessageCoreModel(BaseCoreModel):
             for index, item in enumerate(result):
                 item = eval(item)
                 result[index] = self.get_message_detail(item['message_id'])
+        if order == 1:
+            result.reverse()
         return result
  
+    def get_message_by_person_id(self,person_id):
+        """get a limit message filter by person_id [by timeline also]
+
+        Args:
+            person_id: person_id
+            limit: limit message number
+        """
+        if type(person_id) == ObjectId:
+            logging.info("object id")
+            person_id = str(person_id)
+        logging.info("person id %s"%person_id)
+        try:
+	    result = self.mongodb.message.info.find({"person_id":person_id}).limit(1)[0]
+	except Exception as e:
+	    raise DBQueryError('exception when get message info , error message is %s'%str(e))
+        if result == []or result == None:
+            raise DBQueryError('error when get message detail infomation by person_id')  
+	
+        logging.info("success %s"%result)
+
+        return result
+        
     def clear_message_queue(self, user_id):
         key = key_gen(user_id)
         self.redis.delete(key)
