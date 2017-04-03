@@ -50,13 +50,13 @@ class PictureBuizModel(BaseBuizModel):
         os.remove(path)
         return content
 
-    def store_pictures(self,binary_picture_list, pic_key, pic_type, detect_result):
+    def store_pictures(self,binary_picture_list, pic_key, pic_type):
         """Upload pictures (pass as binary stream file) to OSS databases and mongodb[face.info]
 
         Args:
             imageBytes_list: a list of bianry stream file
             pic_key: set as the key prefix [int] + picture_type
-            
+            [change] detect_result 不用放进来
         Returns:
             key_list: OSS key list which correcpongding every image input
                 example:
@@ -68,14 +68,17 @@ class PictureBuizModel(BaseBuizModel):
             for index, binary_picture in enumerate(binary_picture_list):
                 key = self.gen_key(str(pic_key))
                 # add detect part in origin picture.
-                binary_picture = self._add_box_to_picture(key, detect_result[index], binary_picture)
+                # [change]  这个步骤不能用了
+                # binary_picture = self._add_box_to_picture(key, detect_result[index], binary_picture)
                 success = self.pic_model.upload_picture(key, binary_picture)
                 # add to faceset
                 if not success:
                     raise DBError("oss服务器出错！")
                 else:
                     key_list.append(key)
-        self.face_model.insert_faces_info(key_list, pic_type, detect_result)
+        #[change] 目前认为face_info没有卵用，可以删掉
+        # self.face_model.insert_faces_info(key_list, pic_type, detect_result)
+        
         # logging.info("result in store_pictures function is %s"%key_list)
         return key_list
             # [todo] error handler.

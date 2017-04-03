@@ -13,7 +13,7 @@ class PersonBuizModel(BaseBuizModel):
     def __init__(self, *argc, **argkw):
         super(PersonBuizModel, self).__init__(*argc, **argkw) 
 
-    def store_new_person(self,pic_key_list,detect_result,info_data, user_id):
+    def store_new_person(self,info_data, user_id, picture_list):
         """after upload all of resourse, We should store those record into databases.
 
         Args:
@@ -35,17 +35,26 @@ class PersonBuizModel(BaseBuizModel):
             person_id
         """
         # add person_info in mongodb.[get person_id]
-        person_id = self.person_model.insert_person_info(pic_key_list, info_data)
-        # add setUserId
-        face_token_list = []
-        for item in detect_result:
-            self.face_model.set_person_id_to_face(person_id,item['face_token'])
-            face_token_list.append(item['face_token'])
-        self.face_model.add_faces_to_faceset(face_token_list)
+        # insert person info without pic_key_list
+        person_id = self.person_model.insert_person_info([], info_data)
+        result = self.face_model.add_new_person(person_id,info_data['name'], picture_list)
+        if result.code != 0:
+            self.person_model.delete_person(person_id)
+        # # add setUserId
+        # face_token_list = []
+        # for item in detect_result:
+        #     self.face_model.set_person_id_to_face(person_id,item['face_token'])
+        #     face_token_list.append(item['face_token'])
+        # self.face_model.add_faces_to_faceset(face_token_list)
+        
         # add missing_person_id into person.missing collection
         if user_id != 0:
             self.user_model.insert_missing_person_by_uid(user_id,[person_id])
-        return person_id
+        result.data['person_id'] = person_id
+        return result
+
+    def update_person_picture(self,person_id,pic_key_list):
+        return self.person_model.update_person_picture(person_id,pic_key_list)
 
     def update_person_status(self,shoot_type, event_info, shooter_info = None):
         """update databases infomastion of person_id
@@ -105,9 +114,11 @@ class PersonBuizModel(BaseBuizModel):
             brief_info_list:
         """
         person_info = self.person_model.get_person_detail(person_id_list)
+
         brief_info = []
         if person_info != []:
             for item in person_info:
+                logging.info("person detail info is(item) %s"%item)
                 item_info = {
                     'person_id':item['_id'],
                     'last_update_time':item['last_update_time'],

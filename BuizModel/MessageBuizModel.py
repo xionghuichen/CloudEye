@@ -121,7 +121,6 @@ class MessageBuizModel(BaseBuizModel):
             'pic_key':info['pic_key'],
             'confidence':info['confidence'],
             'type':search_type
-
         }
         message_id = self.message_model.insert_message_detail(message_info)
         reporter_user_id = person_detail_info['relation_id']

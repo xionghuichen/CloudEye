@@ -21,8 +21,20 @@ class PersonCoreModel(BaseCoreModel):
         info_data['track_list'] = []
         info_data['last_update_time'] = info_data['lost_time']
         info_data['last_update_spot'] = info_data['lost_spot']
-
         return self.mongodb.person.info.insert_one(info_data).inserted_id
+
+    def delete_person(self,person_id):
+        if type(person_id) == str:
+            person_id = ObjectId(person_id)
+        return self.mongodb.person.info.delete_one({'person_id':person_id})
+
+    def update_person_picture(self,person_id,picture_key_list):
+        data = {
+            'picture_key_list':picture_key_list
+        }
+        if type(person_id) == str:
+            person_id = ObjectId(person_id)
+        self.mongodb.person.info.update({'_id':person_id},{'$set':data},multi=False)
 
     def update_persons_relation_id(self,person_list,relation_id):
         """Update missing person's relation uid filter by person_list:

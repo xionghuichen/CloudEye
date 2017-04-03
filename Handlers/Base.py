@@ -46,7 +46,7 @@ class BaseHandler(tornado.web.RequestHandler):
         para['mongodb'] = self.application.mongodb 
         self.session = self.application.sqldb() 
         para['sqlsession'] = self.session
-        para['facepp'] = self.application.facepp
+        para['youtu'] = self.application.youtu
         para['ali_service'] = self.application.ali_service
         para['ali_bucket'] = self.application.ali_bucket
         para['redis'] = self.application.redis

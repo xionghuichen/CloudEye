@@ -8,22 +8,25 @@ location = str(os.path.abspath(os.path.join(
     os.path.dirname(__file__), os.pardir))) + '/'
 sys.path.append(location)
 
+# inner model
 import ConfigParser
 import logging
+# database
 import oss2
 import redis
-
+import pymongo
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy.ext.declarative import declarative_base
+# tornado
 import tornado.web
 import tornado.httpserver
 import tornado.ioloop
 from tornado.options import define, options
-
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy.ext.declarative import declarative_base
-import pymongo
+# thirdpart sdk
 from facepp_sdk.facepp import API, File
-
+import TencentYoutuyun
+# my model.
 from config.globalVal import AP
 from Handlers.Index import IndexHandler,SleepHandler
 from Handlers.User import RegisterHandler, LoginHandler, UpdateStatusHandler, ConfirmHandler, LogoutHandler, MyPersonListHandler
@@ -32,7 +35,7 @@ from Handlers.MissPerson import GetAllTracksHandler,LastestUpdatePersonHandler, 
 from Handlers.Web import IndexPageHandler, DetailPageHandler, DownloadHandler
 
 define("port", default=9000, help="run on the given port", type=int)
-define("host", default="139.196.207.155", help="community database host")
+define("host", default="127.0.0.1", help="community database host")
 define("mysql_database", default="cloudeye",
        help="community database name")
 define("mysql_user", default="root", help="community mysql user")
@@ -56,6 +59,10 @@ class Application(tornado.web.Application):
         ALIYUN_SECRET = config.get("app","ALIYUN_SECRET")
         template_path = os.path.join(AP + "templates")
         static_path = os.path.join(AP + "static")
+        appid = config.get("YOUTU","APPID")
+        secret_id = config.get("YOUTU","SECRET_ID")
+        secret_key = config.get("YOUTU","SECRET_KEY")
+        userid = config.get("YOUTU","USERID")
         logging.info("start server.")
         settings = dict(
             cookie_secret=COOKIE_SECRET,
@@ -109,7 +116,9 @@ class Application(tornado.web.Application):
         self.mongodb = client.cloudeye
         # bind face++ cloud service
         logging.info("connect mongodb successfully..")
-        self.facepp = API(FACE_API_KEY, FACE_API_SECRET)
+        # self.facepp = API(FACE_API_KEY, FACE_API_SECRET)
+        end_point = TencentYoutuyun.conf.API_YOUTU_END_POINT
+        self.youtu = TencentYoutuyun.YouTu(appid, secret_id, secret_key, userid, end_point)
         # bind ali cloud service
         auth = oss2.Auth(ALIYUN_KEY,ALIYUN_SECRET)
         endpoint = r'http://oss-cn-shanghai.aliyuncs.com'
