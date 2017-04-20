@@ -39,6 +39,7 @@ class PersonBuizModel(BaseBuizModel):
         person_id = self.person_model.insert_person_info([], info_data)
         result = self.face_model.add_new_person(person_id,info_data['name'], picture_list)
         if result.code != 0:
+            logging.info("buizmodel.store_new_person.inresult.code.person_id : %s"%person_id)
             self.person_model.delete_person(person_id)
         # # add setUserId
         # face_token_list = []
@@ -118,7 +119,7 @@ class PersonBuizModel(BaseBuizModel):
         brief_info = []
         if person_info != []:
             for item in person_info:
-                logging.info("person detail info is(item) %s"%item)
+                # logging.info("person detail info is(item) %s"%item)
                 item_info = {
                     'person_id':item['_id'],
                     'last_update_time':item['last_update_time'],
@@ -151,14 +152,18 @@ class PersonBuizModel(BaseBuizModel):
             'size':size
         }
         person_info = self.person_model.get_person_info_by_date(filter_info,offset,formal)
+        
         result = []
-        for item in person_info:
-            result.append({
-            'picture_key':item['picture_key_list'][0],
-            'person_id':item['_id'],
-            'name':item['name'],
-            'lost_spot':item['spot']
-            })
+        if person_info != []:
+            
+            for item in person_info:
+                logging.info("PersonModel.get_lasteset_person.person_info.item : %s"%item)
+                result.append({
+                'picture_key':item['picture_key_list'][0],
+                'person_id':item['_id'],
+                'name':item['name'],
+                'lost_spot':item['last_update_spot']
+                })
         return result
 
     def get_person_detail(self, person_id):

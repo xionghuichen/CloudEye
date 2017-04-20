@@ -7,6 +7,7 @@ import base64
 import logging
 import time
 import datetime
+import copy
 
 import tornado.web
 import tornado.gen
@@ -141,9 +142,13 @@ class LastestUpdateMessageHandler(BaseHandler):
             pass
         # get the formal cases by size and spot range.
         person_info = self.message_model.get_lastest_message(spot, max_distance, page, size)
-        result.data['message_list'] = person_info
+        # logging.info("MessageHandler, peson_info is %s "%person_info)
+        result.data['message_list'] = copy.deepcopy(person_info)
         result.data['page'] = page
         result.data['size'] = size
+        # logging.info("message list is %s"%person_info)
+        # logging.info("result.data.message_list %s"%result.data['message_list'])
+        result.print_info("[GetLastMessageHandler]")
         self.return_to_client(result, jquery)
         self.finish()
 

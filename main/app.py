@@ -43,6 +43,7 @@ define("mysql_password", default="",
        help="community database password")
 define("mongo_user",default="burningbear", help="community mongodb  user")
 define("mongo_password",default='',help="commuity mongodb password")
+define("flush_redis",default=0,help='flush redis all data')
 logging.basicConfig(level=logging.INFO)
                     #filename='log.log',
                     #filemode='w')
@@ -129,7 +130,8 @@ class Application(tornado.web.Application):
         logging.info("connect redis..")
         self.redis = redis.Redis(host='localhost',port=6379)
         logging.info("connect redis successfully..")
-        # self.redis.flushall()
+        if options.flush_redis==1:
+            self.redis.flushall()
         logging.info("start completed..")
         
 def main():

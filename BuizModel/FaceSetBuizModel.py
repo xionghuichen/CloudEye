@@ -79,7 +79,7 @@ class FaceSetBuizModel(BaseBuizModel):
         to_return = {}
         result = self.face_model.search_person(image_path)
         if result['errorcode'] == 0:
-            logging.info("search face result is %s"%result)
+            # logging.info("search face result is %s"%result)
             candidates = result['candidates'][0]
             confidence = candidates['confidence']
             level = self._calculate_level(confidence)
@@ -203,6 +203,7 @@ class FaceSetBuizModel(BaseBuizModel):
         result = self.face_model.compare_face(person_id, picture)
         to_return['errorcode'] = result['errorcode']
         to_return['errormsg'] = result['errormsg']
+        to_return['ismatch'] = result['ismatch']
         if result['errorcode'] == 0:
             if result['ismatch']:
                 confidence = result['confidence']

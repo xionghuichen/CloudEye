@@ -105,12 +105,12 @@ class MessageCoreModel(BaseCoreModel):
             person_id: person_id
             limit: limit message number
         """
-        if type(person_id) == ObjectId:
-            logging.info("object id")
-            person_id = str(person_id)
-        logging.info("person id %s"%person_id)
+        if type(person_id) == str:
+            # logging.info("object id")
+            person_id = ObjectId(person_id)
+        # logging.info("person id %s"%person_id)
         try:
-	    result = self.mongodb.message.info.find({"person_id":person_id}).limit(1)[0]
+	    result = self.mongodb.message.info.find({"person_id":person_id}).sort([('date',-1)]).limit(1)[0]
 	except Exception as e:
 	    raise DBQueryError('exception when get message info , error message is %s'%str(e))
         if result == []or result == None:

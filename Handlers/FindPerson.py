@@ -98,7 +98,7 @@ class SearchPersonHandler(FindPersonHandler):
         #         face_token = item['face_token']       
         # [change]------------------- 直接从搜索开始： 把search_picture作为参数，进行人脸搜索：不需要face_token
         searchResult = yield self.background_task(self.face_model.search_person, search_picture)
-        timer.mark("after search")
+        # timer.mark("after search")
         if searchResult['errorcode'] == 0:
             # has search result.
             if searchResult['level'] >= self.confirm_level:
@@ -386,9 +386,9 @@ class ComparePersonHandler(FindPersonHandler):
         # -----[base64]不需要检测人脸，只要比较person_id和base64;不需要std_face_token;不需要detect_result
         confidence = yield self.background_task(self.face_model.compare_face, person_id, picture)
         result.data = confidence
-        # logging.info("result of compare, the confidence is %s"%confidence)
+        logging.info("[compare]the confidence is %s"%confidence)
         # [change] 
-        if confidence['errorcode'] == 0 and confidence['level'] >= self.confirm_level:    
+        if confidence['errorcode'] == 0 and confidence['ismatch'] and confidence['level'] >= self.confirm_level:    
             # 4. update info
             result.code = 0
             #[change] 这里也不需要detect_result

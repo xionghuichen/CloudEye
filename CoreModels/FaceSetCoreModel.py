@@ -266,7 +266,7 @@ class FaceSetCoreModel(BaseCoreModel):
             "face_token" : "c16309f7c33738c59fad4044cd34c51c",
             "picture_key" : "camera1::1482735290.95.jpeg",
             "face_rectangle" : {
-                "width" : 180,
+                "width" : 180,:
                 "top" : 88,
                 "height" : 180,
                 "left" : 99

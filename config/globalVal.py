@@ -22,13 +22,13 @@ class ReturnStruct(object):
         self.message_mapping.extend(new_struct.message_mapping)
 
     def print_info(self,tag ='default'):
-        logging.info("print return struct, tag = %s...."%tag)
-        logging.info("max_code:%s"%self.max_code)
-        logging.info("code: %s"%self.code)
-        logging.info("message_mapping: %s"%self.message_mapping)
-        logging.info("data: %s"%self.data)
+        logging.info("print return struct, tag = %s....; max_code is %s; code is %s ; data is %s; message is %s"%(tag,self.max_code,self.code,self.data,self.message_mapping[self.code]))
+        #logging.info("max_code:%s"%self.max_code)
+        #logging.info("code: %s"%self.code)
+        #logging.info("message_mapping: %s"%self.message_mapping)
+        #logging.info("data: %s"%self.data)
 
 PLICEMAN_ID = 0
-GROUP_ID = 'group2'
+GROUP_ID = 'group4'
 FACESET_TOKEN='3448ba215c7d3933ed78f418aa85bb35'
-MAX_WORKERS = 1000
+MAX_WORKERS = 500

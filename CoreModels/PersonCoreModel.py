@@ -26,7 +26,7 @@ class PersonCoreModel(BaseCoreModel):
     def delete_person(self,person_id):
         if type(person_id) == str:
             person_id = ObjectId(person_id)
-        return self.mongodb.person.info.delete_one({'person_id':person_id})
+        return self.mongodb.person.info.delete_one({'_id':person_id})
 
     def update_person_picture(self,person_id,picture_key_list):
         data = {
