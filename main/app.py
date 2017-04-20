@@ -32,7 +32,7 @@ from Handlers.Index import IndexHandler,SleepHandler
 from Handlers.User import RegisterHandler, LoginHandler, UpdateStatusHandler, ConfirmHandler, LogoutHandler, MyPersonListHandler
 from Handlers.FindPerson import SearchPersonHandler, CallHelpHandler, ComparePersonHandler, ImportPersonHandler
 from Handlers.MissPerson import GetAllTracksHandler,LastestUpdatePersonHandler, LastestUpdateMessageHandler, GetMissingPersonDetailHandler, GetMissingPersonDetailWebHandler,GetPersonTracksHandler
-from Handlers.Web import IndexPageHandler, DetailPageHandler, DownloadHandler
+from Handlers.Web import IndexPageHandler, DetailPageHandler, DownloadHandler, FilePageHandler
 
 define("port", default=9000, help="run on the given port", type=int)
 define("host", default="127.0.0.1", help="community database host")
@@ -93,6 +93,7 @@ class Application(tornado.web.Application):
             (r'/get/alltrack/web',GetAllTracksHandler),
             (r'/web/index',IndexPageHandler),
             (r'/web/details',DetailPageHandler),
+            (r'/web/file',FilePageHandler),
             (r'/download',DownloadHandler),
             (r'/admin/import',ImportPersonHandler)
             

@@ -1,0 +1,359 @@
+ <!DOCTYPE html>
+  <html>
+    <head>
+      <!--Import Google Icon Font-->
+      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="{{ static_url('css/materialize.min.css') }}"  media="screen,projection"/>
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <style type="text/css">
+      .pagination{
+        margin-top: -10px;
+        }
+        </style>
+    </head>
+     
+      
+        <div class="row">
+        <div class="col s12 m1"></div>
+        <div class="col s12 m10">
+          <div class="row card blue-grey" style="height: 40px;">
+            <div class="col s12 m6" style="margin-top: 10px;"><a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons white-text">menu</i></a></div>
+        <div class="col s12 m5 " style="margin-top: -5px;">
+          <input class="white-text"></input>
+        </div>
+        <div class="col s12 m1" style="margin-top: 10px;">
+          <a href="#" ><i class="material-icons white-text" >search</i></a>
+        </div>
+          </div>
+        </div>
+        
+        
+            
+        </div>
+     
+      <!--sideNav-->
+       <ul id="slide-out" class="side-nav">
+        <li><div class="userView">
+          <div class="background">
+           <img src="{{ static_url('img/bg3.jpg') }}" style="width: 450px">
+          </div>
+             <!-- Dropdown Trigger -->
+                        <a class='dropdown-button btn' href='#' data-activates='dropdown1'>
+                            选择城市
+                        </a>
+                        <!-- Dropdown Structure -->
+                        <ul id='dropdown1' class='dropdown-content'>
+                            <li>
+                                <a href="#!" class="option-city">
+                                    江苏
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#!" class="option-city">
+                                    上海
+                                </a>
+                            </li>
+                            <li class="divider" class="option-city">
+                            </li>
+                            <li>
+                                <a href="#!">
+                                    广东
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="row">
+                            <form class="col s12">
+                                <div class="switch ">
+                                    <label>
+                                       <!-- 自动定位：江宁区东南大学九龙湖校区-->
+                                        <input type="checkbox">
+                                        <span class="lever">
+                                        </span>
+                                    </label>
+                                </div>
+                            </form>
+                        </div>
+                        <a href="#!name">
+                            <span class="white-text name">
+                                区域：江苏
+                            </span>
+                        </a>
+                        <a href="#!email">
+                            <span class="white-text email">
+                                jdandturk@gmail.com
+                            </span>
+                        </a>
+                    </div>
+                </li>
+                <li>
+                    <a href="file.html">
+                        <i class="material-icons">
+                            perm_contact_calendar
+                        </i>
+                        档案管理
+                    </a>
+                </li>
+                <li>
+                    <a href="index.html">
+                        <i class="material-icons">
+                            map
+                        </i>
+                        工作台
+                    </a>
+                </li>
+                <li>
+                    <div class="divider">
+                    </div>
+                </li>
+                <li>
+                    <a class="subheader">
+                        设置
+                    </a>
+                </li>
+        
+                 <li>
+                    <a class="waves-effect" href="#!">
+                        统计参数设置
+                    </a>
+                </li>
+                 <li>
+                    <a class="waves-effect" href="#!">
+                        账户设置
+                    </a>
+                </li>
+            </ul>
+      <!--title-->
+      <div class="row">
+      <div class="col s12 m1"></div>
+        <div class="col s12 m1 left"><i style="margin-top: 20px;" class="small  material-icons">aspect_ratio</i></div>
+        <div class="col s12 m4 "><h4>失踪人员档案</h4></div>
+        
+      </div>
+      <div class="row">
+        <div class="col s12 m1"></div>
+        <div class="col s12 m4">
+          <p>
+            <input id="sex-m" class="blue-grey" type="checkbox"/>
+            <label for="sex-m">立案</label>
+          </p>
+        </div>
+       <div class="col s12 m5">
+
+         <select class="browser-default">
+           <option value="1">特征</option>
+           <option value="2">男</option>
+            <option value="2">女</option>
+             <option value="2"></option>
+         </select>
+       </div>
+      </div>
+      </div>
+      <!--card-->
+      <div class="row">
+         <div class="col s12 m1"></div>
+        <div class="col s12 m2">
+          <div class="card">
+            <div class="card-image">
+              <img class="materialboxed" height="200px" src="{{ static_url('img/child4.jpg') }}">
+              
+              <span class="card-title">张明</span>
+            </div>
+           <div class="card-content">
+              <p>籍贯：江苏
+              </p>
+              <p>年龄：8</p>
+            </div>
+            <div class="card-action">
+              <a href="#">详情</a>
+              <span>南京江宁区</span>
+            </div>
+          </div>
+        </div>
+        <!--second-->
+        <div class="col s12 m2">
+          <div class="card">
+            <div class="card-image">
+              <img class="materialboxed" height="200px" src="{{ static_url('img/child6.png') }}">
+              
+              <span class="card-title">李霞霞</span>
+            </div>
+           <div class="card-content">
+              <p>籍贯：安徽
+              </p>
+              <p>年龄：1</p>
+            </div>
+            <div class="card-action">
+              <a href="#">详情</a>
+              <span>南京江宁区</span>
+            </div>
+          </div>
+        </div>
+        <!--third-->
+        <div class="col s12 m2">
+          <div class="card">
+            <div class="card-image">
+             
+              <img class="materialboxed" height="200px" src="{{ static_url('img/child5.jpg') }}">
+              <span class="card-title">王尊新</span>
+            </div>
+            <div class="card-content">
+              <p>籍贯：江苏
+              </p>
+              <p>年龄：6</p>
+            </div>
+            <div class="card-action">
+              <a href="#">详情</a>
+              <span>南京鼓楼区</span>
+            </div>
+          </div>
+         
+        </div>
+        <!--forth-->
+        <div class="col s12 m2">
+          <div class="card">
+            <div class="card-image">
+             
+              <img class="materialboxed" height="200px" src="{{ static_url('img/child7.jpg') }}">
+              <span class="card-title">林林丽</span>
+            </div>
+            <div class="card-content">
+              <p>籍贯：江苏
+              </p>
+              <p>年龄：1</p>
+            </div>
+            <div class="card-action">
+              <a href="#">详情</a>
+              <span>南京江宁区</span>
+            </div>
+          </div>
+        
+        </div>
+        <!--fifth-->
+        <div class="col s12 m2">
+          <div class="card">
+            <div class="card-image">
+             
+              <img class="materialboxed" height="200px" src="{{ static_url('img/child8.jpg') }}">
+              <span class="card-title">吴晓曦</span>
+            </div>
+            <div class="card-content">
+              <p>籍贯：江苏
+              </p>
+              <p>年龄：5</p>
+            </div>
+            <div class="card-action">
+              <a href="#">详情</a>
+              <span>南京江宁区</span>
+            </div>
+          </div>
+          <!--second-->
+          
+          <!--third-->
+
+        </div>
+      </div>
+      
+        <ul class="pagination center" style="margin-top: 10px;">
+                    <li class="disabled ">
+                        <a href="#!">
+                            <i class="material-icons">
+                                chevron_left
+                            </i>
+                        </a>
+                    </li>
+                    <li class="active page-indicator blue-grey">
+                        <a href="#!" class="">
+                            1
+                        </a>
+                    </li>
+                    <li class="waves-effect page-indicator">
+                        <a href="#!" class="">
+                            2
+                        </a>
+                    </li>
+                    <li class="waves-effect page-indicator">
+                        <a href="#!" class="">
+                            3
+                        </a>
+                    </li>
+                    <li class="waves-effect page-indicator">
+                        <a href="#!" class="">
+                            4
+                        </a>
+                    </li>
+                    <li class="waves-effect page-indicator">
+                        <a href="#!" class="">
+                            5
+                        </a>
+                    </li>
+                    <li class="waves-effect">
+                        <a href="#!">
+                            <i class="material-icons">
+                                chevron_right
+                            </i>
+                        </a>
+                    </li>
+                </ul>
+                <!--preload-->
+      <div class="preloader-wrapper big ">
+          <div class="spinner-layer spinner-blue-only">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div><div class="gap-patch">
+              <div class="circle"></div>
+            </div><div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+      </div>
+      <!--prepage-->
+    <body>
+      <!--Import jQuery before materialize.js-->
+      <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+      <script type="text/javascript" src="{{ static_url('js/materialize.min.js') }}"></script>
+      <script type="text/javascript">
+               // Initialize collapse button
+          $('.button-collapse').sideNav({
+                menuWidth: 300, // Default is 300
+
+                edge: 'left', // Choose the horizontal origin
+                closeOnClick: false, // Closes side-nav on <a> clicks, useful for Angular/Meteor
+                draggable: true // Choose whether you can drag to open on touch screens
+    }
+  );
+        
+        // Initialize collapsible (uncomment the line below if you use the dropdown variation)
+        //$('.collapsible').collapsible();
+
+        //set dropdown
+        $('.dropdown-button').dropdown({
+            inDuration: 300,
+            outDuration: 225,
+            constrainWidth: false, // Does not change width of dropdown to that of the activator
+            hover: false, // Activate on hover
+            gutter: 0, // Spacing from edge
+            belowOrigin: false, // Displays dropdown below the button
+            alignment: 'right', // Displays dropdown with edge aligned to the left of button
+            stopPropagation: false // Stops event propagation
+          }
+        );
+        
+      </script>
+
+       <script type="text/javascript">
+        //click function
+        $(".page-indicator").click(function(){
+            
+                   
+            $(".page-indicator").removeClass("active");
+            $(".page-indicator").removeClass("blue-grey");
+             $(this).addClass("active");
+             $(this).addClass("blue-grey");
+
+        });
+    </script>
+    </body>
+  </html>
