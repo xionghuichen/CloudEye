@@ -20,7 +20,7 @@ class FindPersonHandler(BaseHandler):
         super(FindPersonHandler, self).__init__(*argc, **argkw)
         self.type_map = {
             "camera":"camera:",
-            "reporter":"reporter:",
+            "reporter":"reporter:"
         }
 
     def get_even_happen_data(self):
@@ -53,7 +53,7 @@ class SearchPersonHandler(FindPersonHandler):
         message_mapping = [
             'search success and confidence higher than level: %s'%self.confirm_level,
             'search success but confidence does not higher than level:%s'%self.confirm_level,
-            'search failed'
+            'search failed, maybe upload a low quality picture'
         ]
         result = ReturnStruct(message_mapping)
         # 1. upload
@@ -88,87 +88,88 @@ class SearchPersonHandler(FindPersonHandler):
             message_mode = self.message_model.PERSON_SEARCH
             
         # 2. search_person
-        result_detect_struct = yield self.background_task(self.face_model.detect_img_list, [binary_picture], False)
-        result.merge_info(result_detect_struct)
-        timer.mark("after detect")
-        if result_detect_struct.code == 0:
-            # has high quality picture:
-            for item in result_detect_struct.data['detect_result_list']:
-                face_token = item['face_token']
-                searchResult = yield self.background_task(self.face_model.search_person, face_token)
-                timer.mark("after search")
-                if searchResult != None:
-                    # has search result.
-                    if searchResult['level'] >= self.confirm_level:
-                        # has high confidence
-                        result.code = 0
-                        # 3. get missing person_detail.
-                        person_id = searchResult['info']['user_id']
-                        result.data['person_id']=person_id
-                        result.data['confidence']=searchResult['confidence']
-                        del result.data['detect_result_list']
-                        # log3
-                        brief_info_list = self.person_model.get_person_brief_info([ObjectId(person_id)])[0]
-                        timer.mark("after get person info")
-                        result.data['std_photo_key'] = brief_info_list['std_photo_key']
-                        result.data['name']=brief_info_list['name']
-                        result.data['description']=brief_info_list['description']
-                        result.data['sex']=brief_info_list['sex']
-                        result.data['lost_time']=brief_info_list['lost_time']
-                        result.data['age']=brief_info_list['age']
-                        # upload picture
-                        detect_result = item
-                        # [todo] delete unreadable '[]'
-                        # log4
-                        pic_key_list = yield self.background_task(
-                            self.picture_model.store_pictures,
-                            [binary_picture], 
-                            self.type_map[search_type]+str(searcher_id), 
-                            pic_type, 
-                            [detect_result])
-                        timer.mark("after store picture")
-                        # 4. update track　and person information
-                        event_info = {
-                            'coordinate':coordinate,
-                            'confidence':searchResult['confidence'],
-                            'pic_key':pic_key_list[0],
-                            'person_id':person_id,
-                            'date':event_happen_date
-                        }
-                        try:
-                            # log 5
-                            track_id = self.person_model.update_person_status(search_mode, event_info,shooter_info)
-                        except Exception as e:
-                            logging.info("infomation of exception %s"%str(e))
-                            key = "camera"+str(searcher_id)
-                            self.picture_model.delete_pictures("camera"+str(searcher_id), pic_type)
-                            raise InnerError("正在search请求中更新用户信息时")
-                        timer.mark("after update person status")
-                        # 5. send message
-                        message_data = {
-                            'person_id':person_id,
-                            'spot':coordinate,
-                            'date':event_happen_date,
-                            'confidence':searchResult['confidence'],
-                            'pic_key':pic_key_list[0]
-                        }
-                        if message_mode == self.person_model.PERSON_SEARCH:
-                            message_data['upload_user_id'] = searcher_id
-                        try:
-                            self.message_model.send_message_factory(message_mode, message_data)
-                        except Exception as e:
-                            logging.info("infomation of exception %s"%str(e))
-                            key = "camera"+str(searcher_id)
-                            self.picture_model.delete_pictures("camera"+str(searcher_id), pic_type)
-                            raise InnerError("正在search请求中发送消息时，%s"%str(e))
-                        timer.mark("after send message")
-                        break
-                    else:
-                        result.code = 1
-                        result.data = {}
-                else:
-                    result.code = 2
-                    result.data = {}
+        # # 不需要做人脸检测操作
+        # result_detect_struct = yield self.background_task(self.face_model.detect_img_list, [binary_picture], False)
+        # result.merge_info(result_detect_struct)
+        # timer.mark("after detect")
+        # if result_detect_struct.code == 0:
+        #     # has high quality picture:
+        #     for item in result_detect_struct.data['detect_result_list']:
+        #         face_token = item['face_token']       
+        # [change]------------------- 直接从搜索开始： 把search_picture作为参数，进行人脸搜索：不需要face_token
+        searchResult = yield self.background_task(self.face_model.search_person, search_picture)
+        # timer.mark("after search")
+        if searchResult['errorcode'] == 0:
+            # has search result.
+            if searchResult['level'] >= self.confirm_level:
+                # has high confidence
+                result.code = 0
+                # 3. get missing person_detail.
+                # [change] 改成get person_id: 这个id是mongodb的person_id
+                person_id = searchResult['info']['person_id']
+                result.data['person_id']=person_id
+                result.data['confidence']=searchResult['confidence']
+                #[不需要检测]
+                # del result.data['detect_result_list']
+                brief_info_list = self.person_model.get_person_brief_info([ObjectId(person_id)])[0]
+                timer.mark("after get person info")
+                result.data['std_photo_key'] = brief_info_list['std_photo_key']
+                result.data['name']=brief_info_list['name']
+                result.data['description']=brief_info_list['description']
+                result.data['sex']=brief_info_list['sex']
+                result.data['lost_time']=brief_info_list['lost_time']
+                result.data['age']=brief_info_list['age']
+                # upload picture
+                # [todo] delete unreadable '[]'
+                # log4
+                # [change]存储图片，detect_result 不用作为字段存储进来
+                pic_key_list = yield self.background_task(
+                    self.picture_model.store_pictures,
+                    [binary_picture], 
+                    self.type_map[search_type]+str(searcher_id), 
+                    pic_type)
+                timer.mark("after store picture")
+                # 4. update track　and person information
+                event_info = {
+                    'coordinate':coordinate,
+                    'confidence':searchResult['confidence'],
+                    'pic_key':pic_key_list[0],
+                    'person_id':person_id,
+                    'date':event_happen_date
+                }
+                try:
+                    # log 5
+                    track_id = self.person_model.update_person_status(search_mode, event_info,shooter_info)
+                except Exception as e:
+                    logging.info("infomation of exception %s"%str(e))
+                    key = "camera"+str(searcher_id)
+                    self.picture_model.delete_pictures("camera"+str(searcher_id), pic_type)
+                    raise InnerError("正在search请求中更新用户信息时")
+                timer.mark("after update person status")
+                # 5. send message
+                message_data = {
+                    'person_id':person_id,
+                    'spot':coordinate,
+                    'date':event_happen_date,
+                    'confidence':searchResult['confidence'],
+                    'pic_key':pic_key_list[0]
+                }
+                if message_mode == self.person_model.PERSON_SEARCH:
+                    message_data['upload_user_id'] = searcher_id
+                try:
+                    self.message_model.send_message_factory(message_mode, message_data)
+                except Exception as e:
+                    logging.info("infomation of exception %s"%str(e))
+                    key = "camera"+str(searcher_id)
+                    self.picture_model.delete_pictures("camera"+str(searcher_id), pic_type)
+                    raise InnerError("正在search请求中发送消息时，%s"%str(e))
+                timer.mark("after send message")
+            else:
+                result.code = 1
+                result.data = {'level':searchResult['level'],'confidence':searchResult['confidence']}
+        else:
+            result.code = 2
+            result.data = searchResult
         self.return_to_client(result)
         timer.mark("after return.")
         self.finish()
@@ -188,7 +189,7 @@ class CallHelpHandler(FindPersonHandler):
         Returns:
         """
         message_mapping = [
-        'empty image'
+        'empty image'   
         ]
         result =ReturnStruct(message_mapping)
         try:
@@ -226,17 +227,25 @@ class CallHelpHandler(FindPersonHandler):
                     raise ArgumentTypeError('picture_list')
 
             # get face_token _list
-            result_detect = yield self.background_task(self.face_model.detect_img_list, binary_picture_list, True)
-            result.merge_info(result_detect)
-            if result_detect.code == 0:
-                # upload pictures.
-                detect_result_list = result_detect.data['detect_result_list']
+            # 检测人脸变成新增人物---:新函数，存储人物信息到mongodb，获取person_id
+            # 拿person_id来添加人脸 ---add new person
+            # 查看人脸检测结果，如果结果失败，删除person_id信息[包括mongodb和优图的]，并且反馈客户端
+
+            # 如果检测成功，开始将这个图片数组存储进oss服务器
+            # 存储成功之后，得到pic_key_list,将新的pic_key_list信息更新到person_info里面.
+            
+            insert_result = yield self.background_task(
+                self.person_model.store_new_person, info_data, user_id, picture_list)
+            if insert_result.code == 0:
                 result_pic_key = yield self.background_task(
-                    self.picture_model.store_pictures,binary_picture_list, self.type_map['reporter']+str(user_id), pic_type, detect_result_list)
+                    self.picture_model.store_pictures,binary_picture_list, self.type_map['reporter']+str(user_id), pic_type)
                 # todo, error handler
                 # store information.[track and person]
-
-                person_id = self.person_model.store_new_person(result_pic_key, detect_result_list, info_data, user_id)
+                # 如果检测成功，开始将这个图片数组存储进oss服务器
+                person_id = insert_result.data['person_id']
+                yield self.background_task(self.person_model.update_person_picture,person_id, result_pic_key)
+                
+                # 存储成功之后，得到pic_key_list,将新的pic_key_list信息更新到person_info里面.
                 message_data = {
                     'name': info_data['name'],
                     'std_pic_key':result_pic_key[0],
@@ -248,8 +257,9 @@ class CallHelpHandler(FindPersonHandler):
                     'reporter_user_id':user_id
                 }
                 self.message_model.send_message_factory(self.message_model.CALL_HELP, message_data)
-                result.data = {}
-            # send message
+                # insert_result.data = {}
+                # send message
+        result.merge_info(insert_result)
         self.return_to_client(result)
         self.finish()
 
@@ -306,18 +316,21 @@ class ImportPersonHandler(FindPersonHandler):
                     raise ArgumentTypeError('picture_list')
 
             # get face_token _list
-            result_detect = yield self.background_task(self.face_model.detect_img_list, binary_picture_list, True)
-            result.merge_info(result_detect)
-            if result_detect.code == 0:
-                # upload pictures.
-                detect_result_list = result_detect.data['detect_result_list']
+            # 检测人脸变成新增人物---:新函数，存储人物信息到mongodb，获取person_id
+            # 拿person_id来添加人脸 ---add new person
+            # 查看人脸检测结果，如果结果失败，删除person_id信息[包括mongodb和优图的]，并且反馈客户端
+
+            # 如果检测成功，开始将这个图片数组存储进oss服务器
+            # 存储成功之后，得到pic_key_list,将新的pic_key_list信息更新到person_info里面.
+            insert_result = yield self.background_task(
+                self.person_model.store_new_person, info_data, user_id, picture_list)
+            if insert_result.code == 0:
                 result_pic_key = yield self.background_task(
-                    self.picture_model.store_pictures,binary_picture_list, self.type_map['reporter']+str(user_id), pic_type, detect_result_list)
-                # todo, error handler
-                # store information.[track and person]
-                person_id = self.person_model.store_new_person(result_pic_key, detect_result_list, info_data, user_id)
-                result.data = {}
-            # send message
+                    self.picture_model.store_pictures,binary_picture_list, self.type_map['reporter']+str(user_id), pic_type)
+                person_id = insert_result.data['person_id']
+                yield self.background_task(self.person_model.update_person_picture,person_id, result_pic_key)
+                insert_result.data = {}
+        result.merge_info(insert_result)
         self.return_to_client(result)
         self.finish()
 
@@ -356,51 +369,55 @@ class ComparePersonHandler(FindPersonHandler):
             raise ArgumentTypeError('picture')
         message_mapping = [
             'find high confidence person',
-            'the person maybe not the missing one'
-
+            'the person maybe not the missing one or you upload a low quality picture'
         ]
         result =ReturnStruct(message_mapping)
         event_happen_date = self.get_even_happen_data()
         # 1. get person's std picture. personid--> -->face_token
-        std_face_token = self.person_model.get_person_std_pic(person_id)
-        # 2. detect picture --> face_token2
-        result_detect_struct = yield self.background_task(self.face_model.detect_img_list, [binary_picture], True)
-        result.merge_info(result_detect_struct)
-        # 3. compare face_token.
-        if result_detect_struct.code == 0:
-            # the result just one element
-            detect_result = result_detect_struct.data['detect_result_list']
-            confidence = yield self.background_task(self.face_model.compare_face, std_face_token, detect_result[0]['face_token'])
+        # std_face_token = self.person_model.get_person_std_pic(person_id)
+        # # 2. detect picture --> face_token2
+        # result_detect_struct = yield self.background_task(self.face_model.detect_img_list, [binary_picture], True)
+        # result.merge_info(result_detect_struct)
+        # # 3. compare face_token.
+        # if result_detect_struct.code == 0:
+        #     # the result just one element
+        #     detect_result = result_detect_struct.data['detect_result_list']
+
+        # -----[base64]不需要检测人脸，只要比较person_id和base64;不需要std_face_token;不需要detect_result
+        confidence = yield self.background_task(self.face_model.compare_face, person_id, picture)
+        result.data = confidence
+        logging.info("[compare]the confidence is %s"%confidence)
+        # [change] 
+        if confidence['errorcode'] == 0 and confidence['ismatch'] and confidence['level'] >= self.confirm_level:    
+            # 4. update info
+            result.code = 0
+            #[change] 这里也不需要detect_result
+            pic_key_list = yield self.background_task(self.picture_model.store_pictures,[binary_picture], "user"+str(user_id), pic_type)
+            # 4. update track　and person information
+            shooter_info = {
+                'user_id':user_id,
+                'description':description
+            }
+            event_info = {
+                'coordinate':coordinate,
+                'confidence':confidence['confidence'],
+                'pic_key':pic_key_list[0],
+                'person_id':person_id,
+                'date':event_happen_date
+            }
+            self.person_model.update_person_status(self.person_model.PERSON, event_info, shooter_info)
+            # 5. send message.
+            message_data = {
+                'spot':coordinate,
+                'date':event_happen_date,
+                'person_id':person_id,
+                'upload_user_id':user_id,
+                'confidence':confidence['confidence'],
+                'pic_key':pic_key_list[0]
+            }
+            self.message_model.send_message_factory(self.message_model.COMPARE, message_data)
+        else:
+            result.code = 1
             result.data = confidence
-            # logging.info("result of compare, the confidence is %s"%confidence)
-            if confidence['level'] >= self.confirm_level:    
-                # 4. update info
-                result.code = 0
-                pic_key_list = yield self.background_task(self.picture_model.store_pictures,[binary_picture], "user"+str(user_id), pic_type, detect_result)
-                # 4. update track　and person information
-                shooter_info = {
-                    'user_id':user_id,
-                    'description':description
-                }
-                event_info = {
-                    'coordinate':coordinate,
-                    'confidence':confidence['confidence'],
-                    'pic_key':pic_key_list[0],
-                    'person_id':person_id,
-                    'date':event_happen_date
-                }
-                self.person_model.update_person_status(self.person_model.PERSON, event_info, shooter_info)
-                # 5. send message.
-                message_data = {
-                    'spot':coordinate,
-                    'date':event_happen_date,
-                    'person_id':person_id,
-                    'upload_user_id':user_id,
-                    'confidence':confidence['confidence'],
-                    'pic_key':pic_key_list[0]
-                }
-                self.message_model.send_message_factory(self.message_model.COMPARE, message_data)
-            else:
-                result.code = 1
         self.return_to_client(result)
         self.finish()

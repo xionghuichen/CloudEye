@@ -8,6 +8,10 @@ class IndexPageHandler(tornado.web.RequestHandler):
     def get(self):
         self.render('index.html')
 
+class FilePageHandler(tornado.web.RequestHandler):
+    def get(self):
+        self.render('file.html')
+
 
 class DetailPageHandler(tornado.web.RequestHandler):
     def get(self):

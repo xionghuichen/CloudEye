@@ -46,7 +46,7 @@ class BaseHandler(tornado.web.RequestHandler):
         para['mongodb'] = self.application.mongodb 
         self.session = self.application.sqldb() 
         para['sqlsession'] = self.session
-        para['facepp'] = self.application.facepp
+        para['youtu'] = self.application.youtu
         para['ali_service'] = self.application.ali_service
         para['ali_bucket'] = self.application.ali_bucket
         para['redis'] = self.application.redis
@@ -115,14 +115,17 @@ class BaseHandler(tornado.web.RequestHandler):
                         self.change_custom_string_to_json(list_value)
 
     def return_to_client(self,return_struct, JQuery=''):
+	# return_struct.print_info()
         self.change_custom_string_to_json(return_struct.data)
         # return_struct.print_info("after change")
+        
         temp_json = json.dumps({'code':return_struct.code,
             'message':return_struct.message_mapping[return_struct.code],
             'data':return_struct.data},ensure_ascii=False)
         temp_json.replace("null", "\'empty\'")
         if JQuery != '':
             temp_json = JQuery+'('+temp_json+')'
-        self.write(temp_json)
+        logging.info("[RETURN TO CLIENT] : %s"%temp_json)
+	self.write(temp_json)
 
 

@@ -1,484 +1,465 @@
 <!DOCTYPE html>
-<html lang="zh" class="no-js">
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	
-	
-      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-	<link rel="stylesheet" type="text/css" href="{{ static_url('css/normalize-indicator.css') }}" />
-	<link rel="stylesheet" type="text/css" href="{{ static_url('css/htmleaf-indicator.css') }}">
-	<link rel="stylesheet" type="text/css" href="{{ static_url('css/component-indicator.css') }}" />
+<html>
+    
+    <head>
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.js">
+        <!--Import Google Icon Font-->
+        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="{{static_url('css/materialize.min.css')}}"
+        media="screen,projection" />
+        <!--Let browser know website is optimized for mobile-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"
+        />
+        <script type="text/javascript" src="http://api.map.baidu.com/api?v=1.4">
+        </script>
+        <script type="text/javascript" src="http://api.map.baidu.com/library/Heatmap/2.0/src/Heatmap_min.js">
+        </script>
+        <style>
+            #map{ height: 500px; width: 100%;margin: auto; padding:20px; } #canvas{
+            margin-right: 30px; } .divide-graph{ margin-top: 10px; margin-bottom: 50px;
+            }
+        </style>
+    </head>
+    
+    <body>
+    <div class="row ">
+        <div class="col s12 m13 navbar-fixed " style="margin-left: -12px;width: 1380px;">
+            <nav>
+    <div class="nav-wrapper blue-grey" style="margin: 0px;">
+      <a href="#!" class="brand-logo"><i class="material-icons" style="margin-left: 10px;">cloud</i>CloudEye</a>
+       <form style="width: 78%" class="right">
+        <div class="input-field">
+          <input id="search" type="search" required>
+          <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+          <i class="material-icons">close</i>
+        </div>
+      </form>
+      
+    </div>
+  </nav>
+        </div>
+    </div>
+    
+        <div id="container1" class="active">
+            
+            <!--sideNav-->
+            <ul id="slide-out" class="side-nav fixed" style="margin-top: 64px;">
+                <li>
+                    <div class="userView">
+                        <div class="background">
+                            <img src="{{ static_url('img/bg3.jpg') }}" style="width: 450px">
+                        </div>
+                        <!-- Dropdown Trigger -->
+                        <a class='dropdown-button btn' href='#' data-activates='dropdown1'>
+                            选择城市
+                        </a>
+                        <!-- Dropdown Structure -->
+                        <ul id='dropdown1' class='dropdown-content'>
+                            <li>
+                                <a href="#!" class="option-city">
+                                    江苏
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#!" class="option-city">
+                                    上海
+                                </a>
+                            </li>
+                            <li class="divider" class="option-city">
+                            </li>
+                            <li>
+                                <a href="#!">
+                                    广东
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="row">
+                            <form class="col s12">
+                                <div class="switch ">
+                                    <label>
+                                       <!-- 自动定位：江宁区东南大学九龙湖校区-->
+                                        <input type="checkbox">
+                                        <span class="lever">
+                                        </span>
+                                    </label>
+                                </div>
+                            </form>
+                        </div>
+                        <a href="#!name">
+                            <span class="white-text name">
+                                区域：江苏
+                            </span>
+                        </a>
+                        <a href="#!email">
+                            <span class="white-text email">
+                                
+                            </span>
+                        </a>
+                    </div>
+                </li>
+                <li>
+                    <a href="/web/file">
+                        <i class="material-icons">
+                            perm_contact_calendar
+                        </i>
+                        档案管理
+                    </a>
+                </li>
+                <li>
+                    <a href="#!">
+                        <i class="material-icons">
+                            map
+                        </i>
+                        工作台
+                    </a>
+                </li>
+                <li>
+                    <div class="divider">
+                    </div>
+                </li>
+                <li>
+                    <a class="subheader">
+                        设置
+                    </a>
+                </li>
+        
+                 <li>
+                    <a class="waves-effect" href="#!">
+                        统计参数设置
+                    </a>
+                </li>
+                 <li>
+                    <a class="waves-effect" href="#!">
+                        账户设置
+                    </a>
+                </li>
+            </ul>
+            <!--title-->
+            <div class="row">
+                <div class="col s12 m3">
+                </div>
+                <div class="col s12 m1" style="margin-top: 20px;">
+                    <i class="small material-icons">
+                        aspect_ratio
+                    </i>
+                </div>
+                <div class="col s12 m2 ">
+                    <h4>
+                        最新上传
+                    </h4>
+                </div>
+                <div class="divider col s12 m6">
+                </div>
+            </div>
+            <!--card-->
+            <div class="row">
+                <div class="col s12 m3">
+                </div>
+                <div class="col s12 m4">
+                    <div class="card update">
+                        <div class="card-panel blue-grey lighten-1" style="height: 60px;">
+                            
+                            <span  class="white-text update-name" style="margin-top: -10px;">
+                                李美玲有新消息
+                            </span>
+                            <span class="white-text update-source">
+                                通过摄像头检测
+                            </span>
+                        </div>
+                        <div class="card-image">
+                            <div class="row">
+                                <div class="col s12 m6">
+                                    <img class="materialboxed update-std-pic" height="200px" src="{{ static_url('img/child3.jpg') }}">
+                                </div>
+                                <div class="col s12 m6">
+                                    <img class="materialboxed update-track-pic" height="200px" src="{{ static_url('img/child4.jpg') }}">
+                                </div>
+                            </div>
+                            <span class="card-title">
+                                报案标准照片
+                            </span>
+                        </div>
+                        <div class="card-content">
+                            <p class="update-loc">
+                                最新发现地点：xxx
+                            </p>
+                            <p class="update-time">
+                                发现时间：2011年2月3日
+                            </p>
+                        </div>
+                        <div class="card-action">
+                            <a href="/web/details" class="update-details">
+                                详情
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!--second-->
+                <!--third-->
+                <div class="col s12 m4">
+                    <div class="card update">
+                        <div class="card-panel blue-grey lighten-1" style="height: 60px;">
+                           
+                            <span class="white-text update-name">
+                                李美玲有新消息
+                            </span>
+                             <span class="white-text update-source">
+                                摄像头检测
+                            </span>
+                        </div>
+                        <div class="card-image">
+                            <div class="row">
+                                <div class="col s12 m6">
+                                    <img class="materialboxed update-std-pic" height="200px" src="{{ static_url('img/child3.jpg') }}">
+                                </div>
+                                <div class="col s12 m6">
+                                    <img class="materialboxed update-track-pic" height="200px" src="{{ static_url('img/child3.jpg') }}">
+                                </div>
+                            </div>
+                            <span class="card-title">
+                                报案标准照片
+                            </span>
+                        </div>
+                        <div class="card-content">
+                            <p class="update-loc">
+                                最新发现地点：xxx
+                            </p>
+                            <p class="update-time">
+                                发现时间：2011年2月3日
+                            </p>
+                        </div>
+                        <div class="card-action">
+                            <a href="/web/details" class="update-details">
+                                详情
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!--EOF-->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 m3">
+            </div>
+            <div class="col s12 m9 center">
+                <ul class="pagination">
+                    <li class="disabled">
+                        <a href="#!">
+                            <i class="material-icons">
+                                chevron_left
+                            </i>
+                        </a>
+                    </li>
+                    <li class="active page-indicator blue-grey">
+                        <a href="#!" class="">
+                            1
+                        </a>
+                    </li>
+                    <li class="waves-effect page-indicator">
+                        <a href="#!" class="">
+                            2
+                        </a>
+                    </li>
+                    <li class="waves-effect page-indicator">
+                        <a href="#!" class="">
+                            3
+                        </a>
+                    </li>
+                    <li class="waves-effect page-indicator">
+                        <a href="#!" class="">
+                            4
+                        </a>
+                    </li>
+                    <li class="waves-effect page-indicator">
+                        <a href="#!" class="">
+                            5
+                        </a>
+                    </li>
+                    <li class="waves-effect">
+                        <a href="#!">
+                            <i class="material-icons">
+                                chevron_right
+                            </i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!--preload-->
+        <div class="preloader-wrapper big ">
+            <div class="spinner-layer spinner-blue-only">
+                <div class="circle-clipper left">
+                    <div class="circle">
+                    </div>
+                </div>
+                <div class="gap-patch">
+                    <div class="circle">
+                    </div>
+                </div>
+                <div class="circle-clipper right">
+                    <div class="circle">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--map-->
+        <div class="row">
+            <div class="col s12 m3">
+            </div>
+            <div class="col s12 m9 card teal darken+2">
+                <p class="white-text">
+                    数据统计分析
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 m3">
+            </div>
+            <div class="col s12 m9">
+                <div class="card grey darken-2">
+                    <div class="card-content white-text">
+                        <span class="card-title">
+                            热力图
+                        </span>
+                        <p>
+                        </p>
+                        <p>
+                            此热力图统计您管辖区域内一年中的案发地点分布，颜色越深表示案发越密集
+                        </p>
+                    </div>
+                   
+                </div>
+                 <div id="map">
+            </div>
+          
+        
+        </div>
+        <div class="row divide-graph">
+            <div class="col s12 m3">
+            </div>
+            <div class="col s12 m8 divider">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 m3">
+            </div>
+            <div class="col s12 m2">
+                <div class="card grey darken-2">
+                    <div class="card-content  white-text">
+                        <span class="card-title">
+                           入库案件统计
+                        </span>
+                        <p>
+                        此图统计您管辖区域内每月用户上传或警局备案入库的走失记录，蓝色为男性统计曲线，灰色为女性统计曲线
+                        </p>
+                        <p>
+                            
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m7">
+              <canvas class="card" id="canvas2" height="150">
+                </canvas>
+            </div>
+        </div>
+       
+        <!--data analysis-->
+        <div class="row">
+            <div class="col s12 m5">
+            </div>
+            <!--
+ <div class="col s12 m4">
+                <canvas class="card" id="canvas" height="210">
+                </canvas>
+            </div>
+            <div class="col s12 m1">
+            </div>
+            <div class="col s12 m4">
+                <canvas class="card" id="canvas2" height="210">
+                </canvas>
+            </div>
+            -->
+           
+        </div>
+        <!--graph-->
+        <div class="row divide-graph">
+            <div class="col s12 m1">
+            </div>
+            <div class="col s12 m8 divider">
+            </div>
+        </div>
+        <!--data analysis-->
+        </div>
+    </body>
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js">
+    </script>
+    <script type="text/javascript" src="{{ static_url('js/materialize.min.js') }}">
+    </script>
+    <script type="text/javascript">
+        // Initialize collapse button
+        $('.button-collapse').sideNav({
+            menuWidth: 280,
+            // Default is 300
+            edge: 'left',
+            // Choose the horizontal origin
+            closeOnClick: false,
+            // Closes side-nav on <a> clicks, useful for Angular/Meteor
+            draggable: true // Choose whether you can drag to open on touch screens
+        });
+        $('.button-collapse').sideNav('show');
 
-	<link rel="stylesheet" type="text/css" href="{{ static_url('css/normalize-gallery.css') }}" />
-	<link rel="stylesheet" type="text/css" href="{{ static_url('css/default-gallery.css') }}">
-	<link href="{{ static_url('css/main-gallery.css') }}" rel="stylesheet" type='text/css' />
-	<link href="{{ static_url('css/demo-gallery.css') }}" rel="stylesheet" type='text/css' />
-	<!--update0304-->
-	 <script type="text/javascript" src="http://api.map.baidu.com/api?v=1.4"></script>
-<script type="text/javascript" src="http://api.map.baidu.com/library/Heatmap/2.0/src/Heatmap_min.js"></script>
-  
-<style>
-#map{
-	height: 700px;
-	width: 80%;margin: auto;
-	padding:20px;
-	 -webkit-box-shadow: 5px 5px 5px;  
-  -moz-box-shadow: 3px 3px 3px;  
-  box-shadow: 3px 3px 3px; 
-  border-radius:5px;
-}
-#heatmaptitle h2{
-	margin:20px 20px 20px 10px;
-}
+        // Initialize collapsible (uncomment the line below if you use the dropdown variation)
+        //$('.collapsible').collapsible();
+        //set dropdown
+        $('.dropdown-button').dropdown({
+            inDuration: 300,
+            outDuration: 225,
+            constrainWidth: false,
+            // Does not change width of dropdown to that of the activator
+            hover: false,
+            // Activate on hover
+            gutter: 0,
+            // Spacing from edge
+            belowOrigin: false,
+            // Displays dropdown below the button
+            alignment: 'right',
+            // Displays dropdown with edge aligned to the left of button
+            stopPropagation: false // Stops event propagation
+        });
 
-.outer-img{
-    width:100%;
-   
-    border:1px solid #4EC83B;
-    overflow: hidden;
-}
-.outer-img img {
-    position: relative;
-    width: 100%;
-   
-}
-</style>
-	<!--[if IE]>
-		<script src="http://libs.useso.com/js/html5shiv/3.7/html5shiv.min.js"></script>
-	<![endif]-->
-	<script>document.documentElement.className = 'js';</script>
-
-	<script type="text/javascript" src="http://cdn.webfont.youziku.com/wwwroot/js/wf/youziku.api.min.js"></script>
-</head>
-<body>
-	<svg class="hidden">
-		<defs>
-			<symbol id="icon-arrow" viewBox="0 0 24 24">
-				<title>arrow</title>
-				<polygon points="6.3,12.8 20.9,12.8 20.9,11.2 6.3,11.2 10.2,7.2 9,6 3.1,12 9,18 10.2,16.8 "/>
-			</symbol>
-			<symbol id="icon-drop" viewBox="0 0 24 24">
-				<title>drop</title>
-				<path d="M12,21c-3.6,0-6.6-3-6.6-6.6C5.4,11,10.8,4,11.4,3.2C11.6,3.1,11.8,3,12,3s0.4,0.1,0.6,0.3c0.6,0.8,6.1,7.8,6.1,11.2C18.6,18.1,15.6,21,12,21zM12,4.8c-1.8,2.4-5.2,7.4-5.2,9.6c0,2.9,2.3,5.2,5.2,5.2s5.2-2.3,5.2-5.2C17.2,12.2,13.8,7.3,12,4.8z"/><path d="M12,18.2c-0.4,0-0.7-0.3-0.7-0.7s0.3-0.7,0.7-0.7c1.3,0,2.4-1.1,2.4-2.4c0-0.4,0.3-0.7,0.7-0.7c0.4,0,0.7,0.3,0.7,0.7C15.8,16.5,14.1,18.2,12,18.2z"/>
-			</symbol>
-			<symbol id="icon-triangle" viewBox="0 0 24 24">
-				<title>triangle</title>
-				<path d="M4.5,19.8C4.5,19.8,4.5,19.8,4.5,19.8V4.2c0-0.3,0.2-0.5,0.4-0.7c0.2-0.1,0.5-0.1,0.8,0l13.5,7.8c0.2,0.1,0.4,0.4,0.4,0.7c0,0.3-0.2,0.5-0.4,0.7L5.7,20.4c-0.1,0.1-0.3,0.1-0.5,0.1C4.8,20.6,4.5,20.2,4.5,19.8z M6,5.6v12.8L17.2,12L6,5.6z"/>
-			</symbol>
-			<symbol id="icon-bubble" viewBox="0 0 48 24">
-				<title>bubble</title>
-				<path d="M0.9,23c-0.2,0.2,0,0.8,0.2,0.9C1.2,24,1.3,24,1.4,24c0.2,0,0.3-0.1,0.5-0.1l10.7-4.1h30.7c2.2,0,3.9-1.8,3.9-3.9V3.9c0-2.2-1.8-3.9-3.9-3.9H5.9C3.7,0,2,1.8,2,3.9v11.8c0,2.2,1,3.5,3.2,3.5C5.1,19.2,2.2,21.5,0.9,23zM45.7,15.8c0,1.3-1.1,2.4-2.4,2.4h-31c-0.2,0-0.3,0.1-0.5,0.1l-9.4,4.3c0,0,4.1-2.9,4.7-3.7c0.1-0.2-0.1-0.4-0.2-0.5c-0.1-0.1-0.3-0.2-0.5-0.2H5.9c-1.3,0-2.4-1.1-2.4-2.4V3.9c0-1.3,1.1-2.4,2.4-2.4h37.4c1.3,0,2.4,1.1,2.4,2.4V15.8L45.7,15.8z"/>
-			</symbol>
-			<!-- Icon by Gregor Cresnar: http://www.flaticon.com/free-icon/magnifying-glass_126474#term=magnifier&page=1&position=1 -->
-			<symbol id="icon-magnifier" viewBox="0 0 24 24">
-				<title>magnifier</title>
-				<path d="M22.6,20l-4.8-4.8c0,0-0.1,0-0.1-0.1c1-1.4,1.5-3.2,1.5-5c0-5.1-4.1-9.2-9.2-9.2S0.9,5,0.9,10c0,5.1,4.1,9.2,9.2,9.2c1.9,0,3.6-0.6,5-1.5c0,0,0,0.1,0.1,0.1l4.8,4.8c0.7,0.7,1.9,0.7,2.6,0C23.3,21.9,23.3,20.7,22.6,20z M10,16c-3.3,0-6-2.7-6-6c0-3.3,2.7-6,6-6c3.3,0,6,2.7,6,6S13.3,16,10,16z" />
-			</symbol>
-			<!-- Icon by Madebyoliver: http://www.flaticon.com/free-icon/placeholder_149060#term=location&page=1&position=1 -->
-			<symbol id="icon-pin" viewBox="0 0 24 24">
-				<title>pin</title>
-				<path d="M17.6,2.9L17.6,2.9c-3.1-3.1-8.2-3.1-11.3,0l0,0C3.6,5.7,3.2,11,5.6,14.2l6.4,9.2l6.4-9.2C20.8,11,20.4,5.7,17.6,2.9z M12.1,11.1c-1.5,0-2.6-1.2-2.6-2.6s1.2-2.6,2.6-2.6s2.6,1.2,2.6,2.6S13.5,11.1,12.1,11.1z" />
-			</symbol>
-			<symbol id="icon-circle" viewBox="0 0 16 16">
-				<circle cx="8" cy="8" r="6.215"></circle>
-			</symbol>
-		</defs>
-	</svg>
-	<main>
-		
-		<!--ok style="background-image:url(img/bg.jpg);-->
-		<section class="section section--nav" id="Meklit" >
-			<span class="link-copy2"></span>
-			<nav class="nav nav--meklit">
-				<button class="nav__item nav__item--current" id="already-case" aria-label="Item 0"><span class="nav__item-title"><span>已立案</span></span></button>
-				<button class="nav__item" id="unready-case" aria-label="Item 1"></span><span class="nav__item-title"><span>未立案</span></span></button>
-				
-			</nav>
-			<nav class="nav nav--xusni">
-				<button class="nav__item nav__item--current" id="page1" aria-label="Item 1"><span class="nav__item-title">01</span></button>
-				<button class="nav__item "  id="page2" aria-label="Item 2"><span class="nav__item-title">02</span></button>
-				<button class="nav__item" id="page3" aria-label="Item 3"><span class="nav__item-title">03</span></button>
-				<button class="nav__item" id="page4" aria-label="Item 4"><span class="nav__item-title">04</span></button>
-				<button class="nav__item" id="page5" aria-label="Item 5"><span class="nav__item-title">05</span></button>
-				<button class="nav__item" id="page6" aria-label="Item 6"><span class="nav__item-title">06</span></button>
-				<button class="nav__item" id="page7" aria-label="Item 7"><span class="nav__item-title">07</span></button>
-				<button class="nav__item" id="page8" aria-label="Item 8"><span class="nav__item-title">08</span></button>
-			</nav>
-			<!-- Mockup slider for decorative purpose only -->
-			<div class="mockup-slider">
-				
-				<div class="grid margintopmiddle" id="case">
-					<figure class="tile-15 case-item">
-						<!--此处有动态赋值-->
-						<img src="{{ static_url('css/demo-gallery.css') }}" class="photo" />
-						<figcaption>
-							<div>
-								<!--此处有动态赋值-->
-								<h3 class="name" style="color:#ffffff" ><span>Lily</span></h3>
-								<p class="desc">01</p>
-							</div>
-							<a href="/web/details">View more</a>
-						</figcaption>			
-					</figure>
-					<figure class="tile-15 case-item">
-						<!--此处有动态赋值-->
-						<img src="{{ static_url('img/child2.jpg') }}" class="photo" />
-						<figcaption>
-							<div>
-								<!--此处有动态赋值-->
-								<h3 class="name"><span>Lily</span></h3>
-								<p class="desc">02</p>
-							</div>
-							<a href="/web/details">View more</a>
-						</figcaption>			
-					</figure>
-					<figure class="tile-15 case-item">
-						<!--此处有动态赋值-->
-						<img src="{{ static_url('img/child2.jpg') }}" class="photo" />
-						<figcaption>
-							<div>
-								<!--此处有动态赋值-->
-								<h3 class="name"><span>Lily</span></h3>
-								<p class="desc">03</p>
-							</div>
-							<a href="/web/details">View more</a>
-						</figcaption>			
-					</figure>
-					
-					<figure class="tile-15 last case-item">
-						<!--此处有动态赋值-->
-						<img src="{{ static_url('img/child3.jpg') }}" class="photo" />
-						<figcaption>
-							<div>
-								<!--此处有动态赋值-->
-								<h3 class="name"><span>Lily</span></h3>
-								<p class="desc">04</p>
-							</div>
-							<a href="/web/details">View more</a>
-						</figcaption>			
-					</figure>
-
-				</div>
-				
-			</div>
-
-		</section>
-
-		
-		<!--ok-->
-		<section class="section section--nav" id="Kafa">
-			<span class="link-copy"></span>
-			<nav class="nav nav--kafa">
-				<button id="update1" class="nav__item nav__item--current update" aria-label="Item 1"><span class="nav__item-inner"><img class="nav__item-img" src="{{ static_url('img/avatar-1.svg') }}" alt="Avatar 1" /></span><span class="nav__item-title update-name">John Doe</span></button>
-				<button id="update2" class="nav__item  update" aria-label="Item 2"><span class="nav__item-inner"><img class="nav__item-img" src="{{ static_url('img/avatar-2.svg') }}" alt="Avatar 2" /></span><span class="nav__item-title update-name">Henry Green</span></button>
-				<button id="update3" class="nav__item update" aria-label="Item 3"><span class="nav__item-inner"><img class="nav__item-img" src="{{ static_url('img/avatar-3.svg') }}" alt="Avatar 3" /></span><span class="nav__item-title update-name">Terry House</span></button>
-				<button id="update4" class="nav__item update" aria-label="Item 4"><span class="nav__item-inner"><img class="nav__item-img" src="{{ static_url('img/avatar-4.svg') }}" alt="Avatar 4" /></span><span class="nav__item-title update-name">Walter Freeman</span></button>
-				<button id="update5" class="nav__item update" aria-label="Item 5"><span class="nav__item-inner"><img class="nav__item-img" src="{{ static_url('img/avatar-5.svg') }}" alt="Avatar 5" /></span><span class="nav__item-title update-name">Andy Knight</span></button>
-			</nav>
-			<!-- Mockup slider for decorative purpose only -->
-			<div class="mockup-slider">
-					<div class="container">
-			<div class="content">
-				
-					<figure class="tile-1 update-case">
-						<!--此处有动态赋值-->
-						 <div class="outer-img">
-					         <img src="{{ static_url('img/pdefault.jpg') }}"  />
-					    </div>
-						<figcaption>
-							<!--此处有动态赋值 name-->
-							<h2><span id="stdInfor">标准照片</span> <i class="name"></i></h2>
-							<a href="details.html">View more</a>
-						</figcaption>			
-					</figure>
-					<figure class="tile-1 last update-case">
-						
-						<div class="outer-img photo">
-							<!--此处有动态赋值-->
-					        <img src="{{ static_url('img/pdefault.jpg') }}"  />
-					    </div>
-						<figcaption>
-							<!--此处有动态赋值 时间-->
-							<h2><span id="hasUpload">最近更新</span> <i class="match-value"></i></h2>
-							<a href="details.html">View more</a>
-						</figcaption>			
-					</figure>
-					
-			
-			</div>
-			
-		</section>
-		<div id="heatmaptitle">
-			<h2>管辖区案件统计热力图</h2>
-		</div>
-	<div id="map"></div>
-		
-	</main>
-	
-	<script src="{{ static_url('js/clipboard.min.js') }}"></script>
-	<script src="{{ static_url('js/main.js') }}"></script>
-
-	
-	<script>window.jQuery || document.write('<script src="{{ static_url('js/jquery-2.1.1.min.js') }}"><\/script>')</script>
-	<script src="{{ static_url('js/captionHover.dev.js') }}"></script>
-	<script>
-		$(function() {
-			$('.tile-1').captionHover({
-				fx: 'honey',
-
-				
-			});
-			$('.tile-10').captionHover({
-				fx: 'sophie'
-			});
-		
-			$('.tile-15').captionHover({
-				fx: 'milo',
-				 figWidth: '23%',
-   
-		
-			});
-		});
-	</script>
-	
-<!--BIND DATA-->
-<script type="text/javascript">
-			binary_formal=1;
-			function getLocalTime(nS) {     
-			   return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,'');     
-			}   
-			<!--get json-->
-		
-			function load_register(index){
-				//此处有动态赋值
-				 //initial registered cases
-			 $.getJSON("/get/updateperson?jsoncallback=?",{"formal":1,"spot":"[31.8,118.8]","max_distance":100.33,"page":index,"size":4},function(result){
-			 	//alert(result.code+result.data.person_list.length);
-				 	if (result.code==0) {
-			 		<!--initial updates-->
-			 		var r_cases=result.data.person_list;
-			 		for(var i=0;i<4;i++){
-		     		
-		     		var test=$(".case-item")[i];
-					jQuery.data(test,"datas",r_cases[i]);
-					
-
-					//$(".case_item:eq("+i+")").show();
-					$(".case-item:eq("+i+") figcaption a").attr('href',$(".case-item:eq("+i+") figcaption a").attr('href')+"?person_id="+jQuery.data(test,"datas").person_id);
-					
-					$(".case-item:eq("+i+") figcaption div h3 span").text(jQuery.data(test,"datas").name);
-					$(".case-item:eq("+i+") img").attr('src',jQuery.data(test,"datas").picture_key);
-					
-					}
-
-				}
-				
-			 }
-			);
-			};
-				function load_unregister(index){
-					//此处有动态赋值
-				 //<!--initial unregistered cases-->
-			 $.getJSON("/get/updateperson?jsoncallback=?",{"formal":0,"spot":"[31.8,118.8]","max_distance":100.33,"page":index,"size":4},function(result){
-			 	//alert(result.code+result.data.person_list.length);
-				 	if (result.code==0) {
-			 		<!--initial updates-->
-			 		var r_cases=result.data.person_list;
-			 		for(var i=0;i<4;i++){
-		     		
-		     		var test=$(".case-item")[i];
-					jQuery.data(test,"datas",r_cases[i]);
-					
-
-					//$(".case_item:eq("+i+")").show();
-					$(".case-item:eq("+i+") figcaption a").attr('href',$(".case-item:eq("+i+") figcaption a").attr('href')+"?person_id="+jQuery.data(test,"datas").person_id);
-					
-					$(".case-item:eq("+i+") figcaption div h3 span").text(jQuery.data(test,"datas").name);
-					$(".case-item:eq("+i+") img").attr('src',jQuery.data(test,"datas").picture_key);
-					
-					}
-
-				}
-				
-			 }
-			);
-			};
-
-			 $(document).ready(function() {  
-  	   		    load_register(0);
-		   
-		  
-		});  
-			 <!--button click function-->
-			$("#already-case").click(function(){
-				
-				if (binary_formal==0) {
-  				$("#already-case").removeClass("nav__item--current");
-				$("#unready-case").removeClass("nav__item--current");
-				$(this).addClass("nav__item--current");
-  				//alert("click");
-  				load_register(0);}
-  				binary_formal=1;
-		});
-	
-			$("#unready-case").click(function(){
-				if (binary_formal==1) {
-				$("#already-case").removeClass("nav__item--current");
-				$("#unready-case").removeClass("nav__item--current");
-				$(this).addClass("nav__item--current");
-  				//alert("clickun");
-  				load_unregister(0);}
-  				binary_formal=0;
-		});
-			$("#page1").click(function(){
-				if ($("#already-case").hasClass('nav__item--current')) {
-					
-					//alert("click");
-					load_register(0);
-				}else{
-					//alert("clickun");
-					load_unregister(0);
-				}
-			});
-			$("#page2").click(function(){
-				if ($("#already-case").hasClass('nav__item--current')) {
-					
-					//alert("click");
-					load_register(1);
-				}else{
-					//alert("clickun");
-					load_unregister(1);
-				}
-			});
-			$("#page3").click(function(){
-				if ($("#already-case").hasClass('nav__item--current')) {
-					
-					//alert("click");
-					load_register(2);
-				}else{
-					//alert("clickun");
-					load_unregister(2);
-				}
-			});
-			$("#page4").click(function(){
-				if ($("#already-case").hasClass('nav__item--current')) {
-					
-					//alert("click");
-					load_register(3);
-				}else{
-					//alert("clickun");
-					load_unregister(3);
-				}
-			});
-
-			<!--bind update-->
-				<!--get json-->
-			function load_update(index){
-				//此处有动态赋值
-				$.getJSON("/get/updatemessage?jsoncallback=?",{"spot":"[31.8,118.8]","max_distance":100.33,"page":0,"size":5},function(result){
-			 	
-				 	if (result.code==0) {
-
-
-			 		<!--initial updates-->
-			 		var update=result.data.message_list;
-		     		
-		     		var test=$(".update-case")[0];
-					jQuery.data(test,"datas",update[0]);
-					//alert(update[index].name);
-					//$(".update-case:eq("+0+") figcaption h2 i").css("background-color","red");
-					$(".nav__item span.update-name").text(update[index].name);
-				
-					//standard profile
-					$(".update-case:eq("+0+") figcaption a").attr('href',$(".update-case:eq("+0+") figcaption a").attr('href')+"?person_id="+update[index].person_id);
-					
-					//alert(jQuery.data(test,"datas").person_id+","+$(".update-case:eq("+0+") figcaption a").attr('href'));
-					
-					$(".update-case:eq("+0+") img").attr('src',update[index].std_pic_key);
-					
-					//$(".update-case:eq("+0+") figcaption h2 i").text(update[index].name);
-
-					//user track
-					$(".update-case:eq("+1+") figcaption a").attr('href',$(".update-case:eq("+0+") figcaption a").attr('href')+"?person_id="+update[index].person_id);
-					if(update[index].pic_key!="empty")
-					{
-						$(".update-case:eq("+1+") img").attr('src',update[index].pic_key);
-						$("#hasUpload").text("最新用户上传");
-						$("#stdInfor").text("报案发布照片");
-						$(".update-case:eq("+1+") figcaption h2 i").text(getLocalTime(update[index].date));
-						$(".update-case:eq("+0+") figcaption h2 i").text("");
-					}else{
-						$(".update-case:eq("+1+") img").attr('src',"{{ static_url('img/pdefault.jpg') }}");
-						$("#hasUpload").text("暂无上传");
-							$(".update-case:eq("+1+") figcaption h2 i").text("");
-							$(".update-case:eq("+0+") figcaption h2 i").text(getLocalTime(update[index].date));
-					}
-					
-					console.log(update[index].pic_key);
-					
-
-
-				}
-				
-			 }
-			);
-			};
-			load_update(1);
-			$("#update1").click(function(){
-				load_update(0);
-			});
-			$("#update2").click(function(){
-				load_update(1);
-			});
-			$("#update3").click(function(){
-				load_update(2);
-			});
-			$("#update4").click(function(){
-				load_update(3);
-			});
-			$("#update5").click(function(){
-				load_update(4);
-			});
-window.setInterval(function(){
-	
-		//此处有动态赋值
-	 $.getJSON("/get/updatemessage?jsoncallback=?",{"spot":"[31.8,118.8]","max_distance":100.33,"page":0,"size":5},function(result){
-	 	 var update=result.data.message_list;
-	 var test=$(".update-case")[0];
-	// alert(update[0].date);
-	 //alert(update[0].date+","+jQuery.data(test,"datas").date);
-	 console.log(update[0].date);
-	 console.log(jQuery.data(test,"datas").date);
-	 //version2
-	 if(update[0].date>jQuery.data(test,"datas").date)
-	 {
-
-	 	//flush data
-	 	//alert("有"+update[0].name+"最新的上传记录");
-	 	load_update(0);
-	 }
-	 	
-
-	 });
-				//$(".update").removeClass("nav__item--current");
-				//$("#update1").addClass("nav__item--current");
-		
-	
-},3000);
-		</script>
-
-		<!--update0304-->
-
-<script type="text/javascript">
-//version2
- $.getJSON("/get/alltrack/web?jsoncallback=?",{"spot":"[31.8,118.8]","range_longitude":10,"range_latitude":10},function(result2){
- 	var data2=result2.data.info;
-  for (var i = data2.length - 1; i >= 0; i--) {
- 	data2[i].count=data2[i].count*100;
+        //load map
+       $.getJSON("/get/alltrack/web?jsoncallback=?",{"spot":"[31.8,118.8]","range_longitude":10,"range_latitude":10},function(result2){
+    var data2=result2.data.info;
+ for (var i = data2.length - 1; i >= 0; i--) {
+    data2[i].count=data2[i].count*100;
  }
 
+var points = [
+{ "lng": 118.826293, "lat": 31.893676, "count": 1 },//西安
+{ "lng": 118.829275, "lat": 31.896037, "count": 1 },//宝鸡
+{ "lng": 118.826293, "lat": 31.893699, "count": 1 },//安康
+{ "lng": 118.826293, "lat": 31.893675, "count": 1},//汉中 
+{ "lng": 118.826293, "lat": 31.893688, "count": 1 },//商洛 
+{ "lng": 118.826293, "lat": 31.893679, "count": 1 },//延安 
+{ "lng": 118.826293, "lat": 31.893679, "count": 1 },//铜川 
+{ "lng": 118.826293, "lat": 31.893673, "count": 1 },//渭南 
+{ "lng": 118.826293, "lat": 31.893671, "count": 1},//咸阳 
+{ "lng": 118.826293, "lat": 31.893666, "count": 1000 },// 榆林 
+];
+var points2 = [
+{ "lat": 31.875,"lng": 118.88,  "count": 100 },//西安
+{ "lat": 31.89, "lng": 118.8, "count": 100 },//宝鸡
+{"lat": 31.89,  "lng": 118.8, "count": 100 },//安康
+{  "lat": 31.895, "lng": 118.8,"count": 100},//汉中 
+
+];
+
+console.log(data2[1].lat);
+console.log(data2[1].lng);
+console.log(data2[1].count);
 
 var map = new BMap.Map("map"); // 创建地图实例
 var point = new BMap.Point(118.826293,31.893676);
@@ -530,6 +511,250 @@ return !!(elem.getContext && elem.getContext('2d'));
 
 });
 
-</script>
-</body>
+    </script>
+   <script type="text/javascript">
+        //load update
+        function getLocalTime(nS) {     
+               return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,'');     
+            }   
+            function load_update(page){
+                //此处有动态赋值
+                $.getJSON("http://139.196.207.155:9000/get/updatemessage?jsoncallback=?",{"spot":"[31.8,118.8]","max_distance":100.33,"page":0,"size":10},function(result){
+                
+                
+                    if (result.code==0) {
+
+
+        
+                    <!--initial updates-->
+                    var update=result.data.message_list;
+                    
+                    var test=$(".update");
+
+
+                    jQuery.data(test[0],"datas",update[0]);
+                    //alert(update[index].name);
+                    //$(".update-case:eq("+0+") figcaption h2 i").css("background-color","red");
+                    $(".update-name:eq(0)").text(update[2*page].name);
+                
+                    //standard profile
+                    $(".update-details:eq("+0+")").attr('href',$(".update-details:eq("+0+")").attr('href')+"?person_id="+update[2*page].person_id);
+                    var href = $(".update-details:eq("+0+")").attr("href");
+                    console.log(href);
+                    
+                    //alert(jQuery.data(test,"datas").person_id+","+$(".update-case:eq("+0+") figcaption a").attr('href'));
+                    
+                    $(".update-std-pic:eq("+0+")").attr('src',update[2*page].std_pic_key);
+                    
+                    //$(".update-case:eq("+0+") figcaption h2 i").text(update[index].name);
+
+                     //use map to decode location
+                    var maphelper = new BMap.Map();
+                    var point = new BMap.Point(update[2*page].spot[1],update[2*page].spot[0]);
+                    var gc = new BMap.Geocoder();
+                    gc.getLocation(point, function(rs){
+                       var addComp = rs.addressComponents;
+                       $(".update-loc:eq(0)").text("");
+                       $(".update-loc:eq(0)").append("地点: "+addComp.province + " " + addComp.city + " " + addComp.district + " " + addComp.street + " " + addComp.streetNumber);
+                    }); 
+
+                    
+                    if(update[2*page].pic_key!="empty")
+                    {
+                        $(".update-track-pic:eq("+0+")").attr('src',update[2*page].pic_key);
+                         $(".update-track-pic:eq("+0+")").show();
+                        $(".update-time:eq("+0+")").text(getLocalTime(update[2*page].date));
+                        
+                    }else{
+                       $(".update-track-pic:eq("+0+")").hide();
+                        
+                        
+                      $(".update-time:eq("+0+")").text("时间"+getLocalTime(update[2*page].date));
+                    }
+                    if (update[2*page].type==0) {
+                        $(".update-source:eq(0)").text("有求助发布");
+                    }else if(update[2*page].type==1){
+                         $(".update-source:eq(0)").text("由摄像监控检测有新消息");
+                    }else if(update[2*page].type==2){
+                         $(".update-source:eq(0)").text("由用户跟拍上传有新的消息");
+                    }else{
+                         $(".update-source:eq(0)").text("由用户主动检索有新的消息");
+                    }
+                    //second
+                  //  jQuery.data(test[1],"datas",update[2*page+1]);
+                    //alert(update[index].name);
+                    //$(".update-case:eq("+0+") figcaption h2 i").css("background-color","red");
+                    $(".update-name:eq(1)").text(update[2*page+1].name);
+                
+                    //standard profile
+                   
+//                    .attr("href")
+                    $(".update-details:eq("+1+")").attr("href",href);
+
+                    console.log( $(".update-details:eq("+1+")").attr("href"));
+                    // console.log(JSON.stringify(  $(".update-details:eq("+1+")").href));
+                    
+                    //alert(jQuery.data(test,"datas").person_id+","+$(".update-case:eq("+0+") figcaption a").attr('href'));
+                    
+                    $(".update-std-pic:eq("+1+")").attr('src',update[2*page+1].std_pic_key);
+                    
+                    //$(".update-case:eq("+0+") figcaption h2 i").text(update[index].name);
+
+                     var point = new BMap.Point(update[2*page+1].spot[1],update[2*page+1].spot[0]);
+                    var gc = new BMap.Geocoder();
+                    gc.getLocation(point, function(rs){
+                       var addComp = rs.addressComponents;
+                       $(".update-loc:eq(1)").text("");
+                       $(".update-loc:eq(1)").append("地点: "+addComp.province + " " + addComp.city + " " + addComp.district + " " + addComp.street + " " + addComp.streetNumber);
+                    }); 
+                    if(update[2*page+1].pic_key!="empty")
+                    {
+                        $(".update-track-pic:eq("+1+")").attr('src',update[2*page+1].pic_key);
+                         $(".update-track-pic:eq("+1+")").show();
+                        $(".update-time:eq("+1+")").text(getLocalTime(update[2*page+1].date));
+                        
+                    }else{
+                        $(".update-track-pic:eq("+1+")").hide();
+                        
+                        
+                            $(".update-time:eq("+1+")").text("时间"+getLocalTime(update[2*page+1].date));
+                    }
+                     if (update[2*page+1].type==0) {
+                        $(".update-source:eq(1)").text("有求助发布");
+                    }else if(update[2*page+1].type==1){
+                         $(".update-source:eq(1)").text("由摄像监控检测有新消息");
+                    }else if(update[2*page+1].type==2){
+                         $(".update-source:eq(1)").text("由用户跟拍上传有新的消息");
+                    }else{
+                         $(".update-source:eq(1)").text("由用户主动检索有新的消息");
+                    }
+                    //eof
+                  //  console.log(update[2*page].pic_key);
+                    
+                }
+                
+             }
+            );
+            };
+        
+    </script>
+    <script src="{{ static_url('js/Chart.js') }}">
+    </script>
+    <script>
+        //graph1
+        var randomScalingFactor = function() {
+            return Math.round(Math.random() * 10)
+        };
+
+        var barChartData = {
+            labels: ["January", "February", "March", "April", "May", "June", "July"],
+            datasets: [{
+                fillColor: "rgba(220,220,220,0.5)",
+                strokeColor: "rgba(220,220,220,0.8)",
+                highlightFill: "rgba(220,220,220,0.75)",
+                highlightStroke: "rgba(220,220,220,1)",
+                data: [randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor()]
+            },
+            {
+                fillColor: "rgba(151,187,205,0.5)",
+                strokeColor: "rgba(151,187,205,0.8)",
+                highlightFill: "rgba(151,187,205,0.75)",
+                highlightStroke: "rgba(151,187,205,1)",
+                data: [randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor()]
+            }]
+
+        }
+
+        //graph2
+        var randomScalingFactor = function() {
+            return Math.round(Math.random() * 100)
+        };
+        var lineChartData = {
+            labels: ["一月", "二月", "三月", "四月", "五月", "六月", "七月"],
+            datasets: [{
+                label: "My First dataset",
+                fillColor: "rgba(220,220,220,0.2)",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: [randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor()]
+            },
+            {
+                label: "My Second dataset",
+                fillColor: "rgba(151,187,205,0.2)",
+                strokeColor: "rgba(151,187,205,1)",
+                pointColor: "rgba(151,187,205,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(151,187,205,1)",
+                data: [randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor()]
+            }]
+
+        }
+
+        window.onload = function() {
+           // var ctx = document.getElementById("canvas").getContext("2d");
+            //window.myBar = new Chart(ctx).Bar(barChartData, {
+            //    responsive: true
+            //});
+            var ctx2 = document.getElementById("canvas2").getContext("2d");
+            window.myLine = new Chart(ctx2).Line(lineChartData, {
+                responsive: true
+            });
+        }
+
+        load_update(0);
+    </script>
+    <script type="text/javascript">
+        //click function
+        $(".page-indicator").click(function(){
+            
+            load_update($(this).find('a').text()-1);       
+            $(".page-indicator").removeClass("active");
+            $(".page-indicator").removeClass("blue-grey");
+             $(this).addClass("active");
+             $(this).addClass("blue-grey");
+
+        });
+    </script>
+    <script type="text/javascript">
+        $(".option-city").click(function(){
+
+        });
+        //weekly update
+        window.setInterval(function(){
+    
+        //此处有动态赋值
+     $.getJSON("/get/updatemessage?jsoncallback=?",{"spot":"[31.8,118.8]","max_distance":100.33,"page":0,"size":2},function(result){
+         var update=result.data.message_list;
+     var test=$(".update")[0];
+    // alert(update[0].date);
+     //alert(update[0].date+","+jQuery.data(test,"datas").date);
+
+     console.log(JSON.stringify(result));
+    // console.log(update[0].date);
+     console.log(jQuery.data(test,"datas").date);
+     //version2
+     if(update[0].date>jQuery.data(test,"datas").date)
+     {
+        //flush data
+        //alert("有"+update[0].name+"最新的上传记录");
+        Materialize.toast("有"+update[0].name+"最新的上传记录", 4000)
+        load_update(0);
+         $(".page-indicator").removeClass("active");
+         $(".page-indicator:eq(0)").addClass("active");
+     }
+        
+
+     });
+                //$(".update").removeClass("nav__item--current");
+                //$("#update1").addClass("nav__item--current");
+        
+    
+},3000);
+    </script>
+    </body>
+
 </html>

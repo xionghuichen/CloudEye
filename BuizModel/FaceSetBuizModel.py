@@ -15,7 +15,7 @@ class FaceSetBuizModel(BaseBuizModel):
         self.VERY_HIGH_CONFIDENCE = 3
         self.SUPER_HIGH_CONFIDENCE = 4
 
-    def _calculate_level(self,levels,confidence):
+    def _calculate_level(self,confidence):
         """Calculate confidence level
 
         Args:
@@ -27,9 +27,10 @@ class FaceSetBuizModel(BaseBuizModel):
         Returns:
             level: confidence level.
         """
-        level1 = float(levels['1e-3'])
-        level2 = float(levels['1e-4'])
-        level3 = float(levels['1e-5'])
+        # [change] 置信级别手写
+        level1 = 40# float(levels['1e-3'])
+        level2 = 50# float(levels['1e-4'])
+        level3 = 65# float(levels['1e-5'])
         level4 = level3 + (level3 - level2)/2
         level = self.LOW_CONFIDENCE
         if confidence >= level4:
@@ -42,10 +43,12 @@ class FaceSetBuizModel(BaseBuizModel):
             level = self.MIDDLE_CONFIDENCE
         return level
 
-    def search_person(self,face_token):
+    def search_person(self,image_path):
         """ Use face++ to search a person by url.
         Args:
             face_token: image's url!
+            1. 由搜索face_token 变成base64编码的字符
+
 
         Returns:
             if don't search a possbile face, return None,
@@ -55,22 +58,45 @@ class FaceSetBuizModel(BaseBuizModel):
                         "user_id": "234723hgfd",
                         "face_token": "4dc8ba0650405fa7a4a5b0b5cb937f0b"
                 }
+
+            "candidates":[
+                {
+                    "person_id":"person3",
+                    "face_id":"1031567119985213439",
+                    "confidence":54.90695571899414,
+                    “tag”: “new tag”
+                },
+                {
+                    "person_id":"person1",
+                    "face_id":"1031587105968553983",# 无用
+                    "confidence":54.86775207519531,
+                    “tag”: “new tag”o # 无用
+                },
+                …
+                ],
+
         """
-        result = self.face_model.search_face(face_token)
-        if result.has_key('results'):
-            confidence = result['results'][0]['confidence']
-            level = self._calculate_level(result['thresholds'],confidence)
+        to_return = {}
+        result = self.face_model.search_person(image_path)
+        if result['errorcode'] == 0:
+            # logging.info("search face result is %s"%result)
+            candidates = result['candidates'][0]
+            confidence = candidates['confidence']
+            level = self._calculate_level(confidence)
             to_return = {
                 'level':level, 
                 'confidence':confidence,
-                'info':result['results'][0]
+                'info':candidates
             }
+        # if result.has_key('results'):
+        #     confidence = result['results'][0]['confidence']
+        #     level = self._calculate_level(result['thresholds'],confidence)
+
             
             # logging.info("result of search, %s"%to_return)
-            return to_return
-        else:
-            # do not search an possible face
-            return None
+        to_return['errormsg'] = result['errormsg']
+        to_return['errorcode'] = result['errorcode']
+        return to_return
     
     def detect_img_list(self, binary_picture_list, only):
         """detect face of a image list through face++, get face_token list as a result.
@@ -148,7 +174,7 @@ class FaceSetBuizModel(BaseBuizModel):
         # logging.info("[detect result list] detect img list function : %s"%detect_result_list)
         return to_return
 
-    def compare_face(self, std_face_token, detect_face_token):
+    def compare_face(self, person_id, picture):
         """Compare two face token.
 
         Args:
@@ -164,9 +190,25 @@ class FaceSetBuizModel(BaseBuizModel):
                     self.VERY_HIGH_CONFIDENCE = 3
 
                 confidence: float
+            {
+                  "confidence":50.502410888671878,
+                  "ismatch":false,
+                  "session_id":"xxxx",
+                  "errorcode":0,
+                  "errormsg":"ok"
+                }
+
         """
-        result = self.face_model.compare_face(std_face_token, detect_face_token)
-        confidence = result['confidence']
-        level = self._calculate_level(result['thresholds'],confidence)
-        logging.info("result of compare, the confidence is %s"%confidence)
-        return {'level':level,'confidence':confidence}
+        to_return ={}
+        result = self.face_model.compare_face(person_id, picture)
+        to_return['errorcode'] = result['errorcode']
+        to_return['errormsg'] = result['errormsg']
+        to_return['ismatch'] = result['ismatch']
+        if result['errorcode'] == 0:
+            if result['ismatch']:
+                confidence = result['confidence']
+                level = self._calculate_level(confidence)
+                to_return['confidence'] = confidence
+                to_return['level'] = level     
+        logging.info("result of compare is %s"%to_return)
+        return to_return

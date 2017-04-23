@@ -34,7 +34,7 @@ class BaseCoreModel(object):
     def __init__(self, *argc, **argkw):
         self.mongodb = argkw['mongodb']
         self.session = argkw['sqlsession']
-        self.facepp = argkw['facepp']
+        self.youtu = argkw['youtu']
         self.ali_service = argkw['ali_service']
         self.ali_bucket = argkw['ali_bucket']
         self.redis = argkw['redis']

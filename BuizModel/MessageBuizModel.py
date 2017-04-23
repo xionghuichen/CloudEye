@@ -121,7 +121,6 @@ class MessageBuizModel(BaseBuizModel):
             'pic_key':info['pic_key'],
             'confidence':info['confidence'],
             'type':search_type
-
         }
         message_id = self.message_model.insert_message_detail(message_info)
         reporter_user_id = person_detail_info['relation_id']
@@ -212,45 +211,47 @@ class MessageBuizModel(BaseBuizModel):
             'page':page,
             'size':size
         }
-        person_info = self.person_model.get_person_info_by_date(filter_info,offset,2)
+        #person_info = self.person_model.get_person_info_by_date(filter_info,offset,2)
+        #result = []
+        #for item in person_info:
+        #    person_id = item['_id']
+            # logging.info("[BuizModel.MessageBuizModel] item in get lastest_message is %s"%item)
+        #    try:
+        #        message = self.message_model.get_message_by_person_id(person_id)
+        #        logging.info("[get lastest message]person_id %s  message %s"%(person_id,message))
+                
+        #    except DBQueryError as e:
+        #        continue
+        #    append_item = {
+        #    'std_pic_key':message['std_pic_key'],# this is just a key, not a list.
+        #    'person_id':message['person_id'],
+        #    'name':message['name'],
+        #    'type':message['type'],
+        #    'date':message['date'],
+        #    'spot':message['spot']
+        #    }
+        #    if not message.has_key('pic_key'):
+        #        append_item['pic_key']= 'empty'
+        #    else:
+        #        append_item['pic_key']=message['pic_key']
+        #     result.append(append_item)
+                
+        message_info = self.message_model.get_message_timeline(filter_info,offset)
         result = []
-        for item in person_info:
-            person_id = item['_id']
-            # logging.info("person id %s"%person_id)
-            try:
-                message = self.message_model.get_message_by_person_id(person_id)
-            except DBQueryError as e:
-                continue
+        for item in message_info:
+            logging.info("item in lastest message is %s"%item)
             append_item = {
-            'std_pic_key':message['std_pic_key'],# this is just a key, not a list.
-            'person_id':message['person_id'],
-            'name':message['name'],
-            'type':message['type'],
-            'date':message['date'],
-            'spot':message['spot']
+            'std_pic_key':item['std_pic_key'],# this is just a key, not a list.
+            'person_id':item['person_id'],
+            'name':item['name'],
+            'type':item['type'],
+            'date':item['date'],
+            'spot':item['spot']
             }
-            if not message.has_key('pic_key'):
+            if not item.has_key('pic_key'):
                 append_item['pic_key']= 'empty'
             else:
-                append_item['pic_key']=message['pic_key']
+                append_item['pic_key']=item['pic_key']
             result.append(append_item)
-                
-        # message_info = self.message_model.get_message_timeline(filter_info,offset)
-        # result = []
-        # for item in message_info:
-        #     logging.info("item in lastest message is %s"%item)
-        #     append_item = {
-        #     'std_pic_key':item['std_pic_key'],# this is just a key, not a list.
-        #     'person_id':item['person_id'],
-        #     'name':item['name'],
-        #     'type':item['type'],
-        #     'date':item['date'],
-        #     'spot':item['spot']
-        #     }
-        #     if not item.has_key('pic_key'):
-        #         append_item['pic_key']= 'empty'
-        #     else:
-        #         append_item['pic_key']=item['pic_key']
-        #     result.append(append_item)
 
         return result

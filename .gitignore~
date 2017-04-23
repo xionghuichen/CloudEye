@@ -1,1 +1,4 @@
-nohup.out
+*nohup.out
+*.pyc
+config/config.ini
+

@@ -69,7 +69,7 @@ import logging
 #     "nick_name":"6666666",
 #     "id_number":"350623199503100009"
 # }
-# ]
+# ]add_new_person
 user_info_list=[
 {
     "telephone":"15195861001",
@@ -352,36 +352,36 @@ if __name__ == '__main__':
 
     # compare for a specifical person
 
-    name = '安琪儿'
-    # select a random person to login
-    random_person = 3# random.randint(1,len(location.u_latitude)-1)
-    login(user_info_list[random_person])
-    data = {
-        'coordinates':[location.u_latitude[random_person],location.u_longitude[random_person]]
-    }
-    # print updatestatus(data)
+    # name = '安琪儿'
+    # # select a random person to login
+    # random_person = 3# random.randint(1,len(location.u_latitude)-1)
+    # login(user_info_list[random_person])
+    # data = {
+    #     'coordinates':[location.u_latitude[random_person],location.u_longitude[random_person]]
+    # }
+    # # print updatestatus(data)
 
-    if name != '':
-        upload_number = random.randint(3,3)
-        print "use user search :%s, search %s of picture %s"%(random_person,name,upload_number)
-        with open(unicode('./missing_person/%s/%s.jpg'%(name,upload_number),'utf8'), 'rb') as f:
-            content = base64.b64encode(f.read())
-            data = {
-                'search_picture':content,
-                'pic_type':'jpg',
-                'coordinate':[location.u_latitude[random_person-1],location.u_longitude[random_person-1]],
-                'type':'reporter',
-                'id':1 # arbitrary number
-            }
-            try:
-                result = eval(search(data))
-                print result
-                person_id = result['data']['person_id']
-                data = {'person_id':person_id}
-                search_name = eval(getPersonDetail(data))['data']['person_info']['name']
-                print "origin name is %s, search name is %s, confidence is %s"%(name,search_name,result['data']['confidence'])
-            except Exception as e:
-                print "error:%s"%(str(e))
+    # if name != '':
+    #     upload_number = random.randint(3,3)
+    #     print "use user search :%s, search %s of picture %s"%(random_person,name,upload_number)
+    #     with open(unicode('./missing_person/%s/%s.jpg'%(name,upload_number),'utf8'), 'rb') as f:
+    #         content = base64.b64encode(f.read())
+    #         data = {
+    #             'search_picture':content,
+    #             'pic_type':'jpg',
+    #             'coordinate':[location.u_latitude[random_person-1],location.u_longitude[random_person-1]],
+    #             'type':'reporter',
+    #             'id':1 # arbitrary number
+    #         }
+    #         try:
+    #             result = eval(search(data))
+    #             print result
+    #             person_id = result['data']['person_id']
+    #             data = {'person_id':person_id}
+    #             search_name = eval(getPersonDetail(data))['data']['person_info']['name']
+    #             print "origin name is %s, search name is %s, confidence is %s"%(name,search_name,result['data']['confidence'])
+    #         except Exception as e:
+    #             print "error:%s"%(str(e))
 
 
     # login_id = 1
